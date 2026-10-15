@@ -67,7 +67,7 @@
   <!-- نظام التنبيهات العائمة -->
   <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none px-4"></div>
 
-  <!-- شريط الأدمن المخفي (3 نقرات على الشعار + كلمة السر Dane7422) -->
+  <!-- شريط الأدمن المخفي -->
   <div id="adminBar" class="hidden bg-gradient-to-r from-amber-950 via-yellow-900 to-amber-950 border-b border-yellow-500/50 px-3 py-2.5 sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="font-extrabold text-yellow-300 flex items-center gap-1.5">
@@ -148,7 +148,7 @@
         أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة القطع 🔥</span>
       </h2>
       <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto mb-4 leading-relaxed">
-        تصفح الكتالوج الرسمي، اختر الموديل، استخدم أزرار (+) و (-) لتحديد الكمية المطلوبة بدقة، وأرسل طلبيتك بسهولة تامة.
+        تصفح الكتالوج الرسمي، اختر الموديل، حدد الكمية، وشاركنا رأيك وتقييمك.
       </p>
       <div class="flex flex-wrap justify-center gap-2 text-xs">
         <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl shadow">
@@ -178,24 +178,18 @@
     <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </main>
 
-  <!-- نافذة إعداد الربط التلقائي -->
+  <!-- نافذة إعداد النشر السحابي -->
   <div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md p-4 flex flex-col shadow-2xl space-y-3 text-xs">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-        <h3 class="font-extrabold text-yellow-400 text-sm">🔗 تفعيل النشر السحابي المباشر</h3>
+        <h3 class="font-extrabold text-yellow-400 text-sm">🔗 ربط النشر التلقائي للزبائن</h3>
         <button onclick="closeCloudSetupModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
       <p class="text-gray-300 leading-relaxed">
-        ضع مفتاح الربط الخاص بك هنا لمرة واحدة لتنشر الموديلات وتظهر لكل الزبائن فوراً دون فتح GitHub:
+        الصق مفتاح ربط GitHub هنا لتنعكس الموديلات والمشاهدات والإعجابات لكل الزبائن تلقائياً:
       </p>
-      <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/20 space-y-1 text-[11px] text-gray-300">
-        <p class="text-yellow-400 font-bold">خطوات الحصول على المفتاح:</p>
-        <p>1. افتح هذا الرابط: <a href="https://github.com/settings/tokens/new?scopes=repo&description=FashionWorldAutoPublish" target="_blank" class="text-sky-400 underline font-bold">أنشئ مفتاح الربط هنا</a></p>
-        <p>2. انزل لآخر الصفحة واضغط <b>Generate token</b>.</p>
-        <p>3. انسخ الرمز الذي يبدأ بـ <code>ghp_...</code> والصقه بالأسفل:</p>
-      </div>
-      <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-xs" placeholder="الصق المفتاح هنا (ghp_...)" />
-      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow">حفظ وتفعيل النشر التلقائي ✅</button>
+      <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-xs" placeholder="ghp_..." />
+      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow">حفظ التفعيل ✅</button>
     </div>
   </div>
 
@@ -220,15 +214,15 @@
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل (مع أزرار + و - والحد الأدنى المخصص) -->
+  <!-- نافذة تفاصيل الموديل (مع التقييم بالنجوم وقسم التعليقات) -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
-    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
+    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[92vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
         <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-sm truncate pl-2">تفاصيل الموديل</h3>
         <button onclick="closeProductModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
       <div class="overflow-y-auto flex-1 space-y-3 pl-1">
-        <div class="relative h-60 sm:h-68 rounded-xl overflow-hidden bg-black border border-gray-800">
+        <div class="relative h-56 sm:h-64 rounded-xl overflow-hidden bg-black border border-gray-800">
           <img id="modalMainImg" src="" class="w-full h-full object-cover" />
           <div class="watermark-logo">
             <span class="text-[10px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
@@ -236,33 +230,53 @@
           <span id="modalDiscountBadge" class="hidden absolute top-2.5 right-2.5 bg-red-600 text-white font-extrabold text-xs px-2.5 py-0.5 rounded-full shadow">حسم خاص 🔥</span>
         </div>
         <div id="modalThumbs" class="flex gap-2 overflow-x-auto pb-1 no-scrollbar"></div>
-        <div class="space-y-2.5 bg-black/60 p-3 rounded-xl border border-gray-800 text-xs">
+        
+        <div class="space-y-2 bg-black/60 p-3 rounded-xl border border-gray-800 text-xs">
           <div class="flex justify-between items-center">
-            <span id="modalCategory" class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2.5 py-0.5 rounded-lg font-bold"></span>
+            <span id="modalCategory" class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-lg font-bold"></span>
             <span id="modalViews" class="text-[11px] text-gray-400"></span>
           </div>
           <p id="modalPack" class="text-gray-200 font-bold leading-relaxed"></p>
+          
+          <!-- التقييم بالنجوم -->
+          <div class="flex items-center justify-between pt-1 border-t border-gray-800">
+            <span class="text-yellow-300 font-bold">تقييم التجار:</span>
+            <div id="modalStarsContainer" class="flex items-center gap-1 text-base cursor-pointer"></div>
+          </div>
+
           <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
 
-          <!-- قسم أزرار + و - لتحديد الكمية بالقطع -->
-          <div class="pt-3 border-t border-gray-800 space-y-2 bg-neutral-950 p-2.5 rounded-lg border border-yellow-500/20">
+          <!-- تحديد كمية القطع -->
+          <div class="pt-2 border-t border-gray-800 space-y-2 bg-neutral-950 p-2.5 rounded-lg border border-yellow-500/20">
             <div class="flex justify-between items-center">
-              <span class="text-yellow-300 font-bold">حدد عدد القطع المطلوبة:</span>
-              <span id="modalMinNotice" class="text-[10px] text-gray-400">الحد الأدنى: 10 قطع</span>
+              <span class="text-yellow-300 font-bold">عدد القطع:</span>
+              <span id="modalMinNotice" class="text-[10px] text-gray-400">الحد الأدنى: 10</span>
             </div>
             <div class="flex items-center justify-center gap-2">
-              <button onclick="adjustModalQty(-5)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">-5</button>
-              <button onclick="adjustModalQty(-1)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">-</button>
-              <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-20 bg-black border border-gray-700 text-center text-yellow-400 font-black rounded-lg py-2 text-base focus:outline-none" />
-              <button onclick="adjustModalQty(1)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">+</button>
-              <button onclick="adjustModalQty(5)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">+5</button>
+              <button onclick="adjustModalQty(-5)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">-5</button>
+              <button onclick="adjustModalQty(-1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">-</button>
+              <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-16 bg-black border border-gray-700 text-center text-yellow-400 font-black rounded-lg py-1 text-sm focus:outline-none" />
+              <button onclick="adjustModalQty(1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">+</button>
+              <button onclick="adjustModalQty(5)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">+5</button>
             </div>
-            <div class="flex justify-between items-center pt-1 text-gray-300 font-bold">
+            <div class="flex justify-between items-center pt-1 text-gray-300 font-bold text-[11px]">
               <span>الإجمالي الفرعي:</span>
-              <span id="modalSubtotal" class="text-emerald-400 text-sm">$0</span>
+              <span id="modalSubtotal" class="text-emerald-400">$0</span>
             </div>
           </div>
         </div>
+
+        <!-- قسم تعليقات وأري التجار -->
+        <div class="bg-black/70 p-3 rounded-xl border border-gray-800 space-y-2 text-xs">
+          <p class="font-bold text-yellow-400">💬 تعليقات وآراء التجار:</p>
+          <div id="commentsList" class="space-y-1.5 max-h-28 overflow-y-auto pr-1"></div>
+          <div class="flex gap-1.5 pt-1">
+            <input id="commentAuthor" class="w-1/3 bg-black border border-gray-700 rounded-lg px-2 py-1 text-white text-[11px]" placeholder="اسمك / المحل..." />
+            <input id="commentText" class="flex-1 bg-black border border-gray-700 rounded-lg px-2 py-1 text-white text-[11px]" placeholder="اكتب تعليقك أو استفسارك..." />
+            <button onclick="addComment()" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-lg">إرسال</button>
+          </div>
+        </div>
+
         <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2 rounded-xl text-xs shadow">
           📲 مشاركة الموديل عبر واتساب (للمسوقين)
         </button>
@@ -291,7 +305,7 @@
     </div>
   </div>
 
-  <!-- نافذة إضافة/تعديل موديل للأدمن (مع تحديد سعر القطعة والحد الأدنى) -->
+  <!-- نافذة إضافة/تعديل موديل للأدمن -->
   <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
@@ -343,10 +357,6 @@
           <label class="block text-yellow-300 font-bold">📷 الصورة الرئيسية للموديل (من الهاتف):</label>
           <input id="pImgFile" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-gray-300" />
         </div>
-        <div class="bg-black/40 p-2.5 rounded-lg border border-gray-800">
-          <label class="block text-gray-300 mb-1 font-bold">📸 صور إضافية (اختياري):</label>
-          <input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-gray-300" />
-        </div>
         <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl mt-2 shadow">حفظ ونشر الموديل فورا ✅</button>
       </form>
     </div>
@@ -386,8 +396,8 @@
       exchangeRate: 15000,
       bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
       products: [
-        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
-        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
+        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 24, ratingCount: 5, comments: [{author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 18, ratingCount: 4, comments: [{author: "تاجرة دمشق", text: "الموديل مطلوب جداً عندنا"}], hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
       ]
     };
   </script>
@@ -395,10 +405,10 @@
   <script>
     const GITHUB_REPO = 'najdt656/fashion-world';
     const DATA_FILE_PATH = 'store-data.json';
-    const LS_STATE_KEY = 'fw_permanent_state_v41';
-    const LS_TOKEN_KEY = 'fw_gh_token_v41';
-    const LS_LIKED_KEY = 'fw_user_liked_ids_v41';
-    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v41';
+    const LS_STATE_KEY = 'fw_permanent_state_v50';
+    const LS_TOKEN_KEY = 'fw_gh_token_v50';
+    const LS_LIKED_KEY = 'fw_user_liked_ids_v50';
+    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v50';
 
     let likedProducts = {};
     let viewedProducts = {};
@@ -412,7 +422,7 @@
     let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
-    let isAdmin = localStorage.getItem('fw_admin_logged_v41') === '1';
+    let isAdmin = localStorage.getItem('fw_admin_logged_v50') === '1';
     let cart = [];
     let secretClicks = 0;
     let currentModalProduct = null;
@@ -502,6 +512,23 @@
 
       if (isAdmin) {
         document.getElementById('adminBar').classList.remove('hidden');
+        updateCloudBadge();
+      }
+    }
+
+    function updateCloudBadge(text, colorClass) {
+      const badge = document.getElementById('cloudStatusBadge');
+      if (!badge) return;
+      const hasToken = !!localStorage.getItem(LS_TOKEN_KEY);
+      if (text) {
+        badge.innerText = text;
+        badge.className = colorClass || "bg-black/60 text-yellow-300 px-2 py-0.5 rounded text-[10px] border border-yellow-500/30";
+      } else if (hasToken) {
+        badge.innerText = "🟢 النشر السحابي متصل";
+        badge.className = "bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30";
+      } else {
+        badge.innerText = "🟡 اضغط ربط النشر للتحديث التلقائي";
+        badge.className = "bg-black/60 text-yellow-300 px-2 py-0.5 rounded text-[10px] border border-yellow-500/30";
       }
     }
 
@@ -518,7 +545,7 @@
       } catch (e) {}
 
       const ghToken = localStorage.getItem(LS_TOKEN_KEY);
-      if (syncToCloud && ghToken && isAdmin) {
+      if (syncToCloud && ghToken) {
         try {
           const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`;
           let sha = null;
@@ -532,7 +559,7 @@
 
           const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
           const bodyObj = {
-            message: "Auto update store products",
+            message: "Auto update store products and ratings",
             content: contentBase64
           };
           if (sha) bodyObj.sha = sha;
@@ -566,6 +593,7 @@
       if (!token) return alert("يرجى لصق المفتاح أولاً!");
       localStorage.setItem(LS_TOKEN_KEY, token);
       closeCloudSetupModal();
+      updateCloudBadge();
       await saveAllState(true);
       showToast("تم ربط النشر التلقائي بنجاح! ✨");
     }
@@ -619,6 +647,7 @@
       grid.innerHTML = list.map(p => {
         const isLiked = !!likedProducts[p.id];
         const minQty = p.minQty || 10;
+        const avgRating = (p.ratingCount && p.ratingCount > 0) ? (p.ratingSum / p.ratingCount).toFixed(1) : '5.0';
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
           <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
@@ -634,7 +663,7 @@
             ${p.hasDiscount ? `<span class="absolute top-10 right-2.5 bg-red-600 text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow animate-pulse">حسم خاص 🔥</span>` : ''}
 
             <div class="absolute bottom-2 right-2 left-2 flex justify-between items-center bg-black/75 backdrop-blur-sm px-2.5 py-1 rounded-lg text-[10px]">
-              <span class="text-yellow-300 font-bold">👁️ ${p.views || 0} مشاهدة</span>
+              <span class="text-yellow-300 font-bold">⭐ ${avgRating} (${p.ratingCount || 1})</span>
               <span class="text-emerald-400 font-bold">📦 حد أدنى: ${minQty} قطع</span>
             </div>
           </div>
@@ -672,7 +701,7 @@
         p.views = (p.views || 0) + 1;
         viewedProducts[id] = true;
         try { localStorage.setItem(LS_VIEWED_KEY, JSON.stringify(viewedProducts)); } catch (e) {}
-        await saveAllState(false);
+        await saveAllState(true);
       }
 
       document.getElementById('modalTitle').innerText = p.name;
@@ -693,6 +722,12 @@
       document.getElementById('modalPriceContainer').innerHTML = formatPrice(p.priceUsd);
       calculateModalTotal();
 
+      // رسم النجوم التفاعلية
+      renderModalStars(p);
+
+      // عرض التعليقات
+      renderComments(p);
+
       const thumbsContainer = document.getElementById('modalThumbs');
       const allImgs = [p.img, ...(p.extras || [])];
       thumbsContainer.innerHTML = allImgs.map(imgSrc => `
@@ -707,6 +742,62 @@
       document.getElementById('productModal').classList.add('hidden');
       document.getElementById('productModal').classList.remove('flex');
       currentModalProduct = null;
+    }
+
+    function renderModalStars(p) {
+      const container = document.getElementById('modalStarsContainer');
+      const avg = (p.ratingCount && p.ratingCount > 0) ? Math.round(p.ratingSum / p.ratingCount) : 5;
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= avg ? 'text-yellow-400' : 'text-gray-600'} hover:scale-125 transition">⭐</span>`;
+      }
+      starsHtml += `<span class="text-xs text-gray-300 mr-1">(${p.ratingCount || 1} تقييمات)</span>`;
+      container.innerHTML = starsHtml;
+    }
+
+    async function rateProduct(productId, stars) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+      p.ratingSum = (p.ratingSum || 20) + stars;
+      p.ratingCount = (p.ratingCount || 4) + 1;
+      renderModalStars(p);
+      renderProducts();
+      await saveAllState(true);
+      showToast(`شكراً لك! تم تسجيل تقييمك (${stars} نجوم) ⭐`);
+    }
+
+    function renderComments(p) {
+      const list = document.getElementById('commentsList');
+      const comments = p.comments || [];
+      if (comments.length === 0) {
+        list.innerHTML = `<p class="text-gray-500 text-[11px]">لا توجد تعليقات بعد. كن أول المعلقين!</p>`;
+        return;
+      }
+      list.innerHTML = comments.map(c => `
+        <div class="bg-black/50 p-2 rounded-lg border border-gray-800">
+          <span class="text-yellow-400 font-bold">${c.author}:</span>
+          <span class="text-gray-200 mr-1">${c.text}</span>
+        </div>
+      `).join('');
+    }
+
+    async function addComment() {
+      if (!currentModalProduct) return;
+      const authorInput = document.getElementById('commentAuthor');
+      const textInput = document.getElementById('commentText');
+      const author = authorInput.value.trim() || "تاجر معتمد";
+      const text = textInput.value.trim();
+
+      if (!text) return alert("يرجى كتابة نص التعليق أولاً!");
+
+      if (!currentModalProduct.comments) currentModalProduct.comments = [];
+      currentModalProduct.comments.push({ author, text });
+
+      authorInput.value = "";
+      textInput.value = "";
+      renderComments(currentModalProduct);
+      await saveAllState(true);
+      showToast("تم إضافة تعليقك بنجاح ✅");
     }
 
     function adjustModalQty(delta) {
@@ -751,14 +842,6 @@
       showToast(`تمت إضافة ${qty} قطعة من الموديل للسلة 🛒`);
     }
 
-    function shareProductWhatsApp() {
-      if (!currentModalProduct) return;
-      const p = currentModalProduct;
-      const priceText = `${p.priceUsd}$ للقطعة (الحد الأدنى: ${p.minQty || 10} قطع)`;
-      const msg = `🔥 عرض جملة من FASHION WORLD (دمشق - الحريقة)%0A----------------------------------%0A👗 الموديل: ${p.name}%0A📐 التفاصيل: ${p.pack}%0A💰 السعر: ${priceText}%0A----------------------------------%0Aللطلب والاستفسار يرجى المراسلة فوراً!`;
-      window.open(`https://wa.me/?text=${msg}`, '_blank');
-    }
-
     async function toggleLikeProduct(e, id) {
       e.stopPropagation();
       const item = products.find(p => p.id === id);
@@ -773,7 +856,7 @@
       }
 
       try { localStorage.setItem(LS_LIKED_KEY, JSON.stringify(likedProducts)); } catch (e) {}
-      await saveAllState(false);
+      await saveAllState(true);
       renderProducts();
     }
 
@@ -873,7 +956,6 @@
       document.getElementById('pMinQty').value = "10";
       document.getElementById('pPack').value = "";
       document.getElementById('pImgFile').value = "";
-      document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = false;
       document.getElementById('addModal').classList.remove('hidden');
       document.getElementById('addModal').classList.add('flex');
@@ -896,7 +978,6 @@
       document.getElementById('pMinQty').value = p.minQty || 10;
       document.getElementById('pPack').value = p.pack;
       document.getElementById('pImgFile').value = "";
-      document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = p.hasDiscount || false;
       document.getElementById('addModal').classList.remove('hidden');
       document.getElementById('addModal').classList.add('flex');
@@ -920,22 +1001,11 @@
         const minQty = parseInt(document.getElementById('pMinQty').value) || 10;
         const pack = document.getElementById('pPack').value.trim();
         const hasDiscount = document.getElementById('pHasDiscount').checked;
-        
         const mainFile = document.getElementById('pImgFile');
-        const extraFiles = document.getElementById('pExtraImgFile');
 
         let mainImgData = null;
         if (mainFile.files && mainFile.files[0]) {
           mainImgData = await compressImageFile(mainFile.files[0], 480, 0.52);
-        }
-
-        let extrasData = [];
-        if (extraFiles.files && extraFiles.files.length > 0) {
-          const maxExtras = Math.min(extraFiles.files.length, 3);
-          for (let i = 0; i < maxExtras; i++) {
-            const comp = await compressImageFile(extraFiles.files[i], 450, 0.5);
-            if (comp) extrasData.push(comp);
-          }
         }
 
         if (editId !== -1) {
@@ -948,7 +1018,6 @@
             products[idx].pack = pack;
             products[idx].hasDiscount = hasDiscount;
             if (mainImgData) products[idx].img = mainImgData;
-            if (extrasData.length > 0) products[idx].extras = extrasData;
           }
         } else {
           products.unshift({
@@ -960,9 +1029,12 @@
             pack,
             views: 1,
             likes: 0,
+            ratingSum: 20,
+            ratingCount: 4,
+            comments: [],
             hasDiscount,
             img: mainImgData || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",
-            extras: extrasData
+            extras: []
           });
         }
 
