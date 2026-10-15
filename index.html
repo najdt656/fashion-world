@@ -12,9 +12,7 @@
       --gold-light: #FBF0B9;
       --gold-dark: #AA771C;
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #090909;
@@ -32,18 +30,13 @@
     .gold-gradient-bg {
       background: linear-gradient(135deg, #E6C65B 0%, #D4AF37 50%, #A67C1E 100%);
     }
-    .gold-border {
-      border: 1px solid rgba(212, 175, 55, 0.35);
-    }
+    .gold-border { border: 1px solid rgba(212, 175, 55, 0.35); }
     .card-luxury {
       background: linear-gradient(180deg, #151515 0%, #0c0c0c 100%);
       border: 1px solid rgba(212, 175, 55, 0.22);
       transition: transform 0.25s ease, border-color 0.25s ease;
     }
-    .card-luxury:hover {
-      border-color: #D4AF37;
-    }
-    /* اللوغو الشفاف على الصور */
+    .card-luxury:hover { border-color: #D4AF37; }
     .watermark-logo {
       position: absolute;
       top: 10px;
@@ -51,7 +44,7 @@
       opacity: 0.85;
       pointer-events: none;
       z-index: 10;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       padding: 3px 8px;
       border-radius: 6px;
       border: 1px solid rgba(212, 175, 55, 0.45);
@@ -60,25 +53,25 @@
       align-items: center;
       gap: 4px;
     }
-    /* إخفاء شريط التمرير مع بقاء التمرير شغالاً */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- شريط الأدمن المخفي (يفتح بـ 3 ضغطات على الشعار + كلمة السر Dane7422) -->
+  <!-- شريط الأدمن المخفي (3 نقرات على الشعار + كلمة السر Dane7422) -->
   <div id="adminBar" class="hidden bg-gradient-to-r from-amber-950 via-yellow-900 to-amber-950 border-b border-yellow-500/50 px-3 py-2.5 sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="font-extrabold text-yellow-300 flex items-center gap-1">
-        <span>👑 لوحة الإدارة (الصرف: <span id="adminRateDisplay">15,000</span> ل.س)</span>
+        <span>👑 الإدارة (الصرف: <span id="adminRateDisplay">15,000</span>)</span>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
-        <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-3 py-1.5 rounded-lg shadow">➕ نشر موديل</button>
-        <button onclick="openBannerModal()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-lg font-bold">🖼️ الغلاف</button>
-        <button onclick="changeExchangeRate()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-lg font-bold">💱 الصرف</button>
-        <button onclick="resetDefaultData()" class="bg-neutral-800 text-gray-200 px-2.5 py-1.5 rounded-lg font-bold" title="استعادة الضبط وتنظيف الذاكرة">🔄 ضبط</button>
-        <button onclick="logoutAdmin()" class="bg-red-600 text-white px-2.5 py-1.5 rounded-lg font-bold">خروج 🔒</button>
+        <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">➕ نشر موديل</button>
+        <button onclick="exportFullSiteForGithub()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow" title="ينسخ كود الموقع مع تعديلاتك لتلصقه في GitHub فيراه كل الزبائن">☁️ تثبيت للزبائن</button>
+        <button onclick="openBannerModal()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">🖼️ الغلاف</button>
+        <button onclick="changeExchangeRate()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">💱 الصرف</button>
+        <button onclick="resetDefaultData()" class="bg-neutral-800 text-gray-200 px-2 py-1.5 rounded-lg font-bold">🔄 ضبط</button>
+        <button onclick="logoutAdmin()" class="bg-red-600 text-white px-2 py-1.5 rounded-lg font-bold">خروج 🔒</button>
       </div>
     </div>
   </div>
@@ -92,7 +85,7 @@
         <a href="https://wa.me/963996311804" target="_blank" class="hover:text-yellow-400 font-bold">0996311804</a>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="openAboutModal()" class="text-yellow-400 font-bold bg-yellow-500/15 px-2.5 py-0.5 rounded-md border border-yellow-500/40 hover:bg-yellow-500/25">
+        <button onclick="openAboutModal()" class="text-yellow-400 font-bold bg-yellow-500/15 px-2.5 py-0.5 rounded-md border border-yellow-500/40">
           ℹ️ من نحن ومنصاتنا
         </button>
         <a href="https://wa.me/963996311804" target="_blank" class="text-emerald-400 font-bold">+963996311804</a>
@@ -103,7 +96,6 @@
   <!-- الهيدر الرئيسي -->
   <header class="bg-[#0b0b0b]/95 border-b border-yellow-500/30 sticky top-0 z-40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-3 py-2.5 flex items-center justify-between gap-2">
-      <!-- الشعار: 3 نقرات تفتح الأدمن -->
       <div class="flex items-center gap-2.5 cursor-pointer select-none" onclick="logoSecretClick()">
         <div class="w-10 h-10 rounded-xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-lg flex-shrink-0">
           <svg viewBox="0 0 64 64" class="w-6 h-6">
@@ -177,7 +169,7 @@
     <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </main>
 
-  <!-- نافذة "من نحن" ومنصات التواصل (مضبوطة 100% للجوال) -->
+  <!-- نافذة "من نحن" -->
   <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[88vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-3 flex-shrink-0">
@@ -204,7 +196,7 @@
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل (معرض الصور المتعددة على طراز شي إن) -->
+  <!-- نافذة تفاصيل الموديل -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
@@ -219,7 +211,6 @@
           </div>
           <span id="modalDiscountBadge" class="hidden absolute top-2.5 right-2.5 bg-red-600 text-white font-extrabold text-xs px-2.5 py-0.5 rounded-full shadow">حسم خاص 🔥</span>
         </div>
-        <!-- شريط الصور الإضافية المصغرة -->
         <div id="modalThumbs" class="flex gap-2 overflow-x-auto pb-1 no-scrollbar"></div>
         <div class="space-y-2 bg-black/60 p-3 rounded-xl border border-gray-800 text-xs">
           <div class="flex justify-between items-center">
@@ -246,12 +237,8 @@
       </div>
       <div class="space-y-3 text-xs">
         <div>
-          <label class="block text-gray-300 font-bold mb-1">1. اختر صورة من استوديو هاتفك:</label>
+          <label class="block text-gray-300 font-bold mb-1">اختر صورة من استوديو هاتفك:</label>
           <input id="bannerFileInput" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-lg px-2.5 py-2 text-gray-300 text-xs" />
-        </div>
-        <div>
-          <label class="block text-gray-400 mb-1">أو ضع رابط صورة مباشر (اختياري):</label>
-          <input id="bannerUrlInput" type="text" class="w-full bg-black border border-gray-700 rounded-lg px-2.5 py-2 text-white text-xs" placeholder="https://..." />
         </div>
         <button id="bannerSaveBtn" onclick="saveNewBanner()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl text-xs shadow">تحديث وحفظ الغلاف ✨</button>
       </div>
@@ -301,9 +288,8 @@
           <label for="pHasDiscount" class="text-yellow-400 font-bold cursor-pointer">تفعيل شارة (حسم خاص 🔥)</label>
         </div>
         <div class="bg-black/40 p-2.5 rounded-lg border border-gray-800 space-y-2">
-          <label class="block text-yellow-300 font-bold">📷 الصورة الرئيسية للموديل:</label>
+          <label class="block text-yellow-300 font-bold">📷 الصورة الرئيسية للموديل (من الهاتف):</label>
           <input id="pImgFile" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-gray-300" />
-          <input id="pImgUrl" type="text" class="w-full bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[11px]" placeholder="أو ضع رابط صورة مباشر هنا (اختياري)" />
         </div>
         <div class="bg-black/40 p-2.5 rounded-lg border border-gray-800">
           <label class="block text-gray-300 mb-1 font-bold">📸 صور إضافية تظهر عند نقر الزبون (اختياري):</label>
@@ -342,9 +328,73 @@
     <p class="text-yellow-400 font-bold">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
   </footer>
 
+  <!-- البيانات المدمجة (تتحدث تلقائياً عند الضغط على زر تثبيت للزبائن) -->
+  <script id="initialDataScript">
+    window.INITIAL_STORE_STATE = {
+      exchangeRate: 15000,
+      bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+      products: [
+        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 48, pack: "سيريه 4 قطع (M-L-XL-2XL) قماش تركي فاخر", views: 142, likes: 38, activeNow: 4, hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80"] },
+        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 65, pack: "سيريه 4 قطع (S-M-L-XL) تطريز ملكي", views: 198, likes: 54, activeNow: 6, hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 201, name: "طقم رجالي كاجوال قطن تركي #201", category: "رجالي", priceUsd: 52, pack: "سيريه 5 قطع (M إلى 3XL) قطن 100%", views: 120, likes: 29, activeNow: 3, hasDiscount: true, img: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 202, name: "جاكيت رجالي جلد فاخر مبطن #202", category: "رجالي", priceUsd: 78, pack: "سيريه 4 قطع (L-XL-2XL-3XL) مقاوم للمطر", views: 164, likes: 47, activeNow: 5, hasDiscount: false, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 301, name: "طقم ولادي شتوي 3 قطع سبور #301", category: "ولادي", priceUsd: 36, pack: "سيريه 6 قطع (أعمار 4-12 سنة)", views: 95, likes: 24, activeNow: 2, hasDiscount: false, img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 302, name: "طقم بناتي العيد مطرز فاخر #302", category: "ولادي", priceUsd: 42, pack: "سيريه 6 قطع (أعمار 3-10 سنوات)", views: 112, likes: 33, activeNow: 4, hasDiscount: true, img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 401, name: "طقم بيبي حديث الولادة قطن #401", category: "ب.ب", priceUsd: 28, pack: "دزينة 12 قطعة (0-12 شهر) قطن ناعم", views: 88, likes: 31, activeNow: 3, hasDiscount: false, img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 402, name: "أفرول ب.ب مبطن فرو ناعم #402", category: "ب.ب", priceUsd: 32, pack: "سيريه 6 قطع (3-6-9-12 شهر)", views: 104, likes: 27, activeNow: 2, hasDiscount: true, img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=600&q=80", extras: [] }
+      ]
+    };
+  </script>
+
   <script>
-    // محرك ضغط الصور الفائق (يحول أي صورة كبيرة من الهاتف إلى صورة خفيفة جداً لا تملأ الذاكرة)
-    function compressImageFile(file, maxWidth = 600, quality = 0.58) {
+    // 1. قاعدة بيانات IndexedDB العملاقة لحفظ المنشورات والصور دون أن تنحذف عند تحديث الصفحة
+    const DB_NAME = 'FashionWorldDB_v1';
+    const STORE_NAME = 'store_state';
+
+    function openDatabase() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME);
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function dbGet(key) {
+      try {
+        const db = await openDatabase();
+        return new Promise((resolve) => {
+          const tx = db.transaction(STORE_NAME, 'readonly');
+          const req = tx.objectStore(STORE_NAME).get(key);
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => resolve(null);
+        });
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function dbSet(key, val) {
+      try {
+        const db = await openDatabase();
+        return new Promise((resolve) => {
+          const tx = db.transaction(STORE_NAME, 'readwrite');
+          tx.objectStore(STORE_NAME).put(val, key);
+          tx.oncomplete = () => resolve(true);
+          tx.onerror = () => resolve(false);
+        });
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // 2. محرك ضغط الصور السريع
+    function compressImageFile(file, maxWidth = 600, quality = 0.6) {
       return new Promise((resolve) => {
         if (!file) return resolve(null);
         const reader = new FileReader();
@@ -376,7 +426,6 @@
       });
     }
 
-    // تحويل الأرقام العربية إلى إنجليزية بذكاء
     function parseCleanNumber(val) {
       if (!val) return 0;
       const str = String(val)
@@ -387,58 +436,38 @@
       return parseFloat(str) || 0;
     }
 
-    // الموديلات الافتراضية (موديلين لكل قسم)
-    const defaultProducts = [
-      { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 48, pack: "سيريه 4 قطع (M-L-XL-2XL) قماش تركي فاخر", views: 142, likes: 38, activeNow: 4, hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80"] },
-      { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 65, pack: "سيريه 4 قطع (S-M-L-XL) تطريز ملكي", views: 198, likes: 54, activeNow: 6, hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] },
-      { id: 201, name: "طقم رجالي كاجوال قطن تركي #201", category: "رجالي", priceUsd: 52, pack: "سيريه 5 قطع (M إلى 3XL) قطن 100%", views: 120, likes: 29, activeNow: 3, hasDiscount: true, img: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80", extras: [] },
-      { id: 202, name: "جاكيت رجالي جلد فاخر مبطن #202", category: "رجالي", priceUsd: 78, pack: "سيريه 4 قطع (L-XL-2XL-3XL) مقاوم للمطر", views: 164, likes: 47, activeNow: 5, hasDiscount: false, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80", extras: [] },
-      { id: 301, name: "طقم ولادي شتوي 3 قطع سبور #301", category: "ولادي", priceUsd: 36, pack: "سيريه 6 قطع (أعمار 4-12 سنة)", views: 95, likes: 24, activeNow: 2, hasDiscount: false, img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=600&q=80", extras: [] },
-      { id: 302, name: "طقم بناتي العيد مطرز فاخر #302", category: "ولادي", priceUsd: 42, pack: "سيريه 6 قطع (أعمار 3-10 سنوات)", views: 112, likes: 33, activeNow: 4, hasDiscount: true, img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=600&q=80", extras: [] },
-      { id: 401, name: "طقم بيبي حديث الولادة قطن #401", category: "ب.ب", priceUsd: 28, pack: "دزينة 12 قطعة (0-12 شهر) قطن ناعم", views: 88, likes: 31, activeNow: 3, hasDiscount: false, img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=600&q=80", extras: [] },
-      { id: 402, name: "أفرول ب.ب مبطن فرو ناعم #402", category: "ب.ب", priceUsd: 32, pack: "سيريه 6 قطع (3-6-9-12 شهر)", views: 104, likes: 27, activeNow: 2, hasDiscount: true, img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=600&q=80", extras: [] }
-    ];
-
-    const STORAGE_KEY = 'fw_master_store_v10';
-    const DEFAULT_BANNER = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80';
-
-    let exchangeRate = parseCleanNumber(localStorage.getItem('fw_rate')) || 15000;
-    let bannerImg = localStorage.getItem('fw_banner_v10') || DEFAULT_BANNER;
+    let exchangeRate = window.INITIAL_STORE_STATE.exchangeRate || 15000;
+    let bannerImg = window.INITIAL_STORE_STATE.bannerImg;
+    let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
-    let isAdmin = false;
+    let isAdmin = sessionStorage.getItem('fw_admin_active') === '1';
     let cart = [];
     let secretClicks = 0;
-    let products = [];
 
-    function loadProducts() {
-      try {
-        // مسح مفاتيح النسخ القديمة المعطوبة لتفريغ مساحة المتصفح تلقائياً
-        ['fw_products_v2','fw_products_v3','fw_products_v4','fw_products_v5','fw_products_v6'].forEach(k => localStorage.removeItem(k));
-        
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            products = parsed;
-            return;
-          }
-        }
-      } catch (e) {
-        console.warn("Storage recovered:", e);
+    // تحميل البيانات المحفوظة في قاعدة بيانات المتصفح فور فتح الصفحة
+    async function initApp() {
+      const savedProducts = await dbGet('products');
+      const savedRate = await dbGet('exchangeRate');
+      const savedBanner = await dbGet('bannerImg');
+
+      if (Array.isArray(savedProducts) && savedProducts.length > 0) {
+        products = savedProducts;
       }
-      products = JSON.parse(JSON.stringify(defaultProducts));
-      saveProductsToStorage();
+      if (savedRate) exchangeRate = Number(savedRate);
+      if (savedBanner) bannerImg = savedBanner;
+
+      if (isAdmin) {
+        document.getElementById('adminBar').classList.remove('hidden');
+      }
+      applyBanner();
+      renderProducts();
     }
 
-    function saveProductsToStorage() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-        return true;
-      } catch (e) {
-        alert("تنبيه: ذاكرة الصور ممتلئة، اضغط على زر (🔄 ضبط) في شريط الإدارة لتفريغ الذاكرة.");
-        return false;
-      }
+    async function saveAllState() {
+      await dbSet('products', products);
+      await dbSet('exchangeRate', exchangeRate);
+      await dbSet('bannerImg', bannerImg);
     }
 
     function applyBanner() {
@@ -483,7 +512,7 @@
       grid.innerHTML = list.map(p => `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
           <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
-            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80'" />
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
             
             <div class="watermark-logo">
               <span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
@@ -526,12 +555,12 @@
       `).join('');
     }
 
-    function openProductModal(id) {
+    async function openProductModal(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
 
       p.views = (p.views || 0) + 1;
-      saveProductsToStorage();
+      await saveAllState();
 
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
@@ -562,12 +591,12 @@
       document.getElementById('productModal').classList.remove('flex');
     }
 
-    function likeProduct(e, id) {
+    async function likeProduct(e, id) {
       e.stopPropagation();
       const item = products.find(p => p.id === id);
       if (item) {
         item.likes = (item.likes || 0) + 1;
-        saveProductsToStorage();
+        await saveAllState();
         renderProducts();
       }
     }
@@ -590,6 +619,7 @@
           const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
           if (pass && pass.trim() === "Dane7422") {
             isAdmin = true;
+            sessionStorage.setItem('fw_admin_active', '1');
             document.getElementById('adminBar').classList.remove('hidden');
             renderProducts();
             alert("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة بنجاح 👑");
@@ -603,27 +633,27 @@
 
     function logoutAdmin() {
       isAdmin = false;
+      sessionStorage.removeItem('fw_admin_active');
       document.getElementById('adminBar').classList.add('hidden');
       renderProducts();
     }
 
-    function resetDefaultData() {
-      if (confirm("هل تريد تنظيف الذاكرة واستعادة الموديلات الـ 8 الأساسية؟")) {
-        localStorage.removeItem(STORAGE_KEY);
-        products = JSON.parse(JSON.stringify(defaultProducts));
-        saveProductsToStorage();
+    async function resetDefaultData() {
+      if (confirm("هل تريد استعادة الموديلات الـ 8 الأساسية؟")) {
+        products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
+        await saveAllState();
         renderProducts();
-        alert("تم تنظيف الذاكرة واستعادة الضبط بنجاح ✅");
+        alert("تمت استعادة الضبط بنجاح ✅");
       }
     }
 
-    function changeExchangeRate() {
+    async function changeExchangeRate() {
       const val = prompt("أدخل سعر صرف الدولار مقابل الليرة السورية:", exchangeRate);
       if (val !== null) {
         const clean = parseCleanNumber(val);
         if (clean > 0) {
           exchangeRate = clean;
-          localStorage.setItem('fw_rate', exchangeRate);
+          await saveAllState();
           renderProducts();
         }
       }
@@ -631,7 +661,6 @@
 
     function openBannerModal() {
       document.getElementById('bannerFileInput').value = "";
-      document.getElementById('bannerUrlInput').value = "";
       document.getElementById('bannerModal').classList.remove('hidden');
       document.getElementById('bannerModal').classList.add('flex');
     }
@@ -642,7 +671,6 @@
 
     async function saveNewBanner() {
       const fileInput = document.getElementById('bannerFileInput');
-      const urlInput = document.getElementById('bannerUrlInput').value.trim();
       const btn = document.getElementById('bannerSaveBtn');
 
       if (fileInput.files && fileInput.files[0]) {
@@ -651,19 +679,13 @@
         btn.innerText = "تحديث وحفظ الغلاف ✨";
         if (compressed) {
           bannerImg = compressed;
-          localStorage.setItem('fw_banner_v10', bannerImg);
+          await saveAllState();
           applyBanner();
           closeBannerModal();
-          alert("تم تحديث صورة الغلاف من استوديو هاتفك بنجاح ✨");
+          alert("تم تحديث وحفظ صورة الغلاف بشكل دائم ✨");
         }
-      } else if (urlInput) {
-        bannerImg = urlInput;
-        localStorage.setItem('fw_banner_v10', bannerImg);
-        applyBanner();
-        closeBannerModal();
-        alert("تم تحديث رابط صورة الغلاف بنجاح ✨");
       } else {
-        alert("الرجاء اختيار صورة من الهاتف أو وضع رابط صورة!");
+        alert("الرجاء اختيار صورة من الهاتف أولاً!");
       }
     }
 
@@ -684,7 +706,6 @@
       document.getElementById('pInputCurrency').value = "USD";
       document.getElementById('pPack').value = "";
       document.getElementById('pImgFile').value = "";
-      document.getElementById('pImgUrl').value = "";
       document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = false;
       document.getElementById('addModal').classList.remove('hidden');
@@ -707,7 +728,6 @@
       document.getElementById('pInputCurrency').value = "USD";
       document.getElementById('pPack').value = p.pack;
       document.getElementById('pImgFile').value = "";
-      document.getElementById('pImgUrl').value = "";
       document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = p.hasDiscount || false;
       document.getElementById('addModal').classList.remove('hidden');
@@ -717,7 +737,7 @@
     async function saveNewProduct(e) {
       e.preventDefault();
       const saveBtn = document.getElementById('saveProductBtn');
-      saveBtn.innerText = "جاري معالجة الصور والنشر... ⏳";
+      saveBtn.innerText = "جاري حفظ الموديل في قاعدة البيانات... ⏳";
       saveBtn.disabled = true;
 
       try {
@@ -727,26 +747,22 @@
         
         const rawPrice = parseCleanNumber(document.getElementById('pPriceInput').value);
         const inputCurr = document.getElementById('pInputCurrency').value;
-        // إذا أدخل السعر بالسوري يحوله للدولار تلقائياً، وإذا بالدولار يثبته كما هو
         const priceUsd = inputCurr === 'SYP' ? Math.round((rawPrice / exchangeRate) * 100) / 100 : rawPrice;
 
         const pack = document.getElementById('pPack').value.trim();
         const hasDiscount = document.getElementById('pHasDiscount').checked;
         
         const mainFile = document.getElementById('pImgFile');
-        const mainUrl = document.getElementById('pImgUrl').value.trim();
         const extraFiles = document.getElementById('pExtraImgFile');
 
         let mainImgData = null;
         if (mainFile.files && mainFile.files[0]) {
-          mainImgData = await compressImageFile(mainFile.files[0], 600, 0.58);
-        } else if (mainUrl) {
-          mainImgData = mainUrl;
+          mainImgData = await compressImageFile(mainFile.files[0], 600, 0.6);
         }
 
         let extrasData = [];
         if (extraFiles.files && extraFiles.files.length > 0) {
-          const maxExtras = Math.min(extraFiles.files.length, 3);
+          const maxExtras = Math.min(extraFiles.files.length, 4);
           for (let i = 0; i < maxExtras; i++) {
             const comp = await compressImageFile(extraFiles.files[i], 550, 0.55);
             if (comp) extrasData.push(comp);
@@ -780,24 +796,48 @@
           });
         }
 
-        saveProductsToStorage();
+        await saveAllState();
         currentCategory = 'ALL';
         closeAddModal();
         renderProducts();
-        alert("تم نشر الموديل وحفظه بنجاح! ✨");
+        alert("تم حفظ الموديل في قاعدة البيانات بنجاح ولن يختفي عند تحديث الصفحة! ✅");
       } catch (err) {
-        alert("حدث خطأ بسيط أثناء الحفظ، يرجى المحاولة مرة أخرى.");
+        alert("حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.");
       } finally {
         saveBtn.innerText = "حفظ ونشر الموديل الآن ✅";
         saveBtn.disabled = false;
       }
     }
 
-    function deleteProduct(id) {
+    async function deleteProduct(id) {
       if (confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")) {
         products = products.filter(p => p.id !== id);
-        saveProductsToStorage();
+        await saveAllState();
         renderProducts();
+      }
+    }
+
+    // ميزة التصدير الذكي: تنسخ كود الموقع كاملاً مع الموديلات الجديدة لتلصقه في GitHub فيظهر لكل الزبائن
+    async function exportFullSiteForGithub() {
+      const stateObj = {
+        exchangeRate,
+        bannerImg,
+        products
+      };
+      const scriptEl = document.getElementById('initialDataScript');
+      scriptEl.textContent = `\n    window.INITIAL_STORE_STATE = ${JSON.stringify(stateObj, null, 2)};\n  `;
+      
+      // إخفاء شريط الأدمن مؤقتاً قبل أخذ نسخة الكود لكي لا يظهر للزبائن
+      const adminBar = document.getElementById('adminBar');
+      adminBar.classList.add('hidden');
+      const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      adminBar.classList.remove('hidden');
+
+      try {
+        await navigator.clipboard.writeText(fullHtml);
+        alert("✅ تم نسخ كود الموقع الجديد مع كافة موديلاتك وصورك إلى الحافظة!\n\nالآن اذهب إلى ملف index.html في GitHub، امسح القديم والصق هذا الكود واضغط Commit ليظهر لكل الزبائن على هواتفهم!");
+      } catch (e) {
+        alert("تعذر النسخ التلقائي، يرجى استخدام متصفح كروم.");
       }
     }
 
@@ -862,10 +902,7 @@
       window.open(`https://wa.me/963996311804?text=${msg}`, '_blank');
     }
 
-    // التشغيل التلقائي وتفريغ أي عطل سابق
-    loadProducts();
-    applyBanner();
-    renderProducts();
+    initApp();
   </script>
 </body>
 </html>
