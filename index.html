@@ -148,7 +148,7 @@
         أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة القطع 🔥</span>
       </h2>
       <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto mb-4 leading-relaxed">
-        تصفح الكتالوج الرسمي، اختر الموديل، حدد عدد القطع المطلوبة (مع الحد الأدنى للطلب)، وأرسل طلبيتك بسهولة تامة.
+        تصفح الكتالوج الرسمي، اختر الموديل، استخدم أزرار (+) و (-) لتحديد الكمية المطلوبة بدقة، وأرسل طلبيتك بسهولة تامة.
       </p>
       <div class="flex flex-wrap justify-center gap-2 text-xs">
         <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl shadow">
@@ -220,7 +220,7 @@
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل (مع اختيار عدد القطع والحد الأدنى) -->
+  <!-- نافذة تفاصيل الموديل (مع أزرار + و - والحد الأدنى المخصص) -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
@@ -244,20 +244,18 @@
           <p id="modalPack" class="text-gray-200 font-bold leading-relaxed"></p>
           <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
 
-          <!-- قسم اختيار عدد القطع والحد الأدنى -->
+          <!-- قسم أزرار + و - لتحديد الكمية بالقطع -->
           <div class="pt-3 border-t border-gray-800 space-y-2 bg-neutral-950 p-2.5 rounded-lg border border-yellow-500/20">
             <div class="flex justify-between items-center">
               <span class="text-yellow-300 font-bold">حدد عدد القطع المطلوبة:</span>
               <span id="modalMinNotice" class="text-[10px] text-gray-400">الحد الأدنى: 10 قطع</span>
             </div>
-            <div class="flex items-center justify-between gap-3">
-              <div class="flex items-center gap-2">
-                <button onclick="adjustModalQty(-5)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-sm">-5</button>
-                <button onclick="adjustModalQty(-1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-sm">-</button>
-                <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-16 bg-black border border-gray-700 text-center text-yellow-400 font-black rounded-lg py-1.5 text-sm focus:outline-none" />
-                <button onclick="adjustModalQty(1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-sm">+</button>
-                <button onclick="adjustModalQty(5)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-sm">+5</button>
-              </div>
+            <div class="flex items-center justify-center gap-2">
+              <button onclick="adjustModalQty(-5)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">-5</button>
+              <button onclick="adjustModalQty(-1)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">-</button>
+              <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-20 bg-black border border-gray-700 text-center text-yellow-400 font-black rounded-lg py-2 text-base focus:outline-none" />
+              <button onclick="adjustModalQty(1)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">+</button>
+              <button onclick="adjustModalQty(5)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-9 h-9 rounded-lg font-bold text-sm shadow">+5</button>
             </div>
             <div class="flex justify-between items-center pt-1 text-gray-300 font-bold">
               <span>الإجمالي الفرعي:</span>
@@ -293,7 +291,7 @@
     </div>
   </div>
 
-  <!-- نافذة إضافة/تعديل موديل للأدمن (مع تحديد الحد الأدنى للقطع) -->
+  <!-- نافذة إضافة/تعديل موديل للأدمن (مع تحديد سعر القطعة والحد الأدنى) -->
   <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
@@ -397,10 +395,10 @@
   <script>
     const GITHUB_REPO = 'najdt656/fashion-world';
     const DATA_FILE_PATH = 'store-data.json';
-    const LS_STATE_KEY = 'fw_permanent_state_v40';
-    const LS_TOKEN_KEY = 'fw_gh_token_v40';
-    const LS_LIKED_KEY = 'fw_user_liked_ids_v40';
-    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v40';
+    const LS_STATE_KEY = 'fw_permanent_state_v41';
+    const LS_TOKEN_KEY = 'fw_gh_token_v41';
+    const LS_LIKED_KEY = 'fw_user_liked_ids_v41';
+    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v41';
 
     let likedProducts = {};
     let viewedProducts = {};
@@ -414,7 +412,7 @@
     let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
-    let isAdmin = localStorage.getItem('fw_admin_logged_v40') === '1';
+    let isAdmin = localStorage.getItem('fw_admin_logged_v41') === '1';
     let cart = [];
     let secretClicks = 0;
     let currentModalProduct = null;
@@ -647,7 +645,7 @@
             </div>
             <div class="flex items-center justify-between border-t border-gray-800 pt-2.5">
               ${formatPrice(p.priceUsd)}
-              <button onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300'} hover:bg-neutral-700 text-xs px-2 py-1 rounded-lg font-bold transition">
+              <button onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300'} hover:bg-neutral-700 text-xs px-2.5 py-1 rounded-lg font-bold transition">
                 ${isLiked ? '❤️ أعجبك' : '🤍 إعجاب'} (${p.likes || 0})
               </button>
             </div>
@@ -753,7 +751,6 @@
       showToast(`تمت إضافة ${qty} قطعة من الموديل للسلة 🛒`);
     }
 
-    // مشاركة الموديل عبر واتساب
     function shareProductWhatsApp() {
       if (!currentModalProduct) return;
       const p = currentModalProduct;
