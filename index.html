@@ -198,7 +198,7 @@
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل -->
+  <!-- نافذة تفاصيل الموديل (مسّرعة فورية) -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[92vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
@@ -222,7 +222,6 @@
           </div>
           <p id="modalPack" class="text-gray-200 font-bold leading-relaxed"></p>
           
-          <!-- التقييم بالنجوم الثابتة والمقيدة (من 1 ل 5) -->
           <div class="flex items-center justify-between pt-1 border-t border-gray-800">
             <span class="text-yellow-300 font-bold">تقييم الموديل (1 إلى 5):</span>
             <div id="modalStarsContainer" class="flex items-center gap-1 text-lg cursor-pointer"></div>
@@ -230,7 +229,6 @@
 
           <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
 
-          <!-- تحديد كمية القطع -->
           <div class="pt-2 border-t border-gray-800 space-y-2 bg-neutral-950 p-2.5 rounded-lg border border-yellow-500/20">
             <div class="flex justify-between items-center">
               <span class="text-yellow-300 font-bold">عدد القطع:</span>
@@ -250,7 +248,6 @@
           </div>
         </div>
 
-        <!-- قسم التعليقات مع زر الحذف -->
         <div class="bg-black/70 p-3 rounded-xl border border-gray-800 space-y-2 text-xs">
           <p class="font-bold text-yellow-400">💬 تعليقات التجار:</p>
           <div id="commentsList" class="space-y-1.5 max-h-32 overflow-y-auto pr-1"></div>
@@ -462,15 +459,19 @@
       return parseFloat(str) || 0;
     }
 
-    async function incrementCloudViews(productId) {
-      try {
-        const res = await fetch(`https://api.countapi.xyz/hit/fashionworld-${productId}/views`);
-        if (res.ok) {
-          const data = await res.json();
-          return data.value;
-        }
-      } catch (e) {}
-      return null;
+    // تعديل تسريعي: جعل عداد المشاهدات يعمل في الخلفية دون تعطيل فتح النافذة
+    function incrementCloudViewsBackground(productId) {
+      fetch(`https://api.countapi.xyz/hit/fashionworld-${productId}/views`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.value) {
+            const p = products.find(item => item.id === productId);
+            if (p) {
+              p.views = data.value;
+              saveAllState();
+            }
+          }
+        }).catch(() => {});
     }
 
     async function initApp() {
@@ -648,7 +649,7 @@
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
           <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
-            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" />
             
             <div class="watermark-logo">
               <span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
@@ -689,20 +690,13 @@
       `}).join('');
     }
 
-    async function openProductModal(id) {
+    function openProductModal(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
       currentModalProduct = p;
       userHasRatedThisSession = false;
 
-      const newViews = await incrementCloudViews(id);
-      if (newViews !== null) {
-        p.views = newViews;
-      } else {
-        p.views = (p.views || 0) + 1;
-      }
-      await saveAllState();
-
+      // فتح النافذة فوراً دون انتظار أي طلب شبكي لضمان السرعة المطلقة
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
@@ -732,6 +726,10 @@
 
       document.getElementById('productModal').classList.add('flex');
       document.getElementById('productModal').classList.remove('hidden');
+
+      // زيادة المشاهدات في الخلفية بصمت
+      p.views = (p.views || 0) + 1;
+      incrementCloudViewsBackground(id);
     }
 
     function closeProductModal() {
@@ -740,7 +738,6 @@
       currentModalProduct = null;
     }
 
-    // تقييم النجوم المحصور بدقة بين 1 و 5 فقط دون أي تكرار عشوائي
     function renderModalStars(p) {
       const container = document.getElementById('modalStarsContainer');
       const avg = (p.ratingCount && p.ratingCount > 0) ? Math.round(p.ratingSum / p.ratingCount) : 5;
@@ -760,7 +757,6 @@
       const p = products.find(item => item.id === productId);
       if (!p) return;
       
-      // إذا كانت هذه المرة الأولى التي يقيم فيها، نقوم بالتعديل المنطقي
       p.ratingSum = (p.ratingSum || 20) + (stars - 5); 
       userHasRatedThisSession = true;
 
