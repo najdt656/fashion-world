@@ -222,7 +222,7 @@
     </div>
   </div>
 
-  <!-- نافذة تغيير صورة الغلاف من الاستوديو -->
+  <!-- نافذة تغيير صورة الغلاف -->
   <div id="bannerModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-sm p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3 flex-shrink-0">
@@ -262,7 +262,7 @@
           </div>
           <div>
             <label class="block text-gray-300 mb-1 font-bold">السعر بالدولار ($)</label>
-            <input id="pUsd" type="number" step="any" min="0" required class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-xs" placeholder="مثال: 45 أو 12.5" />
+            <input id="pUsd" type="number" step="any" min="0" required class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-xs" placeholder="مثال: 45" />
           </div>
         </div>
         <div>
@@ -274,12 +274,8 @@
           <label for="pHasDiscount" class="text-xs text-yellow-400 font-bold">تفعيل حالة (حسم خاص 🔥)</label>
         </div>
         <div>
-          <label class="block text-gray-300 mb-1 font-bold">صورة الموديل الرئيسية</label>
+          <label class="block text-gray-300 mb-1 font-bold">صورة الموديل الرئيسية (اختر صورة من هاتفك)</label>
           <input id="pImgFile" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-gray-300 text-xs" />
-        </div>
-        <div>
-          <label class="block text-gray-300 mb-1 font-bold">صور إضافية للمعرض (اختياري)</label>
-          <input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-gray-300 text-xs" />
         </div>
         <button type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl text-xs mt-2 shadow">حفظ ونشر فوري ✅</button>
       </form>
@@ -334,7 +330,7 @@
       { id: 8, name: "أفرول ب.ب مبطن فرو ناعم #402", category: "ب.ب", priceUsd: 32, pack: "سيريه 6 قطع (3-6-9-12 شهر)", views: 104, likes: 27, activeNow: 2, hasDiscount: true, img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=700&q=80", extras: [] }
     ];
 
-    let products = JSON.parse(localStorage.getItem('fw_products_v4')) || defaultProducts;
+    let products = JSON.parse(localStorage.getItem('fw_products_v5')) || defaultProducts;
 
     document.getElementById('bannerSection').style.backgroundImage = `linear-gradient(to bottom, rgba(8,8,8,0.85), rgba(8,8,8,0.95)), url('${bannerImg}')`;
 
@@ -350,6 +346,11 @@
       document.getElementById('adminRateDisplay').innerText = exchangeRate.toLocaleString('en-US');
       const grid = document.getElementById('productsGrid');
       const list = currentCategory === 'ALL' ? products : products.filter(p => p.category === currentCategory);
+
+      if (list.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 text-sm">لا توجد موديلات منشورة في هذا القسم حالياً.</div>`;
+        return;
+      }
 
       grid.innerHTML = list.map(p => `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
@@ -400,7 +401,7 @@
       if (!p) return;
 
       p.views += 1;
-      localStorage.setItem('fw_products_v4', JSON.stringify(products));
+      localStorage.setItem('fw_products_v5', JSON.stringify(products));
 
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
@@ -436,7 +437,7 @@
       const item = products.find(p => p.id === id);
       if (item) {
         item.likes += 1;
-        localStorage.setItem('fw_products_v4', JSON.stringify(products));
+        localStorage.setItem('fw_products_v5', JSON.stringify(products));
         renderProducts();
       }
     }
@@ -559,9 +560,8 @@
       const pack = document.getElementById('pPack').value;
       const hasDiscount = document.getElementById('pHasDiscount').checked;
       const mainFile = document.getElementById('pImgFile');
-      const extraFiles = document.getElementById('pExtraImgFile');
 
-      const processSave = (mainImg, extrasArr) => {
+      const processSave = (mainImg) => {
         if (editId !== -1) {
           const idx = products.findIndex(p => p.id === editId);
           if (idx !== -1) {
@@ -571,7 +571,6 @@
             products[idx].pack = pack;
             products[idx].hasDiscount = hasDiscount;
             if (mainImg) products[idx].img = mainImg;
-            if (extrasArr.length > 0) products[idx].extras = [...(products[idx].extras || []), ...extrasArr];
           }
         } else {
           products.unshift({
@@ -585,53 +584,31 @@
             activeNow: 2,
             hasDiscount,
             img: mainImg || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=700&q=80",
-            extras: extrasArr
+            extras: []
           });
         }
-        localStorage.setItem('fw_products_v4', JSON.stringify(products));
+        localStorage.setItem('fw_products_v5', JSON.stringify(products));
         closeAddModal();
         renderProducts();
         alert("تم الحفظ والنشر بنجاح على السحابة تلقائياً ✅");
       };
 
-      let mainImgResult = null;
-      let extrasResult = [];
-
-      const handleExtras = () => {
-        if (extraFiles.files && extraFiles.files.length > 0) {
-          let loadedCount = 0;
-          for (let file of extraFiles.files) {
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-              extrasResult.push(evt.target.result);
-              loadedCount++;
-              if (loadedCount === extraFiles.files.length) {
-                processSave(mainImgResult, extrasResult);
-              }
-            };
-            reader.readAsDataURL(file);
-          }
-        } else {
-          processSave(mainImgResult, extrasResult);
-        }
-      };
-
       if (mainFile.files && mainFile.files[0]) {
         const reader = new FileReader();
         reader.onload = function(evt) {
-          mainImgResult = evt.target.result;
-          handleExtras();
+          processSave(evt.target.result);
         };
         reader.readAsDataURL(mainFile.files[0]);
       } else {
-        handleExtras();
+        const existing = products.find(p => p.id === editId);
+        processSave(existing ? existing.img : null);
       }
     }
 
     function deleteProduct(id) {
       if (confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")) {
         products = products.filter(p => p.id !== id);
-        localStorage.setItem('fw_products_v4', JSON.stringify(products));
+        localStorage.setItem('fw_products_v5', JSON.stringify(products));
         renderProducts();
       }
     }
