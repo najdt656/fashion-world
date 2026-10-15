@@ -64,14 +64,13 @@
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="font-extrabold text-yellow-300 flex items-center gap-1.5">
         <span>👑 الإدارة (الصرف: <span id="adminRateDisplay">15,000</span>)</span>
-        <span id="saveStatusBadge" class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30">🟢 الحفظ التلقائي مفعل</span>
+        <span id="cloudStatusBadge" class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30">🟢 جاهز</span>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">➕ نشر موديل</button>
-        <button onclick="exportFullSiteForGithub()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">☁️ تثبيت للزبائن</button>
+        <button onclick="openCloudSetupModal()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">🔗 ربط النشر التلقائي</button>
         <button onclick="openBannerModal()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">🖼️ الغلاف</button>
         <button onclick="changeExchangeRate()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">💱 الصرف</button>
-        <button onclick="resetDefaultData()" class="bg-neutral-800 text-gray-200 px-2 py-1.5 rounded-lg font-bold">🔄 استعادة</button>
         <button onclick="logoutAdmin()" class="bg-red-600 text-white px-2 py-1.5 rounded-lg font-bold">خروج 🔒</button>
       </div>
     </div>
@@ -169,6 +168,27 @@
   <main class="max-w-7xl mx-auto px-3 py-6 flex-1 w-full">
     <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </main>
+
+  <!-- نافذة إعداد الربط التلقائي لمرة واحدة (تغنيك عن فتح GitHub للأبد) -->
+  <div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
+    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md p-4 flex flex-col shadow-2xl space-y-3 text-xs">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+        <h3 class="font-extrabold text-yellow-400 text-sm">🔗 تفعيل النشر السحابي المباشر (لمرة واحدة)</h3>
+        <button onclick="closeCloudSetupModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
+      </div>
+      <p class="text-gray-300 leading-relaxed">
+        لتتمكن من نشر وحذف الموديلات من هاتفك مباشرة وتظهر عند **كل الزبائن فوراً** دون الذهاب إلى GitHub مرة أخرى، ضع مفتاح الربط (GitHub Token) هنا لمرة واحدة فقط:
+      </p>
+      <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/20 space-y-1.5 text-[11px] text-gray-300">
+        <p class="text-yellow-400 font-bold">كيف تحصل على المفتاح في 30 ثانية؟</p>
+        <p>1. اضغط على هذا الرابط المباشر في حسابك: <a href="https://github.com/settings/tokens/new?scopes=repo&description=FashionWorldAutoPublish" target="_blank" class="text-sky-400 underline font-bold">اضغط هنا لإنشاء المفتاح</a></p>
+        <p>2. انزل لآخر الصفحة واضغط الزر الأخضر <b>Generate token</b>.</p>
+        <p>3. انسخ الكود الذي يبدأ بـ <code>ghp_...</code> والصقه بالأسفل:</p>
+      </div>
+      <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-xs" placeholder="الصق المفتاح هنا (ghp_...)" />
+      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow">حفظ وتفعيل النشر التلقائي للأبد ✅</button>
+    </div>
+  </div>
 
   <!-- نافذة "من نحن" -->
   <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
@@ -296,7 +316,7 @@
           <label class="block text-gray-300 mb-1 font-bold">📸 صور إضافية تظهر عند نقر الزبون (اختياري):</label>
           <input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-gray-300" />
         </div>
-        <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl mt-2 shadow">حفظ ونشر الموديل الآن ✅</button>
+        <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl mt-2 shadow">حفظ ونشر الموديل فورا ✅</button>
       </form>
     </div>
   </div>
@@ -348,65 +368,29 @@
   </script>
 
   <script>
-    // مفاتيح التخزين المزدوج
-    const LS_STATE_KEY = 'fw_permanent_state_v20';
-    const LS_LIKED_KEY = 'fw_user_liked_ids_v20';
-    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v20';
-    const DB_NAME = 'FashionWorldPermanentDB_v20';
-    const STORE_NAME = 'app_state';
+    const GITHUB_REPO = 'najdt656/fashion-world';
+    const DATA_FILE_PATH = 'store-data.json';
+    const LS_STATE_KEY = 'fw_permanent_state_v30';
+    const LS_TOKEN_KEY = 'fw_gh_token_v30';
+    const LS_LIKED_KEY = 'fw_user_liked_ids_v30';
+    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v30';
 
-    // سجل التفاعل الحقيقي للمستخدم الحالي (لمنع التكرار الوهمي)
     let likedProducts = {};
     let viewedProducts = {};
-
     try {
       likedProducts = JSON.parse(localStorage.getItem(LS_LIKED_KEY) || '{}');
       viewedProducts = JSON.parse(localStorage.getItem(LS_VIEWED_KEY) || '{}');
     } catch (e) {}
 
-    function openDatabase() {
-      return new Promise((resolve, reject) => {
-        const req = indexedDB.open(DB_NAME, 1);
-        req.onupgradeneeded = (e) => {
-          const db = e.target.result;
-          if (!db.objectStoreNames.contains(STORE_NAME)) {
-            db.createObjectStore(STORE_NAME);
-          }
-        };
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      });
-    }
+    let exchangeRate = window.INITIAL_STORE_STATE.exchangeRate || 15000;
+    let bannerImg = window.INITIAL_STORE_STATE.bannerImg;
+    let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
+    let currencyMode = 'BOTH';
+    let currentCategory = 'ALL';
+    let isAdmin = localStorage.getItem('fw_admin_logged_v30') === '1';
+    let cart = [];
+    let secretClicks = 0;
 
-    async function dbGet(key) {
-      try {
-        const db = await openDatabase();
-        return new Promise((resolve) => {
-          const tx = db.transaction(STORE_NAME, 'readonly');
-          const req = tx.objectStore(STORE_NAME).get(key);
-          req.onsuccess = () => resolve(req.result);
-          req.onerror = () => resolve(null);
-        });
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function dbSet(key, val) {
-      try {
-        const db = await openDatabase();
-        return new Promise((resolve) => {
-          const tx = db.transaction(STORE_NAME, 'readwrite');
-          tx.objectStore(STORE_NAME).put(val, key);
-          tx.oncomplete = () => resolve(true);
-          tx.onerror = () => resolve(false);
-        });
-      } catch (e) {
-        return false;
-      }
-    }
-
-    // ضغط فائق للصور (أقل من 25 كيلوبايت للصورة لضمان الحفظ الفوري في localStorage و IndexedDB معاً)
     function compressImageFile(file, maxWidth = 480, quality = 0.52) {
       return new Promise((resolve) => {
         if (!file) return resolve(null);
@@ -449,82 +433,135 @@
       return parseFloat(str) || 0;
     }
 
-    let exchangeRate = window.INITIAL_STORE_STATE.exchangeRate || 15000;
-    let bannerImg = window.INITIAL_STORE_STATE.bannerImg;
-    let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
-    let currencyMode = 'BOTH';
-    let currentCategory = 'ALL';
-    let isAdmin = localStorage.getItem('fw_admin_logged_v20') === '1';
-    let cart = [];
-    let secretClicks = 0;
-
-    // استرجاع البيانات من الذاكرتين (أيهما أحدث وأكمل)
+    // قراءة البيانات السحابية المشتركة لكل الزبائن + البيانات المحلية
     async function initApp() {
-      // تنظيف مفاتيح الإصدارات القديمة لتفريغ المساحة
-      ['fw_products_v2','fw_products_v3','fw_products_v4','fw_products_v5','fw_products_v6','fw_store_pro_v1','fw_master_store_v10'].forEach(k => {
-        try { localStorage.removeItem(k); } catch(e) {}
-      });
-
-      let loadedState = null;
-
-      // 1. محاولة القراءة من localStorage أولاً (سريع ومباشر)
+      // 1. قراءة النسخة المحلية الفورية
       try {
-        const rawLs = localStorage.getItem(LS_STATE_KEY);
-        if (rawLs) {
-          loadedState = JSON.parse(rawLs);
+        const localRaw = localStorage.getItem(LS_STATE_KEY);
+        if (localRaw) {
+          const parsed = JSON.parse(localRaw);
+          if (Array.isArray(parsed.products)) products = parsed.products;
+          if (parsed.exchangeRate) exchangeRate = Number(parsed.exchangeRate);
+          if (parsed.bannerImg) bannerImg = parsed.bannerImg;
         }
       } catch (e) {}
 
-      // 2. محاولة القراءة من IndexedDB إذا لم يوجد في localStorage أو كان أحدث
-      const dbState = await dbGet('full_state');
-      if (dbState && (!loadedState || (dbState.updatedAt || 0) >= (loadedState.updatedAt || 0))) {
-        loadedState = dbState;
-      }
+      applyBanner();
+      renderProducts();
 
-      if (loadedState) {
-        if (Array.isArray(loadedState.products)) {
-          products = loadedState.products;
+      // 2. جلب أحدث البيانات المنشورة للزبائن على السحابة تلقائياً
+      try {
+        const res = await fetch(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' });
+        if (res.ok) {
+          const cloudData = await res.json();
+          if (cloudData && Array.isArray(cloudData.products)) {
+            products = cloudData.products;
+            if (cloudData.exchangeRate) exchangeRate = Number(cloudData.exchangeRate);
+            if (cloudData.bannerImg) bannerImg = cloudData.bannerImg;
+            try { localStorage.setItem(LS_STATE_KEY, JSON.stringify(cloudData)); } catch(e) {}
+            applyBanner();
+            renderProducts();
+          }
         }
-        if (loadedState.exchangeRate) exchangeRate = Number(loadedState.exchangeRate);
-        if (loadedState.bannerImg) bannerImg = loadedState.bannerImg;
-      }
+      } catch (e) {}
 
       if (isAdmin) {
         document.getElementById('adminBar').classList.remove('hidden');
+        updateCloudBadge();
       }
-      applyBanner();
-      renderProducts();
     }
 
-    // حفظ مزدوج متزامن وفوري يمنع ضياع أي تعديل عند تحديث الصفحة
-    async function saveAllState() {
-      const statePayload = {
+    function updateCloudBadge(text, colorClass) {
+      const badge = document.getElementById('cloudStatusBadge');
+      if (!badge) return;
+      const hasToken = !!localStorage.getItem(LS_TOKEN_KEY);
+      if (text) {
+        badge.innerText = text;
+        badge.className = colorClass || "bg-black/60 text-yellow-300 px-2 py-0.5 rounded text-[10px] border border-yellow-500/30";
+      } else if (hasToken) {
+        badge.innerText = "🟢 النشر السحابي المباشر متصل";
+        badge.className = "bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30";
+      } else {
+        badge.innerText = "🟡 حفظ محلي (اضغط ربط النشر التلقائي)";
+        badge.className = "bg-black/60 text-yellow-300 px-2 py-0.5 rounded text-[10px] border border-yellow-500/30";
+      }
+    }
+
+    // دالة الحفظ الفوري (تحفظ في الجهاز + ترفع على GitHub تلقائياً بالخلفية بدون تدخل منك!)
+    async function saveAllState(syncToCloud = true) {
+      const payload = {
         updatedAt: Date.now(),
         exchangeRate,
         bannerImg,
         products
       };
 
-      let lsSuccess = false;
+      // حفظ في متصفح الجهاز فوراً
       try {
-        localStorage.setItem(LS_STATE_KEY, JSON.stringify(statePayload));
-        lsSuccess = true;
-      } catch (e) {
-        console.warn("localStorage full, relying on IndexedDB");
-      }
+        localStorage.setItem(LS_STATE_KEY, JSON.stringify(payload));
+      } catch (e) {}
 
-      const dbSuccess = await dbSet('full_state', statePayload);
+      const ghToken = localStorage.getItem(LS_TOKEN_KEY);
+      if (syncToCloud && ghToken && isAdmin) {
+        updateCloudBadge("⏳ جاري النشر لكل الزبائن...", "bg-black/60 text-sky-400 px-2 py-0.5 rounded text-[10px] border border-sky-500/30");
+        try {
+          const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`;
+          let sha = null;
+          const getRes = await fetch(apiUrl, {
+            headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github.v3+json' }
+          });
+          if (getRes.ok) {
+            const fileInfo = await getRes.json();
+            sha = fileInfo.sha;
+          }
 
-      const badge = document.getElementById('saveStatusBadge');
-      if (badge) {
-        if (lsSuccess || dbSuccess) {
-          badge.innerText = "🟢 تم الحفظ تلقائياً";
-          badge.className = "bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30";
-        } else {
-          badge.innerText = "🔴 المتصفح يمنع الحفظ (استخدم تثبيت للزبائن)";
-          badge.className = "bg-black/60 text-red-400 px-2 py-0.5 rounded text-[10px] border border-red-500/30";
+          const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+          const bodyObj = {
+            message: "Auto update store products from Admin panel",
+            content: contentBase64
+          };
+          if (sha) bodyObj.sha = sha;
+
+          const putRes = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `token ${ghToken}`,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyObj)
+          });
+
+          if (putRes.ok) {
+            updateCloudBadge("🟢 تم النشر لكل الزبائن تلقائياً!", "bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30");
+          } else {
+            updateCloudBadge("🔴 تأكد من صلاحية مفتاح الربط", "bg-black/60 text-red-400 px-2 py-0.5 rounded text-[10px] border border-red-500/30");
+          }
+        } catch (err) {
+          updateCloudBadge("🔴 خطأ في الاتصال بالإنترنت", "bg-black/60 text-red-400 px-2 py-0.5 rounded text-[10px] border border-red-500/30");
         }
       }
+    }
+
+    function openCloudSetupModal() {
+      document.getElementById('ghTokenInput').value = localStorage.getItem(LS_TOKEN_KEY) || "";
+      document.getElementById('cloudSetupModal').classList.remove('hidden');
+      document.getElementById('cloudSetupModal').classList.add('flex');
+    }
+
+    function closeCloudSetupModal() {
+      document.getElementById('cloudSetupModal').classList.add('hidden');
+      document.getElementById('cloudSetupModal').classList.remove('flex');
+    }
+
+    async function saveCloudToken() {
+      const token = document.getElementById('ghTokenInput').value.trim();
+      if (!token) return alert("يرجى لصق المفتاح أولاً!");
+      localStorage.setItem(LS_TOKEN_KEY, token);
+      closeCloudSetupModal();
+      updateCloudBadge();
+      await saveAllState(true);
+      alert("🎉 ممتاز يا نجدت! تم ربط موقعك بنجاح. الآن أي موديل تنشره أو تحذفه من هاتفك سيظهر عند كل الزبائن تلقائياً دون الحاجة لفتح GitHub أبداً!");
     }
 
     function applyBanner() {
@@ -614,7 +651,6 @@
       `}).join('');
     }
 
-    // فتح الموديل مع احتساب مشاهدة حقيقية واحدة فقط لكل جهاز
     async function openProductModal(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
@@ -623,13 +659,13 @@
         p.views = (p.views || 0) + 1;
         viewedProducts[id] = true;
         try { localStorage.setItem(LS_VIEWED_KEY, JSON.stringify(viewedProducts)); } catch (e) {}
-        await saveAllState();
+        await saveAllState(false);
       }
 
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
-      document.getElementById('modalViews').innerText = `👁️ ${p.views || 0} مشاهدة حقيقية | ❤️ ${p.likes || 0} إعجاب`;
+      document.getElementById('modalViews').innerText = `👁️ ${p.views || 0} مشاهدة | ❤️ ${p.likes || 0} إعجاب`;
       document.getElementById('modalPack').innerText = `📦 الوصف والسيريه: ${p.pack}`;
       
       const badge = document.getElementById('modalDiscountBadge');
@@ -655,7 +691,6 @@
       document.getElementById('productModal').classList.remove('flex');
     }
 
-    // إعجاب حقيقي واحد فقط لكل جهاز (ضغطة تزيد الإعجاب وضغطة ثانية تلغيه)
     async function toggleLikeProduct(e, id) {
       e.stopPropagation();
       const item = products.find(p => p.id === id);
@@ -670,7 +705,7 @@
       }
 
       try { localStorage.setItem(LS_LIKED_KEY, JSON.stringify(likedProducts)); } catch (e) {}
-      await saveAllState();
+      await saveAllState(false);
       renderProducts();
     }
 
@@ -692,10 +727,11 @@
           const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
           if (pass && pass.trim() === "Dane7422") {
             isAdmin = true;
-            try { localStorage.setItem('fw_admin_logged_v20', '1'); } catch (e) {}
+            try { localStorage.setItem('fw_admin_logged_v30', '1'); } catch (e) {}
             document.getElementById('adminBar').classList.remove('hidden');
+            updateCloudBadge();
             renderProducts();
-            alert("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة بنجاح 👑");
+            alert("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة 👑");
           } else if (pass !== null) {
             alert("كلمة المرور غير صحيحة!");
           }
@@ -706,18 +742,9 @@
 
     function logoutAdmin() {
       isAdmin = false;
-      try { localStorage.removeItem('fw_admin_logged_v20'); } catch (e) {}
+      try { localStorage.removeItem('fw_admin_logged_v30'); } catch (e) {}
       document.getElementById('adminBar').classList.add('hidden');
       renderProducts();
-    }
-
-    async function resetDefaultData() {
-      if (confirm("هل تريد استعادة الموديلات الـ 8 الأساسية؟")) {
-        products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
-        await saveAllState();
-        renderProducts();
-        alert("تمت استعادة الموديلات الأساسية بنجاح ✅");
-      }
     }
 
     async function changeExchangeRate() {
@@ -726,8 +753,8 @@
         const clean = parseCleanNumber(val);
         if (clean > 0) {
           exchangeRate = clean;
-          await saveAllState();
           renderProducts();
+          await saveAllState(true);
         }
       }
     }
@@ -752,9 +779,9 @@
         btn.innerText = "تحديث وحفظ الغلاف ✨";
         if (compressed) {
           bannerImg = compressed;
-          await saveAllState();
           applyBanner();
           closeBannerModal();
+          await saveAllState(true);
           alert("تم تحديث وحفظ صورة الغلاف بنجاح ✨");
         }
       } else {
@@ -810,7 +837,7 @@
     async function saveNewProduct(e) {
       e.preventDefault();
       const saveBtn = document.getElementById('saveProductBtn');
-      saveBtn.innerText = "جاري ضغط الصور والحفظ الدائم... ⏳";
+      saveBtn.innerText = "جاري النشر والحفظ السحابي... ⏳";
       saveBtn.disabled = true;
 
       try {
@@ -860,7 +887,7 @@
             category,
             priceUsd,
             pack,
-            views: 0,
+            views: 1,
             likes: 0,
             hasDiscount,
             img: mainImgData || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",
@@ -868,15 +895,15 @@
           });
         }
 
-        await saveAllState();
         currentCategory = 'ALL';
         closeAddModal();
         renderProducts();
-        alert("تم حفظ الموديل بنجاح! ✅");
+        await saveAllState(true);
+        alert("تم نشر الموديل وحفظه بنجاح! ✅");
       } catch (err) {
         alert("حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.");
       } finally {
-        saveBtn.innerText = "حفظ ونشر الموديل الآن ✅";
+        saveBtn.innerText = "حفظ ونشر الموديل فورا ✅";
         saveBtn.disabled = false;
       }
     }
@@ -884,30 +911,8 @@
     async function deleteProduct(id) {
       if (confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")) {
         products = products.filter(p => p.id !== id);
-        await saveAllState();
         renderProducts();
-      }
-    }
-
-    async function exportFullSiteForGithub() {
-      const stateObj = {
-        exchangeRate,
-        bannerImg,
-        products
-      };
-      const scriptEl = document.getElementById('initialDataScript');
-      scriptEl.textContent = `\n    window.INITIAL_STORE_STATE = ${JSON.stringify(stateObj, null, 2)};\n  `;
-      
-      const adminBar = document.getElementById('adminBar');
-      adminBar.classList.add('hidden');
-      const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-      adminBar.classList.remove('hidden');
-
-      try {
-        await navigator.clipboard.writeText(fullHtml);
-        alert("✅ تم نسخ كود الموقع الجديد مع كافة موديلاتك وتعديلاتك إلى الحافظة!\n\nاذهب الآن إلى ملف index.html في GitHub، امسح القديم والصق هذا الكود واضغط Commit ليظهر بشكل دائم عندك وعند كل الزبائن!");
-      } catch (e) {
-        alert("تعذر النسخ التلقائي، يرجى تجربة متصفح كروم.");
+        await saveAllState(true);
       }
     }
 
