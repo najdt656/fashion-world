@@ -27,45 +27,42 @@
     }
     body {
       font-family: 'Cairo', sans-serif;
-      background-color: #060606;
+      background-color: #050507;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(166, 124, 30, 0.07) 0%, transparent 45%);
+        radial-gradient(circle at 12% 12%, rgba(212, 175, 55, 0.11) 0%, transparent 40%),
+        radial-gradient(circle at 88% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
       color: #f5f5f5;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* الوضع النهاري الاحترافي */
+    /* الوضع النهاري البراق */
     body.light-mode {
-      background-color: #f4f5f7;
+      background-color: #f8fafc;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.1) 0%, transparent 45%);
-      color: #111827;
+        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.08) 0%, transparent 45%);
+      color: #0f172a;
     }
     body.light-mode .glass-panel {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      color: #111827;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: #0f172a;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     }
     body.light-mode .card-luxury {
-      background: #ffffff;
-      border: 1px solid rgba(212, 175, 55, 0.28);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      background: linear-gradient(180deg, #ffffff 0%, #fefce8 100%);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
     }
-    body.light-mode .card-luxury h3 {
-      color: #111827 !important;
-    }
+    body.light-mode .card-luxury h3 { color: #0f172a !important; }
     body.light-mode .card-luxury p,
     body.light-mode .text-gray-300,
-    body.light-mode .text-gray-400 {
-      color: #4b5563 !important;
-    }
+    body.light-mode .text-gray-400 { color: #334155 !important; }
     body.light-mode input,
     body.light-mode select {
       background-color: #ffffff !important;
-      color: #111827 !important;
-      border-color: rgba(212, 175, 55, 0.4) !important;
+      color: #0f172a !important;
+      border-color: rgba(212, 175, 55, 0.5) !important;
     }
 
     .font-cinzel { font-family: 'Cinzel', serif; }
@@ -77,51 +74,80 @@
     }
     
     .gold-gradient-bg {
-      background: linear-gradient(135deg, #F3D77D 0%, #D4AF37 50%, #9A6F1A 100%);
-      transition: transform 0.2s ease, filter 0.2s ease;
+      background: linear-gradient(135deg, #FFE885 0%, #D4AF37 50%, #9A6F1A 100%);
+      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.25);
+      transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
     }
     .gold-gradient-bg:hover {
-      filter: brightness(1.06);
+      filter: brightness(1.08);
+      box-shadow: 0 5px 18px rgba(212, 175, 55, 0.4);
     }
-    .gold-gradient-bg:active { transform: scale(0.96); }
+    .gold-gradient-bg:active { transform: scale(0.95); }
 
-    .gold-border { border: 1px solid rgba(212, 175, 55, 0.35); }
+    .glossy-box {
+      background: linear-gradient(145deg, rgba(30, 30, 38, 0.9), rgba(14, 14, 18, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .gold-border { border: 1px solid rgba(212, 175, 55, 0.4); }
     
     .glass-panel {
-      background: rgba(15, 15, 15, 0.92);
-      border: 1px solid rgba(212, 175, 55, 0.22);
+      background: rgba(14, 14, 18, 0.94);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     }
     @media (min-width: 768px) {
       .glass-panel {
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
       }
     }
 
     .card-luxury {
-      background: linear-gradient(165deg, #171717 0%, #0b0b0b 100%);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      background: linear-gradient(165deg, #191920 0%, #0b0b0e 100%);
+      border: 1px solid rgba(212, 175, 55, 0.26);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     @media (min-width: 768px) {
       .card-luxury:hover {
         transform: translateY(-4px);
-        border-color: rgba(212, 175, 55, 0.6);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+        border-color: rgba(212, 175, 55, 0.7);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 16px rgba(212, 175, 55, 0.15);
       }
+    }
+
+    /* وميض شارة الحسم الاحترافي */
+    @keyframes discountPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7), 0 0 10px rgba(250, 204, 21, 0.6);
+        filter: brightness(1);
+      }
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 0 5px rgba(239, 68, 68, 0), 0 0 18px rgba(250, 204, 21, 0.95);
+        filter: brightness(1.18);
+      }
+    }
+    .discount-flash {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%);
+      border: 1px solid #fde047;
+      animation: discountPulse 1.4s infinite ease-in-out;
     }
 
     .watermark-logo {
       position: absolute;
       top: 8px;
       left: 8px;
-      opacity: 0.9;
+      opacity: 0.92;
       pointer-events: none;
       z-index: 10;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       padding: 2px 6px;
       border-radius: 6px;
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.45);
       display: flex;
       align-items: center;
     }
@@ -146,7 +172,7 @@
       transition: transform 0.2s ease;
     }
     .app-icon-link:hover .app-icon-box {
-      transform: translateY(-3px) scale(1.04);
+      transform: translateY(-3px) scale(1.05);
     }
   </style>
 </head>
@@ -156,15 +182,15 @@
   <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[110] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs sm:max-w-sm"></div>
 
   <!-- الشريط العلوي للمعلومات -->
-  <div class="bg-black/95 border-b border-yellow-600/20 text-[10px] sm:text-[11px] py-1.5 px-2.5 sm:px-4 w-full">
-    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 text-gray-300">
+  <div class="bg-gradient-to-r from-black via-neutral-950 to-black border-b border-yellow-500/30 text-[10px] sm:text-[11px] py-1.5 px-2.5 sm:px-4 w-full">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 text-gray-200">
       <div class="flex items-center gap-1.5 truncate">
-        <span class="text-yellow-400 font-bold truncate">📍 سوريا - دمشق - الحريقة</span>
+        <span class="text-yellow-400 font-extrabold truncate">📍 سوريا - دمشق - الحريقة</span>
         <span class="hidden sm:inline text-gray-600">|</span>
-        <span class="hidden sm:inline text-gray-400">شحن مباشر من المعمل لجميع المحافظات</span>
+        <span class="hidden sm:inline text-emerald-400 font-semibold">شحن مباشر من المعمل لجميع المحافظات</span>
       </div>
       <div class="flex items-center gap-2 flex-shrink-0">
-        <button onclick="openAboutModal()" class="text-yellow-400 font-bold bg-yellow-500/15 hover:bg-yellow-500/25 px-2 py-0.5 rounded-lg border border-yellow-500/40 transition text-[10px] sm:text-[11px]">
+        <button onclick="playUiSound('tap'); openAboutModal()" class="text-yellow-300 font-extrabold bg-gradient-to-r from-yellow-500/20 to-amber-500/20 hover:from-yellow-500/30 hover:to-amber-500/30 px-2.5 py-0.5 rounded-lg border border-yellow-400/50 transition text-[10px] sm:text-[11px] shadow-sm">
           ℹ️ من نحن ومنصاتنا
         </button>
         <a href="https://wa.me/963996311804" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-extrabold hidden sm:inline" dir="ltr">+963 996 311 804</a>
@@ -172,8 +198,8 @@
     </div>
   </div>
 
-  <!-- الهيدر الرئيسي المتجاوب 100% للهاتف والكمبيوتر بدون أي قص -->
-  <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/25 shadow-md w-full">
+  <!-- الهيدر الرئيسي المتجاوب مع شريط الإدارة المدمج الأنيق -->
+  <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/30 w-full">
     <div class="max-w-7xl mx-auto px-2.5 sm:px-6 py-2.5 flex items-center justify-between gap-1.5 sm:gap-3">
       
       <!-- الشعار (3 ضغطات خفية تفتح مصادقة الأدمن عبر Firebase) -->
@@ -196,70 +222,73 @@
         </div>
       </div>
 
-      <!-- أزرار الهيدر المتناسقة للهاتف والكمبيوتر -->
+      <!-- أزرار الهيدر البراقة -->
       <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
         
-        <!-- زر الإدارة المنسدل (يظهر فقط في هاتف الأدمن بعد مصادقة Firebase) -->
-        <div id="adminDropdownWrapper" class="hidden relative">
-          <button onclick="toggleAdminMenu()" class="bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-black px-2 sm:px-3 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1 shadow border border-yellow-200">
+        <!-- زر التاج (يظهر فقط للأدمن ويفتح الشريط المدمج تحت الهيدر بدون أي قص) -->
+        <div id="adminDropdownWrapper" class="hidden">
+          <button onclick="playUiSound('tap'); toggleAdminMenu()" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-black font-black px-2.5 sm:px-3 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1 shadow-md border border-yellow-200 active:scale-95 transition">
             <span>👑</span>
-            <span class="hidden xs:inline sm:inline">الإدارة</span>
+            <span class="hidden sm:inline">الإدارة</span>
             <span id="adminArrow" class="text-[8px] transition-transform duration-200">▼</span>
           </button>
-
-          <div id="adminDropdownMenu" class="hidden absolute left-0 mt-2 w-56 glass-panel rounded-2xl p-2.5 shadow-2xl border border-yellow-500/50 z-50 space-y-2 text-xs">
-            <div class="flex items-center justify-between border-b border-gray-800 pb-1.5">
-              <span class="text-yellow-400 font-extrabold text-[11px]">👑 تحكم الإدارة</span>
-              <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full text-[9px] border border-emerald-500/30">الصرف: <b id="adminRateDisplay">15,000</b></span>
-            </div>
-            <button onclick="openAddModal(); toggleAdminMenu();" class="w-full gold-gradient-bg text-black font-extrabold py-2 px-3 rounded-xl flex items-center justify-center gap-1 text-[11px] shadow">
-              <span>➕ نشر موديل جديد</span>
-            </button>
-            <div class="grid grid-cols-2 gap-1.5">
-              <button onclick="openBannerModal(); toggleAdminMenu();" class="bg-neutral-900 hover:bg-neutral-800 text-yellow-300 border border-yellow-500/30 py-1.5 rounded-xl font-bold text-[11px]">🖼️ الغلاف</button>
-              <button onclick="changeExchangeRate(); toggleAdminMenu();" class="bg-neutral-900 hover:bg-neutral-800 text-yellow-300 border border-yellow-500/30 py-1.5 rounded-xl font-bold text-[11px]">💱 الصرف</button>
-            </div>
-            <div class="grid grid-cols-2 gap-1.5">
-              <button onclick="openCloudSetupModal(); toggleAdminMenu();" class="bg-neutral-900 hover:bg-neutral-800 text-sky-400 border border-sky-500/30 py-1.5 rounded-xl font-bold text-[11px]">🔗 التوكن</button>
-              <button onclick="logoutAdmin(); toggleAdminMenu();" class="bg-red-600/90 hover:bg-red-500 text-white py-1.5 rounded-xl font-bold text-[11px]">خروج 🔒</button>
-            </div>
-          </div>
         </div>
 
         <!-- سعر الصرف على الكمبيوتر -->
-        <div class="hidden lg:flex items-center gap-1.5 bg-black/60 border border-yellow-500/30 px-2.5 py-1.5 rounded-xl text-xs text-gray-300">
+        <div class="hidden lg:flex items-center gap-1.5 glossy-box px-2.5 py-1.5 rounded-xl text-xs text-gray-200">
           <span>💱 الصرف:</span>
           <strong id="headerRateDesktop" class="text-yellow-400">15,000</strong>
           <span>ل.س</span>
         </div>
 
         <!-- زر الوضع الليلي والنهاري -->
-        <button onclick="toggleThemeMode()" id="themeToggleBtn" class="bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs flex items-center justify-center shadow transition" title="تبديل المظهر">
+        <button onclick="playUiSound('tap'); toggleThemeMode()" id="themeToggleBtn" class="glossy-box hover:border-yellow-400 text-yellow-400 w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs flex items-center justify-center shadow transition" title="تبديل المظهر">
           🌙
         </button>
 
         <!-- محول العملة -->
-        <select id="currencySelector" onchange="setCurrencyMode(this.value)" class="bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 rounded-xl px-1.5 sm:px-2.5 py-1.5 text-[10px] sm:text-xs font-extrabold focus:outline-none cursor-pointer shadow">
+        <select id="currencySelector" onchange="playUiSound('tap'); setCurrencyMode(this.value)" class="glossy-box text-yellow-400 rounded-xl px-1.5 sm:px-2.5 py-1.5 text-[10px] sm:text-xs font-extrabold focus:outline-none cursor-pointer shadow">
           <option value="BOTH">💵 $ + ل.س</option>
           <option value="USD">💵 دولار ($)</option>
           <option value="SYP">🇸🇾 ليرة (ل.س)</option>
         </select>
 
         <!-- زر السلة -->
-        <button onclick="openCart()" class="relative gold-gradient-bg text-black font-extrabold px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1 shadow-md">
+        <button onclick="playUiSound('tap'); openCart()" class="relative gold-gradient-bg text-black font-extrabold px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1">
           <span>🛒</span>
           <span>السلة</span>
-          <span id="cartCount" class="bg-black text-yellow-400 px-1.5 py-0.2 rounded-full text-[9px] sm:text-[10px] font-black">0</span>
+          <span id="cartCount" class="bg-black text-yellow-400 px-1.5 py-0.2 rounded-full text-[9px] sm:text-[10px] font-black border border-yellow-500/40">0</span>
         </button>
+      </div>
+    </div>
+
+    <!-- شريط أدوات الإدارة المدمج (يفتح بعرض الصفحة تحت الهيدر بشكل مرتب وأنيق جداً على الهاتف والكمبيوتر) -->
+    <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/40 bg-gradient-to-b from-neutral-900 via-black to-neutral-950 px-2.5 sm:px-6 py-2.5 shadow-2xl">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-yellow-400 font-extrabold text-[11px] flex items-center gap-1">👑 لوحة تحكم الإدارة السريعة</span>
+          <span class="bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full text-[10px] border border-emerald-500/40 font-bold">سعر الصرف: <b id="adminRateDisplay">15,000</b> ل.س</span>
+        </div>
+        <div class="grid grid-cols-5 sm:flex sm:items-center gap-1.5">
+          <button onclick="playUiSound('tap'); openAddModal(); toggleAdminMenu();" class="col-span-2 sm:col-auto gold-gradient-bg text-black font-black py-2 px-3 rounded-xl flex items-center justify-center gap-1 text-[10px] sm:text-xs shadow">
+            <span>➕ نشر موديل</span>
+          </button>
+          <button onclick="playUiSound('tap'); openBannerModal(); toggleAdminMenu();" class="bg-amber-500/15 hover:bg-amber-500/25 text-yellow-300 border border-yellow-500/40 py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">🖼️ الغلاف</button>
+          <button onclick="playUiSound('tap'); changeExchangeRate(); toggleAdminMenu();" class="bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">💱 الصرف</button>
+          <div class="col-span-5 sm:col-auto grid grid-cols-2 sm:flex gap-1.5 mt-0.5 sm:mt-0">
+            <button onclick="playUiSound('tap'); openCloudSetupModal(); toggleAdminMenu();" class="bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/40 py-1.5 sm:py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">🔗 التوكن السحابي</button>
+            <button onclick="playUiSound('tap'); logoutAdmin(); toggleAdminMenu();" class="bg-red-600/90 hover:bg-red-500 text-white py-1.5 sm:py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">خروج 🔒</button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- بانر الغلاف الفخم -->
   <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-3 w-full">
-    <div id="bannerSection" class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-yellow-500/30 bg-cover bg-center py-7 sm:py-12 px-3 sm:px-8 shadow-xl">
+    <div id="bannerSection" class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-yellow-500/40 bg-cover bg-center py-7 sm:py-12 px-3 sm:px-8 shadow-2xl">
       <div class="max-w-2xl mx-auto text-center relative z-10 space-y-2.5">
-        <span class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-black/75 border border-yellow-500/40 text-yellow-300 text-[10px] sm:text-xs font-extrabold">
+        <span class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-black/80 border border-yellow-400/50 text-yellow-300 text-[10px] sm:text-xs font-extrabold shadow">
           ✨ المنصة الرسمية لتجار الجملة والمسوقين ✨
         </span>
         <h2 class="text-xl sm:text-4xl font-black leading-snug text-white drop-shadow">
@@ -269,21 +298,21 @@
           تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، حدد الكمية المطلوبة، وشاركنا تقييمك وتعليقك المباشر.
         </p>
         <div class="flex flex-wrap justify-center items-center gap-2 pt-1 text-[11px] sm:text-xs">
-          <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5">
+          <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-4 py-2 rounded-xl shadow-lg flex items-center gap-1.5">
             <span>💬 تواصل واتساب: 0996311804</span>
           </a>
-          <div class="lg:hidden bg-black/80 border border-yellow-500/30 px-3 py-2 rounded-xl text-gray-200">
-            الصرف: <strong id="heroRate" class="text-yellow-400">15,000</strong> ل.س
+          <div class="lg:hidden bg-black/85 border border-yellow-400/40 px-3 py-2 rounded-xl text-gray-100 font-bold shadow">
+            💱 الصرف: <strong id="heroRate" class="text-emerald-400">15,000</strong> ل.س
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- شريط البحث الذكي + فلاتر الأقسام (بدون الأزرار المزعجة) -->
+  <!-- شريط البحث البراق + فلاتر الأقسام الملونة -->
   <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-3 w-full space-y-2">
     
-    <div class="glass-panel rounded-xl sm:rounded-2xl p-2 flex items-center">
+    <div class="glass-panel rounded-xl sm:rounded-2xl p-2 flex items-center border border-yellow-500/35">
       <div class="relative flex-1 flex items-center">
         <span class="absolute right-3 text-yellow-400 text-xs sm:text-sm pointer-events-none">🔍</span>
         <input
@@ -291,29 +320,29 @@
           type="text"
           oninput="handleSearch(this.value)"
           placeholder="ابحث عن اسم الموديل، الكود، أو القسم..."
-          class="w-full bg-black/80 border border-yellow-500/30 focus:border-yellow-400 rounded-xl pr-8 pl-7 py-2 text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none transition"
+          class="w-full bg-black/85 border border-yellow-500/35 focus:border-yellow-400 rounded-xl pr-8 pl-7 py-2 text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none transition"
         />
-        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-2.5 text-gray-400 hover:text-white text-xs bg-neutral-800 px-1.5 py-0.5 rounded-md">✕</button>
+        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-2.5 text-gray-300 hover:text-white text-xs bg-neutral-800 px-1.5 py-0.5 rounded-md">✕</button>
       </div>
     </div>
 
-    <!-- صف فلاتر الأقسام -->
-    <div class="glass-panel rounded-xl sm:rounded-2xl p-1.5 sm:p-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar" id="categoryTabs">
-      <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs shadow">الكل</button>
-      <button onclick="filterCategory('نسواني')" data-cat="نسواني" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">👗 نسواني</button>
-      <button onclick="filterCategory('رجالي')" data-cat="رجالي" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">👔 رجالي</button>
-      <button onclick="filterCategory('ولادي')" data-cat="ولادي" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">🧒 ولادي</button>
-      <button onclick="filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">👶 ب.ب</button>
-      <button onclick="filterCategory('TREND')" data-cat="TREND" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">🔥 الترند الأسبوعي</button>
+    <!-- صف فلاتر الأقسام البراقة -->
+    <div class="glass-panel rounded-xl sm:rounded-2xl p-1.5 sm:p-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar border border-yellow-500/30" id="categoryTabs">
+      <button onclick="playUiSound('tap'); filterCategory('ALL')" data-cat="ALL" class="cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs shadow">✨ الكل</button>
+      <button onclick="playUiSound('tap'); filterCategory('نسواني')" data-cat="نسواني" class="cat-btn flex-shrink-0 glossy-box text-pink-200 hover:border-pink-400 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">👗 نسواني</button>
+      <button onclick="playUiSound('tap'); filterCategory('رجالي')" data-cat="رجالي" class="cat-btn flex-shrink-0 glossy-box text-sky-200 hover:border-sky-400 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">👔 رجالي</button>
+      <button onclick="playUiSound('tap'); filterCategory('ولادي')" data-cat="ولادي" class="cat-btn flex-shrink-0 glossy-box text-emerald-200 hover:border-emerald-400 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">🧒 ولادي</button>
+      <button onclick="playUiSound('tap'); filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn flex-shrink-0 glossy-box text-purple-200 hover:border-purple-400 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">👶 ب.ب</button>
+      <button onclick="playUiSound('tap'); filterCategory('TREND')" data-cat="TREND" class="cat-btn flex-shrink-0 glossy-box text-amber-300 hover:border-amber-400 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition">🔥 الترند الأسبوعي</button>
     </div>
   </section>
 
-  <!-- شبكة الموديلات المتجاوبة تلقائياً للهاتف والكمبيوتر -->
+  <!-- شبكة الموديلات المتجاوبة تلقائياً -->
   <main class="max-w-7xl mx-auto px-2.5 sm:px-6 py-4 flex-1 w-full">
     <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5"></div>
   </main>
 
-  <!-- نافذة مصادقة الأدمن الخفية عبر Firebase (تفتح بـ 3 ضغطات على الشعار) -->
+  <!-- نافذة مصادقة الأدمن الخفية عبر Firebase -->
   <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-3">
     <div class="glass-panel rounded-3xl w-full max-w-sm p-5 flex flex-col shadow-2xl space-y-3 text-xs border border-yellow-500/40">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
@@ -342,14 +371,14 @@
         <button onclick="closeCloudSetupModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
       <p class="text-gray-300 leading-relaxed">
-        أدخل مفتاح الربط (Token) الخاص بـ GitHub مرة واحدة فقط ليقوم الموقع بحفظ ورفع الموديلات والأسعار الجديدة تلقائياً لجميع الزبائن:
+        أدخل مفتاح الربط (Token) الخاص بـ GitHub مرة واحدة فقط ليقوم الموقع بحفظ ورفع الموديلات والأسعار والتعليقات تلقائياً لجميع الزبائن:
       </p>
       <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2.5 text-white text-xs focus:border-yellow-500 focus:outline-none" placeholder="ghp_..." />
       <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow">حفظ وتفعيل المزامنة التلقائية ✅</button>
     </div>
   </div>
 
-  <!-- نافذة "من نحن" مع أيقونات التطبيقات الرسمية -->
+  <!-- نافذة "من نحن" -->
   <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[90vh] p-5 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3 flex-shrink-0">
@@ -361,58 +390,48 @@
         <p class="text-yellow-400 font-extrabold">اسمح لي أن أعرفك على #Fashion_World ❤️⭐</p>
         <p class="font-bold text-emerald-400">نشحن لك الملابس من المعمل مباشرة | سوريا - دمشق - الحريقة</p>
         <div class="space-y-2 text-xs">
-          <div class="bg-black/60 p-3 rounded-xl border border-yellow-500/25">💎 مسؤولون عن تجهيز البضاعة ووصولها لمكتب الشحن الخاص بك بأمان وسرعة.</div>
-          <div class="bg-black/60 p-3 rounded-xl border border-yellow-500/25">💎 نضمن لك التميز والتنافس بالسعر والجودة في متجرك.</div>
-          <div class="bg-black/60 p-3 rounded-xl border border-yellow-500/25">💎 لكل مهتم الرجاء مراسلتنا عبر منصاتنا الرسمية والرد فوري.</div>
+          <div class="glossy-box p-3 rounded-xl">💎 مسؤولون عن تجهيز البضاعة ووصولها لمكتب الشحن الخاص بك بأمان وسرعة.</div>
+          <div class="glossy-box p-3 rounded-xl">💎 نضمن لك التميز والتنافس بالسعر والجودة في متجرك.</div>
+          <div class="glossy-box p-3 rounded-xl">💎 لكل مهتم الرجاء مراسلتنا عبر منصاتنا الرسمية والرد فوري.</div>
         </div>
 
         <div class="pt-4 border-t border-gray-800">
           <p class="text-yellow-300 font-extrabold text-center text-xs mb-4">Follow & Contact Us</p>
           <div class="grid grid-cols-4 gap-3 text-center" dir="ltr">
-            
             <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="app-icon-link flex flex-col items-center gap-1.5 group">
               <div class="app-icon-box bg-[#1877F2]">
-                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
-                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-                </svg>
+                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
               </div>
               <span class="text-[10px] font-bold text-gray-200 group-hover:text-yellow-400">Facebook</span>
             </a>
 
             <a href="https://wa.me/963996311804" target="_blank" class="app-icon-link flex flex-col items-center gap-1.5 group">
               <div class="app-icon-box bg-[#25D366]">
-                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
-                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zM12 2C6.486 2 2 6.486 2 12c0 1.828.496 3.539 1.352 5.012L2 22l5.132-1.341C8.556 21.498 10.221 22 12 22c5.514 0 10-4.486 10-10S17.514 2 12 2z"/>
-                </svg>
+                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zM12 2C6.486 2 2 6.486 2 12c0 1.828.496 3.539 1.352 5.012L2 22l5.132-1.341C8.556 21.498 10.221 22 12 22c5.514 0 10-4.486 10-10S17.514 2 12 2z"/></svg>
               </div>
               <span class="text-[10px] font-bold text-gray-200 group-hover:text-yellow-400">WhatsApp</span>
             </a>
 
             <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="app-icon-link flex flex-col items-center gap-1.5 group">
               <div class="app-icon-box bg-[#229ED9]">
-                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
-                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                </svg>
+                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
               </div>
               <span class="text-[10px] font-bold text-gray-200 group-hover:text-yellow-400">Telegram</span>
             </a>
 
             <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="app-icon-link flex flex-col items-center gap-1.5 group">
               <div class="app-icon-box bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
-                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
+                <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               </div>
               <span class="text-[10px] font-bold text-gray-200 group-hover:text-yellow-400">Instagram</span>
             </a>
-
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل (مع أزرار كمية صغيرة وأنيقة) -->
+  <!-- نافذة تفاصيل الموديل -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[92vh] p-3.5 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
       
@@ -424,26 +443,26 @@
       <div class="overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5 pl-1">
         
         <div class="space-y-2 flex flex-col">
-          <div class="relative h-60 sm:h-72 rounded-2xl overflow-hidden bg-black border border-gray-800">
+          <div class="relative h-60 sm:h-72 rounded-2xl overflow-hidden bg-black border border-yellow-500/30">
             <img id="modalMainImg" src="" class="w-full h-full object-cover" />
             <div class="watermark-logo">
               <span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
             </div>
-            <span id="modalDiscountBadge" class="hidden absolute top-2.5 right-2.5 bg-red-600 text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow">حسم خاص 🔥</span>
+            <span id="modalDiscountBadge" class="hidden absolute top-2.5 right-2.5 discount-flash text-white font-black text-[11px] px-3 py-0.5 rounded-full">حسم 🔥</span>
           </div>
           <div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div>
-          <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 font-extrabold py-2 rounded-xl text-[11px] shadow transition flex items-center justify-center gap-1">
+          <button onclick="playUiSound('tap'); shareProductWhatsApp()" class="w-full bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-extrabold py-2 rounded-xl text-[11px] shadow transition flex items-center justify-center gap-1">
             <span>📲 مشاركة الموديل عبر واتساب (للمسوقين)</span>
           </button>
         </div>
 
         <div class="space-y-2.5 flex flex-col justify-between text-xs">
-          <div class="space-y-2 bg-black/60 p-3 rounded-2xl border border-gray-800">
+          <div class="space-y-2 glossy-box p-3 rounded-2xl">
             <div class="flex justify-between items-center">
-              <span id="modalCategory" class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-lg font-bold text-[11px]"></span>
+              <span id="modalCategory" class="bg-yellow-500/15 text-yellow-300 border border-yellow-500/40 px-2.5 py-0.5 rounded-lg font-extrabold text-[11px]"></span>
               <div class="flex items-center gap-1.5">
-                <span id="modalViews" class="text-[10px] text-gray-300 font-bold">👁️ 0 مشاهدة</span>
-                <button id="modalLikeBtn" onclick="toggleLikeProduct(event, currentModalProduct ? currentModalProduct.id : 0)" class="px-2 py-0.5 rounded-lg text-[10px] font-bold transition"></button>
+                <span id="modalViews" class="text-[10px] text-sky-300 font-bold bg-sky-500/10 px-2 py-0.5 rounded-lg border border-sky-500/30">👁️ 0 مشاهدة</span>
+                <button id="modalLikeBtn" onclick="toggleLikeProduct(event, currentModalProduct ? currentModalProduct.id : 0)" class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold transition"></button>
               </div>
             </div>
             <p id="modalPack" class="text-gray-200 font-bold leading-relaxed text-[11px] sm:text-xs"></p>
@@ -456,18 +475,18 @@
 
             <div id="modalPriceContainer" class="pt-1.5 border-t border-gray-800 flex items-center justify-between"></div>
 
-            <!-- تحديد كمية القطع (أزرار صغيرة وأنيقة) -->
-            <div class="pt-2 border-t border-gray-800 space-y-1.5 bg-neutral-950/90 p-2.5 rounded-xl border border-yellow-500/25">
+            <!-- تحديد كمية القطع -->
+            <div class="pt-2 border-t border-gray-800 space-y-1.5 bg-black/70 p-2.5 rounded-xl border border-yellow-500/30">
               <div class="flex justify-between items-center">
                 <span class="text-yellow-300 font-bold text-[11px]">الكمية المطلوبة:</span>
-                <span id="modalMinNotice" class="text-[9px] bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded border border-yellow-500/30 font-bold">الحد الأدنى: 10</span>
+                <span id="modalMinNotice" class="text-[9px] bg-yellow-500/15 text-yellow-300 px-1.5 py-0.5 rounded border border-yellow-500/40 font-bold">الحد الأدنى: 10</span>
               </div>
               <div class="flex items-center justify-center gap-1.5 pt-0.5">
-                <button onclick="adjustModalQty(-5)" class="bg-neutral-800 hover:bg-neutral-700 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-[10px] transition">-5</button>
-                <button onclick="adjustModalQty(-1)" class="bg-neutral-800 hover:bg-neutral-700 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-xs transition">-</button>
-                <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-14 bg-black border border-yellow-500/40 text-center text-yellow-400 font-black rounded-lg py-1 text-xs focus:outline-none" />
-                <button onclick="adjustModalQty(1)" class="bg-neutral-800 hover:bg-neutral-700 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-xs transition">+</button>
-                <button onclick="adjustModalQty(5)" class="bg-neutral-800 hover:bg-neutral-700 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-[10px] transition">+5</button>
+                <button onclick="playUiSound('tap'); adjustModalQty(-5)" class="glossy-box hover:border-yellow-400 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-[10px] transition">-5</button>
+                <button onclick="playUiSound('tap'); adjustModalQty(-1)" class="glossy-box hover:border-yellow-400 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-xs transition">-</button>
+                <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-14 bg-black border border-yellow-500/50 text-center text-yellow-400 font-black rounded-lg py-1 text-xs focus:outline-none" />
+                <button onclick="playUiSound('tap'); adjustModalQty(1)" class="glossy-box hover:border-yellow-400 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-xs transition">+</button>
+                <button onclick="playUiSound('tap'); adjustModalQty(5)" class="glossy-box hover:border-yellow-400 active:scale-95 text-white w-7 h-7 rounded-lg font-bold text-[10px] transition">+5</button>
               </div>
               <div class="flex justify-between items-center pt-1 text-gray-300 font-bold text-[11px]">
                 <span>الإجمالي الفرعي:</span>
@@ -477,13 +496,13 @@
           </div>
 
           <!-- قسم التعليقات المباشرة لجميع الزبائن -->
-          <div class="bg-black/70 p-3 rounded-2xl border border-gray-800 space-y-2 text-xs">
-            <p class="font-bold text-yellow-400 text-[11px]">💬 تعليقات وآراء التجار:</p>
+          <div class="glossy-box p-3 rounded-2xl space-y-2 text-xs">
+            <p class="font-extrabold text-yellow-400 text-[11px]">💬 تعليقات وآراء التجار (تظهر للجميع):</p>
             <div id="commentsList" class="space-y-1.5 max-h-28 overflow-y-auto pr-1"></div>
             <div class="flex gap-1 pt-1">
-              <input id="commentAuthor" class="w-1/3 bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-white text-[10px] focus:border-yellow-500 focus:outline-none" placeholder="اسمك / المحل..." />
-              <input id="commentText" class="flex-1 bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-white text-[10px] focus:border-yellow-500 focus:outline-none" placeholder="اكتب تعليقك..." />
-              <button onclick="addComment()" class="gold-gradient-bg text-black font-extrabold px-2.5 py-1.5 rounded-lg text-[10px]">إرسال</button>
+              <input id="commentAuthor" class="w-1/3 bg-black border border-yellow-500/30 rounded-lg px-2 py-1.5 text-white text-[10px] focus:border-yellow-400 focus:outline-none" placeholder="اسمك / المحل..." />
+              <input id="commentText" class="flex-1 bg-black border border-yellow-500/30 rounded-lg px-2 py-1.5 text-white text-[10px] focus:border-yellow-400 focus:outline-none" placeholder="اكتب تعليقك..." />
+              <button onclick="addComment()" class="gold-gradient-bg text-black font-extrabold px-3 py-1.5 rounded-lg text-[10px]">إرسال</button>
             </div>
           </div>
         </div>
@@ -513,7 +532,7 @@
     </div>
   </div>
 
-  <!-- نافذة إضافة/تعديل موديل للأدمن (بالدولار أو الليرة السورية) -->
+  <!-- نافذة إضافة/تعديل موديل للأدمن (مع تحديد نسبة الحسم المئوية من 100%) -->
   <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[90vh] p-5 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-3 flex-shrink-0">
@@ -557,10 +576,22 @@
             <input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="قياسات (M-L-XL)" />
           </div>
         </div>
-        <div class="flex items-center gap-2 bg-black/50 p-2 rounded-xl border border-gray-800">
-          <input type="checkbox" id="pHasDiscount" class="w-4 h-4 accent-yellow-400" />
-          <label for="pHasDiscount" class="text-yellow-400 font-bold cursor-pointer">تفعيل شارة (حسم خاص 🔥)</label>
+
+        <!-- خانة تحديد نسبة الحسم المئوية من 100% -->
+        <div class="glossy-box p-3 rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="pHasDiscount" onchange="toggleDiscountPercentInput()" class="w-4 h-4 accent-yellow-400 cursor-pointer" />
+              <label for="pHasDiscount" class="text-yellow-400 font-extrabold cursor-pointer">تفعيل شارة الحسم الوامضة 🔥</label>
+            </div>
+            <div id="discountPercentWrapper" class="hidden flex items-center gap-1">
+              <span class="text-gray-300 font-bold text-[11px]">نسبة الحسم:</span>
+              <input id="pDiscountPercent" type="number" min="1" max="99" value="15" class="w-14 bg-black border border-yellow-400 text-center text-yellow-300 font-black rounded-lg py-1 text-xs focus:outline-none" />
+              <span class="text-red-400 font-black text-xs">%</span>
+            </div>
+          </div>
         </div>
+
         <div class="bg-black/40 p-2.5 rounded-xl border border-gray-800 space-y-1.5">
           <label class="block text-yellow-300 font-bold">📷 الصورة الرئيسية للموديل:</label>
           <input id="pImgFile" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-xl px-2 py-1.5 text-gray-300" />
@@ -596,7 +627,7 @@
   </div>
 
   <!-- الفوتر -->
-  <footer class="bg-black/90 border-t border-yellow-500/25 py-6 px-4 text-center text-[11px] text-gray-400 mt-6">
+  <footer class="bg-black/95 border-t border-yellow-500/30 py-6 px-4 text-center text-[11px] text-gray-400 mt-6">
     <p class="font-cinzel text-base font-black gold-gradient-text mb-1">FASHION WORLD</p>
     <p class="mb-1">📍 سوريا - دمشق - الحريقة | تجارة الألبسة بالجملة</p>
     <p class="text-yellow-400 font-bold">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
@@ -609,13 +640,13 @@
       exchangeRate: 15000,
       bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
       products: [
-        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
-        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 19, ratingCount: 4, comments: [{id: 2, author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
+        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, discountPercent: 20, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 19, ratingCount: 4, comments: [{id: 2, author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, discountPercent: 0, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
       ]
     };
   </script>
 
-  <!-- مصادقة Firebase الآمنة (تعمل فقط عند تسجيل دخولك على هاتفك) -->
+  <!-- مصادقة Firebase الآمنة -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -635,10 +666,12 @@
     onAuthStateChanged(auth, (user) => {
       window.isAdmin = !!user;
       const wrapper = document.getElementById('adminDropdownWrapper');
+      const menu = document.getElementById('adminDropdownMenu');
       if (user) {
         if (wrapper) wrapper.classList.remove('hidden');
       } else {
         if (wrapper) wrapper.classList.add('hidden');
+        if (menu) menu.classList.add('hidden');
       }
       if (typeof window.renderProducts === 'function') window.renderProducts();
       if (window.currentModalProduct && typeof window.renderComments === 'function') {
@@ -657,7 +690,8 @@
       try {
         await signInWithEmailAndPassword(auth, email, pass);
         window.closeFirebaseLoginModal();
-        window.showToast("مرحباً بك يا نجدت! تم تفعيل الإدارة على هاتفك 👑");
+        window.playUiSound('success');
+        window.showToast("مرحباً بك يا نجدت! تم تفعيل الإدارة 👑");
       } catch (err) {
         alert("بيانات الدخول غير صحيحة! تأكد من البريد الإلكتروني وكلمة المرور.");
       } finally {
@@ -670,6 +704,7 @@
       signOut(auth).then(() => {
         window.isAdmin = false;
         document.getElementById('adminDropdownWrapper').classList.add('hidden');
+        document.getElementById('adminDropdownMenu').classList.add('hidden');
         window.renderProducts();
         window.showToast("تم تسجيل خروج الإدارة بأمان 🔒");
       });
@@ -688,6 +723,50 @@
     const LS_RATED_KEY = 'fw_user_rated_master';
     const LS_SOCIAL_CACHE = 'fw_social_cache_master';
     const LS_THEME_KEY = 'fw_theme_mode_master';
+
+    // محرك الصوت التفاعلي المدمج (يصدر تكة ناعمة وأنيقة بدون الحاجة لملفات خارجية)
+    let audioCtx = null;
+    function playUiSound(type = 'tap') {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'like') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.085);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+          osc.start(now);
+          osc.stop(now + 0.095);
+        } else if (type === 'cart' || type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.setValueAtTime(880, now + 0.06);
+          gain.gain.setValueAtTime(0.16, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+          osc.start(now);
+          osc.stop(now + 0.165);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(660, now);
+          osc.frequency.exponentialRampToValueAtTime(320, now + 0.045);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.055);
+        }
+      } catch (e) {}
+    }
+    window.playUiSound = playUiSound;
 
     function migrateLegacyStorage() {
       if (!localStorage.getItem(LS_TOKEN_KEY)) {
@@ -729,6 +808,7 @@
     let cart = [];
     let secretClicks = 0;
     window.currentModalProduct = null;
+    let isSyncingGithub = false;
 
     function applySavedTheme() {
       const savedTheme = localStorage.getItem(LS_THEME_KEY) || 'DARK';
@@ -755,7 +835,7 @@
         body.classList.add('light-mode');
         localStorage.setItem(LS_THEME_KEY, 'LIGHT');
         if (btn) btn.innerText = '☀️';
-        showToast("تم تفعيل الوضع النهاري المضيء ☀️");
+        showToast("تم تفعيل الوضع النهاري البراق ☀️");
       }
     }
 
@@ -782,22 +862,12 @@
       const arrow = document.getElementById('adminArrow');
       if (menu.classList.contains('hidden')) {
         menu.classList.remove('hidden');
-        arrow.style.transform = 'rotate(180deg)';
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
       } else {
-        menu.classList.add('hidden');
-        arrow.style.transform = 'rotate(0deg)';
-      }
-    }
-
-    document.addEventListener('click', (e) => {
-      const wrapper = document.getElementById('adminDropdownWrapper');
-      const menu = document.getElementById('adminDropdownMenu');
-      const arrow = document.getElementById('adminArrow');
-      if (wrapper && !wrapper.contains(e.target) && menu && !menu.classList.contains('hidden')) {
         menu.classList.add('hidden');
         if (arrow) arrow.style.transform = 'rotate(0deg)';
       }
-    });
+    }
 
     function handleSearch(val) {
       searchQuery = val.trim().toLowerCase();
@@ -813,42 +883,73 @@
       handleSearch('');
     }
 
+    // دمج ذكي ودقيق للتفاعلات (يضمن ظهور أي تعليق أو إعجاب أو تقييم أو مشاهدة لكل الزبائن فوراً)
+    function mergeSingleSocialEntry(localEntry, remoteEntry) {
+      if (!localEntry) return remoteEntry;
+      if (!remoteEntry) return localEntry;
+
+      const deletedSet = new Set([
+        ...(Array.isArray(localEntry.deletedCommentIds) ? localEntry.deletedCommentIds : []),
+        ...(Array.isArray(remoteEntry.deletedCommentIds) ? remoteEntry.deletedCommentIds : [])
+      ]);
+      const deletedIds = Array.from(deletedSet);
+
+      const commentMap = new Map();
+      (localEntry.comments || []).forEach(c => {
+        if (c && c.id && !deletedSet.has(c.id)) commentMap.set(c.id, c);
+      });
+      (remoteEntry.comments || []).forEach(c => {
+        if (c && c.id && !deletedSet.has(c.id)) commentMap.set(c.id, c);
+      });
+
+      const isRemoteNewer = (remoteEntry.updatedAt || 0) >= (localEntry.updatedAt || 0);
+      const primary = isRemoteNewer ? remoteEntry : localEntry;
+
+      return {
+        views: Math.max(Number(localEntry.views) || 0, Number(remoteEntry.views) || 0),
+        likes: typeof primary.likes === 'number' ? Math.max(0, primary.likes) : Math.max(Number(localEntry.likes) || 0, Number(remoteEntry.likes) || 0),
+        ratingCount: Math.max(Number(localEntry.ratingCount) || 0, Number(remoteEntry.ratingCount) || 0),
+        ratingSum: isRemoteNewer ? (Number(remoteEntry.ratingSum) || Number(localEntry.ratingSum) || 0) : (Number(localEntry.ratingSum) || Number(remoteEntry.ratingSum) || 0),
+        comments: Array.from(commentMap.values()).sort((a, b) => (a.id || 0) - (b.id || 0)),
+        deletedCommentIds: deletedIds,
+        updatedAt: Math.max(localEntry.updatedAt || 0, remoteEntry.updatedAt || 0)
+      };
+    }
+
     function applySocialMapToProducts() {
       products.forEach(p => {
         const s = socialDataMap[p.id];
         if (!s) return;
         p.views = Math.max(Number(p.views) || 0, Number(s.views) || 0);
         if (typeof s.likes === 'number') p.likes = Math.max(0, s.likes);
-        if (typeof s.ratingCount === 'number') {
+        if (typeof s.ratingCount === 'number' && s.ratingCount > 0) {
           p.ratingCount = Math.max(0, Number(s.ratingCount));
           p.ratingSum = Math.max(0, Number(s.ratingSum));
         }
-        const deletedIds = Array.isArray(s.deletedCommentIds) ? s.deletedCommentIds : [];
-        if (Array.isArray(s.comments)) {
-          const map = new Map();
-          (p.comments || []).forEach(c => {
-            if (!deletedIds.includes(c.id)) map.set(c.id, c);
-          });
-          s.comments.forEach(c => {
-            if (!deletedIds.includes(c.id)) map.set(c.id, c);
-          });
-          p.comments = Array.from(map.values()).sort((a, b) => (a.id || 0) - (b.id || 0));
-        }
+        const deletedSet = new Set(Array.isArray(s.deletedCommentIds) ? s.deletedCommentIds : []);
+        const map = new Map();
+        (p.comments || []).forEach(c => {
+          if (c && c.id && !deletedSet.has(c.id)) map.set(c.id, c);
+        });
+        (s.comments || []).forEach(c => {
+          if (c && c.id && !deletedSet.has(c.id)) map.set(c.id, c);
+        });
+        p.comments = Array.from(map.values()).sort((a, b) => (a.id || 0) - (b.id || 0));
       });
     }
 
     function updateSocialEntryFromProduct(p, deletedCommentId = null) {
       const existing = socialDataMap[p.id] || {};
-      const deletedIds = Array.isArray(existing.deletedCommentIds) ? [...existing.deletedCommentIds] : [];
-      if (deletedCommentId && !deletedIds.includes(deletedCommentId)) {
-        deletedIds.push(deletedCommentId);
-      }
+      const deletedSet = new Set(Array.isArray(existing.deletedCommentIds) ? existing.deletedCommentIds : []);
+      if (deletedCommentId) deletedSet.add(deletedCommentId);
+      const deletedIds = Array.from(deletedSet);
+
       socialDataMap[p.id] = {
         views: Number(p.views) || 0,
         likes: Math.max(0, Number(p.likes) || 0),
         ratingSum: Math.max(0, Number(p.ratingSum) || 0),
         ratingCount: Math.max(0, Number(p.ratingCount) || 0),
-        comments: (Array.isArray(p.comments) ? p.comments : []).filter(c => !deletedIds.includes(c.id)),
+        comments: (Array.isArray(p.comments) ? p.comments : []).filter(c => c && !deletedSet.has(c.id)),
         deletedCommentIds: deletedIds,
         updatedAt: Date.now()
       };
@@ -857,7 +958,6 @@
       } catch (e) {}
     }
 
-    // تحديث الأرقام في مكانها بدون إعادة تحميل الصور لمنع أي تعليق أو لاج على الهاتف
     function updateCountersInPlace() {
       products.forEach(p => {
         const viewsEl = document.getElementById(`card-views-${p.id}`);
@@ -883,13 +983,7 @@
           const remoteMap = await res.json();
           if (remoteMap && typeof remoteMap === 'object') {
             Object.keys(remoteMap).forEach(id => {
-              const r = remoteMap[id];
-              const l = socialDataMap[id];
-              if (!l || (r.updatedAt || 0) >= (l.updatedAt || 0)) {
-                socialDataMap[id] = r;
-              } else {
-                socialDataMap[id].views = Math.max(l.views || 0, r.views || 0);
-              }
+              socialDataMap[id] = mergeSingleSocialEntry(socialDataMap[id], remoteMap[id]);
             });
             try { localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap)); } catch (e) {}
             applySocialMapToProducts();
@@ -908,8 +1002,21 @@
       } catch (e) {}
     }
 
+    // رفع التفاعلات مع دمج ذري يمنع مسح تفاعلات الزبائن الآخرين
     async function pushPublicSocialState(p, deletedCommentId = null) {
       if (p) updateSocialEntryFromProduct(p, deletedCommentId);
+      try {
+        const getRes = await fetch(`${PUBLIC_SOCIAL_API}?t=${Date.now()}`, { cache: 'no-store' });
+        if (getRes.ok) {
+          const remoteMap = await getRes.json();
+          if (remoteMap && typeof remoteMap === 'object') {
+            Object.keys(remoteMap).forEach(id => {
+              socialDataMap[id] = mergeSingleSocialEntry(socialDataMap[id], remoteMap[id]);
+            });
+          }
+        }
+      } catch (e) {}
+
       try {
         await fetch(PUBLIC_SOCIAL_API, {
           method: 'PUT',
@@ -970,23 +1077,23 @@
         if (!secItem) return baseItem;
 
         const sEntry = socialDataMap[baseItem.id] || {};
-        const deletedIds = Array.isArray(sEntry.deletedCommentIds) ? sEntry.deletedCommentIds : [];
+        const deletedSet = new Set(Array.isArray(sEntry.deletedCommentIds) ? sEntry.deletedCommentIds : []);
 
         const map = new Map();
         (secItem.comments || []).forEach(c => {
-          if (!deletedIds.includes(c.id)) map.set(c.id, c);
+          if (c && c.id && !deletedSet.has(c.id)) map.set(c.id, c);
         });
         (baseItem.comments || []).forEach(c => {
-          if (!deletedIds.includes(c.id)) map.set(c.id, c);
+          if (c && c.id && !deletedSet.has(c.id)) map.set(c.id, c);
         });
 
         return {
           ...baseItem,
           views: Math.max(Number(baseItem.views) || 0, Number(secItem.views) || 0),
-          likes: typeof baseItem.likes === 'number' ? baseItem.likes : (Number(secItem.likes) || 0),
-          ratingSum: typeof baseItem.ratingSum === 'number' ? baseItem.ratingSum : (Number(secItem.ratingSum) || 0),
-          ratingCount: typeof baseItem.ratingCount === 'number' ? baseItem.ratingCount : (Number(secItem.ratingCount) || 0),
-          comments: Array.from(map.values())
+          likes: Math.max(Number(baseItem.likes) || 0, Number(secItem.likes) || 0),
+          ratingSum: Math.max(Number(baseItem.ratingSum) || 0, Number(secItem.ratingSum) || 0),
+          ratingCount: Math.max(Number(baseItem.ratingCount) || 0, Number(secItem.ratingCount) || 0),
+          comments: Array.from(map.values()).sort((a, b) => (a.id || 0) - (b.id || 0))
         };
       });
     }
@@ -1040,13 +1147,13 @@
       } catch (e) {}
 
       await fetchPublicSocialState();
-      setInterval(fetchPublicSocialState, 15000);
+      setInterval(fetchPublicSocialState, 10000);
     }
 
     async function saveAllState(autoCloudSync = true, changedProduct = null, deletedCommentId = null) {
       localUpdatedAt = Date.now();
       if (changedProduct) {
-        pushPublicSocialState(changedProduct, deletedCommentId);
+        await pushPublicSocialState(changedProduct, deletedCommentId);
       }
 
       const payload = {
@@ -1066,6 +1173,8 @@
     }
 
     async function syncToGithubSilent(payload, ghToken) {
+      if (isSyncingGithub) return;
+      isSyncingGithub = true;
       try {
         const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`;
         let sha = null;
@@ -1089,7 +1198,9 @@
           },
           body: JSON.stringify(bodyObj)
         });
-      } catch (e) {}
+      } catch (e) {} finally {
+        isSyncingGithub = false;
+      }
     }
 
     function openCloudSetupModal() {
@@ -1109,6 +1220,7 @@
       localStorage.setItem(LS_TOKEN_KEY, token);
       closeCloudSetupModal();
       await saveAllState(true);
+      playUiSound('success');
       showToast("تم تفعيل المزامنة التلقائية بنجاح! ✨");
     }
 
@@ -1134,6 +1246,19 @@
       return Math.min(5, Math.max(1, sum / count)).toFixed(1);
     }
 
+    function getDiscountBadgeText(p) {
+      if (!p.hasDiscount) return '';
+      const pct = parseInt(p.discountPercent) || 0;
+      return pct > 0 ? `حسم ${pct}% 🔥` : `حسم خاص 🔥`;
+    }
+
+    function toggleDiscountPercentInput() {
+      const checked = document.getElementById('pHasDiscount').checked;
+      const wrapper = document.getElementById('discountPercentWrapper');
+      if (checked) wrapper.classList.remove('hidden');
+      else wrapper.classList.add('hidden');
+    }
+
     function renderProducts() {
       const rateFormatted = exchangeRate.toLocaleString('en-US');
       const heroRateEl = document.getElementById('heroRate');
@@ -1147,7 +1272,7 @@
         if (btn.getAttribute('data-cat') === currentCategory) {
           btn.className = "cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs shadow";
         } else {
-          btn.className = "cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition";
+          btn.className = "cat-btn flex-shrink-0 glossy-box text-gray-200 hover:border-yellow-400 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition";
         }
       });
 
@@ -1181,10 +1306,11 @@
         const minQty = p.minQty || 10;
         const avgRating = getProductRatingLabel(p);
         const commentsCount = (p.comments && p.comments.length) ? p.comments.length : 0;
+        const discountText = getDiscountBadgeText(p);
 
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
-          <div class="relative h-44 sm:h-60 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
+          <div class="relative h-44 sm:h-60 overflow-hidden bg-neutral-900 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${p.id})">
             <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
             
             <div class="watermark-logo">
@@ -1194,10 +1320,10 @@
             <span class="absolute top-2 right-2 gold-gradient-bg text-black font-extrabold text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full shadow">
               ${p.category}
             </span>
-            ${p.hasDiscount ? `<span class="absolute top-7 right-2 bg-red-600 text-white font-extrabold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-full shadow">حسم 🔥</span>` : ''}
+            ${p.hasDiscount ? `<span class="absolute top-8 right-2 discount-flash text-white font-black text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full">${discountText}</span>` : ''}
 
-            <div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/80 px-2 py-1 rounded-lg text-[8px] sm:text-[10px] border border-white/10">
-              <span id="card-views-${p.id}" class="text-gray-200 font-bold">👁️ ${p.views || 0}</span>
+            <div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/85 px-2 py-1 rounded-lg text-[8px] sm:text-[10px] border border-yellow-500/25">
+              <span id="card-views-${p.id}" class="text-sky-300 font-bold">👁️ ${p.views || 0}</span>
               <span id="card-rating-${p.id}" class="text-yellow-400 font-bold">⭐ ${avgRating} (${commentsCount}💬)</span>
               <span class="text-emerald-400 font-bold">أدنى:${minQty}</span>
             </div>
@@ -1205,7 +1331,7 @@
 
           <div class="p-2.5 sm:p-3.5 flex-1 flex flex-col justify-between space-y-2">
             <div>
-              <h3 class="font-extrabold text-white text-[11px] sm:text-sm mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="openProductModal(${p.id})">${p.name}</h3>
+              <h3 class="font-extrabold text-white text-[11px] sm:text-sm mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${p.id})">${p.name}</h3>
               <p class="text-[10px] text-gray-400 line-clamp-1">📐 ${p.pack}</p>
             </div>
 
@@ -1216,14 +1342,13 @@
               </button>
             </div>
 
-            <!-- أزرار صغيرة ومتناسقة للطلب والتعديل والحذف -->
             <div class="flex items-center gap-1 pt-0.5">
-              <button onclick="openProductModal(${p.id})" class="flex-1 gold-gradient-bg text-black font-extrabold py-1.5 px-2 rounded-lg text-[10px] sm:text-xs shadow truncate">
+              <button onclick="playUiSound('tap'); openProductModal(${p.id})" class="flex-1 gold-gradient-bg text-black font-extrabold py-1.5 px-2 rounded-lg text-[10px] sm:text-xs shadow truncate">
                 🛒 حدد الكمية
               </button>
               ${window.isAdmin ? `
-                <button onclick="editProduct(${p.id})" class="bg-blue-600/90 hover:bg-blue-500 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center flex-shrink-0 shadow" title="تعديل">✏️</button>
-                <button onclick="deleteProduct(${p.id})" class="bg-red-600/90 hover:bg-red-500 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center flex-shrink-0 shadow" title="حذف">🗑️</button>
+                <button onclick="playUiSound('tap'); editProduct(${p.id})" class="bg-blue-600/90 hover:bg-blue-500 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center flex-shrink-0 shadow" title="تعديل">✏️</button>
+                <button onclick="playUiSound('tap'); deleteProduct(${p.id})" class="bg-red-600/90 hover:bg-red-500 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center flex-shrink-0 shadow" title="حذف">🗑️</button>
               ` : ''}
             </div>
           </div>
@@ -1237,7 +1362,7 @@
       const likeBtn = document.getElementById('modalLikeBtn');
       const isLiked = !!likedProducts[p.id];
       if (likeBtn) {
-        likeBtn.className = `${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300 border border-gray-700'} px-2 py-0.5 rounded-lg text-[10px] font-bold transition`;
+        likeBtn.className = `${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300 border border-gray-700'} px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold transition`;
         likeBtn.innerHTML = `${isLiked ? '❤️ معجب' : '🤍 إعجاب'} (${p.likes || 0})`;
       }
     }
@@ -1247,12 +1372,13 @@
       if (!p) return;
       window.currentModalProduct = p;
 
+      // زيادة المشاهدات وحفظها في السحابة فوراً ليراها جميع الزبائن
       if (!viewedProducts[id]) {
         p.views = (Number(p.views) || 0) + 1;
         viewedProducts[id] = true;
         try { localStorage.setItem(LS_VIEWED_KEY, JSON.stringify(viewedProducts)); } catch (e) {}
         updateCountersInPlace();
-        await saveAllState(false, p);
+        saveAllState(false, p);
       }
 
       document.getElementById('modalTitle').innerText = p.name;
@@ -1262,8 +1388,12 @@
       document.getElementById('modalPack').innerText = `📐 القياسات والتفاصيل: ${p.pack}`;
       
       const badge = document.getElementById('modalDiscountBadge');
-      if (p.hasDiscount) badge.classList.remove('hidden');
-      else badge.classList.add('hidden');
+      if (p.hasDiscount) {
+        badge.innerText = getDiscountBadgeText(p);
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
 
       const minQty = p.minQty || 10;
       document.getElementById('modalMinNotice').innerText = `الحد الأدنى: ${minQty} قطع`;
@@ -1279,7 +1409,7 @@
       const thumbsContainer = document.getElementById('modalThumbs');
       const allImgs = [p.img, ...(p.extras || [])];
       thumbsContainer.innerHTML = allImgs.map(imgSrc => `
-        <img src="${imgSrc}" onclick="document.getElementById('modalMainImg').src=this.src" class="w-12 h-12 object-cover rounded-xl border border-yellow-500/50 cursor-pointer hover:opacity-80 flex-shrink-0" />
+        <img src="${imgSrc}" onclick="playUiSound('tap'); document.getElementById('modalMainImg').src=this.src" class="w-12 h-12 object-cover rounded-xl border border-yellow-500/50 cursor-pointer hover:opacity-80 flex-shrink-0" />
       `).join('');
 
       document.getElementById('productModal').classList.add('flex');
@@ -1313,6 +1443,7 @@
       const p = products.find(item => item.id === productId);
       if (!p) return;
 
+      playUiSound('like');
       const cleanStars = Math.min(5, Math.max(1, Number(stars) || 5));
       p.ratingCount = Math.max(0, Number(p.ratingCount) || 0);
       p.ratingSum = Math.max(0, Number(p.ratingSum) || 0);
@@ -1331,21 +1462,21 @@
 
       renderModalStars(p);
       updateCountersInPlace();
+      showToast(`شكراً لتقييمك! تم تسجيل (${cleanStars} نجوم) لدى الجميع ⭐`);
       await saveAllState(true, p);
-      showToast(`شكراً لتقييمك! تم تسجيل (${cleanStars} نجوم) ⭐`);
     }
 
     function renderComments(p) {
       const list = document.getElementById('commentsList');
       const comments = p.comments || [];
       if (comments.length === 0) {
-        list.innerHTML = `<p class="text-gray-500 text-[10px]">لا توجد تعليقات بعد. كن أول من يشاركنا رأيه!</p>`;
+        list.innerHTML = `<p class="text-gray-400 text-[10px]">لا توجد تعليقات بعد. كن أول من يشاركنا رأيه!</p>`;
         return;
       }
       list.innerHTML = comments.map(c => `
-        <div class="flex justify-between items-center bg-black/60 p-2 rounded-xl border border-gray-800 text-[11px]">
+        <div class="flex justify-between items-center bg-black/70 p-2 rounded-xl border border-yellow-500/20 text-[11px]">
           <div>
-            <span class="text-yellow-400 font-bold">${c.author}:</span>
+            <span class="text-yellow-400 font-extrabold">${c.author}:</span>
             <span class="text-gray-200 mr-1">${c.text}</span>
           </div>
           ${window.isAdmin ? `<button onclick="deleteComment(${p.id},${c.id})" class="text-red-400 hover:text-red-300 text-[10px] font-bold px-1.5 py-0.5 bg-red-950/40 rounded" title="حذف التعليق نهائياً">🗑️</button>` : ''}
@@ -1363,6 +1494,7 @@
 
       if (!text) return alert("يرجى كتابة نص التعليق أولاً!");
 
+      playUiSound('cart');
       if (!Array.isArray(window.currentModalProduct.comments)) {
         window.currentModalProduct.comments = [];
       }
@@ -1376,8 +1508,8 @@
       textInput.value = "";
       renderComments(window.currentModalProduct);
       updateCountersInPlace();
+      showToast("تم نشر تعليقك وحفظه لجميع الزبائن 💬✨");
       await saveAllState(true, window.currentModalProduct);
-      showToast("تم نشر تعليقك لجميع الزبائن بنجاح 💬✨");
     }
 
     async function deleteComment(productId, commentId) {
@@ -1385,11 +1517,12 @@
       const p = products.find(item => item.id === productId);
       if (!p || !p.comments) return;
       
+      playUiSound('tap');
       p.comments = p.comments.filter(c => c.id !== commentId);
       renderComments(p);
       updateCountersInPlace();
-      await saveAllState(true, p, commentId);
       showToast("تم حذف التعليق نهائياً", "error");
+      await saveAllState(true, p, commentId);
     }
 
     function adjustModalQty(delta) {
@@ -1429,6 +1562,7 @@
         return;
       }
 
+      playUiSound('cart');
       const existing = cart.find(c => c.id === window.currentModalProduct.id);
       if (existing) {
         existing.qty += qty;
@@ -1453,6 +1587,7 @@
       const item = products.find(p => p.id === id);
       if (!item) return;
 
+      playUiSound('like');
       if (likedProducts[id]) {
         item.likes = Math.max(0, (Number(item.likes) || 1) - 1);
         delete likedProducts[id];
@@ -1460,7 +1595,7 @@
       } else {
         item.likes = (Number(item.likes) || 0) + 1;
         likedProducts[id] = true;
-        showToast("شكراً لتفاعلك! تم تسجيل إعجابك ❤️");
+        showToast("شكراً لتفاعلك! تم حفظ إعجابك لدى الجميع ❤️");
       }
 
       try { localStorage.setItem(LS_LIKED_KEY, JSON.stringify(likedProducts)); } catch (e) {}
@@ -1485,6 +1620,7 @@
       secretClicks++;
       if (secretClicks >= 3) {
         secretClicks = 0;
+        playUiSound('tap');
         if (window.isAdmin) {
           toggleAdminMenu();
         } else {
@@ -1510,6 +1646,7 @@
           exchangeRate = clean;
           renderProducts();
           await saveAllState(true);
+          playUiSound('success');
           showToast("تم تحديث سعر الصرف وحفظه تلقائياً ✨");
         }
       }
@@ -1540,6 +1677,7 @@
           applyBanner();
           closeBannerModal();
           await saveAllState(true);
+          playUiSound('success');
           showToast("تم تحديث صورة الغلاف وحفظها تلقائياً ✨");
         }
       } else {
@@ -1568,6 +1706,8 @@
       document.getElementById('pImgFile').value = "";
       document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = false;
+      document.getElementById('pDiscountPercent').value = "15";
+      toggleDiscountPercentInput();
       document.getElementById('addModal').classList.add('flex');
       document.getElementById('addModal').classList.remove('hidden');
     }
@@ -1591,7 +1731,9 @@
       document.getElementById('pPack').value = p.pack;
       document.getElementById('pImgFile').value = "";
       document.getElementById('pExtraImgFile').value = "";
-      document.getElementById('pHasDiscount').checked = p.hasDiscount || false;
+      document.getElementById('pHasDiscount').checked = !!p.hasDiscount;
+      document.getElementById('pDiscountPercent').value = p.discountPercent || 15;
+      toggleDiscountPercentInput();
       document.getElementById('addModal').classList.add('flex');
       document.getElementById('addModal').classList.remove('hidden');
     }
@@ -1615,6 +1757,7 @@
         const minQty = parseInt(document.getElementById('pMinQty').value) || 10;
         const pack = document.getElementById('pPack').value.trim();
         const hasDiscount = document.getElementById('pHasDiscount').checked;
+        const discountPercent = hasDiscount ? Math.min(99, Math.max(1, parseInt(document.getElementById('pDiscountPercent').value) || 15)) : 0;
         const mainFile = document.getElementById('pImgFile');
         const extraFiles = document.getElementById('pExtraImgFile');
 
@@ -1642,6 +1785,7 @@
             products[idx].minQty = minQty;
             products[idx].pack = pack;
             products[idx].hasDiscount = hasDiscount;
+            products[idx].discountPercent = discountPercent;
             if (mainImgData) products[idx].img = mainImgData;
             if (extrasData.length > 0) products[idx].extras = extrasData;
             targetProd = products[idx];
@@ -1660,6 +1804,7 @@
             ratingCount: 0,
             comments: [],
             hasDiscount,
+            discountPercent,
             img: mainImgData || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",
             extras: extrasData
           };
@@ -1669,8 +1814,9 @@
         currentCategory = 'ALL';
         closeAddModal();
         renderProducts();
-        await saveAllState(true, targetProd);
+        playUiSound('success');
         showToast("تم حفظ ونشر الموديل تلقائياً لجميع الزبائن! ✅");
+        await saveAllState(true, targetProd);
       } catch (err) {
         alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
       } finally {
@@ -1701,13 +1847,13 @@
         container.innerHTML = cart.map(c => {
           const sub = Math.round(c.priceUsd * c.qty * 100) / 100;
           totalUsd += sub;
-          return `<div class="flex justify-between items-center bg-black/80 p-2.5 rounded-xl border border-gray-800 gap-2">
+          return `<div class="flex justify-between items-center glossy-box p-2.5 rounded-xl gap-2">
             <div class="flex-1 min-w-0">
               <p class="font-bold text-white text-xs truncate">${c.name}</p>
               <p class="text-[10px] text-yellow-400">$${c.priceUsd} للقطعة × ${c.qty} قطعة</p>
             </div>
             <span class="text-emerald-400 font-black text-xs">$${sub}</span>
-            <button onclick="removeFromCart(${c.id})" class="text-red-400 hover:text-red-300 text-[10px] font-bold px-2 py-1 bg-red-950/30 rounded-lg">حذف</button>
+            <button onclick="playUiSound('tap'); removeFromCart(${c.id})" class="text-red-400 hover:text-red-300 text-[10px] font-bold px-2 py-1 bg-red-950/40 rounded-lg">حذف</button>
           </div>`;
         }).join('');
         totalUsd = Math.round(totalUsd * 100) / 100;
@@ -1731,6 +1877,7 @@
 
     function sendOrderWhatsApp() {
       if (cart.length === 0) return alert("السلة فارغة!");
+      playUiSound('success');
       const buyer = document.getElementById('buyerName').value || "تاجر جملة";
       let totalUsd = 0;
       let lines = cart.map((c, idx) => {
