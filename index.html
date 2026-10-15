@@ -222,9 +222,9 @@
           </div>
           <p id="modalPack" class="text-gray-200 font-bold leading-relaxed"></p>
           
-          <!-- التقييم بالنجوم -->
+          <!-- التقييم بالنجوم الثابتة والمقيدة (من 1 ل 5) -->
           <div class="flex items-center justify-between pt-1 border-t border-gray-800">
-            <span class="text-yellow-300 font-bold">قيم الموديل (من 5 نجوم):</span>
+            <span class="text-yellow-300 font-bold">تقييم الموديل (1 إلى 5):</span>
             <div id="modalStarsContainer" class="flex items-center gap-1 text-lg cursor-pointer"></div>
           </div>
 
@@ -250,7 +250,7 @@
           </div>
         </div>
 
-        <!-- قسم التعليقات -->
+        <!-- قسم التعليقات مع زر الحذف -->
         <div class="bg-black/70 p-3 rounded-xl border border-gray-800 space-y-2 text-xs">
           <p class="font-bold text-yellow-400">💬 تعليقات التجار:</p>
           <div id="commentsList" class="space-y-1.5 max-h-32 overflow-y-auto pr-1"></div>
@@ -388,9 +388,9 @@
   <script>
     const GITHUB_REPO = 'najdt656/fashion-world';
     const DATA_FILE_PATH = 'store-data.json';
-    const LS_STATE_KEY = 'fw_permanent_state_v90';
-    const LS_TOKEN_KEY = 'fw_gh_token_v90';
-    const LS_LIKED_KEY = 'fw_user_liked_ids_v90';
+    const LS_STATE_KEY = 'fw_permanent_state_v100';
+    const LS_TOKEN_KEY = 'fw_gh_token_v100';
+    const LS_LIKED_KEY = 'fw_user_liked_ids_v100';
 
     let likedProducts = {};
     try {
@@ -402,7 +402,7 @@
     let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
-    let isAdmin = localStorage.getItem('fw_admin_logged_v90') === '1';
+    let isAdmin = localStorage.getItem('fw_admin_logged_v100') === '1';
     let cart = [];
     let secretClicks = 0;
     let currentModalProduct = null;
@@ -462,7 +462,6 @@
       return parseFloat(str) || 0;
     }
 
-    // دالة تحديث المشاهدات الحية سحابياً لكل زبون جديد عبر CountAPI المجاني
     async function incrementCloudViews(productId) {
       try {
         const res = await fetch(`https://api.countapi.xyz/hit/fashionworld-${productId}/views`);
@@ -696,7 +695,6 @@
       currentModalProduct = p;
       userHasRatedThisSession = false;
 
-      // زيادة المشاهدة سحابياً لكل زبون جديد يفتح الموديل
       const newViews = await incrementCloudViews(id);
       if (newViews !== null) {
         p.views = newViews;
@@ -742,6 +740,7 @@
       currentModalProduct = null;
     }
 
+    // تقييم النجوم المحصور بدقة بين 1 و 5 فقط دون أي تكرار عشوائي
     function renderModalStars(p) {
       const container = document.getElementById('modalStarsContainer');
       const avg = (p.ratingCount && p.ratingCount > 0) ? Math.round(p.ratingSum / p.ratingCount) : 5;
@@ -761,14 +760,14 @@
       const p = products.find(item => item.id === productId);
       if (!p) return;
       
-      p.ratingSum = (p.ratingSum || 20) + stars;
-      p.ratingCount = (p.ratingCount || 4) + 1;
+      // إذا كانت هذه المرة الأولى التي يقيم فيها، نقوم بالتعديل المنطقي
+      p.ratingSum = (p.ratingSum || 20) + (stars - 5); 
       userHasRatedThisSession = true;
 
       renderModalStars(p);
       renderProducts();
       await saveAllState();
-      showToast(`شكراً لك! تم تسجيل تقييمك (${stars} نجوم) ⭐`);
+      showToast(`شكراً لك! تم اعتماد تقييمك (${stars} نجوم) ⭐`);
     }
 
     function renderComments(p) {
@@ -911,7 +910,7 @@
           const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
           if (pass && pass.trim() === "Dane7422") {
             isAdmin = true;
-            localStorage.setItem('fw_admin_logged_v80', '1');
+            localStorage.setItem('fw_admin_logged_v100', '1');
             document.getElementById('adminBar').classList.remove('hidden');
             renderProducts();
             showToast("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة 👑");
@@ -925,7 +924,7 @@
 
     function logoutAdmin() {
       isAdmin = false;
-      localStorage.removeItem('fw_admin_logged_v80');
+      localStorage.removeItem('fw_admin_logged_v100');
       document.getElementById('adminBar').classList.add('hidden');
       renderProducts();
     }
