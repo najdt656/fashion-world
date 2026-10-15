@@ -7,59 +7,117 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --gold: #D4AF37; --gold-light: #FFF3B0; --gold-dark: #9A6F1A; }
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #FFF3B0;
+      --gold-dark: #9A6F1A;
+    }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: 'Cairo', sans-serif;
+    
+    /* الوضع الليلي الافتراضي */
+    body.dark-mode {
       background-color: #060606;
-      background-image: radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.08) 0%, transparent 45%), radial-gradient(circle at 85% 80%, rgba(166, 124, 30, 0.07) 0%, transparent 45%);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(166, 124, 30, 0.07) 0%, transparent 45%),
+        radial-gradient(rgba(212, 175, 55, 0.06) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 28px 28px;
       background-attachment: fixed;
       color: #f5f5f5;
-      overflow-x: hidden;
-      margin: 0; padding: 0;
     }
+    body.dark-mode .glass-panel {
+      background: rgba(16, 16, 16, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+    }
+    body.dark-mode .card-luxury {
+      background: linear-gradient(165deg, rgba(24, 24, 24, 0.92) 0%, rgba(10, 10, 10, 0.96) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    /* الوضع النهاري الساطع */
+    body.light-mode {
+      background-color: #f4f5f7;
+      background-image: none;
+      color: #111111;
+    }
+    body.light-mode .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #111;
+    }
+    body.light-mode .card-luxury {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    body.light-mode .card-luxury h3 { color: #111 !important; }
+    body.light-mode .text-gray-300, body.light-mode .text-gray-400 { color: #4b5563 !important; }
+
     .font-cinzel { font-family: 'Cinzel', serif; }
-    .gold-gradient-text { background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .gold-gradient-bg { background: linear-gradient(135deg, #F3D77D 0%, #D4AF37 50%, #9A6F1A 100%); transition: all 0.25s ease; }
+    
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #AA771C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .gold-gradient-bg {
+      background: linear-gradient(135deg, #F3D77D 0%, #D4AF37 50%, #9A6F1A 100%);
+      transition: all 0.25s ease;
+    }
     .gold-gradient-bg:hover { filter: brightness(1.08); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25); }
     .gold-border { border: 1px solid rgba(212, 175, 55, 0.35); }
-    .glass-panel { background: rgba(16, 16, 16, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.22); }
-    .card-luxury { background: linear-gradient(165deg, rgba(24, 24, 24, 0.92) 0%, rgba(10, 10, 10, 0.96) 100%); border: 1px solid rgba(212, 175, 55, 0.2); transition: transform 0.3s ease; }
-    .card-luxury:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.65); box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7); }
-    .watermark-logo { position: absolute; top: 10px; left: 10px; opacity: 0.88; pointer-events: none; z-index: 10; background: rgba(0,0,0,0.65); padding: 3px 8px; border-radius: 8px; border: 1px solid rgba(212,175,55,0.45); backdrop-filter: blur(4px); }
+
+    .watermark-logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      opacity: 0.88;
+      pointer-events: none;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 3px 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      backdrop-filter: blur(4px);
+    }
+
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .app-icon-box { width: 62px; height: 62px; border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.6); transition: transform 0.25s ease; }
-    .app-icon-link:hover .app-icon-box { transform: translateY(-4px) scale(1.06); }
+
+    @keyframes slideIn {
+      from { transform: translateY(-20px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .toast-anim { animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col pb-20 md:pb-0">
+<body class="min-h-screen flex flex-col pb-20 md:pb-0 dark-mode" id="mainBody">
 
   <div id="toastContainer" class="fixed top-20 left-1/2 -translate-x-1/2 z-[110] flex flex-col items-center gap-2 pointer-events-none px-4 w-full max-w-sm"></div>
 
-  <!-- الشريط العلوي -->
-  <div class="bg-black/95 border-b border-yellow-600/20 text-[11px] py-1.5 px-3">
-    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 text-gray-300">
+  <!-- الشريط العلوي النظيف (من نحن واحدة فقط، لا تكرار) -->
+  <div class="bg-black/95 text-white border-b border-yellow-600/20 text-[11px] py-1.5 px-3">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
       <div class="flex items-center gap-2">
         <span class="text-yellow-400 font-bold">📍 سوريا - دمشق - الحريقة</span>
         <span class="hidden sm:inline text-gray-600">|</span>
-        <span class="hidden sm:inline text-gray-400">شحن مباشر من المعمل لجميع المحافظات</span>
+        <span class="hidden sm:inline text-gray-400">شحن مباشر لجميع المحافظات</span>
       </div>
-      <div class="flex items-center gap-2">
-        <a href="about.html" class="text-yellow-400 font-bold bg-yellow-500/15 hover:bg-yellow-500/25 px-2.5 py-0.5 rounded-lg border border-yellow-500/40 transition">
-          ℹ️ من نحن ومنصاتنا
-        </a>
-        <a href="admin.html" class="text-sky-400 font-bold bg-sky-500/15 hover:bg-sky-500/25 px-2.5 py-0.5 rounded-lg border border-sky-500/40 transition">
-          🔐 صفحة الأدمن
-        </a>
+      <div class="flex items-center gap-3">
+        <a href="about.html" class="text-yellow-400 font-bold hover:underline">ℹ️ من نحن ومنصاتنا</a>
+        <a href="admin.html" class="text-sky-400 font-bold hover:underline">🔐 صفحة الأدمن</a>
       </div>
     </div>
   </div>
 
-  <!-- الهيدر الرئيسي -->
-  <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/25 shadow-lg">
+  <!-- الهيدر الرئيسي مع زر الوضع الليلي/النهاري -->
+  <header class="glass-panel sticky top-0 z-50 border-b shadow-lg">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5 cursor-pointer select-none" onclick="window.location.href='index.html'">
+      
+      <div class="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none" onclick="window.location.href='index.html'">
         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-xl">
           <svg viewBox="0 0 64 64" class="w-6 h-6 sm:w-7 sm:h-7"><path fill="url(#g1)" d="M25 8 L28 18 L32 14 L36 18 L39 8 L42 22 C42 28 38 32 39 39 L47 56 L17 56 L25 39 C26 32 22 28 22 22 Z"/></svg>
         </div>
@@ -70,11 +128,18 @@
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
+        <!-- زر تبديل الوضع (ليلي / نهاري) -->
+        <button onclick="toggleThemeMode()" id="themeToggleBtn" class="bg-neutral-900 text-yellow-400 border border-yellow-500/40 px-3 py-2 rounded-xl text-xs font-bold shadow transition hover:scale-105" title="تبديل المظهر ليلي/نهاري">
+          🌙 ليلي
+        </button>
+
         <select id="currencySelector" onchange="setCurrencyMode(this.value)" class="bg-neutral-900 text-yellow-400 border border-yellow-500/40 rounded-xl px-2.5 py-2 text-xs font-extrabold focus:outline-none">
           <option value="BOTH">💵 $ + ل.س</option>
           <option value="USD">💵 دولار ($)</option>
           <option value="SYP">🇸🇾 ليرة (ل.س)</option>
         </select>
+
+        <!-- سلة واحدة فقط منظمة -->
         <button onclick="openCart()" class="relative gold-gradient-bg text-black font-extrabold px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 shadow-lg">
           <span>🛒 السلة</span>
           <span id="cartCount" class="bg-black text-yellow-400 px-1.5 py-0.5 rounded-full text-[10px] font-black">0</span>
@@ -89,7 +154,7 @@
       <div class="max-w-3xl mx-auto text-center relative z-10 space-y-3">
         <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-black/70 border border-yellow-500/40 text-yellow-300 text-xs font-extrabold backdrop-blur-md">✨ المنصة الرسمية لتجار الجملة والمسوقين ✨</span>
         <h2 class="text-2xl sm:text-4xl font-black text-white">أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة القطع 🔥</span></h2>
-        <p class="text-gray-200 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، واطلب مباشره.</p>
+        <p class="text-gray-200 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، واطلب مباشرة.</p>
         <div class="flex justify-center gap-2 pt-2 text-xs">
           <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-5 py-2.5 rounded-xl shadow">💬 تواصل واتساب: 0996311804</a>
           <a href="about.html" class="bg-black/75 hover:bg-black text-yellow-300 border border-yellow-500/40 px-4 py-2.5 rounded-xl font-extrabold transition">🌐 من نحن</a>
@@ -98,7 +163,7 @@
     </div>
   </section>
 
-  <!-- البحث والأقسام -->
+  <!-- البحث والأقسام (بدون أي قوائم مزعجة بجانب زر الشبكة) -->
   <section class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 w-full space-y-2.5">
     <div class="glass-panel rounded-2xl p-2.5 flex items-center gap-2">
       <div class="relative flex-1 flex items-center">
@@ -132,35 +197,23 @@
     <a href="admin.html" class="flex flex-col items-center text-sky-400 px-2 py-1"><span>🔐</span><span>الأدمن</span></a>
   </nav>
 
-  <!-- نافذة الموديل -->
-  <div id="productModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-50 p-3">
-    <div class="glass-panel rounded-3xl w-full max-w-2xl max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
-        <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-sm truncate">تفاصيل الموديل</h3>
-        <button onclick="closeProductModal()" class="text-gray-400 text-lg">✕</button>
+  <!-- نافذة سلة الشراء -->
+  <div id="cartModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[88vh] p-5 flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3">
+        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">🛒 سلة طلبات الجملة</h3>
+        <button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-8 h-8 rounded-full flex items-center justify-center text-sm">✕</button>
       </div>
-      <div class="overflow-y-auto flex-1 space-y-3 text-xs">
-        <div class="relative h-60 rounded-xl overflow-hidden bg-black border border-gray-800">
-          <img id="modalMainImg" src="" class="w-full h-full object-cover" />
+      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2.5 text-xs pl-1"></div>
+      <div class="border-t border-gray-800 pt-3 mt-3 space-y-2.5">
+        <div class="flex justify-between font-extrabold text-xs sm:text-sm">
+          <span>الإجمالي الكلي:</span>
+          <span id="cartTotal" class="text-yellow-400">$0</span>
         </div>
-        <div id="modalThumbs" class="flex gap-2 overflow-x-auto pb-1 no-scrollbar"></div>
-        <p id="modalPack" class="text-gray-200 font-bold"></p>
-        <div id="modalPriceContainer" class="flex justify-between border-t border-gray-800 pt-2"></div>
-        <div class="bg-black/60 p-3 rounded-xl border border-gray-800 space-y-2">
-          <div class="flex justify-between items-center">
-            <span class="text-yellow-300 font-bold">حدد الكمية:</span>
-            <span id="modalMinNotice" class="text-gray-400 text-[10px]"></span>
-          </div>
-          <div class="flex items-center justify-center gap-2">
-            <button onclick="adjustModalQty(-1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold">-</button>
-            <input id="modalQtyInput" type="number" min="1" value="10" class="w-16 bg-black text-center text-yellow-400 font-black rounded-lg py-1" />
-            <button onclick="adjustModalQty(1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold">+</button>
-          </div>
-        </div>
-      </div>
-      <div class="flex gap-2 pt-2 border-t border-gray-800 mt-2">
-        <button onclick="addCustomQtyToCart()" class="flex-1 gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl text-xs">🛒 أضف إلى السلة</button>
-        <button onclick="closeProductModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl text-xs">إغلاق</button>
+        <input id="buyerName" class="w-full bg-black border border-gray-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none" placeholder="اسم التاجر / المحل والمدينة..." />
+        <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-lg">
+          <span>📲 إرسال الطلبية عبر واتساب (0996311804)</span>
+        </button>
       </div>
     </div>
   </div>
@@ -171,14 +224,32 @@
   </footer>
 
   <script>
-    let products = window.INITIAL_STORE_STATE ? window.INITIAL_STORE_STATE.products : [];
-    let exchangeRate = 15000;
-    let currencyMode = 'BOTH';
+    let products = window.INITIAL_STORE_STATE ? window.INITIAL_STORE_STATE.products : [
+      { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80" }
+    ];
     let currentCategory = 'ALL';
     let searchQuery = '';
-    let layoutMode = 'GRID';
     let cart = [];
-    let currentModalProduct = null;
+    let isDarkMode = true;
+
+    function toggleThemeMode() {
+      isDarkMode = !isDarkMode;
+      const body = document.getElementById('mainBody');
+      const btn = document.getElementById('themeToggleBtn');
+      if (isDarkMode) {
+        body.className = "min-h-screen flex flex-col pb-20 md:pb-0 dark-mode";
+        btn.innerText = "🌙 ليلي";
+        localStorage.setItem('fw_theme_mode', 'dark');
+      } else {
+        body.className = "min-h-screen flex flex-col pb-20 md:pb-0 light-mode";
+        btn.innerText = "☀️ نهاري";
+        localStorage.setItem('fw_theme_mode', 'light');
+      }
+    }
+
+    if (localStorage.getItem('fw_theme_mode') === 'light') {
+      toggleThemeMode();
+    }
 
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
@@ -188,13 +259,13 @@
         list = list.filter(p => p.name.toLowerCase().includes(searchQuery) || p.category.toLowerCase().includes(searchQuery));
       }
       grid.innerHTML = list.map(p => `
-        <div class="card-luxury rounded-2xl overflow-hidden flex flex-col cursor-pointer" onclick="openProductModal(${p.id})">
+        <div class="card-luxury rounded-2xl overflow-hidden flex flex-col cursor-pointer" onclick="alert('موديل: ${p.name}')">
           <div class="relative h-56 bg-neutral-900">
             <img src="${p.img}" class="w-full h-full object-cover" />
             <span class="absolute top-2.5 right-2.5 gold-gradient-bg text-black text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">${p.category}</span>
           </div>
           <div class="p-3 flex-1 flex flex-col justify-between space-y-2">
-            <h3 class="font-extrabold text-white text-xs line-clamp-1">${p.name}</h3>
+            <h3 class="font-extrabold text-xs line-clamp-1">${p.name}</h3>
             <div class="flex items-center justify-between border-t border-gray-800 pt-2">
               <span class="text-yellow-400 font-black text-xs">$${p.priceUsd}</span>
               <span class="text-emerald-400 font-bold text-[10px]">📦 أدنى: ${p.minQty || 10}</span>
@@ -204,41 +275,17 @@
       `).join('');
     }
 
-    function openProductModal(id) {
-      const p = products.find(item => item.id === id);
-      if (!p) return;
-      currentModalProduct = p;
-      document.getElementById('modalTitle').innerText = p.name;
-      document.getElementById('modalMainImg').src = p.img;
-      document.getElementById('modalPack').innerText = `📐 التفاصيل: ${p.pack}`;
-      document.getElementById('modalMinNotice').innerText = `الحد الأدنى: ${p.minQty || 10} قطع`;
-      document.getElementById('modalQtyInput').value = p.minQty || 10;
-      document.getElementById('modalPriceContainer').innerHTML = `<span class="text-yellow-400 font-black">$${p.priceUsd} للقطعة</span>`;
-      document.getElementById('productModal').classList.remove('hidden');
-      document.getElementById('productModal').classList.add('flex');
+    function openCart() {
+      document.getElementById('cartModal').classList.add('flex');
+      document.getElementById('cartModal').classList.remove('hidden');
     }
-    function closeProductModal() {
-      document.getElementById('productModal').classList.add('hidden');
-      document.getElementById('productModal').classList.remove('flex');
-    }
-    function adjustModalQty(delta) {
-      const input = document.getElementById('modalQtyInput');
-      const min = currentModalProduct.minQty || 10;
-      let val = (parseInt(input.value) || min) + delta;
-      if (val < min) val = min;
-      input.value = val;
-    }
-    function addCustomQtyToCart() {
-      if (!currentModalProduct) return;
-      const qty = parseInt(document.getElementById('modalQtyInput').value) || 10;
-      cart.push({ ...currentModalProduct, qty });
-      document.getElementById('cartCount').innerText = cart.reduce((a,b)=>a+b.qty,0);
-      document.getElementById('mobileCartCount').innerText = cart.reduce((a,b)=>a+b.qty,0);
-      closeProductModal();
+    function closeCart() {
+      document.getElementById('cartModal').classList.add('hidden');
+      document.getElementById('cartModal').classList.remove('flex');
     }
     function filterCategory(cat) { currentCategory = cat; renderProducts(); }
     function handleSearch(q) { searchQuery = q.trim().toLowerCase(); renderProducts(); }
-    initApp();
+    renderProducts();
   </script>
 </body>
 </html>
