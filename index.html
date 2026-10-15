@@ -56,26 +56,28 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     @keyframes slideIn {
-      from { transform: translateY(-20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from { transform: translateY(-20px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
     }
-    .toast-anim { animation: slideIn 0.3s ease forwards; }
+    .toast-anim { animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none px-4"></div>
+  <!-- حاوية رسائل الشكر والتنبيهات التفاعلية (Toast Notifications) -->
+  <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2 pointer-events-none px-4 w-full max-w-sm"></div>
 
-  <!-- شريط الأدمن المخفي -->
+  <!-- شريط الأدمن المخفي (يفتح بـ 3 نقرات على الشعار + كلمة المرور Dane7422) -->
   <div id="adminBar" class="hidden bg-gradient-to-r from-amber-950 via-yellow-900 to-amber-950 border-b border-yellow-500/50 px-3 py-2.5 sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="font-extrabold text-yellow-300 flex items-center gap-1.5">
         <span>👑 الإدارة (الصرف: <span id="adminRateDisplay">15,000</span>)</span>
-        <span class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30">🟢 متصل</span>
+        <span id="cloudStatusBadge" class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30">🟢 الحفظ نشط</span>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">➕ نشر موديل</button>
         <button onclick="exportSiteCode()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">☁️ حفظ وتحديث للزبائن</button>
+        <button onclick="openCloudSetupModal()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">🔗 التوكن</button>
         <button onclick="openBannerModal()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">🖼️ الغلاف</button>
         <button onclick="changeExchangeRate()" class="bg-black/80 text-yellow-300 border border-yellow-500/40 px-2 py-1.5 rounded-lg font-bold">💱 الصرف</button>
         <button onclick="logoutAdmin()" class="bg-red-600 text-white px-2 py-1.5 rounded-lg font-bold">خروج 🔒</button>
@@ -83,7 +85,7 @@
     </div>
   </div>
 
-  <!-- الشريط العلوي للتواصل -->
+  <!-- الشريط العلوي للتواصل وزر من نحن -->
   <div class="bg-black border-b border-yellow-600/20 text-[11px] py-1.5 px-3">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-gray-300">
       <div class="flex items-center gap-2">
@@ -92,7 +94,7 @@
         <a href="https://wa.me/963996311804" target="_blank" class="hover:text-yellow-400 font-bold">0996311804</a>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="openAboutModal()" class="text-yellow-400 font-bold bg-yellow-500/15 px-2.5 py-0.5 rounded-md border border-yellow-500/40">
+        <button onclick="openAboutModal()" class="text-yellow-400 font-bold bg-yellow-500/15 hover:bg-yellow-500/25 px-2.5 py-0.5 rounded-md border border-yellow-500/40 transition">
           ℹ️ من نحن ومنصاتنا
         </button>
         <a href="https://wa.me/963996311804" target="_blank" class="text-emerald-400 font-bold">+963996311804</a>
@@ -147,12 +149,15 @@
         أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة القطع 🔥</span>
       </h2>
       <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto mb-4 leading-relaxed">
-        تصفح الكتالوج الرسمي، اختر الموديل، حدد الكمية، وشاركنا رأيك وتقييمك.
+        تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، حدد الكمية المطلوبة، وشاركنا تقييمك وتعليقك.
       </p>
       <div class="flex flex-wrap justify-center gap-2 text-xs">
         <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl shadow">
           💬 تواصل واتساب: 0996311804
         </a>
+        <button onclick="openAboutModal()" class="bg-neutral-900/90 hover:bg-neutral-800 border border-yellow-500/40 px-3.5 py-2 rounded-xl text-yellow-300 font-bold">
+          🌐 منصاتنا الرسمية
+        </button>
         <div class="bg-neutral-900/90 border border-yellow-500/30 px-3.5 py-2 rounded-xl text-gray-300">
           سعر الصرف: <strong id="heroRate" class="text-yellow-400">15,000</strong> ل.س
         </div>
@@ -177,28 +182,63 @@
     <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </main>
 
-  <!-- نافذة "من نحن" -->
+  <!-- نافذة إعداد التوكن السحابي -->
+  <div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
+    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md p-4 flex flex-col shadow-2xl space-y-3 text-xs">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+        <h3 class="font-extrabold text-yellow-400 text-sm">🔗 إعداد مفتاح الحفظ السحابي (GitHub Token)</h3>
+        <button onclick="closeCloudSetupModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
+      </div>
+      <p class="text-gray-300 leading-relaxed">
+        أدخل مفتاح الربط (Token) الخاص بـ GitHub لحفظ الموديلات والتعليقات والإعجابات لجميع الزبائن:
+      </p>
+      <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-xs" placeholder="ghp_..." />
+      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow">حفظ وتفعيل ✅</button>
+    </div>
+  </div>
+
+  <!-- نافذة "من نحن" المحدثة بجميع روابط التواصل الرسمية -->
   <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
-    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[88vh] p-4 flex flex-col shadow-2xl overflow-hidden">
+    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[90vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-3 flex-shrink-0">
-        <h3 class="font-extrabold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3>
+        <h3 class="font-extrabold text-yellow-400 text-sm">✨ من نحن ومنصاتنا الرسمية - Fashion World</h3>
         <button onclick="closeAboutModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
       <div class="overflow-y-auto flex-1 space-y-3 text-xs text-gray-200 leading-relaxed pl-1">
-        <p class="font-bold text-white">للتجار والتاجرات ولمندوبين ولمسوقين المهتمين ب ملابس النسواني رجالي ولادي ب.ب التركية واجمل الترندات بسعر جملة الجملة🔥✨</p>
-        <p class="text-yellow-400 font-extrabold text-sm">اسمح لي أن اعرفك على #Fashion_World ❤️⭐</p>
-        <p class="font-cinzel text-yellow-200 font-bold">Fashion_World</p>
-        <p class="font-bold text-emerald-400">تشحن لك ملابس من لمعمل مباشرة</p>
+        <p class="font-bold text-white">للتجار والتاجرات وللمندوبين والمسوقين المهتمين بملابس (نسواني - رجالي - ولادي - ب.ب) وأجمل الترندات بسعر جملة الجملة 🔥✨</p>
+        <p class="text-yellow-400 font-extrabold text-sm">اسمح لي أن أعرفك على #Fashion_World ❤️⭐</p>
+        <p class="font-bold text-emerald-400">نشحن لك الملابس من المعمل مباشرة | سوريا - دمشق - الحريقة</p>
         <div class="space-y-2">
-          <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/25">💎 تكون مسؤولة عن تجهيز البضاعة ووصولها ل مكتب الشحن الخاص بك</div>
-          <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/25">💎 Fashion_World ستضمن لك التميز والتنافس بالسعر في متجرك</div>
-          <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/25">💎 لكل مهتم الرجاء مراسلتنا على منصاتنا ل نشرح لك كامل التفاصيل والرد فوري</div>
+          <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/25">💎 مسؤولون عن تجهيز البضاعة ووصولها لمكتب الشحن الخاص بك بأمان وسرعة.</div>
+          <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/25">💎 نضمن لك التميز والتنافس بالسعر والجودة في متجرك.</div>
+          <div class="bg-black/60 p-2.5 rounded-xl border border-yellow-500/25">💎 لكل مهتم الرجاء مراسلتنا عبر منصاتنا الرسمية والرد فوري.</div>
+        </div>
+
+        <!-- روابط منصات التواصل الاجتماعي الرسمية المنسقة -->
+        <div class="pt-3 border-t border-gray-800 space-y-2">
+          <p class="text-yellow-300 font-extrabold text-center text-xs mb-1">🌐 تواصل معنا وتابعنا عبر منصاتنا الرسمية:</p>
+          
+          <a href="https://wa.me/963996311804" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2.5 px-3 rounded-xl text-center shadow transition">
+            <span>💬 واتساب مباشر: 0996311804</span>
+          </a>
+
+          <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-2.5 px-3 rounded-xl text-center shadow transition">
+            <span>💙 صفحتنا الرسمية على فيسبوك (Facebook)</span>
+          </a>
+
+          <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-extrabold py-2.5 px-3 rounded-xl text-center shadow transition">
+            <span>✈️ قناتنا الرسمية على تلجرام (Telegram)</span>
+          </a>
+
+          <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 via-purple-600 to-amber-500 hover:opacity-90 text-white font-extrabold py-2.5 px-3 rounded-xl text-center shadow transition">
+            <span>📸 حسابنا الرسمي على انستغرام (Instagram)</span>
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل (مسّرعة فورية) -->
+  <!-- نافذة تفاصيل الموديل -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
     <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[92vh] p-4 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
@@ -218,28 +258,30 @@
         <div class="space-y-2 bg-black/60 p-3 rounded-xl border border-gray-800 text-xs">
           <div class="flex justify-between items-center">
             <span id="modalCategory" class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-lg font-bold"></span>
-            <span id="modalViews" class="text-[11px] text-gray-400">👁️ 0 مشاهدة</span>
+            <span id="modalViews" class="text-[11px] text-gray-300 font-bold">👁️ 0 مشاهدة</span>
           </div>
           <p id="modalPack" class="text-gray-200 font-bold leading-relaxed"></p>
           
-          <div class="flex items-center justify-between pt-1 border-t border-gray-800">
+          <!-- التقييم بالنجوم (من 1 إلى 5 مع إمكانية تغيير التقييم) -->
+          <div class="flex items-center justify-between pt-1.5 border-t border-gray-800">
             <span class="text-yellow-300 font-bold">تقييم الموديل (1 إلى 5):</span>
             <div id="modalStarsContainer" class="flex items-center gap-1 text-lg cursor-pointer"></div>
           </div>
 
           <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
 
+          <!-- تحديد كمية القطع -->
           <div class="pt-2 border-t border-gray-800 space-y-2 bg-neutral-950 p-2.5 rounded-lg border border-yellow-500/20">
             <div class="flex justify-between items-center">
-              <span class="text-yellow-300 font-bold">عدد القطع:</span>
+              <span class="text-yellow-300 font-bold">عدد القطع المطلوبة:</span>
               <span id="modalMinNotice" class="text-[10px] text-gray-400">الحد الأدنى: 10</span>
             </div>
             <div class="flex items-center justify-center gap-2">
-              <button onclick="adjustModalQty(-5)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">-5</button>
-              <button onclick="adjustModalQty(-1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">-</button>
+              <button onclick="adjustModalQty(-5)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-8 h-8 rounded-lg font-bold text-xs">-5</button>
+              <button onclick="adjustModalQty(-1)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-8 h-8 rounded-lg font-bold text-xs">-</button>
               <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-16 bg-black border border-gray-700 text-center text-yellow-400 font-black rounded-lg py-1 text-sm focus:outline-none" />
-              <button onclick="adjustModalQty(1)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">+</button>
-              <button onclick="adjustModalQty(5)" class="bg-neutral-800 text-white w-8 h-8 rounded-lg font-bold text-xs">+5</button>
+              <button onclick="adjustModalQty(1)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-8 h-8 rounded-lg font-bold text-xs">+</button>
+              <button onclick="adjustModalQty(5)" class="bg-neutral-800 hover:bg-neutral-700 text-white w-8 h-8 rounded-lg font-bold text-xs">+5</button>
             </div>
             <div class="flex justify-between items-center pt-1 text-gray-300 font-bold text-[11px]">
               <span>الإجمالي الفرعي:</span>
@@ -248,12 +290,13 @@
           </div>
         </div>
 
+        <!-- قسم التعليقات الثابتة -->
         <div class="bg-black/70 p-3 rounded-xl border border-gray-800 space-y-2 text-xs">
-          <p class="font-bold text-yellow-400">💬 تعليقات التجار:</p>
-          <div id="commentsList" class="space-y-1.5 max-h-32 overflow-y-auto pr-1"></div>
+          <p class="font-bold text-yellow-400">💬 تعليقات وآراء التجار:</p>
+          <div id="commentsList" class="space-y-1.5 max-h-36 overflow-y-auto pr-1"></div>
           <div class="flex gap-1.5 pt-1">
             <input id="commentAuthor" class="w-1/3 bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-white text-[11px]" placeholder="اسمك / المحل..." />
-            <input id="commentText" class="flex-1 bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-white text-[11px]" placeholder="اكتب تعليقك أو رأيك بالبضاعة..." />
+            <input id="commentText" class="flex-1 bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-white text-[11px]" placeholder="اكتب تعليقك..." />
             <button onclick="addComment()" class="bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold px-3 py-1.5 rounded-lg">إرسال</button>
           </div>
         </div>
@@ -310,7 +353,7 @@
             </select>
           </div>
           <div>
-            <label class="block text-gray-300 mb-1 font-bold">سعر القطعة ($)</label>
+            <label class="block text-gray-300 mb-1 font-bold">سعر القطعة</label>
             <div class="flex gap-1">
               <input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-lg px-2 py-2 text-white" placeholder="سعر القطعة" />
               <select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-lg px-1.5 font-bold">
@@ -338,7 +381,11 @@
           <label class="block text-yellow-300 font-bold">📷 الصورة الرئيسية للموديل (من الهاتف):</label>
           <input id="pImgFile" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-gray-300" />
         </div>
-        <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl mt-2 shadow">حفظ ونشر الموديل فورا ✅</button>
+        <div class="bg-black/40 p-2.5 rounded-lg border border-gray-800">
+          <label class="block text-gray-300 mb-1 font-bold">📸 صور إضافية للموديل (اختياري):</label>
+          <input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1.5 text-gray-300" />
+        </div>
+        <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl mt-2 shadow">حفظ ونشر الموديل فوراً ✅</button>
       </form>
     </div>
   </div>
@@ -368,16 +415,27 @@
   <footer class="bg-black border-t border-yellow-500/30 py-6 px-3 text-center text-xs text-gray-400">
     <p class="font-cinzel text-base font-bold gold-gradient-text mb-1">FASHION WORLD</p>
     <p class="mb-1">📍 سوريا - دمشق - الحريقة | تجارة الألبسة بالجملة</p>
-    <p class="text-yellow-400 font-bold">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
+    <p class="text-yellow-400 font-bold mb-2">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
+    <div class="flex justify-center gap-3 text-[11px] text-gray-300 mt-2">
+      <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="hover:text-yellow-400">فيسبوك</a>
+      <span>•</span>
+      <a href="https://wa.me/963996311804" target="_blank" class="hover:text-yellow-400">واتساب</a>
+      <span>•</span>
+      <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="hover:text-yellow-400">تلجرام</a>
+      <span>•</span>
+      <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="hover:text-yellow-400">انستغرام</a>
+    </div>
   </footer>
 
+  <!-- البيانات الافتراضية -->
   <script id="initialDataScript">
     window.INITIAL_STORE_STATE = {
+      updatedAt: 1700000000000,
       exchangeRate: 15000,
       bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
       products: [
         { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
-        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 18, ratingCount: 4, comments: [{id: 2, author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
+        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 19, ratingCount: 4, comments: [{id: 2, author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
       ]
     };
   </script>
@@ -385,36 +443,69 @@
   <script>
     const GITHUB_REPO = 'najdt656/fashion-world';
     const DATA_FILE_PATH = 'store-data.json';
-    const LS_STATE_KEY = 'fw_permanent_state_v100';
-    const LS_TOKEN_KEY = 'fw_gh_token_v100';
-    const LS_LIKED_KEY = 'fw_user_liked_ids_v100';
+
+    // مفاتيح التخزين الموحدة والدائمة (مع دعم استيراد أي بيانات من الإصدارات السابقة تلقائياً)
+    const LS_STATE_KEY = 'fw_permanent_state_master';
+    const LS_TOKEN_KEY = 'fw_gh_token_master';
+    const LS_LIKED_KEY = 'fw_user_liked_master';
+    const LS_VIEWED_KEY = 'fw_user_viewed_master';
+    const LS_RATED_KEY = 'fw_user_rated_master';
+
+    // ترحيل ذكي للبيانات من أي مفتاح سابق لعدم فقدان أي توكن أو موديل سابق
+    function migrateLegacyStorage() {
+      if (!localStorage.getItem(LS_TOKEN_KEY)) {
+        const oldTokens = ['fw_gh_token_v100', 'fw_gh_token_v90', 'fw_gh_token_v80', 'fw_gh_token_v70', 'fw_gh_token_v60', 'fw_gh_token_v50', 'fw_gh_token_v41', 'fw_gh_token_v30'];
+        for (const k of oldTokens) {
+          const val = localStorage.getItem(k);
+          if (val) { localStorage.setItem(LS_TOKEN_KEY, val); break; }
+        }
+      }
+      if (!localStorage.getItem(LS_STATE_KEY)) {
+        const oldStates = ['fw_permanent_state_v100', 'fw_permanent_state_v90', 'fw_permanent_state_v80', 'fw_permanent_state_v70', 'fw_permanent_state_v60', 'fw_permanent_state_v50'];
+        for (const k of oldStates) {
+          const val = localStorage.getItem(k);
+          if (val) { localStorage.setItem(LS_STATE_KEY, val); break; }
+        }
+      }
+    }
+    migrateLegacyStorage();
 
     let likedProducts = {};
+    let viewedProducts = {};
+    let userRatings = {};
     try {
       likedProducts = JSON.parse(localStorage.getItem(LS_LIKED_KEY) || '{}');
+      viewedProducts = JSON.parse(localStorage.getItem(LS_VIEWED_KEY) || '{}');
+      userRatings = JSON.parse(localStorage.getItem(LS_RATED_KEY) || '{}');
     } catch (e) {}
 
+    let localUpdatedAt = window.INITIAL_STORE_STATE.updatedAt || 0;
     let exchangeRate = window.INITIAL_STORE_STATE.exchangeRate || 15000;
     let bannerImg = window.INITIAL_STORE_STATE.bannerImg;
     let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
-    let isAdmin = localStorage.getItem('fw_admin_logged_v100') === '1';
+    let isAdmin = localStorage.getItem('fw_admin_logged_master') === '1';
     let cart = [];
     let secretClicks = 0;
     let currentModalProduct = null;
-    let userHasRatedThisSession = false;
 
+    // رسائل الشكر والتنبيهات المنبثقة
     function showToast(message, type = 'success') {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
-      toast.className = `toast-anim px-4 py-2.5 rounded-xl shadow-2xl text-xs font-bold border flex items-center gap-2 pointer-events-auto ${type === 'success' ? 'bg-neutral-900 text-yellow-300 border-yellow-500/50' : 'bg-neutral-900 text-red-400 border-red-500/50'}`;
+      toast.className = `toast-anim px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold border flex items-center gap-2 pointer-events-auto text-center justify-center w-full ${
+        type === 'success'
+          ? 'bg-neutral-900/95 text-yellow-300 border-yellow-500/60 shadow-yellow-500/10'
+          : 'bg-neutral-900/95 text-red-400 border-red-500/60'
+      }`;
       toast.innerHTML = `<span>${type === 'success' ? '✨' : '⚠️'}</span><span>${message}</span>`;
       container.appendChild(toast);
       setTimeout(() => {
         toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
         setTimeout(() => toast.remove(), 300);
-      }, 2500);
+      }, 3000);
     }
 
     function compressImageFile(file, maxWidth = 480, quality = 0.52) {
@@ -459,46 +550,81 @@
       return parseFloat(str) || 0;
     }
 
-    // تعديل تسريعي: جعل عداد المشاهدات يعمل في الخلفية دون تعطيل فتح النافذة
-    function incrementCloudViewsBackground(productId) {
-      fetch(`https://api.countapi.xyz/hit/fashionworld-${productId}/views`)
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.value) {
-            const p = products.find(item => item.id === productId);
-            if (p) {
-              p.views = data.value;
-              saveAllState();
-            }
-          }
-        }).catch(() => {});
+    // دمج ذكي بين بيانات السحابة وبيانات المتصفح لمنع ضياع أي تعليق أو إعجاب أو مشاهدة عند التحديث
+    function mergeProductsSmart(localList, cloudList, isCloudNewer) {
+      const baseList = isCloudNewer ? cloudList : localList;
+      const secondaryList = isCloudNewer ? localList : cloudList;
+
+      return baseList.map(baseItem => {
+        const secItem = secondaryList.find(p => p.id === baseItem.id);
+        if (!secItem) return baseItem;
+
+        // الاحتفاظ بأعلى عدد مشاهدات وإعجابات
+        const mergedViews = Math.max(Number(baseItem.views) || 0, Number(secItem.views) || 0);
+        const mergedLikes = Math.max(Number(baseItem.likes) || 0, Number(secItem.likes) || 0);
+
+        // دمج التعليقات بدون تكرار (إلا إذا قام المستخدم بحذف تعليق محلياً وكان التحديث المحلي أحدث)
+        let mergedComments = [];
+        if (!isCloudNewer) {
+          mergedComments = Array.isArray(baseItem.comments) ? baseItem.comments : [];
+        } else {
+          const map = new Map();
+          (secItem.comments || []).forEach(c => map.set(c.id || c.text, c));
+          (baseItem.comments || []).forEach(c => map.set(c.id || c.text, c));
+          mergedComments = Array.from(map.values());
+        }
+
+        return {
+          ...baseItem,
+          views: mergedViews,
+          likes: mergedLikes,
+          ratingSum: !isCloudNewer ? baseItem.ratingSum : Math.max(baseItem.ratingSum || 20, secItem.ratingSum || 20),
+          ratingCount: !isCloudNewer ? baseItem.ratingCount : Math.max(baseItem.ratingCount || 4, secItem.ratingCount || 4),
+          comments: mergedComments
+        };
+      });
     }
 
     async function initApp() {
+      let localParsed = null;
       try {
         const localRaw = localStorage.getItem(LS_STATE_KEY);
         if (localRaw) {
-          const parsed = JSON.parse(localRaw);
-          if (Array.isArray(parsed.products) && parsed.products.length > 0) {
-            products = parsed.products;
+          localParsed = JSON.parse(localRaw);
+          if (Array.isArray(localParsed.products) && localParsed.products.length > 0) {
+            products = localParsed.products;
+            localUpdatedAt = Number(localParsed.updatedAt) || 0;
           }
-          if (parsed.exchangeRate) exchangeRate = Number(parsed.exchangeRate);
-          if (parsed.bannerImg) bannerImg = parsed.bannerImg;
+          if (localParsed.exchangeRate) exchangeRate = Number(localParsed.exchangeRate);
+          if (localParsed.bannerImg) bannerImg = localParsed.bannerImg;
         }
       } catch (e) {}
 
       applyBanner();
       renderProducts();
 
+      // جلب البيانات السحابية ودمجها بذكاء دون مسح التعديلات المحلية الأحدث
       try {
         const res = await fetch(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const cloudData = await res.json();
           if (cloudData && Array.isArray(cloudData.products) && cloudData.products.length > 0) {
-            products = cloudData.products;
-            if (cloudData.exchangeRate) exchangeRate = Number(cloudData.exchangeRate);
-            if (cloudData.bannerImg) bannerImg = cloudData.bannerImg;
-            try { localStorage.setItem(LS_STATE_KEY, JSON.stringify(cloudData)); } catch(e) {}
+            const cloudTime = Number(cloudData.updatedAt) || 0;
+            const isCloudNewer = cloudTime > localUpdatedAt;
+
+            if (localParsed && Array.isArray(localParsed.products)) {
+              products = mergeProductsSmart(localParsed.products, cloudData.products, isCloudNewer);
+            } else {
+              products = cloudData.products;
+            }
+
+            if (isCloudNewer) {
+              if (cloudData.exchangeRate) exchangeRate = Number(cloudData.exchangeRate);
+              if (cloudData.bannerImg) bannerImg = cloudData.bannerImg;
+              localUpdatedAt = cloudTime;
+            }
+
+            await saveAllState(false);
             applyBanner();
             renderProducts();
           }
@@ -510,9 +636,11 @@
       }
     }
 
-    async function saveAllState() {
+    // حفظ فوري محلي + مزامنة سحابية تلقائية بالخلفية إذا كان التوكن موجوداً
+    async function saveAllState(autoCloudSync = true) {
+      localUpdatedAt = Date.now();
       const payload = {
-        updatedAt: Date.now(),
+        updatedAt: localUpdatedAt,
         exchangeRate,
         bannerImg,
         products
@@ -520,17 +648,49 @@
       try {
         localStorage.setItem(LS_STATE_KEY, JSON.stringify(payload));
       } catch (e) {}
+
+      const ghToken = localStorage.getItem(LS_TOKEN_KEY);
+      if (autoCloudSync && ghToken) {
+        syncToGithubSilent(payload, ghToken);
+      }
+    }
+
+    async function syncToGithubSilent(payload, ghToken) {
+      try {
+        const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`;
+        let sha = null;
+        const getRes = await fetch(apiUrl, {
+          headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        if (getRes.ok) {
+          const fileInfo = await getRes.json();
+          sha = fileInfo.sha;
+        }
+        const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+        const bodyObj = { message: "Auto sync store state", content: contentBase64 };
+        if (sha) bodyObj.sha = sha;
+
+        await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bodyObj)
+        });
+      } catch (e) {}
     }
 
     async function exportSiteCode() {
-      await saveAllState();
+      await saveAllState(false);
       const ghToken = localStorage.getItem(LS_TOKEN_KEY);
       if (!ghToken) {
         openCloudSetupModal();
         return;
       }
 
-      showToast("جاري التحديث للزبائن... ⏳");
+      showToast("جاري الحفظ والتحديث لكل الزبائن... ⏳");
       try {
         const payload = {
           updatedAt: Date.now(),
@@ -551,7 +711,7 @@
 
         const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
         const bodyObj = {
-          message: "Sync store state",
+          message: "Manual sync store state",
           content: contentBase64
         };
         if (sha) bodyObj.sha = sha;
@@ -567,12 +727,12 @@
         });
 
         if (putRes.ok) {
-          showToast("🟢 تم التحديث لكل الزبائن بنجاح! ✨");
+          showToast("🟢 تم حفظ وتحديث الموقع لكل الزبائن بنجاح! ✨");
         } else {
-          showToast("⚠️ تم الحفظ محلياً في هاتفك", "error");
+          showToast("⚠️ تم الحفظ محلياً، يرجى التأكد من صلاحية التوكن", "error");
         }
       } catch (err) {
-        showToast("⚠️ تم الحفظ محلياً في هاتفك", "error");
+        showToast("⚠️ تم الحفظ محلياً في جهازك", "error");
       }
     }
 
@@ -592,7 +752,7 @@
       if (!token) return alert("يرجى لصق المفتاح أولاً!");
       localStorage.setItem(LS_TOKEN_KEY, token);
       closeCloudSetupModal();
-      showToast("تم ربط النشر التلقائي بنجاح! ✨");
+      showToast("تم حفظ مفتاح الربط السحابي بنجاح! ✨");
       exportSiteCode();
     }
 
@@ -645,11 +805,15 @@
       grid.innerHTML = list.map(p => {
         const isLiked = !!likedProducts[p.id];
         const minQty = p.minQty || 10;
-        const avgRating = (p.ratingCount && p.ratingCount > 0) ? (p.ratingSum / p.ratingCount).toFixed(1) : '5.0';
+        const avgRating = (p.ratingCount && p.ratingCount > 0)
+          ? Math.min(5, Math.max(1, (p.ratingSum / p.ratingCount))).toFixed(1)
+          : '5.0';
+        const commentsCount = (p.comments && p.comments.length) ? p.comments.length : 0;
+
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
           <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
-            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" />
+            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
             
             <div class="watermark-logo">
               <span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
@@ -660,9 +824,11 @@
             </span>
             ${p.hasDiscount ? `<span class="absolute top-10 right-2.5 bg-red-600 text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow animate-pulse">حسم خاص 🔥</span>` : ''}
 
-            <div class="absolute bottom-2 right-2 left-2 flex justify-between items-center bg-black/75 backdrop-blur-sm px-2.5 py-1 rounded-lg text-[10px]">
-              <span class="text-yellow-300 font-bold">⭐ ${avgRating} (${p.ratingCount || 1})</span>
-              <span class="text-emerald-400 font-bold">📦 حد أدنى: ${minQty} قطع</span>
+            <!-- شريط المعلومات السفلي فوق الصورة: المشاهدات + النجوم + الحد الأدنى -->
+            <div class="absolute bottom-2 right-2 left-2 flex justify-between items-center bg-black/80 backdrop-blur-sm px-2.5 py-1 rounded-lg text-[10px]">
+              <span class="text-gray-200 font-bold">👁️ ${p.views || 0} مشاهدة</span>
+              <span class="text-yellow-400 font-bold">⭐ ${avgRating} (${commentsCount} 💬)</span>
+              <span class="text-emerald-400 font-bold">📦 أدنى: ${minQty}</span>
             </div>
           </div>
           <div class="p-3.5 flex-1 flex flex-col justify-between space-y-2.5">
@@ -690,13 +856,20 @@
       `}).join('');
     }
 
-    function openProductModal(id) {
+    // فتح الموديل وزيادة المشاهدات مرة واحدة فقط لكل زبون/جهاز
+    async function openProductModal(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
       currentModalProduct = p;
-      userHasRatedThisSession = false;
 
-      // فتح النافذة فوراً دون انتظار أي طلب شبكي لضمان السرعة المطلقة
+      if (!viewedProducts[id]) {
+        p.views = (Number(p.views) || 0) + 1;
+        viewedProducts[id] = true;
+        try { localStorage.setItem(LS_VIEWED_KEY, JSON.stringify(viewedProducts)); } catch (e) {}
+        await saveAllState();
+        renderProducts();
+      }
+
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
@@ -726,10 +899,6 @@
 
       document.getElementById('productModal').classList.add('flex');
       document.getElementById('productModal').classList.remove('hidden');
-
-      // زيادة المشاهدات في الخلفية بصمت
-      p.views = (p.views || 0) + 1;
-      incrementCloudViewsBackground(id);
     }
 
     function closeProductModal() {
@@ -738,43 +907,64 @@
       currentModalProduct = null;
     }
 
+    // عرض النجوم من 1 إلى 5 مع السماح للزبون بتغيير رأيه وتلوين اختياره
     function renderModalStars(p) {
       const container = document.getElementById('modalStarsContainer');
-      const avg = (p.ratingCount && p.ratingCount > 0) ? Math.round(p.ratingSum / p.ratingCount) : 5;
+      const myRating = userRatings[p.id] || 0;
+      const avg = (p.ratingCount && p.ratingCount > 0)
+        ? Math.min(5, Math.max(1, Math.round(p.ratingSum / p.ratingCount)))
+        : 5;
+      const activeStars = myRating > 0 ? myRating : avg;
+
       let starsHtml = '';
       for (let i = 1; i <= 5; i++) {
-        starsHtml += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= avg ? 'text-yellow-400' : 'text-gray-600'} hover:scale-125 transition cursor-pointer text-2xl select-none">★</span>`;
+        starsHtml += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= activeStars ? 'text-yellow-400' : 'text-gray-600'} hover:scale-125 transition cursor-pointer text-2xl select-none">★</span>`;
       }
-      starsHtml += `<span class="text-xs text-gray-300 mr-2">(${p.ratingCount || 1} تقييمات)</span>`;
+      const avgText = (p.ratingCount && p.ratingCount > 0)
+        ? Math.min(5, Math.max(1, (p.ratingSum / p.ratingCount))).toFixed(1)
+        : '5.0';
+      starsHtml += `<span class="text-xs text-gray-300 mr-2 font-bold">${avgText}/5 (${p.ratingCount || 1})</span>`;
       container.innerHTML = starsHtml;
     }
 
     async function rateProduct(productId, stars) {
-      if (userHasRatedThisSession) {
-        showToast("لقد قمت بالتقييم بالفعل في هذه الجلسة!", "error");
-        return;
-      }
       const p = products.find(item => item.id === productId);
       if (!p) return;
-      
-      p.ratingSum = (p.ratingSum || 20) + (stars - 5); 
-      userHasRatedThisSession = true;
+
+      const cleanStars = Math.min(5, Math.max(1, Number(stars) || 5));
+      if (!p.ratingCount || p.ratingCount < 1) {
+        p.ratingCount = 4;
+        p.ratingSum = 20;
+      }
+
+      const previousUserRating = userRatings[productId];
+      if (previousUserRating) {
+        // إذا غيّر الزبون رأيه، نحدث تقييمه السابق بدون زيادة عدد المقيمين
+        p.ratingSum = Math.max(p.ratingCount, (p.ratingSum - previousUserRating) + cleanStars);
+      } else {
+        // تقييم جديد لأول مرة من هذا الزبون
+        p.ratingSum = (p.ratingSum || 20) + cleanStars;
+        p.ratingCount = (p.ratingCount || 4) + 1;
+      }
+
+      userRatings[productId] = cleanStars;
+      try { localStorage.setItem(LS_RATED_KEY, JSON.stringify(userRatings)); } catch (e) {}
 
       renderModalStars(p);
       renderProducts();
       await saveAllState();
-      showToast(`شكراً لك! تم اعتماد تقييمك (${stars} نجوم) ⭐`);
+      showToast(`شكراً لتقييمك! تم حفظ تقييمك (${cleanStars} من 5 نجوم) بنجاح ⭐🙏`);
     }
 
     function renderComments(p) {
       const list = document.getElementById('commentsList');
       const comments = p.comments || [];
       if (comments.length === 0) {
-        list.innerHTML = `<p class="text-gray-500 text-[11px]">لا توجد تعليقات بعد. كن أول المعلقين!</p>`;
+        list.innerHTML = `<p class="text-gray-500 text-[11px]">لا توجد تعليقات بعد. كن أول من يشاركنا رأيه!</p>`;
         return;
       }
       list.innerHTML = comments.map(c => `
-        <div class="flex justify-between items-center bg-black/50 p-2 rounded-lg border border-gray-800">
+        <div class="flex justify-between items-center bg-black/60 p-2 rounded-lg border border-gray-800">
           <div>
             <span class="text-yellow-400 font-bold">${c.author}:</span>
             <span class="text-gray-200 mr-1">${c.text}</span>
@@ -793,7 +983,9 @@
 
       if (!text) return alert("يرجى كتابة نص التعليق أولاً!");
 
-      if (!currentModalProduct.comments) currentModalProduct.comments = [];
+      if (!Array.isArray(currentModalProduct.comments)) {
+        currentModalProduct.comments = [];
+      }
       const newComment = {
         id: Date.now(),
         author,
@@ -806,7 +998,7 @@
       renderComments(currentModalProduct);
       renderProducts();
       await saveAllState();
-      showToast("تم إضافة تعليقك وحفظه بنجاح ✅");
+      showToast("شكراً لمشاركتنا رأيك! تم نشر وحفظ تعليقك بنجاح 💬🌷");
     }
 
     async function deleteComment(productId, commentId) {
@@ -817,7 +1009,7 @@
       renderComments(p);
       renderProducts();
       await saveAllState();
-      showToast("تم حذف التعليق بنجاح", "error");
+      showToast("تم حذف التعليق وحفظ التعديل بنجاح", "error");
     }
 
     function adjustModalQty(delta) {
@@ -859,7 +1051,7 @@
       }
       document.getElementById('cartCount').innerText = cart.reduce((a, b) => a + b.qty, 0);
       closeProductModal();
-      showToast(`تمت إضافة ${qty} قطعة من الموديل للسلة 🛒`);
+      showToast(`شكراً لاختيارك! تمت إضافة ${qty} قطعة إلى سلة الجملة 🛒✨`);
     }
 
     function shareProductWhatsApp() {
@@ -870,21 +1062,27 @@
       window.open(`https://wa.me/?text=${msg}`, '_blank');
     }
 
+    // الإعجاب بالموديل مع حفظ دائم ورسالة شكر تفاعلية
     async function toggleLikeProduct(e, id) {
       e.stopPropagation();
       const item = products.find(p => p.id === id);
       if (!item) return;
 
       if (likedProducts[id]) {
-        item.likes = Math.max(0, (item.likes || 1) - 1);
+        item.likes = Math.max(0, (Number(item.likes) || 1) - 1);
         delete likedProducts[id];
+        showToast("تم إلغاء الإعجاب بالموديل", "error");
       } else {
-        item.likes = (item.likes || 0) + 1;
+        item.likes = (Number(item.likes) || 0) + 1;
         likedProducts[id] = true;
+        showToast("شكراً لتفاعلك! يسعدنا إعجابك بهذا الموديل ❤️✨");
       }
 
       try { localStorage.setItem(LS_LIKED_KEY, JSON.stringify(likedProducts)); } catch (e) {}
       await saveAllState();
+      if (currentModalProduct && currentModalProduct.id === id) {
+        document.getElementById('modalViews').innerText = `👁️ ${item.views || 1} مشاهدة | ❤️ ${item.likes || 0} إعجاب`;
+      }
       renderProducts();
     }
 
@@ -906,7 +1104,7 @@
           const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
           if (pass && pass.trim() === "Dane7422") {
             isAdmin = true;
-            localStorage.setItem('fw_admin_logged_v100', '1');
+            localStorage.setItem('fw_admin_logged_master', '1');
             document.getElementById('adminBar').classList.remove('hidden');
             renderProducts();
             showToast("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة 👑");
@@ -920,7 +1118,7 @@
 
     function logoutAdmin() {
       isAdmin = false;
-      localStorage.removeItem('fw_admin_logged_v100');
+      localStorage.removeItem('fw_admin_logged_master');
       document.getElementById('adminBar').classList.add('hidden');
       renderProducts();
     }
@@ -933,7 +1131,7 @@
           exchangeRate = clean;
           renderProducts();
           await saveAllState();
-          showToast("تم تحديث سعر الصرف ✨");
+          showToast("تم تحديث سعر الصرف وحفظه بنجاح ✨");
         }
       }
     }
@@ -986,6 +1184,7 @@
       document.getElementById('pMinQty').value = "10";
       document.getElementById('pPack').value = "";
       document.getElementById('pImgFile').value = "";
+      document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = false;
       document.getElementById('addModal').classList.add('flex');
       document.getElementById('addModal').classList.remove('hidden');
@@ -1008,6 +1207,7 @@
       document.getElementById('pMinQty').value = p.minQty || 10;
       document.getElementById('pPack').value = p.pack;
       document.getElementById('pImgFile').value = "";
+      document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = p.hasDiscount || false;
       document.getElementById('addModal').classList.add('flex');
       document.getElementById('addModal').classList.remove('hidden');
@@ -1032,10 +1232,20 @@
         const pack = document.getElementById('pPack').value.trim();
         const hasDiscount = document.getElementById('pHasDiscount').checked;
         const mainFile = document.getElementById('pImgFile');
+        const extraFiles = document.getElementById('pExtraImgFile');
 
         let mainImgData = null;
         if (mainFile.files && mainFile.files[0]) {
           mainImgData = await compressImageFile(mainFile.files[0], 480, 0.52);
+        }
+
+        let extrasData = [];
+        if (extraFiles && extraFiles.files && extraFiles.files.length > 0) {
+          const maxExtras = Math.min(extraFiles.files.length, 3);
+          for (let i = 0; i < maxExtras; i++) {
+            const comp = await compressImageFile(extraFiles.files[i], 450, 0.5);
+            if (comp) extrasData.push(comp);
+          }
         }
 
         if (editId !== -1) {
@@ -1048,6 +1258,7 @@
             products[idx].pack = pack;
             products[idx].hasDiscount = hasDiscount;
             if (mainImgData) products[idx].img = mainImgData;
+            if (extrasData.length > 0) products[idx].extras = extrasData;
           }
         } else {
           products.unshift({
@@ -1064,7 +1275,7 @@
             comments: [],
             hasDiscount,
             img: mainImgData || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",
-            extras: []
+            extras: extrasData
           });
         }
 
@@ -1076,7 +1287,7 @@
       } catch (err) {
         alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
       } finally {
-        saveBtn.innerText = "حفظ ونشر الموديل فورا ✅";
+        saveBtn.innerText = "حفظ ونشر الموديل فوراً ✅";
         saveBtn.disabled = false;
       }
     }
