@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>FASHION WORLD | عالم الأزياء لتجارة الألبسة بالجملة - دمشق الحريقة</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
@@ -12,10 +12,19 @@
       --gold-light: #FBF0B9;
       --gold-dark: #AA771C;
     }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #080808;
       color: #f5f5f5;
+      touch-action: manipulation;
+    }
+    /* منع الزوم التلقائي في الموبايل عند الكتابة بالحقول */
+    input, select, textarea {
+      font-size: 16px !important;
     }
     .font-cinzel { font-family: 'Cinzel', serif; }
     .gold-gradient-text {
@@ -58,51 +67,40 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- شريط الأدمن المخفي -->
-  <div id="adminBar" class="hidden bg-gradient-to-r from-amber-900/90 via-yellow-800/90 to-amber-900/90 border-b border-yellow-500/50 px-4 py-3 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-sm">
-      <div class="flex items-center gap-2 font-bold text-yellow-200">
-        <span>👑 لوحة تحكم أدمن FASHION WORLD</span>
-      </div>
-      <div class="flex flex-wrap items-center gap-2">
-        <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-3 py-1.5 rounded-lg text-xs shadow">
-          ➕ نشر موديل جديد
-        </button>
-        <button onclick="changeBanner()" class="bg-black/60 hover:bg-black text-yellow-300 border border-yellow-500/40 px-3 py-1.5 rounded-lg text-xs font-bold">
-          🖼️ تغيير صورة الغلاف
-        </button>
-        <button onclick="changeExchangeRate()" class="bg-black/60 hover:bg-black text-yellow-300 border border-yellow-500/40 px-3 py-1.5 rounded-lg text-xs font-bold">
-          💱 صرف العملات (<span id="adminRateDisplay">15000</span>)
-        </button>
-        <button onclick="logoutAdmin()" class="bg-red-600/80 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold">
-          خروج 🔒
-        </button>
+  <div id="adminBar" class="hidden bg-gradient-to-r from-amber-900/90 via-yellow-800/90 to-amber-900/90 border-b border-yellow-500/50 px-3 py-2 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div class="font-bold text-yellow-200">👑 لوحة تحكم أدمن</div>
+      <div class="flex flex-wrap items-center gap-1.5">
+        <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">➕ نشر</button>
+        <button onclick="changeBanner()" class="bg-black/60 text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-lg font-bold">🖼️ الغلاف</button>
+        <button onclick="changeExchangeRate()" class="bg-black/60 text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-lg font-bold">💱 الصرف</button>
+        <button onclick="logoutAdmin()" class="bg-red-600 text-white px-2.5 py-1.5 rounded-lg font-bold">خروج 🔒</button>
       </div>
     </div>
   </div>
 
   <!-- الشريط العلوي للتواصل -->
-  <div class="bg-black border-b border-yellow-600/20 text-xs py-2 px-4">
+  <div class="bg-black border-b border-yellow-600/20 text-[11px] py-1.5 px-3">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-gray-300">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span>
-        <span class="hidden sm:inline text-gray-600">|</span>
-        <a href="https://wa.me/963996311804" target="_blank" class="hover:text-yellow-400">واتساب: 0996311804</a>
+        <a href="https://wa.me/963996311804" target="_blank" class="hover:text-yellow-400">0996311804</a>
       </div>
-      <div class="flex items-center gap-3">
-        <button onclick="openAboutModal()" class="text-yellow-400 font-bold hover:underline bg-yellow-500/10 px-2.5 py-1 rounded border border-yellow-500/30">
-          ℹ️ من نحن ومنصاتنا
+      <div class="flex items-center gap-2">
+        <button onclick="openAboutModal()" class="text-yellow-400 font-bold bg-yellow-500/10 px-2.5 py-0.5 rounded border border-yellow-500/30">
+          ℹ️ من نحن
         </button>
-        <a href="https://wa.me/963996311804" target="_blank" class="text-emerald-400 font-bold hover:underline">🌍 دولي: +963996311804</a>
+        <a href="https://wa.me/963996311804" target="_blank" class="text-emerald-400 font-bold">+963996311804</a>
       </div>
     </div>
   </div>
 
   <!-- الهيدر الرئيسي -->
   <header class="bg-[#0b0b0b]/95 border-b border-yellow-500/30 sticky top-0 z-40 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3 cursor-pointer select-none" onclick="logoSecretClick()" title="FASHION WORLD">
-        <div class="w-12 h-12 rounded-xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-lg">
-          <svg viewBox="0 0 64 64" class="w-8 h-8">
+    <div class="max-w-7xl mx-auto px-3 py-2 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 cursor-pointer select-none" onclick="logoSecretClick()" title="FASHION WORLD">
+        <div class="w-10 h-10 rounded-xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-lg">
+          <svg viewBox="0 0 64 64" class="w-6 h-6">
             <defs>
               <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#FFF3B0"/>
@@ -114,293 +112,105 @@
           </svg>
         </div>
         <div>
-          <h1 class="font-cinzel text-xl sm:text-2xl font-black tracking-wider gold-gradient-text">FASHION WORLD</h1>
-          <p class="text-[11px] text-gray-400">لتجارة وصناعة الألبسة بالجملة - دمشق الحريقة</p>
+          <h1 class="font-cinzel text-base sm:text-xl font-black tracking-wider gold-gradient-text">FASHION WORLD</h1>
+          <p class="text-[9px] text-gray-400">جملة الألبسة - دمشق الحريقة</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-2 sm:gap-3">
-        <select id="currencySelector" onchange="setCurrencyMode(this.value)" class="bg-neutral-900 text-yellow-400 border border-yellow-500/40 rounded-lg px-2.5 py-2 text-xs font-bold focus:outline-none">
-          <option value="BOTH">💵 $ + ل.س معاً</option>
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <select id="currencySelector" onchange="setCurrencyMode(this.value)" class="bg-neutral-900 text-yellow-400 border border-yellow-500/40 rounded-lg px-2 py-1 text-xs font-bold focus:outline-none">
+          <option value="BOTH">💵 $ + ل.س</option>
           <option value="USD">💵 دولار ($)</option>
-          <option value="SYP">🇸🇾 ليرة سورية (ل.س)</option>
+          <option value="SYP">🇸🇾 ليرة (ل.س)</option>
         </select>
 
-        <button onclick="openCart()" class="relative gold-gradient-bg text-black font-extrabold px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 shadow-lg">
-          <span>🛒 سلة الجملة</span>
-          <span id="cartCount" class="bg-black text-yellow-400 px-2 py-0.5 rounded-full text-xs">0</span>
+        <button onclick="openCart()" class="relative gold-gradient-bg text-black font-extrabold px-3 py-1 rounded-xl text-xs flex items-center gap-1 shadow-lg">
+          <span>🛒 السلة</span>
+          <span id="cartCount" class="bg-black text-yellow-400 px-1.5 py-0.2 rounded-full text-[10px]">0</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- بانر الغلاف -->
-  <section id="bannerSection" class="relative overflow-hidden border-b border-yellow-500/20 bg-cover bg-center py-12 px-4" style="background-image: linear-gradient(to bottom, rgba(8,8,8,0.85), rgba(8,8,8,0.95)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80');">
+  <section id="bannerSection" class="relative overflow-hidden border-b border-yellow-500/20 bg-cover bg-center py-10 px-3" style="background-image: linear-gradient(to bottom, rgba(8,8,8,0.85), rgba(8,8,8,0.95)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80');">
     <div class="max-w-5xl mx-auto text-center relative z-10">
-      <span class="inline-block px-4 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-xs font-bold mb-3">
-        ✨ المنصة الرسمية لطلبات الجملة المباشرة - دمشق الحريقة ✨
+      <span class="inline-block px-3 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[11px] font-bold mb-2">
+        ✨ المنصة الرسمية لطلبات الجملة المباشرة ✨
       </span>
-      <h2 class="text-2xl sm:text-4xl font-black mb-3">
+      <h2 class="text-xl sm:text-3xl font-black mb-2">
         أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة الجملة 🔥</span>
       </h2>
-      <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto mb-5">
-        تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر السيريهات، وانقر على أي موديل لمعاينة تفاصيله وصوره المتعددة.
+      <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto mb-4">
+        تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر السيريهات، وانقر على أي موديل لمعاينة تفاصيله.
       </p>
-      <div class="flex flex-wrap justify-center gap-3 text-xs">
-        <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-extrabold px-5 py-2.5 rounded-xl shadow">
-          💬 تواصل واتساب مباشر: 0996311804
+      <div class="flex flex-wrap justify-center gap-2 text-xs">
+        <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl shadow text-xs">
+          💬 تواصل واتساب: 0996311804
         </a>
-        <div class="bg-neutral-900 border border-yellow-500/30 px-4 py-2.5 rounded-xl text-gray-300">
-          سعر الصرف المعتمد: <strong id="heroRate" class="text-yellow-400">15,000</strong> ل.س / 1$
+        <div class="bg-neutral-900 border border-yellow-500/30 px-3 py-2 rounded-xl text-gray-300 text-xs">
+          سعر الصرف: <strong id="heroRate" class="text-yellow-400">15,000</strong> ل.س
         </div>
       </div>
     </div>
   </section>
 
   <!-- فلاتر الأقسام -->
-  <section class="max-w-7xl mx-auto px-4 pt-6 w-full">
-    <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="categoryTabs">
-      <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl text-xs sm:text-sm">الكل</button>
-      <button onclick="filterCategory('نسواني')" data-cat="نسواني" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm">👗 قسم نسواني</button>
-      <button onclick="filterCategory('رجالي')" data-cat="رجالي" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm">👔 قسم رجالي</button>
-      <button onclick="filterCategory('ولادي')" data-cat="ولادي" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm">🧒 قسم ولادي</button>
-      <button onclick="filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm">👶 قسم ب.ب</button>
+  <section class="max-w-7xl mx-auto px-3 pt-5 w-full">
+    <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2" id="categoryTabs">
+      <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn gold-gradient-bg text-black font-extrabold px-3 py-1.5 rounded-xl text-xs">الكل</button>
+      <button onclick="filterCategory('نسواني')" data-cat="نسواني" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-3 py-1.5 rounded-xl text-xs">👗 نسواني</button>
+      <button onclick="filterCategory('رجالي')" data-cat="رجالي" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-3 py-1.5 rounded-xl text-xs">👔 رجالي</button>
+      <button onclick="filterCategory('ولادي')" data-cat="ولادي" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-3 py-1.5 rounded-xl text-xs">🧒 ولادي</button>
+      <button onclick="filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn bg-neutral-900 text-gray-300 border border-yellow-500/30 font-bold px-3 py-1.5 rounded-xl text-xs">👶 ب.ب</button>
     </div>
   </section>
 
   <!-- شبكة الموديلات -->
-  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
-    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  <main class="max-w-7xl mx-auto px-3 py-6 flex-1 w-full">
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
   </main>
 
-  <!-- نافذة "من نحن" (تم ضبط المقاسات لتناسب جميع الشاشات بدون قص) -->
-  <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3 sm:p-4">
-    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl max-w-lg w-full p-4 sm:p-6 max-h-[90vh] overflow-y-auto space-y-3">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
-        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-lg">✨ من نحن - Fashion World</h3>
-        <button onclick="closeAboutModal()" class="text-gray-400 hover:text-white text-xl px-2">✕</button>
+  <!-- نافذة "من نحن" -->
+  <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
+    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[85vh] p-4 flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
+        <h3 class="font-extrabold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3>
+        <button onclick="closeAboutModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
-      <div class="text-xs sm:text-sm text-gray-300 space-y-2.5 leading-relaxed">
-        <p class="font-bold text-white">للتجار والتاجرات ولمندوبين ولمسوقين المهتمين ب ملابس النسواني رجالي ولادي ب.ب التركية واجمل الترندات بسعر جملة الجملة 🔥✨</p>
+      <div class="overflow-y-auto flex-1 space-y-2.5 text-xs text-gray-300 leading-relaxed pr-1">
+        <p class="font-bold text-white text-[11px]">للتجار والتاجرات ولمندوبين ولمسوقين المهتمين ب ملابس النسواني رجالي ولادي ب.ب التركية واجمل الترندات بسعر جملة الجملة 🔥✨</p>
         <p class="text-yellow-400 font-extrabold">اسمح لي أن اعرفك على #Fashion_World ❤️⭐</p>
         <p class="font-cinzel text-yellow-200 font-bold">FASHION_WORLD</p>
         <p>تشحن لك ملابس من لمعمل مباشرة</p>
-        <ul class="space-y-2 text-[11px] sm:text-xs">
-          <li class="bg-black/50 p-2.5 rounded-lg border border-yellow-500/20">💎 تكون مسؤولة عن تجهيز البضاعة ووصولها ل مكتب الشحن الخاص بك</li>
-          <li class="bg-black/50 p-2.5 rounded-lg border border-yellow-500/20">💎 Fashion_World ستضمن لك التميز والتنافس بالسعر في متجرك</li>
-          <li class="bg-black/50 p-2.5 rounded-lg border border-yellow-500/20">💎 لكل مهتم الرجاء مراسلتنا على منصاتنا ل نشرح لك كامل التفاصيل والرد فوري</li>
+        <ul class="space-y-1.5 text-[11px]">
+          <li class="bg-black/50 p-2 rounded-lg border border-yellow-500/20">💎 تكون مسؤولة عن تجهيز البضاعة ووصولها ل مكتب الشحن الخاص بك</li>
+          <li class="bg-black/50 p-2 rounded-lg border border-yellow-500/20">💎 Fashion_World ستضمن لك التميز والتنافس بالسعر في متجرك</li>
+          <li class="bg-black/50 p-2 rounded-lg border border-yellow-500/20">💎 لكل مهتم الرجاء مراسلتنا على منصاتنا ل نشرح لك كامل التفاصيل والرد فوري</li>
         </ul>
-      </div>
-      <div class="pt-2 border-t border-gray-800 space-y-2">
-        <p class="text-[11px] text-gray-400 font-bold mb-1">تابعنا وتواصل معنا عبر منصاتنا الرسمية:</p>
-        <div class="grid grid-cols-1 gap-2">
-          <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2.5 px-3 rounded-xl text-center flex items-center justify-center gap-1.5 shadow">
-            💙 فيسبوك (Facebook)
-          </a>
-          <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold py-2.5 px-3 rounded-xl text-center flex items-center justify-center gap-1.5 shadow">
-            ✈️ تليجرام (Telegram)
-          </a>
-          <a href="https://www.instagram.com/fashion.world_na?dlrf=cDB4aDlyZ3h4eWQ2" target="_blank" class="bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold py-2.5 px-3 rounded-xl text-center flex items-center justify-center gap-1.5 shadow">
-            📸 إنستغرام (Instagram)
-          </a>
+        <div class="pt-2 border-t border-gray-800 space-y-1.5">
+          <p class="text-[11px] text-gray-400 font-bold">تابعنا عبر منصاتنا الرسمية:</p>
+          <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="block bg-blue-600 text-white text-xs font-bold py-2.5 px-3 rounded-xl text-center shadow">💙 فيسبوك (Facebook)</a>
+          <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="block bg-sky-500 text-white text-xs font-bold py-2.5 px-3 rounded-xl text-center shadow">✈️ تليجرام (Telegram)</a>
+          <a href="https://www.instagram.com/fashion.world_na?dlrf=cDB4aDlyZ3h4eWQ2" target="_blank" class="block bg-pink-600 text-white text-xs font-bold py-2.5 px-3 rounded-xl text-center shadow">📸 إنستغرام (Instagram)</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- نافذة تفاصيل الموديل -->
-  <div id="productModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3 sm:p-4">
-    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl max-w-2xl w-full p-4 sm:p-5 max-h-[95vh] overflow-y-auto flex flex-col space-y-3">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
-        <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-sm sm:text-lg">تفاصيل الموديل</h3>
-        <button onclick="closeProductModal()" class="text-gray-400 hover:text-white text-xl px-2">✕</button>
+  <div id="productModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
+    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl w-full max-w-md max-h-[85vh] p-4 flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
+        <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-sm">تفاصيل الموديل</h3>
+        <button onclick="closeProductModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
-      
-      <div class="space-y-3">
-        <div class="relative h-64 sm:h-96 rounded-xl overflow-hidden bg-black border border-gray-800">
+      <div class="overflow-y-auto flex-1 space-y-3 pr-1">
+        <div class="relative h-56 rounded-xl overflow-hidden bg-black border border-gray-800">
           <img id="modalMainImg" src="" class="w-full h-full object-cover" />
           <div class="watermark-logo">
             <span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
           </div>
-          <span id="modalDiscountBadge" class="hidden absolute top-3 right-3 bg-red-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow">حسم خاص 🔥</span>
+          <span id="modalDiscountBadge" class="hidden absolute top-2 right-2 bg-red-600 text-white font-extrabold text-[11px] px-2.5 py-0.5 rounded-full shadow">حسم خاص 🔥</span>
         </div>
-        <div id="modalThumbs" class="flex gap-2 overflow-x-auto pb-1"></div>
-      </div>
-
-      <div class="space-y-2 bg-black/60 p-3 sm:p-4 rounded-xl border border-gray-800 text-xs sm:text-sm">
-        <div class="flex justify-between items-center">
-          <span id="modalCategory" class="text-xs bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2.5 py-1 rounded-lg font-bold"></span>
-          <span id="modalViews" class="text-[11px] text-gray-400"></span>
-        </div>
-        <p id="modalPack" class="text-gray-300 font-bold text-xs"></p>
-        <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
-      </div>
-
-      <div class="flex gap-2 pt-1">
-        <button id="modalAddCartBtn" class="flex-1 gold-gradient-bg text-black font-extrabold py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm shadow">
-          🛒 أضف لسلة الجملة
-        </button>
-        <button onclick="closeProductModal()" class="bg-neutral-800 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold">إغلاق</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- نافذة إضافة/تعديل موديل للأدمن -->
-  <div id="addModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-3 sm:p-4">
-    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl max-w-md w-full p-4 sm:p-5 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-3 border-b border-gray-800 pb-2.5">
-        <h3 id="modalHeaderTitle" class="font-extrabold text-yellow-400 text-sm sm:text-base">➕ نشر موديل جملة جديد</h3>
-        <button onclick="closeAddModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
-      </div>
-      <form onsubmit="saveNewProduct(event)" class="space-y-3 text-xs sm:text-sm">
-        <input type="hidden" id="editIndex" value="-1" />
-        <div>
-          <label class="block text-gray-300 mb-1">اسم الموديل / الكود</label>
-          <input id="pName" required class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="مثال: طقم نسواني كتان فاخر #405" />
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-gray-300 mb-1">القسم</label>
-            <select id="pCat" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white">
-              <option value="نسواني">نسواني</option>
-              <option value="رجالي">رجالي</option>
-              <option value="ولادي">ولادي</option>
-              <option value="ب.ب">ب.ب</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-gray-300 mb-1">السعر ($)</label>
-            <input id="pUsd" type="number" step="0.5" required class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="45" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-gray-300 mb-1">تفاصيل السيريه والقطع</label>
-          <input id="pPack" required class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="سيريه 6 قطع (M-L-XL-XXL)" />
-        </div>
-        <div class="flex items-center gap-2 bg-black/50 p-2 rounded-lg border border-gray-800">
-          <input type="checkbox" id="pHasDiscount" class="w-4 h-4 accent-yellow-400" />
-          <label for="pHasDiscount" class="text-xs text-yellow-400 font-bold">تفعيل حالة (حسم خاص 🔥)</label>
-        </div>
-        <div>
-          <label class="block text-gray-300 mb-1">صورة الموديل الرئيسية</label>
-          <input id="pImgFile" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-gray-300 text-xs" />
-        </div>
-        <div>
-          <label class="block text-gray-300 mb-1">صور إضافية للمعارض (اختياري)</label>
-          <input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-gray-300 text-xs" />
-        </div>
-        <button type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl mt-1">
-          حفظ ونشر فوري ✅
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- نافذة سلة الشراء -->
-  <div id="cartModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-3 sm:p-4">
-    <div class="bg-neutral-900 border border-yellow-500/50 rounded-2xl max-w-lg w-full p-4 sm:p-5 max-h-[90vh] flex flex-col">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5">
-        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">🛒 سلة طلبات الجملة</h3>
-        <button onclick="closeCart()" class="text-gray-400 hover:text-white text-xl px-2">✕</button>
-      </div>
-      <div id="cartItems" class="flex-1 overflow-y-auto space-y-2.5 text-xs sm:text-sm"></div>
-      <div class="border-t border-gray-800 pt-3 mt-2 space-y-2">
-        <div class="flex justify-between font-bold text-sm sm:text-base">
-          <span>الإجمالي التقديري:</span>
-          <span id="cartTotal" class="text-yellow-400">$0</span>
-        </div>
-        <input id="buyerName" class="w-full bg-black border border-gray-700 rounded-lg px-3 py-2 text-xs sm:text-sm text-white" placeholder="اسم التاجر / المحل والمدينة..." />
-        <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2">
-          <span>📲 إرسال الطلبية عبر واتساب (0996311804)</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- الفوتر -->
-  <footer class="bg-black border-t border-yellow-500/30 py-6 px-4 text-center text-xs text-gray-400">
-    <p class="font-cinzel text-base font-bold gold-gradient-text mb-1">FASHION WORLD</p>
-    <p class="mb-2">📍 العنوان: سوريا - دمشق - الحريقة | تجارة وتوزيع الألبسة بالجملة</p>
-    <p class="text-yellow-400 font-bold mb-2">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
-  </footer>
-
-  <script>
-    let exchangeRate = Number(localStorage.getItem('fw_rate')) || 15000;
-    let bannerImg = localStorage.getItem('fw_banner') || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80';
-    let currencyMode = 'BOTH';
-    let currentCategory = 'ALL';
-    let isAdmin = false;
-    let cart = [];
-    let secretClicks = 0;
-
-    const defaultProducts = [
-      { id: 1, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 48, pack: "سيريه 4 قطع (M-L-XL-2XL)", views: 142, likes: 38, activeNow: 4, hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80", extras: ["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80"] },
-      { id: 2, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 65, pack: "سيريه 4 قطع (S-M-L-XL)", views: 198, likes: 54, activeNow: 6, hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=700&q=80", extras: [] },
-      { id: 3, name: "طقم رجالي كاجوال قطن تركي #201", category: "رجالي", priceUsd: 52, pack: "سيريه 5 قطع (M إلى 3XL)", views: 120, likes: 29, activeNow: 3, hasDiscount: true, img: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=700&q=80", extras: [] },
-      { id: 4, name: "جاكيت رجالي جلد فاخر مبطن #202", category: "رجالي", priceUsd: 78, pack: "سيريه 4 قطع (L-XL-2XL-3XL)", views: 164, likes: 47, activeNow: 5, hasDiscount: false, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80", extras: [] },
-      { id: 5, name: "طقم ولادي شتوي 3 قطع سبور #301", category: "ولادي", priceUsd: 36, pack: "سيريه 6 قطع (أعمار 4-12 سنة)", views: 95, likes: 24, activeNow: 2, hasDiscount: false, img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80", extras: [] },
-      { id: 6, name: "طقم بناتي العيد مطرز فاخر #302", category: "ولادي", priceUsd: 42, pack: "سيريه 6 قطع (أعمار 3-10 سنوات)", views: 112, likes: 33, activeNow: 4, hasDiscount: true, img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80", extras: [] },
-      { id: 7, name: "طقم بيبي حديث الولادة قطن #401", category: "ب.ب", priceUsd: 28, pack: "دزينة 12 قطعة (0-12 شهر)", views: 88, likes: 31, activeNow: 3, hasDiscount: false, img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=700&q=80", extras: [] },
-      { id: 8, name: "أفرول ب.ب مبطن فرو ناعم #402", category: "ب.ب", priceUsd: 32, pack: "سيريه 6 قطع (3-6-9-12 شهر)", views: 104, likes: 27, activeNow: 2, hasDiscount: true, img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=700&q=80", extras: [] }
-    ];
-
-    let products = JSON.parse(localStorage.getItem('fw_products_v3')) || defaultProducts;
-
-    document.getElementById('bannerSection').style.backgroundImage = `linear-gradient(to bottom, rgba(8,8,8,0.85), rgba(8,8,8,0.95)), url('${bannerImg}')`;
-
-    function formatPrice(usd) {
-      const syp = Math.round(usd * exchangeRate).toLocaleString('en-US');
-      if (currencyMode === 'USD') return `<span class="text-yellow-400 font-black text-lg">$${usd}</span>`;
-      if (currencyMode === 'SYP') return `<span class="text-emerald-400 font-black text-base">${syp} ل.س</span>`;
-      return `<div class="flex flex-col"><span class="text-yellow-400 font-black text-lg">$${usd}</span><span class="text-emerald-400 font-bold text-xs">${syp} ل.س</span></div>`;
-    }
-
-    function renderProducts() {
-      document.getElementById('heroRate').innerText = exchangeRate.toLocaleString('en-US');
-      document.getElementById('adminRateDisplay').innerText = exchangeRate.toLocaleString('en-US');
-      const grid = document.getElementById('productsGrid');
-      const list = currentCategory === 'ALL' ? products : products.filter(p => p.category === currentCategory);
-
-      grid.innerHTML = list.map(p => `
-        <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
-          <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
-            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
-            
-            <div class="watermark-logo">
-              <span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
-            </div>
-
-            <span class="absolute top-3 right-3 gold-gradient-bg text-black font-extrabold text-xs px-3 py-1 rounded-full shadow">
-              ${p.category}
-            </span>
-            ${p.hasDiscount ? `<span class="absolute top-3 left-3 bg-red-600 text-white font-extrabold text-[11px] px-2.5 py-0.5 rounded-full shadow animate-pulse">حسم خاص 🔥</span>` : ''}
-
-            <div class="absolute bottom-2 right-2 left-2 flex justify-between items-center bg-black/75 backdrop-blur-sm px-2.5 py-1 rounded-lg text-[11px]">
-              <span class="text-yellow-300 font-bold">👁️ ${p.views} مشاهدة</span>
-              <span class="text-emerald-400 font-bold animate-pulse">🟢 ${p.activeNow} يشاهدونه الآن</span>
-            </div>
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
-            <div>
-              <h3 class="font-extrabold text-white text-base mb-1 cursor-pointer hover:text-yellow-400" onclick="openProductModal(${p.id})">${p.name}</h3>
-              <p class="text-xs text-gray-400">📦 ${p.pack}</p>
-            </div>
-            <div class="flex items-center justify-between border-t border-gray-800 pt-3">
-              ${formatPrice(p.priceUsd)}
-              <button onclick="likeProduct(event, ${p.id})" class="bg-neutral-800 hover:bg-neutral-700 text-xs px-2.5 py-1.5 rounded-lg">
-                ❤️ ${p.likes}
-              </button>
-            </div>
-            <div class="flex gap-2">
-              <button onclick="addToCart(${p.id})" class="flex-1 gold-gradient-bg text-black font-extrabold py-2 rounded-xl text-xs shadow">
-                🛒 أضف لسلة الجملة
-              </button>
-              ${isAdmin ? `
-                <button onclick="editProduct(${p.id})" class="bg-blue-600 text-white px-2.5 py-2 rounded-xl text-xs font-bold" title="تعديل">✏️</button>
-                <button onclick="deleteProduct(${p.id})" class="bg-red-600 text-white px-2.5 py-2 rounded-xl text-xs font-bold" title="حذف">🗑️</button>
-              ` : ''}
-            </div>
-          </div>
-        </div>
-      `).join('');
-    
+        <div id="modalThumbs" class="flex gap-1.5 overflow-x-
