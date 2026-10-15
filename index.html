@@ -42,11 +42,11 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- شريط الأدمن المخفي (يظهر فقط بعد إدخال كلمة السر) -->
+  <!-- شريط الأدمن المخفي (يظهر فقط للأدمن بعد كلمة السر) -->
   <div id="adminBar" class="hidden bg-gradient-to-r from-amber-900/90 via-yellow-800/90 to-amber-900/90 border-b border-yellow-500/50 px-4 py-3 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-sm">
       <div class="flex items-center gap-2 font-bold text-yellow-200">
-        <span>👑 وضع الإدارة (أدمن FASHION WORLD)</span>
+        <span>👑 لوحة تحكم أدمن FASHION WORLD</span>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-3 py-1.5 rounded-lg text-xs shadow">
@@ -62,7 +62,7 @@
     </div>
   </div>
 
-  <!-- الشريط العلوي للعنوان والتواصل -->
+  <!-- الشريط العلوي للعنوان والتواصل (للزوار) -->
   <div class="bg-black border-b border-yellow-600/20 text-xs py-2 px-4">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-gray-300">
       <div class="flex items-center gap-3">
@@ -72,9 +72,6 @@
       </div>
       <div class="flex items-center gap-3">
         <a href="https://wa.me/963996311804" target="_blank" class="text-emerald-400 font-bold hover:underline">🌍 تواصل دولي: +963996311804</a>
-        <button onclick="toggleAdminLogin()" class="text-gray-400 hover:text-yellow-400 border border-gray-800 px-2 py-0.5 rounded text-[11px]">
-          🔒 دخول الإدارة
-        </button>
       </div>
     </div>
   </div>
@@ -82,8 +79,8 @@
   <!-- الهيدر الرئيسي -->
   <header class="bg-[#0b0b0b]/95 border-b border-yellow-500/30 sticky top-0 z-40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-      <!-- الشعار -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="logoSecretClick()">
+      <!-- الشعار (اضغط عليه 3 مرات متتالية لفتح لوحة الأدمن السرية) -->
+      <div class="flex items-center gap-3 cursor-pointer select-none" onclick="logoSecretClick()" title="FASHION WORLD">
         <div class="w-12 h-12 rounded-xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-lg">
           <svg viewBox="0 0 64 64" class="w-8 h-8">
             <defs>
@@ -141,7 +138,7 @@
     </div>
   </section>
 
-  <!-- فلاتر الأقسام -->
+  <!-- فلاتر الأقسام (موديلين فقط لكل قسم حسب الطلب) -->
   <section class="max-w-7xl mx-auto px-4 pt-6 w-full">
     <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="categoryTabs">
       <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl text-xs sm:text-sm">الكل (8)</button>
@@ -236,16 +233,12 @@
     let secretClicks = 0;
 
     const defaultProducts = [
-      // نسواني (2)
       { id: 1, name: "طقم نسواني رسمي كتان ملكي", category: "نسواني", priceUsd: 48, pack: "سيريه 4 قطع (M-L-XL-2XL)", views: 142, likes: 38, activeNow: 4, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80" },
       { id: 2, name: "فستان سهرة مخمل مطرز ذهبي", category: "نسواني", priceUsd: 65, pack: "سيريه 4 قطع (S-M-L-XL)", views: 198, likes: 54, activeNow: 6, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=700&q=80" },
-      // رجالي (2)
       { id: 3, name: "طقم رجالي كاجوال قطن تركي", category: "رجالي", priceUsd: 52, pack: "سيريه 5 قطع (M إلى 3XL)", views: 120, likes: 29, activeNow: 3, img: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=700&q=80" },
       { id: 4, name: "جاكيت رجالي جلد فاخر مبطن", category: "رجالي", priceUsd: 78, pack: "سيريه 4 قطع (L-XL-2XL-3XL)", views: 164, likes: 47, activeNow: 5, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80" },
-      // ولادي (2)
       { id: 5, name: "طقم ولادي شتوي 3 قطع سبور", category: "ولادي", priceUsd: 36, pack: "سيريه 6 قطع (أعمار 4-12 سنة)", views: 95, likes: 24, activeNow: 2, img: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80" },
       { id: 6, name: "طقم بناتي العيد مطرز فاخر", category: "ولادي", priceUsd: 42, pack: "سيريه 6 قطع (أعمار 3-10 سنوات)", views: 112, likes: 33, activeNow: 4, img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80" },
-      // ب.ب (2)
       { id: 7, name: "طقم بيبي حديث الولادة قطن 100%", category: "ب.ب", priceUsd: 28, pack: "دزينة 12 قطعة (0-12 شهر)", views: 88, likes: 31, activeNow: 3, img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=700&q=80" },
       { id: 8, name: "أفرول ب.ب مبطن فرو ناعم", category: "ب.ب", priceUsd: 32, pack: "سيريه 6 قطع (3-6-9-12 شهر)", views: 104, likes: 27, activeNow: 2, img: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=700&q=80" }
     ];
@@ -327,24 +320,23 @@
       renderProducts();
     }
 
-    function toggleAdminLogin() {
-      if (isAdmin) return;
-      const pass = prompt("أدخل الرقم السري للإدارة (الافتراضي: 0996311804):");
-      if (pass === "0996311804") {
-        isAdmin = true;
-        document.getElementById('adminBar').classList.remove('hidden');
-        renderProducts();
-      } else if (pass !== null) {
-        alert("الرقم السري غير صحيح!");
-      }
-    }
-
     function logoSecretClick() {
       secretClicks++;
       if (secretClicks >= 3) {
         secretClicks = 0;
-        toggleAdminLogin();
+        if (!isAdmin) {
+          const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
+          if (pass === "Dane7422") {
+            isAdmin = true;
+            document.getElementById('adminBar').classList.remove('hidden');
+            renderProducts();
+            alert("تم تفعيل وضع الأدمن بنجاح 👑");
+          } else if (pass !== null) {
+            alert("كلمة المرور غير صحيحة!");
+          }
+        }
       }
+      setTimeout(() => { secretClicks = 0; }, 2000);
     }
 
     function logoutAdmin() {
