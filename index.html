@@ -64,7 +64,6 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- نظام التنبيهات العائمة -->
   <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none px-4"></div>
 
   <!-- شريط الأدمن المخفي -->
@@ -72,7 +71,7 @@
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="font-extrabold text-yellow-300 flex items-center gap-1.5">
         <span>👑 الإدارة (الصرف: <span id="adminRateDisplay">15,000</span>)</span>
-        <span class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30">🟢 حفظ فوري آمن</span>
+        <span class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded text-[10px] border border-emerald-500/30">🟢 متصل</span>
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-2.5 py-1.5 rounded-lg shadow">➕ نشر موديل</button>
@@ -219,14 +218,14 @@
         <div class="space-y-2 bg-black/60 p-3 rounded-xl border border-gray-800 text-xs">
           <div class="flex justify-between items-center">
             <span id="modalCategory" class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-lg font-bold"></span>
-            <span id="modalViews" class="text-[11px] text-gray-400"></span>
+            <span id="modalViews" class="text-[11px] text-gray-400">👁️ 0 مشاهدة</span>
           </div>
           <p id="modalPack" class="text-gray-200 font-bold leading-relaxed"></p>
           
-          <!-- التقييم بالنجوم الملونة التفاعلية -->
+          <!-- التقييم بالنجوم -->
           <div class="flex items-center justify-between pt-1 border-t border-gray-800">
-            <span class="text-yellow-300 font-bold">قيم الموديل (اضغط على النجمة):</span>
-            <div id="modalStarsContainer" class="flex items-center gap-1 text-base cursor-pointer"></div>
+            <span class="text-yellow-300 font-bold">قيم الموديل (من 5 نجوم):</span>
+            <div id="modalStarsContainer" class="flex items-center gap-1 text-lg cursor-pointer"></div>
           </div>
 
           <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
@@ -251,7 +250,7 @@
           </div>
         </div>
 
-        <!-- قسم التعليقات المباشرة والثابتة دائماً -->
+        <!-- قسم التعليقات -->
         <div class="bg-black/70 p-3 rounded-xl border border-gray-800 space-y-2 text-xs">
           <p class="font-bold text-yellow-400">💬 تعليقات التجار:</p>
           <div id="commentsList" class="space-y-1.5 max-h-32 overflow-y-auto pr-1"></div>
@@ -375,14 +374,13 @@
     <p class="text-yellow-400 font-bold">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
   </footer>
 
-  <!-- البيانات الأساسية الدائمة والمحمية -->
   <script id="initialDataScript">
     window.INITIAL_STORE_STATE = {
       exchangeRate: 15000,
       bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
       products: [
-        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 20, ratingCount: 4, comments: [{author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
-        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 18, ratingCount: 4, comments: [{author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
+        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
+        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 18, ratingCount: 4, comments: [{id: 2, author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
       ]
     };
   </script>
@@ -390,16 +388,13 @@
   <script>
     const GITHUB_REPO = 'najdt656/fashion-world';
     const DATA_FILE_PATH = 'store-data.json';
-    const LS_STATE_KEY = 'fw_permanent_state_v70';
-    const LS_TOKEN_KEY = 'fw_gh_token_v70';
-    const LS_LIKED_KEY = 'fw_user_liked_ids_v70';
-    const LS_VIEWED_KEY = 'fw_user_viewed_ids_v70';
+    const LS_STATE_KEY = 'fw_permanent_state_v90';
+    const LS_TOKEN_KEY = 'fw_gh_token_v90';
+    const LS_LIKED_KEY = 'fw_user_liked_ids_v90';
 
     let likedProducts = {};
-    let viewedProducts = {};
     try {
       likedProducts = JSON.parse(localStorage.getItem(LS_LIKED_KEY) || '{}');
-      viewedProducts = JSON.parse(localStorage.getItem(LS_VIEWED_KEY) || '{}');
     } catch (e) {}
 
     let exchangeRate = window.INITIAL_STORE_STATE.exchangeRate || 15000;
@@ -407,10 +402,11 @@
     let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
-    let isAdmin = localStorage.getItem('fw_admin_logged_v70') === '1';
+    let isAdmin = localStorage.getItem('fw_admin_logged_v90') === '1';
     let cart = [];
     let secretClicks = 0;
     let currentModalProduct = null;
+    let userHasRatedThisSession = false;
 
     function showToast(message, type = 'success') {
       const container = document.getElementById('toastContainer');
@@ -466,7 +462,18 @@
       return parseFloat(str) || 0;
     }
 
-    // نظام التحميل والتخزين المزدوج الدائم (localStorage + السحابة)
+    // دالة تحديث المشاهدات الحية سحابياً لكل زبون جديد عبر CountAPI المجاني
+    async function incrementCloudViews(productId) {
+      try {
+        const res = await fetch(`https://api.countapi.xyz/hit/fashionworld-${productId}/views`);
+        if (res.ok) {
+          const data = await res.json();
+          return data.value;
+        }
+      } catch (e) {}
+      return null;
+    }
+
     async function initApp() {
       try {
         const localRaw = localStorage.getItem(LS_STATE_KEY);
@@ -483,13 +490,11 @@
       applyBanner();
       renderProducts();
 
-      // جلب البيانات من السحابة إذا كانت أحدث
       try {
         const res = await fetch(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const cloudData = await res.json();
           if (cloudData && Array.isArray(cloudData.products) && cloudData.products.length > 0) {
-            // دمج ذكي للحفاظ على التعليقات والتقييمات المحدثة
             products = cloudData.products;
             if (cloudData.exchangeRate) exchangeRate = Number(cloudData.exchangeRate);
             if (cloudData.bannerImg) bannerImg = cloudData.bannerImg;
@@ -512,13 +517,11 @@
         bannerImg,
         products
       };
-
       try {
         localStorage.setItem(LS_STATE_KEY, JSON.stringify(payload));
       } catch (e) {}
     }
 
-    // زر التحديث اليدوي للزبائن ورفع كافة التعديلات والتعليقات والنجوم للسحابة
     async function exportSiteCode() {
       await saveAllState();
       const ghToken = localStorage.getItem(LS_TOKEN_KEY);
@@ -527,7 +530,7 @@
         return;
       }
 
-      showToast("جاري تحديث البيانات وحفظ التعليقات والنجوم سحابياً... ⏳");
+      showToast("جاري التحديث للزبائن... ⏳");
       try {
         const payload = {
           updatedAt: Date.now(),
@@ -548,7 +551,7 @@
 
         const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
         const bodyObj = {
-          message: "Manual sync: update products, ratings and comments",
+          message: "Sync store state",
           content: contentBase64
         };
         if (sha) bodyObj.sha = sha;
@@ -564,19 +567,19 @@
         });
 
         if (putRes.ok) {
-          showToast("🟢 تم حفظ وتحديث التعليقات والنجوم وبضاعتك لكل الزبائن بنجاح تام! ✨");
+          showToast("🟢 تم التحديث لكل الزبائن بنجاح! ✨");
         } else {
-          showToast("⚠️ تم الحفظ محلياً في جهازك، تأكد من صحة مفتاح الربط.", "error");
+          showToast("⚠️ تم الحفظ محلياً في هاتفك", "error");
         }
       } catch (err) {
-        showToast("⚠️ تم الحفظ في هاتفك بنجاح.", "error");
+        showToast("⚠️ تم الحفظ محلياً في هاتفك", "error");
       }
     }
 
     function openCloudSetupModal() {
       document.getElementById('ghTokenInput').value = localStorage.getItem(LS_TOKEN_KEY) || "";
-      document.getElementById('cloudSetupModal').classList.remove('hidden');
       document.getElementById('cloudSetupModal').classList.add('flex');
+      document.getElementById('cloudSetupModal').classList.remove('hidden');
     }
 
     function closeCloudSetupModal() {
@@ -691,18 +694,21 @@
       const p = products.find(item => item.id === id);
       if (!p) return;
       currentModalProduct = p;
+      userHasRatedThisSession = false;
 
-      if (!viewedProducts[id]) {
+      // زيادة المشاهدة سحابياً لكل زبون جديد يفتح الموديل
+      const newViews = await incrementCloudViews(id);
+      if (newViews !== null) {
+        p.views = newViews;
+      } else {
         p.views = (p.views || 0) + 1;
-        viewedProducts[id] = true;
-        try { localStorage.setItem(LS_VIEWED_KEY, JSON.stringify(viewedProducts)); } catch (e) {}
-        await saveAllState();
       }
+      await saveAllState();
 
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
-      document.getElementById('modalViews').innerText = `👁️ ${p.views || 0} مشاهدة | ❤️ ${p.likes || 0} إعجاب`;
+      document.getElementById('modalViews').innerText = `👁️ ${p.views || 1} مشاهدة | ❤️ ${p.likes || 0} إعجاب`;
       document.getElementById('modalPack').innerText = `📐 القياسات والتفاصيل: ${p.pack}`;
       
       const badge = document.getElementById('modalDiscountBadge');
@@ -736,23 +742,29 @@
       currentModalProduct = null;
     }
 
-    // نظام النجوم التفاعلي الملون بدقة
     function renderModalStars(p) {
       const container = document.getElementById('modalStarsContainer');
       const avg = (p.ratingCount && p.ratingCount > 0) ? Math.round(p.ratingSum / p.ratingCount) : 5;
       let starsHtml = '';
       for (let i = 1; i <= 5; i++) {
-        starsHtml += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= avg ? 'text-yellow-400' : 'text-gray-600'} hover:scale-125 transition cursor-pointer text-xl">★</span>`;
+        starsHtml += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= avg ? 'text-yellow-400' : 'text-gray-600'} hover:scale-125 transition cursor-pointer text-2xl select-none">★</span>`;
       }
       starsHtml += `<span class="text-xs text-gray-300 mr-2">(${p.ratingCount || 1} تقييمات)</span>`;
       container.innerHTML = starsHtml;
     }
 
     async function rateProduct(productId, stars) {
+      if (userHasRatedThisSession) {
+        showToast("لقد قمت بالتقييم بالفعل في هذه الجلسة!", "error");
+        return;
+      }
       const p = products.find(item => item.id === productId);
       if (!p) return;
+      
       p.ratingSum = (p.ratingSum || 20) + stars;
       p.ratingCount = (p.ratingCount || 4) + 1;
+      userHasRatedThisSession = true;
+
       renderModalStars(p);
       renderProducts();
       await saveAllState();
@@ -767,9 +779,12 @@
         return;
       }
       list.innerHTML = comments.map(c => `
-        <div class="bg-black/50 p-2 rounded-lg border border-gray-800">
-          <span class="text-yellow-400 font-bold">${c.author}:</span>
-          <span class="text-gray-200 mr-1">${c.text}</span>
+        <div class="flex justify-between items-center bg-black/50 p-2 rounded-lg border border-gray-800">
+          <div>
+            <span class="text-yellow-400 font-bold">${c.author}:</span>
+            <span class="text-gray-200 mr-1">${c.text}</span>
+          </div>
+          <button onclick="deleteComment(${p.id}, ${c.id})" class="text-red-400 hover:text-red-300 text-xs font-bold px-1.5 py-0.5" title="حذف التعليق">🗑️</button>
         </div>
       `).join('');
     }
@@ -784,7 +799,12 @@
       if (!text) return alert("يرجى كتابة نص التعليق أولاً!");
 
       if (!currentModalProduct.comments) currentModalProduct.comments = [];
-      currentModalProduct.comments.push({ author, text });
+      const newComment = {
+        id: Date.now(),
+        author,
+        text
+      };
+      currentModalProduct.comments.push(newComment);
 
       authorInput.value = "";
       textInput.value = "";
@@ -792,6 +812,17 @@
       renderProducts();
       await saveAllState();
       showToast("تم إضافة تعليقك وحفظه بنجاح ✅");
+    }
+
+    async function deleteComment(productId, commentId) {
+      const p = products.find(item => item.id === productId);
+      if (!p || !p.comments) return;
+      
+      p.comments = p.comments.filter(c => c.id !== commentId);
+      renderComments(p);
+      renderProducts();
+      await saveAllState();
+      showToast("تم حذف التعليق بنجاح", "error");
     }
 
     function adjustModalQty(delta) {
@@ -880,7 +911,7 @@
           const pass = prompt("أدخل كلمة المرور الخاصة بالإدارة:");
           if (pass && pass.trim() === "Dane7422") {
             isAdmin = true;
-            localStorage.setItem('fw_admin_logged_v70', '1');
+            localStorage.setItem('fw_admin_logged_v80', '1');
             document.getElementById('adminBar').classList.remove('hidden');
             renderProducts();
             showToast("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة 👑");
@@ -894,7 +925,7 @@
 
     function logoutAdmin() {
       isAdmin = false;
-      localStorage.removeItem('fw_admin_logged_v70');
+      localStorage.removeItem('fw_admin_logged_v80');
       document.getElementById('adminBar').classList.add('hidden');
       renderProducts();
     }
@@ -914,8 +945,8 @@
 
     function openBannerModal() {
       document.getElementById('bannerFileInput').value = "";
-      document.getElementById('bannerModal').classList.remove('hidden');
       document.getElementById('bannerModal').classList.add('flex');
+      document.getElementById('bannerModal').classList.remove('hidden');
     }
     function closeBannerModal() {
       document.getElementById('bannerModal').classList.add('hidden');
