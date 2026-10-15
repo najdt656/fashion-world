@@ -14,7 +14,6 @@
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
-    /* خلفية ملكية متعددة الطبقات مع إضاءة محيطية ونقش خفيف */
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #060606;
@@ -51,7 +50,7 @@
     .gold-border { border: 1px solid rgba(212, 175, 55, 0.35); }
     
     .glass-panel {
-      background: rgba(16, 16, 16, 0.82);
+      background: rgba(16, 16, 16, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(212, 175, 55, 0.22);
@@ -64,7 +63,7 @@
     }
     @media (min-width: 768px) {
       .card-luxury:hover {
-        transform: translateY(-6px);
+        transform: translateY(-5px);
         border-color: rgba(212, 175, 55, 0.65);
         box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(212, 175, 55, 0.12);
       }
@@ -95,6 +94,22 @@
       to { transform: translateY(0) scale(1); opacity: 1; }
     }
     .toast-anim { animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    /* أيقونات التطبيقات الرسمية */
+    .app-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .app-icon-link:hover .app-icon-box {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 24px rgba(212, 175, 55, 0.25);
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col pb-20 md:pb-0">
@@ -102,26 +117,8 @@
   <!-- حاوية رسائل الشكر والتنبيهات التفاعلية -->
   <div id="toastContainer" class="fixed top-20 left-1/2 -translate-x-1/2 z-[110] flex flex-col items-center gap-2 pointer-events-none px-4 w-full max-w-sm"></div>
 
-  <!-- شريط الأدمن المخفي (يفتح بـ 3 نقرات على الشعار + كلمة المرور Dane7422) -->
-  <div id="adminBar" class="hidden bg-gradient-to-r from-amber-950/95 via-yellow-900/95 to-amber-950/95 backdrop-blur-md border-b border-yellow-500/50 px-3 py-2.5 sticky top-0 z-50 shadow-2xl">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs overflow-x-auto no-scrollbar">
-      <div class="font-extrabold text-yellow-300 flex items-center gap-1.5 flex-shrink-0">
-        <span>👑 لوحة الإدارة (الصرف: <span id="adminRateDisplay">15,000</span>)</span>
-        <span class="bg-black/60 text-emerald-400 px-2 py-0.5 rounded-full text-[10px] border border-emerald-500/30">🟢 نشط</span>
-      </div>
-      <div class="flex items-center gap-1.5 flex-shrink-0">
-        <button onclick="openAddModal()" class="bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold px-3 py-1.5 rounded-xl shadow">➕ نشر موديل</button>
-        <button onclick="exportSiteCode()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold px-3 py-1.5 rounded-xl shadow">☁️ حفظ وتحديث للزبائن</button>
-        <button onclick="openCloudSetupModal()" class="bg-black/80 hover:bg-black text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-xl font-bold">🔗 التوكن</button>
-        <button onclick="openBannerModal()" class="bg-black/80 hover:bg-black text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-xl font-bold">🖼️ الغلاف</button>
-        <button onclick="changeExchangeRate()" class="bg-black/80 hover:bg-black text-yellow-300 border border-yellow-500/40 px-2.5 py-1.5 rounded-xl font-bold">💱 الصرف</button>
-        <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1.5 rounded-xl font-bold">خروج 🔒</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- الشريط العلوي للمعلومات (يظهر بشكل أنيق ومتناسق) -->
-  <div class="bg-black/90 border-b border-yellow-600/20 text-[11px] py-1.5 px-3">
+  <!-- الشريط العلوي للمعلومات -->
+  <div class="bg-black/95 border-b border-yellow-600/20 text-[11px] py-1.5 px-3">
     <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 text-gray-300">
       <div class="flex items-center gap-2">
         <span class="text-yellow-400 font-bold flex items-center gap-1">📍 سوريا - دمشق - الحريقة</span>
@@ -137,14 +134,14 @@
     </div>
   </div>
 
-  <!-- الهيدر الرئيسي (متجاوب للهاتف والكمبيوتر) -->
-  <header class="glass-panel sticky top-0 z-40 border-b border-yellow-500/25 shadow-lg">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
+  <!-- الهيدر الرئيسي مع قائمة الإدارة المنسدلة الذكية -->
+  <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/25 shadow-lg">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2 sm:gap-3 relative">
       
       <!-- الشعار (3 ضغطات تفتح الأدمن) -->
       <div class="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none group" onclick="logoSecretClick()">
-        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-xl group-hover:border-yellow-400 transition flex-shrink-0">
-          <svg viewBox="0 0 64 64" class="w-7 h-7">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-xl group-hover:border-yellow-400 transition flex-shrink-0">
+          <svg viewBox="0 0 64 64" class="w-6 h-6 sm:w-7 sm:h-7">
             <defs>
               <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#FFF3B0"/>
@@ -156,14 +153,45 @@
           </svg>
         </div>
         <div>
-          <h1 class="font-cinzel text-lg sm:text-2xl font-black tracking-wider gold-gradient-text leading-none">FASHION WORLD</h1>
-          <p class="text-[10px] sm:text-xs text-gray-400 mt-1 font-semibold">عالم الأزياء لتجارة الجملة - دمشق</p>
+          <h1 class="font-cinzel text-base sm:text-2xl font-black tracking-wider gold-gradient-text leading-none">FASHION WORLD</h1>
+          <p class="text-[9px] sm:text-xs text-gray-400 mt-1 font-semibold">عالم الأزياء لتجارة الجملة - دمشق</p>
         </div>
       </div>
 
-      <!-- أزرار التحكم السريعة للكمبيوتر والهاتف -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- سعر الصرف يظهر في الهيدر على الكمبيوتر -->
+      <!-- أزرار الهيدر + زر شريط الإدارة القابل للطي -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        
+        <!-- زر شريط الإدارة المنسدل (يظهر للأدمن فقط وعند الضغط يفتح القائمة) -->
+        <div id="adminDropdownWrapper" class="hidden relative">
+          <button onclick="toggleAdminMenu()" class="bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-black px-2.5 sm:px-3.5 py-2 rounded-xl text-xs flex items-center gap-1 shadow-lg border border-yellow-200">
+            <span>👑 الإدارة</span>
+            <span id="adminArrow" class="text-[10px] transition-transform duration-200">▼</span>
+          </button>
+
+          <!-- القائمة المنسدلة لأدوات الإدارة -->
+          <div id="adminDropdownMenu" class="hidden absolute left-0 mt-2 w-60 glass-panel rounded-2xl p-3 shadow-2xl border border-yellow-500/50 z-50 space-y-2 text-xs">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-2 mb-1">
+              <span class="text-yellow-400 font-extrabold">👑 تحكم الإدارة</span>
+              <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full text-[10px] border border-emerald-500/30">الصرف: <b id="adminRateDisplay">15,000</b></span>
+            </div>
+            <button onclick="openAddModal(); toggleAdminMenu();" class="w-full gold-gradient-bg text-black font-extrabold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow">
+              <span>➕ نشر موديل جديد</span>
+            </button>
+            <button onclick="exportSiteCode(); toggleAdminMenu();" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow">
+              <span>☁️ حفظ وتحديث للزبائن</span>
+            </button>
+            <div class="grid grid-cols-2 gap-1.5 pt-1">
+              <button onclick="openBannerModal(); toggleAdminMenu();" class="bg-neutral-900 hover:bg-neutral-800 text-yellow-300 border border-yellow-500/30 py-2 rounded-xl font-bold">🖼️ الغلاف</button>
+              <button onclick="changeExchangeRate(); toggleAdminMenu();" class="bg-neutral-900 hover:bg-neutral-800 text-yellow-300 border border-yellow-500/30 py-2 rounded-xl font-bold">💱 الصرف</button>
+            </div>
+            <div class="grid grid-cols-2 gap-1.5">
+              <button onclick="openCloudSetupModal(); toggleAdminMenu();" class="bg-neutral-900 hover:bg-neutral-800 text-sky-400 border border-sky-500/30 py-2 rounded-xl font-bold">🔗 التوكن</button>
+              <button onclick="logoutAdmin(); toggleAdminMenu();" class="bg-red-600/90 hover:bg-red-500 text-white py-2 rounded-xl font-bold">خروج 🔒</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- سعر الصرف على الكمبيوتر -->
         <div class="hidden lg:flex items-center gap-1.5 bg-black/60 border border-yellow-500/30 px-3 py-1.5 rounded-xl text-xs text-gray-300">
           <span>💱 الصرف:</span>
           <strong id="headerRateDesktop" class="text-yellow-400">15,000</strong>
@@ -171,19 +199,14 @@
         </div>
 
         <!-- محول العملة -->
-        <select id="currencySelector" onchange="setCurrencyMode(this.value)" class="bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 rounded-xl px-2.5 py-2 text-xs font-extrabold focus:outline-none cursor-pointer shadow">
+        <select id="currencySelector" onchange="setCurrencyMode(this.value)" class="bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 rounded-xl px-2 sm:px-2.5 py-2 text-xs font-extrabold focus:outline-none cursor-pointer shadow">
           <option value="BOTH">💵 $ + ل.س</option>
           <option value="USD">💵 دولار ($)</option>
           <option value="SYP">🇸🇾 ليرة (ل.س)</option>
         </select>
 
-        <!-- زر واتساب سريع على الكمبيوتر -->
-        <a href="https://wa.me/963996311804" target="_blank" class="hidden md:flex items-center gap-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 font-extrabold px-3.5 py-2 rounded-xl text-xs transition">
-          <span>💬 واتساب</span>
-        </a>
-
         <!-- زر السلة -->
-        <button onclick="openCart()" class="relative gold-gradient-bg text-black font-extrabold px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 shadow-lg">
+        <button onclick="openCart()" class="relative gold-gradient-bg text-black font-extrabold px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 shadow-lg">
           <span>🛒 السلة</span>
           <span id="cartCount" class="bg-black text-yellow-400 px-1.5 py-0.5 rounded-full text-[10px] font-black">0</span>
         </button>
@@ -193,7 +216,7 @@
 
   <!-- بانر الغلاف الفخم -->
   <section class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 w-full">
-    <div id="bannerSection" class="relative overflow-hidden rounded-3xl border border-yellow-500/30 bg-cover bg-center py-10 sm:py-16 px-4 sm:px-8 shadow-2xl">
+    <div id="bannerSection" class="relative overflow-hidden rounded-3xl border border-yellow-500/30 bg-cover bg-center py-9 sm:py-14 px-4 sm:px-8 shadow-2xl">
       <div class="max-w-3xl mx-auto text-center relative z-10 space-y-3">
         <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-black/70 border border-yellow-500/40 text-yellow-300 text-[11px] sm:text-xs font-extrabold backdrop-blur-md">
           ✨ المنصة الرسمية لتجار الجملة والمسوقين ✨
@@ -202,14 +225,14 @@
           أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة القطع 🔥</span>
         </h2>
         <p class="text-gray-200 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed font-medium">
-          تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، حدد الكمية المطلوبة، وأرسل طلبيتك مباشرة إلى قسم التجهيز والشحن في الحريقة.
+          تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، حدد الكمية المطلوبة، وشاركنا تقييمك وتعليقك المباشر.
         </p>
         <div class="flex flex-wrap justify-center items-center gap-2.5 pt-2 text-xs">
           <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-5 py-2.5 rounded-xl shadow-lg flex items-center gap-1.5">
             <span>💬 تواصل واتساب: 0996311804</span>
           </a>
           <button onclick="openAboutModal()" class="bg-black/75 hover:bg-black text-yellow-300 border border-yellow-500/40 px-4 py-2.5 rounded-xl font-extrabold backdrop-blur-md transition">
-            🌐 منصاتنا الرسمية
+            🌐 من نحن ومنصاتنا
           </button>
           <div class="lg:hidden bg-black/75 border border-yellow-500/30 px-3.5 py-2.5 rounded-xl text-gray-200 backdrop-blur-md">
             الصرف: <strong id="heroRate" class="text-yellow-400">15,000</strong> ل.س
@@ -219,49 +242,68 @@
     </div>
   </section>
 
-  <!-- شريط الأقسام الذكي + زر تبديل طريقة العرض على الهاتف -->
-  <section class="max-w-7xl mx-auto px-3 sm:px-6 pt-5 w-full">
-    <div class="glass-panel rounded-2xl p-2 sm:p-3 flex items-center justify-between gap-2">
-      
-      <!-- أزرار الأقسام (تنساب أفقياً على الهاتف وتظهر كاملة بالوسط على الكمبيوتر) -->
-      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar flex-1 py-0.5" id="categoryTabs">
-        <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl text-xs shadow">الكل</button>
-        <button onclick="filterCategory('نسواني')" data-cat="نسواني" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-2 rounded-xl text-xs transition">👗 نسواني</button>
-        <button onclick="filterCategory('رجالي')" data-cat="رجالي" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-2 rounded-xl text-xs transition">👔 رجالي</button>
-        <button onclick="filterCategory('ولادي')" data-cat="ولادي" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-2 rounded-xl text-xs transition">🧒 ولادي</button>
-        <button onclick="filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-2 rounded-xl text-xs transition">👶 ب.ب</button>
-        <button onclick="filterCategory('TREND')" data-cat="TREND" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 font-extrabold px-3.5 py-2 rounded-xl text-xs transition">🔥 الترند الأسبوعي</button>
+  <!-- شريط البحث الذكي + الأقسام + زر (شبكة / قائمة) للهاتف والكمبيوتر -->
+  <section class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 w-full space-y-2.5">
+    
+    <!-- صف البحث وتبديل طريقة العرض (يظهر على الهاتف والكمبيوتر) -->
+    <div class="glass-panel rounded-2xl p-2 sm:p-2.5 flex items-center gap-2">
+      <div class="relative flex-1 flex items-center">
+        <span class="absolute right-3 text-yellow-400 text-sm pointer-events-none">🔍</span>
+        <input
+          id="searchInput"
+          type="text"
+          oninput="handleSearch(this.value)"
+          placeholder="ابحث عن اسم الموديل، الكود، أو القسم..."
+          class="w-full bg-black/80 border border-yellow-500/30 focus:border-yellow-400 rounded-xl pr-9 pl-8 py-2 text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none transition"
+        />
+        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-2.5 text-gray-400 hover:text-white text-xs bg-neutral-800 px-1.5 py-0.5 rounded-md">✕</button>
       </div>
 
-      <!-- زر تبديل العرض على الهاتف (عمود واحد كبير أو عمودين مثل شي إن) -->
-      <button onclick="toggleMobileGrid()" id="gridToggleBtn" class="sm:hidden flex-shrink-0 bg-black/80 text-yellow-400 border border-yellow-500/40 px-2.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1" title="تغيير حجم العرض">
-        <span id="gridToggleIcon">⊞</span>
-        <span id="gridToggleText" class="text-[10px]">شبكي</span>
-      </button>
+      <!-- زر تبديل العرض (شبكة / قائمة) يعمل على الكمبيوتر والهاتف -->
+      <div class="flex items-center gap-1 flex-shrink-0">
+        <button onclick="setLayoutMode('GRID')" id="btnGridMode" class="gold-gradient-bg text-black font-extrabold px-3 py-2 rounded-xl text-xs flex items-center gap-1 shadow transition" title="عرض شبكة">
+          <span>⊞</span>
+          <span class="hidden sm:inline">شبكة</span>
+        </button>
+        <button onclick="setLayoutMode('LIST')" id="btnListMode" class="bg-neutral-900 text-gray-300 border border-yellow-500/30 hover:bg-neutral-800 font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 transition" title="عرض قائمة">
+          <span>☰</span>
+          <span class="hidden sm:inline">قائمة</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- صف فلاتر الأقسام -->
+    <div class="glass-panel rounded-2xl p-2 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar" id="categoryTabs">
+      <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-4 py-1.5 rounded-xl text-xs shadow">الكل</button>
+      <button onclick="filterCategory('نسواني')" data-cat="نسواني" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-1.5 rounded-xl text-xs transition">👗 نسواني</button>
+      <button onclick="filterCategory('رجالي')" data-cat="رجالي" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-1.5 rounded-xl text-xs transition">👔 رجالي</button>
+      <button onclick="filterCategory('ولادي')" data-cat="ولادي" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-1.5 rounded-xl text-xs transition">🧒 ولادي</button>
+      <button onclick="filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-1.5 rounded-xl text-xs transition">👶 ب.ب</button>
+      <button onclick="filterCategory('TREND')" data-cat="TREND" class="cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-yellow-400 border border-yellow-500/40 font-extrabold px-3.5 py-1.5 rounded-xl text-xs transition">🔥 الترند الأسبوعي</button>
     </div>
   </section>
 
-  <!-- شبكة الموديلات -->
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 flex-1 w-full">
-    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"></div>
+  <!-- شبكة / قائمة الموديلات -->
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-5 flex-1 w-full">
+    <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"></div>
   </main>
 
-  <!-- شريط سفلي عائم للهاتف فقط (Mobile Quick Navigation Bar) لسهولة الاستخدام بيد واحدة -->
+  <!-- شريط سفلي عائم للهاتف -->
   <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 glass-panel border-t border-yellow-500/30 px-2 py-1.5 flex justify-around items-center text-[10px] font-bold shadow-2xl">
     <button onclick="filterCategory('ALL'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-yellow-400 px-2 py-1">
       <span class="text-base">🏠</span>
       <span>الرئيسية</span>
     </button>
-    <button onclick="filterCategory('TREND'); document.getElementById('categoryTabs').scrollIntoView({behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-gray-300 hover:text-yellow-400 px-2 py-1">
-      <span class="text-base">🔥</span>
-      <span>الترند</span>
+    <button onclick="document.getElementById('searchInput').focus(); window.scrollTo({top:220, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-gray-300 hover:text-yellow-400 px-2 py-1">
+      <span class="text-base">🔍</span>
+      <span>بحث</span>
     </button>
     <button onclick="openCart()" class="flex flex-col items-center gap-0.5 bg-gradient-to-r from-yellow-400 to-amber-600 text-black font-black px-3.5 py-1.5 rounded-xl -mt-3 shadow-lg border border-yellow-200">
       <span class="text-sm">🛒 السلة (<span id="mobileCartCount">0</span>)</span>
     </button>
     <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 text-gray-300 hover:text-yellow-400 px-2 py-1">
       <span class="text-base">🌐</span>
-      <span>منصاتنا</span>
+      <span>من نحن</span>
     </button>
     <a href="https://wa.me/963996311804" target="_blank" class="flex flex-col items-center gap-0.5 text-emerald-400 px-2 py-1">
       <span class="text-base">💬</span>
@@ -277,18 +319,18 @@
         <button onclick="closeCloudSetupModal()" class="text-gray-400 hover:text-white text-lg px-2">✕</button>
       </div>
       <p class="text-gray-300 leading-relaxed">
-        أدخل مفتاح الربط (Token) الخاص بـ GitHub لحفظ الموديلات والتعليقات والإعجابات لجميع الزبائن:
+        أدخل مفتاح الربط (Token) الخاص بـ GitHub لرفع الموديلات والأسعار الجديدة لجميع الزبائن:
       </p>
       <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2.5 text-white text-xs focus:border-yellow-500 focus:outline-none" placeholder="ghp_..." />
       <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-3 rounded-xl shadow">حفظ وتفعيل ✅</button>
     </div>
   </div>
 
-  <!-- نافذة "من نحن" المحدثة بجميع روابط التواصل الرسمية -->
+  <!-- نافذة "من نحن" مع أيقونات التطبيقات فقط واسمها بالإنجليزية -->
   <div id="aboutModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[90vh] p-5 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3 flex-shrink-0">
-        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">✨ من نحن ومنصاتنا الرسمية - Fashion World</h3>
+        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">✨ من نحن - Fashion World</h3>
         <button onclick="closeAboutModal()" class="bg-neutral-800 hover:bg-neutral-700 text-gray-300 w-8 h-8 rounded-full flex items-center justify-center text-sm">✕</button>
       </div>
       <div class="overflow-y-auto flex-1 space-y-3 text-xs sm:text-sm text-gray-200 leading-relaxed pl-1">
@@ -301,44 +343,68 @@
           <div class="bg-black/60 p-3 rounded-xl border border-yellow-500/25">💎 لكل مهتم الرجاء مراسلتنا عبر منصاتنا الرسمية والرد فوري.</div>
         </div>
 
-        <!-- روابط منصات التواصل الاجتماعي الرسمية -->
-        <div class="pt-3 border-t border-gray-800 space-y-2.5 text-xs">
-          <p class="text-yellow-300 font-extrabold text-center mb-1">🌐 تواصل معنا وتابعنا عبر منصاتنا الرسمية:</p>
-          
-          <a href="https://wa.me/963996311804" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 px-4 rounded-xl text-center shadow-lg transition">
-            <span>💬 واتساب مباشر: 0996311804</span>
-          </a>
+        <!-- أيقونات التطبيقات فقط مع اسمها بالإنجليزية -->
+        <div class="pt-4 border-t border-gray-800">
+          <p class="text-yellow-300 font-extrabold text-center text-xs mb-4">Follow & Contact Us</p>
+          <div class="grid grid-cols-4 gap-3 text-center" dir="ltr">
+            
+            <!-- Facebook App Icon -->
+            <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="app-icon-link flex flex-col items-center gap-2 group">
+              <div class="app-icon-box bg-[#1877F2]">
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                </svg>
+              </div>
+              <span class="text-[11px] font-bold text-gray-200 group-hover:text-yellow-400 tracking-wide">Facebook</span>
+            </a>
 
-          <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3 px-4 rounded-xl text-center shadow-lg transition">
-            <span>💙 صفحتنا الرسمية على فيسبوك (Facebook)</span>
-          </a>
+            <!-- WhatsApp App Icon -->
+            <a href="https://wa.me/963996311804" target="_blank" class="app-icon-link flex flex-col items-center gap-2 group">
+              <div class="app-icon-box bg-[#25D366]">
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zM12 2C6.486 2 2 6.486 2 12c0 1.828.496 3.539 1.352 5.012L2 22l5.132-1.341C8.556 21.498 10.221 22 12 22c5.514 0 10-4.486 10-10S17.514 2 12 2z"/>
+                </svg>
+              </div>
+              <span class="text-[11px] font-bold text-gray-200 group-hover:text-yellow-400 tracking-wide">WhatsApp</span>
+            </a>
 
-          <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-extrabold py-3 px-4 rounded-xl text-center shadow-lg transition">
-            <span>✈️ قناتنا الرسمية على تلجرام (Telegram)</span>
-          </a>
+            <!-- Telegram App Icon -->
+            <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="app-icon-link flex flex-col items-center gap-2 group">
+              <div class="app-icon-box bg-[#229ED9]">
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+              </div>
+              <span class="text-[11px] font-bold text-gray-200 group-hover:text-yellow-400 tracking-wide">Telegram</span>
+            </a>
 
-          <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 via-purple-600 to-amber-500 hover:opacity-90 text-white font-extrabold py-3 px-4 rounded-xl text-center shadow-lg transition">
-            <span>📸 حسابنا الرسمي على انستغرام (Instagram)</span>
-          </a>
+            <!-- Instagram App Icon -->
+            <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="app-icon-link flex flex-col items-center gap-2 group">
+              <div class="app-icon-box bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </div>
+              <span class="text-[11px] font-bold text-gray-200 group-hover:text-yellow-400 tracking-wide">Instagram</span>
+            </a>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل (تصميم متجاوب: عمودان عريضان على الكمبيوتر + بطاقة سفلية مريحة على الهاتف) -->
+  <!-- نافذة تفاصيل الموديل -->
   <div id="productModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[92vh] p-4 sm:p-6 flex flex-col shadow-2xl overflow-hidden">
       
-      <!-- هيدر النافذة -->
       <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3 flex-shrink-0">
         <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-sm sm:text-base truncate pl-2">تفاصيل الموديل</h3>
         <button onclick="closeProductModal()" class="bg-neutral-800 hover:bg-neutral-700 text-gray-300 w-8 h-8 rounded-full flex items-center justify-center text-sm">✕</button>
       </div>
 
-      <!-- محتوى الموديل (ينقسم لعمودين على الكمبيوتر وعمود واحد انسيابي على الهاتف) -->
       <div class="overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pl-1">
         
-        <!-- العمود الأيمن: معرض الصور + زر المشاركة -->
         <div class="space-y-2.5 flex flex-col">
           <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-black border border-gray-800 shadow-inner">
             <img id="modalMainImg" src="" class="w-full h-full object-cover" />
@@ -353,7 +419,6 @@
           </button>
         </div>
 
-        <!-- العمود الأيسر: التفاصيل، التقييم، الكمية، والتعليقات -->
         <div class="space-y-3 flex flex-col justify-between text-xs">
           <div class="space-y-2.5 bg-black/60 p-3.5 rounded-2xl border border-gray-800">
             <div class="flex justify-between items-center">
@@ -370,7 +435,7 @@
 
             <div id="modalPriceContainer" class="pt-2 border-t border-gray-800 flex items-center justify-between"></div>
 
-            <!-- حاسبة تحديد كمية القطع -->
+            <!-- تحديد كمية القطع -->
             <div class="pt-2.5 border-t border-gray-800 space-y-2 bg-neutral-950/90 p-3 rounded-xl border border-yellow-500/25">
               <div class="flex justify-between items-center">
                 <span class="text-yellow-300 font-bold">حدد الكمية المطلوبة:</span>
@@ -390,9 +455,9 @@
             </div>
           </div>
 
-          <!-- قسم التعليقات الثابتة -->
+          <!-- قسم التعليقات المباشرة لجميع الزبائن -->
           <div class="bg-black/70 p-3.5 rounded-2xl border border-gray-800 space-y-2 text-xs">
-            <p class="font-bold text-yellow-400">💬 تعليقات وآراء التجار:</p>
+            <p class="font-bold text-yellow-400">💬 تعليقات وآراء التجار (تظهر للجميع):</p>
             <div id="commentsList" class="space-y-1.5 max-h-32 overflow-y-auto pr-1"></div>
             <div class="flex gap-1.5 pt-1">
               <input id="commentAuthor" class="w-1/3 bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white text-[11px] focus:border-yellow-500 focus:outline-none" placeholder="اسمك / المحل..." />
@@ -403,7 +468,6 @@
         </div>
       </div>
 
-      <!-- شريط الأزرار السفلي الثابت داخل النافذة -->
       <div class="flex gap-2.5 pt-3 border-t border-gray-800 mt-3 flex-shrink-0">
         <button onclick="addCustomQtyToCart()" class="flex-1 gold-gradient-bg text-black font-black py-3 rounded-xl text-xs sm:text-sm shadow-lg">🛒 أضف الكمية إلى سلة الجملة</button>
         <button onclick="closeProductModal()" class="bg-neutral-800 hover:bg-neutral-700 text-white px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition">إغلاق</button>
@@ -514,13 +578,7 @@
   <footer class="bg-black/90 border-t border-yellow-500/25 py-8 px-4 text-center text-xs text-gray-400 mt-8">
     <p class="font-cinzel text-lg font-black gold-gradient-text mb-1">FASHION WORLD</p>
     <p class="mb-1">📍 سوريا - دمشق - الحريقة | تجارة الألبسة بالجملة</p>
-    <p class="text-yellow-400 font-bold mb-3">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
-    <div class="flex flex-wrap justify-center gap-3 text-xs text-gray-300">
-      <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="bg-neutral-900 hover:bg-neutral-800 border border-gray-800 px-3 py-1.5 rounded-xl transition">💙 فيسبوك</a>
-      <a href="https://wa.me/963996311804" target="_blank" class="bg-neutral-900 hover:bg-neutral-800 border border-gray-800 px-3 py-1.5 rounded-xl transition">💬 واتساب</a>
-      <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="bg-neutral-900 hover:bg-neutral-800 border border-gray-800 px-3 py-1.5 rounded-xl transition">✈️ تلجرام</a>
-      <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="bg-neutral-900 hover:bg-neutral-800 border border-gray-800 px-3 py-1.5 rounded-xl transition">📸 انستغرام</a>
-    </div>
+    <p class="text-yellow-400 font-bold">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
   </footer>
 
   <!-- البيانات الافتراضية -->
@@ -540,11 +598,15 @@
     const GITHUB_REPO = 'najdt656/fashion-world';
     const DATA_FILE_PATH = 'store-data.json';
 
+    // سحابة عامة مجانية مخصصة لمزامنة التفاعلات (المشاهدات، الإعجابات، النجوم، التعليقات) لكل الزبائن فوراً
+    const PUBLIC_SOCIAL_API = 'https://kvdb.io/A6p7W8zPqR9xYv2LmN4kJc/fw_public_social_v1';
+
     const LS_STATE_KEY = 'fw_permanent_state_master';
     const LS_TOKEN_KEY = 'fw_gh_token_master';
     const LS_LIKED_KEY = 'fw_user_liked_master';
     const LS_VIEWED_KEY = 'fw_user_viewed_master';
     const LS_RATED_KEY = 'fw_user_rated_master';
+    const LS_SOCIAL_CACHE = 'fw_social_cache_master';
 
     function migrateLegacyStorage() {
       if (!localStorage.getItem(LS_TOKEN_KEY)) {
@@ -567,10 +629,12 @@
     let likedProducts = {};
     let viewedProducts = {};
     let userRatings = {};
+    let socialDataMap = {};
     try {
       likedProducts = JSON.parse(localStorage.getItem(LS_LIKED_KEY) || '{}');
       viewedProducts = JSON.parse(localStorage.getItem(LS_VIEWED_KEY) || '{}');
       userRatings = JSON.parse(localStorage.getItem(LS_RATED_KEY) || '{}');
+      socialDataMap = JSON.parse(localStorage.getItem(LS_SOCIAL_CACHE) || '{}');
     } catch (e) {}
 
     let localUpdatedAt = window.INITIAL_STORE_STATE.updatedAt || 0;
@@ -579,8 +643,9 @@
     let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
     let currencyMode = 'BOTH';
     let currentCategory = 'ALL';
+    let searchQuery = '';
+    let layoutMode = 'GRID'; // 'GRID' أو 'LIST'
     let isAdmin = localStorage.getItem('fw_admin_logged_master') === '1';
-    let mobileTwoCols = false; // وضع العرض على الهاتف (عمود أو عمودين)
     let cart = [];
     let secretClicks = 0;
     let currentModalProduct = null;
@@ -602,22 +667,135 @@
       }, 3000);
     }
 
-    // تبديل طريقة العرض على الهاتف بين عمود واحد كبير أو عمودين (شبكي)
-    function toggleMobileGrid() {
-      mobileTwoCols = !mobileTwoCols;
-      const grid = document.getElementById('productsGrid');
-      const icon = document.getElementById('gridToggleIcon');
-      const text = document.getElementById('gridToggleText');
-      if (mobileTwoCols) {
-        grid.className = "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-6";
-        icon.innerText = "▭";
-        text.innerText = "كبير";
+    // فتح/إغلاق قائمة الإدارة المنسدلة
+    function toggleAdminMenu() {
+      const menu = document.getElementById('adminDropdownMenu');
+      const arrow = document.getElementById('adminArrow');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
       } else {
-        grid.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6";
-        icon.innerText = "⊞";
-        text.innerText = "شبكي";
+        menu.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // إغلاق قائمة الإدارة عند النقر خارجها
+    document.addEventListener('click', (e) => {
+      const wrapper = document.getElementById('adminDropdownWrapper');
+      const menu = document.getElementById('adminDropdownMenu');
+      const arrow = document.getElementById('adminArrow');
+      if (wrapper && !wrapper.contains(e.target) && menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+      }
+    });
+
+    // تبديل طريقة العرض (شبكة / قائمة) للكمبيوتر والهاتف
+    function setLayoutMode(mode) {
+      layoutMode = mode;
+      const grid = document.getElementById('productsGrid');
+      const btnGrid = document.getElementById('btnGridMode');
+      const btnList = document.getElementById('btnListMode');
+
+      if (mode === 'LIST') {
+        grid.className = "grid grid-cols-1 lg:grid-cols-2 gap-3.5 sm:gap-5";
+        btnList.className = "gold-gradient-bg text-black font-extrabold px-3 py-2 rounded-xl text-xs flex items-center gap-1 shadow transition";
+        btnGrid.className = "bg-neutral-900 text-gray-300 border border-yellow-500/30 hover:bg-neutral-800 font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 transition";
+      } else {
+        grid.className = "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6";
+        btnGrid.className = "gold-gradient-bg text-black font-extrabold px-3 py-2 rounded-xl text-xs flex items-center gap-1 shadow transition";
+        btnList.className = "bg-neutral-900 text-gray-300 border border-yellow-500/30 hover:bg-neutral-800 font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 transition";
       }
       renderProducts();
+    }
+
+    // البحث الفوري
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (searchQuery.length > 0) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+      renderProducts();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      handleSearch('');
+    }
+
+    // مزامنة التفاعلات الحية لجميع الزبائن
+    function applySocialMapToProducts() {
+      products.forEach(p => {
+        const s = socialDataMap[p.id];
+        if (!s) return;
+        p.views = Math.max(Number(p.views) || 0, Number(s.views) || 0);
+        p.likes = typeof s.likes === 'number' ? Math.max(0, s.likes) : (Number(p.likes) || 0);
+        if (s.ratingCount) {
+          p.ratingCount = Number(s.ratingCount);
+          p.ratingSum = Number(s.ratingSum);
+        }
+        if (Array.isArray(s.comments)) {
+          p.comments = s.comments;
+        }
+      });
+    }
+
+    function updateSocialEntryFromProduct(p) {
+      socialDataMap[p.id] = {
+        views: Number(p.views) || 0,
+        likes: Number(p.likes) || 0,
+        ratingSum: Number(p.ratingSum) || 20,
+        ratingCount: Number(p.ratingCount) || 4,
+        comments: Array.isArray(p.comments) ? p.comments : [],
+        updatedAt: Date.now()
+      };
+      try {
+        localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
+      } catch (e) {}
+    }
+
+    async function fetchPublicSocialState() {
+      try {
+        const res = await fetch(`${PUBLIC_SOCIAL_API}?t=${Date.now()}`, { cache: 'no-store' });
+        if (res.ok) {
+          const remoteMap = await res.json();
+          if (remoteMap && typeof remoteMap === 'object') {
+            Object.keys(remoteMap).forEach(id => {
+              const r = remoteMap[id];
+              const l = socialDataMap[id];
+              if (!l || (r.updatedAt || 0) >= (l.updatedAt || 0)) {
+                socialDataMap[id] = r;
+              } else {
+                socialDataMap[id].views = Math.max(l.views || 0, r.views || 0);
+              }
+            });
+            try { localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap)); } catch (e) {}
+            applySocialMapToProducts();
+            renderProducts();
+            if (currentModalProduct) {
+              const updatedProd = products.find(item => item.id === currentModalProduct.id);
+              if (updatedProd) {
+                document.getElementById('modalViews').innerText = `👁️ ${updatedProd.views || 1} مشاهدة | ❤️ ${updatedProd.likes || 0} إعجاب`;
+                renderModalStars(updatedProd);
+                renderComments(updatedProd);
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    async function pushPublicSocialState(p) {
+      if (p) updateSocialEntryFromProduct(p);
+      try {
+        await fetch(PUBLIC_SOCIAL_API, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(socialDataMap)
+        });
+      } catch (e) {}
     }
 
     function compressImageFile(file, maxWidth = 480, quality = 0.52) {
@@ -709,9 +887,15 @@
         }
       } catch (e) {}
 
+      applySocialMapToProducts();
       applyBanner();
       renderProducts();
 
+      if (isAdmin) {
+        document.getElementById('adminDropdownWrapper').classList.remove('hidden');
+      }
+
+      // جلب بيانات الموديلات من GitHub
       try {
         const res = await fetch(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
@@ -732,6 +916,7 @@
               localUpdatedAt = cloudTime;
             }
 
+            applySocialMapToProducts();
             await saveAllState(false);
             applyBanner();
             renderProducts();
@@ -739,13 +924,17 @@
         }
       } catch (e) {}
 
-      if (isAdmin) {
-        document.getElementById('adminBar').classList.remove('hidden');
-      }
+      // جلب التفاعلات المشتركة لجميع الزبائن وتحديثها دورياً
+      await fetchPublicSocialState();
+      setInterval(fetchPublicSocialState, 12000);
     }
 
-    async function saveAllState(autoCloudSync = true) {
+    async function saveAllState(autoCloudSync = true, changedProduct = null) {
       localUpdatedAt = Date.now();
+      if (changedProduct) {
+        pushPublicSocialState(changedProduct);
+      }
+
       const payload = {
         updatedAt: localUpdatedAt,
         exchangeRate,
@@ -790,7 +979,10 @@
     }
 
     async function exportSiteCode() {
+      products.forEach(p => updateSocialEntryFromProduct(p));
+      await pushPublicSocialState(null);
       await saveAllState(false);
+
       const ghToken = localStorage.getItem(LS_TOKEN_KEY);
       if (!ghToken) {
         openCloudSetupModal();
@@ -836,7 +1028,7 @@
         if (putRes.ok) {
           showToast("🟢 تم حفظ وتحديث الموقع لكل الزبائن بنجاح! ✨");
         } else {
-          showToast("⚠️ تم الحفظ محلياً، يرجى التأكد من صلاحية التوكن", "error");
+          showToast("⚠️ تم حفظ التفاعلات، تأكد من صلاحية التوكن لرفع الصور", "error");
         }
       } catch (err) {
         showToast("⚠️ تم الحفظ محلياً في جهازك", "error");
@@ -889,9 +1081,9 @@
 
       document.querySelectorAll('.cat-btn').forEach(btn => {
         if (btn.getAttribute('data-cat') === currentCategory) {
-          btn.className = "cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-4 py-2 rounded-xl text-xs shadow";
+          btn.className = "cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-4 py-1.5 rounded-xl text-xs shadow";
         } else {
-          btn.className = "cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-2 rounded-xl text-xs transition";
+          btn.className = "cat-btn flex-shrink-0 bg-neutral-900/90 hover:bg-neutral-800 text-gray-200 border border-yellow-500/25 font-bold px-3.5 py-1.5 rounded-xl text-xs transition";
         }
       });
 
@@ -907,12 +1099,18 @@
         list = products.filter(p => p.category === currentCategory);
       }
 
-      if (list.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-14 text-gray-400 text-sm glass-panel rounded-2xl">لا توجد موديلات في هذا القسم حالياً.</div>`;
-        return;
+      if (searchQuery) {
+        list = list.filter(p =>
+          (p.name && p.name.toLowerCase().includes(searchQuery)) ||
+          (p.category && p.category.toLowerCase().includes(searchQuery)) ||
+          (p.pack && p.pack.toLowerCase().includes(searchQuery))
+        );
       }
 
-      const imgHeightClass = mobileTwoCols ? "h-44 sm:h-64" : "h-64 sm:h-68";
+      if (list.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-14 text-gray-400 text-sm glass-panel rounded-2xl">لا توجد موديلات مطابقة للبحث حالياً.</div>`;
+        return;
+      }
 
       grid.innerHTML = list.map(p => {
         const isLiked = !!likedProducts[p.id];
@@ -922,9 +1120,49 @@
           : '5.0';
         const commentsCount = (p.comments && p.comments.length) ? p.comments.length : 0;
 
+        // تصميم وضع القائمة (List View) للهاتف والكمبيوتر
+        if (layoutMode === 'LIST') {
+          return `
+          <div class="card-luxury rounded-2xl overflow-hidden flex flex-row items-stretch">
+            <div class="relative w-36 sm:w-48 flex-shrink-0 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
+              <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
+              <div class="watermark-logo">
+                <span class="text-[8px] font-cinzel font-bold gold-gradient-text">FW</span>
+              </div>
+              <span class="absolute top-2 right-2 gold-gradient-bg text-black font-extrabold text-[10px] px-2 py-0.5 rounded-full shadow">${p.category}</span>
+            </div>
+            <div class="p-3.5 flex-1 flex flex-col justify-between space-y-2">
+              <div>
+                <h3 class="font-extrabold text-white text-xs sm:text-sm mb-1 cursor-pointer hover:text-yellow-400" onclick="openProductModal(${p.id})">${p.name}</h3>
+                <p class="text-[11px] text-gray-400">📐 ${p.pack} | 📦 الحد الأدنى: ${minQty} قطع</p>
+                <div class="flex items-center gap-3 mt-1.5 text-[10px] text-gray-300 font-bold">
+                  <span>👁️ ${p.views || 0} مشاهدة</span>
+                  <span class="text-yellow-400">⭐ ${avgRating} (${commentsCount} تعليق)</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between border-t border-gray-800/80 pt-2">
+                ${formatPrice(p.priceUsd)}
+                <div class="flex items-center gap-1.5">
+                  <button onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300 border border-gray-700'} text-xs px-2.5 py-1.5 rounded-xl font-bold">
+                    ${isLiked ? '❤️' : '🤍'} ${p.likes || 0}
+                  </button>
+                  <button onclick="openProductModal(${p.id})" class="gold-gradient-bg text-black font-extrabold px-3.5 py-1.5 rounded-xl text-xs shadow">
+                    🛒 اطلب
+                  </button>
+                  ${isAdmin ? `
+                    <button onclick="editProduct(${p.id})" class="bg-blue-600 text-white px-2 py-1.5 rounded-xl text-xs font-bold">✏️</button>
+                    <button onclick="deleteProduct(${p.id})" class="bg-red-600 text-white px-2 py-1.5 rounded-xl text-xs font-bold">🗑️</button>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }
+
+        // تصميم وضع الشبكة (Grid View)
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
-          <div class="relative ${imgHeightClass} overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
+          <div class="relative h-48 sm:h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openProductModal(${p.id})">
             <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
             
             <div class="watermark-logo">
@@ -976,7 +1214,7 @@
         p.views = (Number(p.views) || 0) + 1;
         viewedProducts[id] = true;
         try { localStorage.setItem(LS_VIEWED_KEY, JSON.stringify(viewedProducts)); } catch (e) {}
-        await saveAllState();
+        await saveAllState(true, p);
         renderProducts();
       }
 
@@ -1059,8 +1297,8 @@
 
       renderModalStars(p);
       renderProducts();
-      await saveAllState();
-      showToast(`شكراً لتقييمك! تم حفظ تقييمك (${cleanStars} من 5 نجوم) بنجاح ⭐🙏`);
+      await saveAllState(true, p);
+      showToast(`شكراً لتقييمك! تم حفظ تقييمك (${cleanStars} من 5 نجوم) وظهر للجميع ⭐🙏`);
     }
 
     function renderComments(p) {
@@ -1076,7 +1314,7 @@
             <span class="text-yellow-400 font-bold">${c.author}:</span>
             <span class="text-gray-200 mr-1">${c.text}</span>
           </div>
-          <button onclick="deleteComment(${p.id}, ${c.id})" class="text-red-400 hover:text-red-300 text-xs font-bold px-1.5 py-0.5" title="حذف التعليق">🗑️</button>
+          ${isAdmin ? `<button onclick="deleteComment(${p.id},${c.id})" class="text-red-400 hover:text-red-300 text-xs font-bold px-1.5 py-0.5" title="حذف التعليق">🗑️</button>` : ''}
         </div>
       `).join('');
     }
@@ -1104,8 +1342,8 @@
       textInput.value = "";
       renderComments(currentModalProduct);
       renderProducts();
-      await saveAllState();
-      showToast("شكراً لمشاركتنا رأيك! تم نشر وحفظ تعليقك بنجاح 💬🌷");
+      await saveAllState(true, currentModalProduct);
+      showToast("شكراً لمشاركتنا رأيك! تم نشر تعليقك لجميع الزبائن بنجاح 💬🌷");
     }
 
     async function deleteComment(productId, commentId) {
@@ -1115,7 +1353,7 @@
       p.comments = p.comments.filter(c => c.id !== commentId);
       renderComments(p);
       renderProducts();
-      await saveAllState();
+      await saveAllState(true, p);
       showToast("تم حذف التعليق وحفظ التعديل بنجاح", "error");
     }
 
@@ -1193,7 +1431,7 @@
       }
 
       try { localStorage.setItem(LS_LIKED_KEY, JSON.stringify(likedProducts)); } catch (e) {}
-      await saveAllState();
+      await saveAllState(true, item);
       if (currentModalProduct && currentModalProduct.id === id) {
         document.getElementById('modalViews').innerText = `👁️ ${item.views || 1} مشاهدة | ❤️ ${item.likes || 0} إعجاب`;
       }
@@ -1219,9 +1457,9 @@
           if (pass && pass.trim() === "Dane7422") {
             isAdmin = true;
             localStorage.setItem('fw_admin_logged_master', '1');
-            document.getElementById('adminBar').classList.remove('hidden');
+            document.getElementById('adminDropdownWrapper').classList.remove('hidden');
             renderProducts();
-            showToast("مرحباً بك يا نجدت! تم تفعيل وضع الإدارة 👑");
+            showToast("مرحباً بك يا نجدت! تم تفعيل قائمة الإدارة 👑");
           } else if (pass !== null) {
             alert("كلمة المرور غير صحيحة!");
           }
@@ -1233,7 +1471,7 @@
     function logoutAdmin() {
       isAdmin = false;
       localStorage.removeItem('fw_admin_logged_master');
-      document.getElementById('adminBar').classList.add('hidden');
+      document.getElementById('adminDropdownWrapper').classList.add('hidden');
       renderProducts();
     }
 
@@ -1244,7 +1482,7 @@
         if (clean > 0) {
           exchangeRate = clean;
           renderProducts();
-          await saveAllState();
+          await saveAllState(true);
           showToast("تم تحديث سعر الصرف وحفظه بنجاح ✨");
         }
       }
@@ -1272,7 +1510,7 @@
           bannerImg = compressed;
           applyBanner();
           closeBannerModal();
-          await saveAllState();
+          await saveAllState(true);
           showToast("تم تحديث وحفظ صورة الغلاف بنجاح ✨");
         }
       } else {
@@ -1362,6 +1600,7 @@
           }
         }
 
+        let targetProd = null;
         if (editId !== -1) {
           const idx = products.findIndex(p => p.id === editId);
           if (idx !== -1) {
@@ -1373,9 +1612,10 @@
             products[idx].hasDiscount = hasDiscount;
             if (mainImgData) products[idx].img = mainImgData;
             if (extrasData.length > 0) products[idx].extras = extrasData;
+            targetProd = products[idx];
           }
         } else {
-          products.unshift({
+          targetProd = {
             id: Date.now(),
             name,
             category,
@@ -1390,13 +1630,14 @@
             hasDiscount,
             img: mainImgData || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",
             extras: extrasData
-          });
+          };
+          products.unshift(targetProd);
         }
 
         currentCategory = 'ALL';
         closeAddModal();
         renderProducts();
-        await saveAllState();
+        await saveAllState(true, targetProd);
         showToast("تم نشر الموديل وحفظه بنجاح! ✅");
       } catch (err) {
         alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
@@ -1409,8 +1650,10 @@
     async function deleteProduct(id) {
       if (confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")) {
         products = products.filter(p => p.id !== id);
+        delete socialDataMap[id];
+        try { localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap)); } catch(e) {}
         renderProducts();
-        await saveAllState();
+        await saveAllState(true);
         showToast("تم حذف الموديل بنجاح", "error");
       }
     }
