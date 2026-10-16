@@ -59,7 +59,8 @@
     body.light-mode .text-gray-300,
     body.light-mode .text-gray-400 { color: #334155 !important; }
     body.light-mode input,
-    body.light-mode select {
+    body.light-mode select,
+    body.light-mode textarea {
       background-color: #ffffff !important;
       color: #0f172a !important;
       border-color: rgba(212, 175, 55, 0.5) !important;
@@ -137,7 +138,7 @@
       animation: discountPulse 1.4s infinite ease-in-out;
     }
 
-    /* وميض زر الربح الهرمي الجذاب للمسوقين */
+    /* وميض زر الربح الجذاب */
     @keyframes emeraldPulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
       50% { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
@@ -200,7 +201,7 @@
       </div>
       <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
         <button onclick="playUiSound('tap'); openAffiliateModal()" class="affiliate-glow text-emerald-300 font-extrabold bg-gradient-to-r from-emerald-600/30 to-teal-600/30 hover:from-emerald-500/40 hover:to-teal-500/40 px-2.5 py-0.5 rounded-lg border border-emerald-400/60 transition text-[10px] sm:text-[11px] shadow-sm">
-          💎 الربح الهرمي للمسوقين
+          💡 كيف يمكنك الربح من موقعنا
         </button>
         <button onclick="playUiSound('tap'); openAboutModal()" class="text-yellow-300 font-extrabold bg-gradient-to-r from-yellow-500/20 to-amber-500/20 hover:from-yellow-500/30 hover:to-amber-500/30 px-2 py-0.5 rounded-lg border border-yellow-400/50 transition text-[10px] sm:text-[11px] shadow-sm">
           ℹ️ من نحن
@@ -237,7 +238,7 @@
       <!-- أزرار الهيدر البراقة -->
       <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
         
-        <!-- زر التاج (يظهر فقط للأدمن ويفتح الشريط المدمج تحت الهيدر بدون أي قص) -->
+        <!-- زر التاج (يظهر فقط للأدمن) -->
         <div id="adminDropdownWrapper" class="hidden">
           <button onclick="playUiSound('tap'); toggleAdminMenu()" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-black font-black px-2.5 sm:px-3 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1 shadow-md border border-yellow-200 active:scale-95 transition">
             <span>👑</span>
@@ -296,7 +297,7 @@
     </div>
   </header>
 
-  <!-- بانر الغلاف الفخم (تم تصحيح العبارة إلى جملة الجملة + زر جذب المسوقين) -->
+  <!-- بانر الغلاف الفخم -->
   <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-3 w-full">
     <div id="bannerSection" class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-yellow-500/40 bg-cover bg-center py-7 sm:py-12 px-3 sm:px-8 shadow-2xl">
       <div class="max-w-2xl mx-auto text-center relative z-10 space-y-2.5">
@@ -307,14 +308,14 @@
           أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة الجملة 🔥</span>
         </h2>
         <p class="text-gray-200 text-[11px] sm:text-sm max-w-lg mx-auto leading-relaxed font-medium">
-          تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، حدد الكمية المطلوبة، أو انضم لفريق المسوقين واربح عمولات هرمية متصاعدة!
+          تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، اختر الموديل، حدد الكمية المطلوبة، واطلبها مباشرة من المعمل في دمشق.
         </p>
         <div class="flex flex-wrap justify-center items-center gap-2 pt-1 text-[11px] sm:text-xs">
           <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-4 py-2 rounded-xl shadow-lg flex items-center gap-1.5">
             <span>💬 تواصل واتساب: 0996311804</span>
           </a>
           <button onclick="playUiSound('tap'); openAffiliateModal()" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-black px-3.5 py-2 rounded-xl shadow-lg border border-emerald-300/50 flex items-center gap-1 transition">
-            <span>💎 نظام الربح الهرمي للمسوقين</span>
+            <span>💡 كيف يمكنك الربح من موقعنا</span>
           </button>
           <div class="lg:hidden bg-black/85 border border-yellow-400/40 px-3 py-2 rounded-xl text-gray-100 font-bold shadow">
             💱 الصرف: <strong id="heroRate" class="text-emerald-400">15,000</strong> ل.س
@@ -356,13 +357,13 @@
     <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5"></div>
   </main>
 
-  <!-- 💎 نافذة نظام الربح الهرمي للمسوقين الاحترافية الجديدة -->
+  <!-- 💡 نافذة "كيف يمكنك الربح من موقعنا" بتسعيرة 5$ لكل 150$ وكود سري للمسوق -->
   <div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden border border-yellow-500/50">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3 flex-shrink-0">
         <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base flex items-center gap-1.5">
-          <span>💎</span>
-          <span>نظام الشركاء والربح الهرمي - Fashion World</span>
+          <span>💡</span>
+          <span>كيف يمكنك الربح من موقعنا - Fashion World</span>
         </h3>
         <button onclick="closeAffiliateModal()" class="bg-neutral-800 hover:bg-neutral-700 text-gray-300 w-7 h-7 rounded-full flex items-center justify-center text-xs">✕</button>
       </div>
@@ -370,65 +371,66 @@
       <div class="overflow-y-auto flex-1 space-y-3.5 text-xs pl-1">
         <!-- لافتة تحفيزية -->
         <div class="bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-emerald-500/20 border border-yellow-500/40 rounded-2xl p-3 text-center space-y-1">
-          <p class="text-yellow-300 font-black text-xs sm:text-sm">🚀 ابدأ تجارتك من هاتفك بدون رأس مال وكون شبكتك الخاصة!</p>
-          <p class="text-gray-200 text-[11px] leading-relaxed">كل طلبية تأتي عن طريقك أو عن طريق المسوقين الذين دعوتهم تمنحك أرباحاً دولارية فورية ومستمرة.</p>
+          <p class="text-yellow-300 font-black text-xs sm:text-sm">🚀 اربح معنا بالدولار من هاتفك وبسرية تامة أمام زبائنك!</p>
+          <p class="text-gray-200 text-[11px] leading-relaxed">انشر رابطك الخاص للتجار والزبائن؛ لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك برمز توجيه سري خاص بك لدى الإدارة!</p>
         </div>
 
-        <!-- مستويات الهرم الثلاثة -->
+        <!-- مستويات الأرباح المحدثة (5$ لكل 150$ وأقل نسبياً) -->
         <div class="space-y-2">
-          <p class="font-extrabold text-yellow-400 text-xs">📐 مستويات العمولات والأرباح الهرمية:</p>
+          <p class="font-extrabold text-yellow-400 text-xs">📊 جدول الأرباح والمكافآت التراكمية:</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div class="glossy-box p-3 rounded-xl border border-emerald-500/40 text-center space-y-1">
-              <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-black">المستوى الأول (مباشر)</span>
-              <p class="text-xl font-black text-emerald-400">5%</p>
-              <p class="text-[10px] text-gray-300">عمولة فورية على كل فاتورة جملة يشتريها زبونك مباشرة.</p>
+              <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-black">مبيعاتك المباشرة</span>
+              <p class="text-base font-black text-emerald-400">5$ لكل 150$</p>
+              <p class="text-[10px] text-gray-300">تربح 5$ عن كل 150$ يشتريها زبونك (وتُحسب نسبياً لأي مبلغ أقل أو أكثر).</p>
             </div>
             <div class="glossy-box p-3 rounded-xl border border-yellow-500/40 text-center space-y-1">
-              <span class="bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full text-[10px] font-black">المستوى الثاني (فريقك)</span>
-              <p class="text-xl font-black text-yellow-400">3%</p>
-              <p class="text-[10px] text-gray-300">ربح تلقائي من جميع مبيعات المسوقين الذين سجلوا عبر كودك.</p>
+              <span class="bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full text-[10px] font-black">أرباح فريقك (الجيل 2)</span>
+              <p class="text-base font-black text-yellow-400">2.5$ لكل 150$</p>
+              <p class="text-[10px] text-gray-300">ربح تلقائي إضافي من مبيعات المسوقين الذين انضموا عبر رابطك.</p>
             </div>
             <div class="glossy-box p-3 rounded-xl border border-purple-500/40 text-center space-y-1">
-              <span class="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full text-[10px] font-black">المستوى الثالث + مكافآت</span>
-              <p class="text-xl font-black text-purple-400">2% + 🏆</p>
-              <p class="text-[10px] text-gray-300">من مبيعات الجيل الثالث + مكافأة مالية شهرية لأقوى مسوق.</p>
+              <span class="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full text-[10px] font-black">الجيل 3 + مكافأة</span>
+              <p class="text-base font-black text-purple-400">1$ لكل 150$ 🏆</p>
+              <p class="text-[10px] text-gray-300">من مبيعات الجيل الثالث + مكافأة شهرية خاصة لأكثر مسوق نشاطاً.</p>
             </div>
           </div>
         </div>
 
-        <!-- توليد كود المسوق ورابط الإحالة -->
+        <!-- توليد البصمة السرية للمسوق ورابط الإحالة -->
         <div class="glossy-box p-3 rounded-2xl space-y-2 border border-yellow-500/35">
-          <p class="font-extrabold text-yellow-400 text-[11px]">🔗 استخرج كود ورابط الإحالة الخاص بك مجاناً:</p>
+          <p class="font-extrabold text-yellow-400 text-[11px]">🔑 استخرج رمز البصمة السري ورابطك الخاص مجاناً:</p>
           <div class="flex gap-1.5">
-            <input id="marketerNameInput" type="text" class="flex-1 bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white text-xs focus:border-yellow-400 focus:outline-none" placeholder="اكتب اسمك أو لقبك (مثال: أحمد)..." />
-            <button onclick="generateMarketerProfile()" class="gold-gradient-bg text-black font-black px-3 py-2 rounded-xl text-xs">توليد كودي ✨</button>
+            <input id="marketerNameInput" type="text" class="flex-1 bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white text-xs focus:border-yellow-400 focus:outline-none" placeholder="اكتب اسمك أو لقبك لتوليد بصمتك..." />
+            <button onclick="generateMarketerProfile()" class="gold-gradient-bg text-black font-black px-3 py-2 rounded-xl text-xs">توليد بصمتي ✨</button>
           </div>
           <div class="bg-black/80 p-2.5 rounded-xl border border-gray-800 space-y-1.5">
             <div class="flex justify-between items-center text-[11px]">
-              <span class="text-gray-400">كود المسوق الخاص بك:</span>
-              <strong id="myAffiliateCode" class="text-yellow-400 font-mono text-xs select-all">FW-1000</strong>
+              <span class="text-gray-400">بصمة التوجيه السرية الخاصة بك:</span>
+              <strong id="myAffiliateCode" class="text-yellow-400 font-mono text-xs select-all tracking-wider">893K-X7</strong>
             </div>
             <div class="flex gap-1">
               <input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded-lg px-2 py-1.5 text-emerald-400 text-[10px] focus:outline-none" dir="ltr" />
               <button onclick="copyAffiliateLink()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] flex-shrink-0">نسخ الرابط 📋</button>
             </div>
+            <p class="text-[9px] text-gray-400">🔒 ملاحظة: عندما يطلب الزبون من خلال رابطك، يظهر في نهاية الفاتورة "رمز توجيه وتوثيق" يحتوي على أحرف بصمتك السرية دون أن يعلم الزبون بوجود عمولة!</p>
           </div>
         </div>
 
-        <!-- حاسبة الأرباح التفاعلية لتحفيز المسوقين -->
+        <!-- حاسبة الأرباح التفاعلية وفق معادلة (5$ لكل 150$) -->
         <div class="glossy-box p-3 rounded-2xl space-y-2 border border-emerald-500/30">
           <div class="flex justify-between items-center">
-            <span class="font-extrabold text-emerald-400 text-[11px]">🧮 حاسبة الأرباح الشهرية المتوقعة:</span>
-            <span id="calcProfitResult" class="text-sm font-black text-yellow-400">$225 / شهرياً</span>
+            <span class="font-extrabold text-emerald-400 text-[11px]">🧮 حاسبة أرباحك الشهرية المتوقعة:</span>
+            <span id="calcProfitResult" class="text-sm font-black text-yellow-400">$100 / شهرياً</span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-[10px]">
             <div>
-              <label class="text-gray-300 block mb-1">مبيعاتك المباشرة شهرياً ($):</label>
-              <input id="calcDirectSales" type="number" value="2500" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1 text-white font-bold" />
+              <label class="text-gray-300 block mb-1">مبيعات زبائنك شهرياً ($):</label>
+              <input id="calcDirectSales" type="number" step="50" value="1500" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1 text-white font-bold" />
             </div>
             <div>
               <label class="text-gray-300 block mb-1">عدد المسوقين في فريقك:</label>
-              <input id="calcTeamSize" type="number" value="5" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1 text-white font-bold" />
+              <input id="calcTeamSize" type="number" value="4" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1 text-white font-bold" />
             </div>
           </div>
         </div>
@@ -436,7 +438,7 @@
 
       <div class="flex gap-2 pt-3 border-t border-gray-800 mt-3 flex-shrink-0">
         <button onclick="registerMarketerWhatsApp()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-black font-black py-2.5 rounded-xl text-xs shadow-lg flex items-center justify-center gap-1">
-          <span>📲 اعتماد كودي رسمياً لدى الإدارة عبر واتساب</span>
+          <span>📲 تفعيل بصمتي السرية لدى الإدارة عبر واتساب</span>
         </button>
         <button onclick="closeAffiliateModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold">إغلاق</button>
       </div>
@@ -553,7 +555,7 @@
           </div>
           <div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div>
           <button onclick="playUiSound('tap'); shareProductWhatsApp()" class="w-full bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-extrabold py-2 rounded-xl text-[11px] shadow transition flex items-center justify-center gap-1">
-            <span>📲 مشاركة الموديل عبر واتساب (مع كود إحالتك التسويقي)</span>
+            <span>📲 مشاركة الموديل عبر واتساب</span>
           </button>
         </div>
 
@@ -705,21 +707,25 @@
     </div>
   </div>
 
-  <!-- نافذة سلة الشراء -->
+  <!-- 🛒 نافذة سلة الشراء المطورة (الاسم + العنوان + الرقم + ملاحظة + إخفاء المسوق عن الزبون) -->
   <div id="cartModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[88vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[92vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5 flex-shrink-0">
         <h3 class="font-extrabold text-yellow-400 text-sm">🛒 سلة طلبات الجملة</h3>
         <button onclick="closeCart()" class="bg-neutral-800 hover:bg-neutral-700 text-gray-300 w-7 h-7 rounded-full flex items-center justify-center text-xs">✕</button>
       </div>
-      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 text-xs pl-1"></div>
-      <div class="border-t border-gray-800 pt-3 mt-3 space-y-2">
-        <div class="flex justify-between font-extrabold text-xs">
-          <span>الإجمالي الكلي:</span>
+      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 text-xs pl-1 max-h-48"></div>
+      <div class="border-t border-gray-800 pt-3 mt-3 space-y-2 flex-shrink-0">
+        <div class="flex justify-between font-extrabold text-xs bg-black/60 p-2 rounded-xl border border-yellow-500/30">
+          <span>الإجمالي الكلي للفاتورة:</span>
           <span id="cartTotal" class="text-yellow-400">$0</span>
         </div>
-        <input id="buyerName" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:border-yellow-500 focus:outline-none" placeholder="اسم التاجر / المحل والمدينة..." />
-        <input id="cartReferralCode" class="w-full bg-black border border-emerald-500/40 rounded-xl px-3 py-1.5 text-[11px] text-emerald-300 focus:border-emerald-400 focus:outline-none" placeholder="كود المسوق / الإحالة (اختياري)..." />
+        <div class="space-y-1.5 text-xs">
+          <input id="buyerName" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white focus:border-yellow-500 focus:outline-none" placeholder="👤 اسم التاجر / اسم المحل..." />
+          <input id="buyerAddress" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white focus:border-yellow-500 focus:outline-none" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن..." />
+          <input id="buyerPhone" type="tel" dir="ltr" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-right text-white focus:border-yellow-500 focus:outline-none" placeholder="📞 رقم الهاتف / واتساب للتواصل..." />
+          <textarea id="buyerNotes" rows="2" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none resize-none" placeholder="📝 ملاحظة إضافية حول الطلبية أو الألوان (اختياري)..."></textarea>
+        </div>
         <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg transition">
           <span>📲 إرسال الطلبية عبر واتساب (0996311804)</span>
         </button>
@@ -823,8 +829,8 @@
     const LS_RATED_KEY = 'fw_user_rated_master';
     const LS_SOCIAL_CACHE = 'fw_social_cache_master';
     const LS_THEME_KEY = 'fw_theme_mode_master';
-    const LS_MARKETER_KEY = 'fw_marketer_profile_master';
-    const LS_REFERRED_BY_KEY = 'fw_referred_by_code';
+    const LS_MARKETER_KEY = 'fw_marketer_profile_v2';
+    const LS_REFERRED_BY_KEY = 'fw_referred_by_code_v2';
 
     // محرك الصوت التفاعلي المدمج
     let audioCtx = null;
@@ -888,11 +894,21 @@
     }
     migrateLegacyStorage();
 
+    // توليد بصمة سرية عشوائية أنيقة للمسوق (مثال: 893K-X7)
+    function createRandomStamp() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+      const nums = Math.floor(100 + Math.random() * 900);
+      const c1 = chars.charAt(Math.floor(Math.random() * chars.length));
+      const c2 = chars.charAt(Math.floor(Math.random() * chars.length));
+      const n2 = Math.floor(1 + Math.random() * 9);
+      return `${nums}${c1}-${c2}${n2}`;
+    }
+
     let likedProducts = {};
     let viewedProducts = {};
     let userRatings = {};
     let socialDataMap = {};
-    let marketerProfile = { name: '', code: 'FW-' + Math.floor(1000 + Math.random() * 9000) };
+    let marketerProfile = { name: '', code: createRandomStamp() };
 
     try {
       likedProducts = JSON.parse(localStorage.getItem(LS_LIKED_KEY) || '{}');
@@ -900,7 +916,11 @@
       userRatings = JSON.parse(localStorage.getItem(LS_RATED_KEY) || '{}');
       socialDataMap = JSON.parse(localStorage.getItem(LS_SOCIAL_CACHE) || '{}');
       const savedMarketer = JSON.parse(localStorage.getItem(LS_MARKETER_KEY) || 'null');
-      if (savedMarketer && savedMarketer.code) marketerProfile = savedMarketer;
+      if (savedMarketer && savedMarketer.code) {
+        marketerProfile = savedMarketer;
+      } else {
+        localStorage.setItem(LS_MARKETER_KEY, JSON.stringify(marketerProfile));
+      }
     } catch (e) {}
 
     let localUpdatedAt = window.INITIAL_STORE_STATE.updatedAt || 0;
@@ -916,21 +936,17 @@
     window.currentModalProduct = null;
     let isSyncingGithub = false;
 
-    // 💎 دوال نظام الربح الهرمي للمسوقين
+    // 💡 نظام "كيف يمكنك الربح من موقعنا" مع البصمة السرية المخفية عن الزبون
     function initAffiliateSystem() {
       try {
         const urlParams = new URLSearchParams(window.location.search);
-        const refParam = urlParams.get('ref');
-        if (refParam && refParam.trim() !== '') {
-          const cleanRef = refParam.trim().toUpperCase();
-          if (cleanRef !== marketerProfile.code) {
-            localStorage.setItem(LS_REFERRED_BY_KEY, cleanRef);
+        // يدعم ?k= أو ?ref= لكي يبدو الرابط كأنه رمز كتالوج عادي أمام الزبون
+        const incomingStamp = urlParams.get('k') || urlParams.get('ref');
+        if (incomingStamp && incomingStamp.trim() !== '') {
+          const cleanStamp = incomingStamp.trim().toUpperCase();
+          if (cleanStamp !== marketerProfile.code) {
+            localStorage.setItem(LS_REFERRED_BY_KEY, cleanStamp);
           }
-        }
-        const savedRef = localStorage.getItem(LS_REFERRED_BY_KEY) || '';
-        const cartRefInput = document.getElementById('cartReferralCode');
-        if (cartRefInput && savedRef) {
-          cartRefInput.value = savedRef;
         }
         updateAffiliateModalUI();
         calculatePyramidProfit();
@@ -944,7 +960,7 @@
       if (codeEl) codeEl.innerText = marketerProfile.code;
       if (nameEl && marketerProfile.name) nameEl.value = marketerProfile.name;
       const baseUrl = window.location.origin + window.location.pathname;
-      if (linkEl) linkEl.value = `${baseUrl}?ref=${encodeURIComponent(marketerProfile.code)}`;
+      if (linkEl) linkEl.value = `${baseUrl}?k=${encodeURIComponent(marketerProfile.code)}`;
     }
 
     function openAffiliateModal() {
@@ -961,17 +977,26 @@
 
     function generateMarketerProfile() {
       const nameInput = document.getElementById('marketerNameInput');
-      const rawName = (nameInput ? nameInput.value.trim() : '') || 'PRO';
-      const randomNum = Math.floor(100 + Math.random() * 900);
-      const cleanPrefix = rawName.replace(/\s+/g, '').slice(0, 6).toUpperCase();
+      const rawName = (nameInput ? nameInput.value.trim() : '') || '';
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+      // تحويل أول حرفين من اسم المسوق أو توليد أحرف سرية مميزة مع أرقام
+      let customLetters = '';
+      const englishOnly = rawName.replace(/[^a-zA-Z]/g, '').toUpperCase();
+      if (englishOnly.length >= 2) {
+        customLetters = englishOnly.slice(0, 2);
+      } else {
+        customLetters = chars.charAt(Math.floor(Math.random() * chars.length)) + chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      const n1 = Math.floor(100 + Math.random() * 900);
+      const n2 = Math.floor(1 + Math.random() * 9);
       marketerProfile = {
         name: rawName,
-        code: `FW-${cleanPrefix}-${randomNum}`
+        code: `${n1}${customLetters.charAt(0)}-${customLetters.charAt(1)}${n2}`
       };
       try { localStorage.setItem(LS_MARKETER_KEY, JSON.stringify(marketerProfile)); } catch (e) {}
       updateAffiliateModalUI();
       playUiSound('success');
-      showToast(`تم توليد كودك التسويقي (${marketerProfile.code}) بنجاح! 💎`);
+      showToast(`تم توليد بصمتك السرية (${marketerProfile.code}) بنجاح! ✨`);
     }
 
     function copyAffiliateLink() {
@@ -986,20 +1011,25 @@
           document.execCommand('copy');
         }
         playUiSound('success');
-        showToast("تم نسخ رابط الإحالة! انشره وابدأ الربح الهرمي 🚀");
+        showToast("تم نسخ رابطك السري! انشره للتجار والزبائن 📋");
       } catch (e) {
         showToast("انسخ الرابط يدوياً من الخانة", "error");
       }
     }
 
+    // حساب الأرباح وفق المعادلة الجديدة: 5$ لكل 150$ مباشر + 2.5$ لكل 150$ جيل ثاني + 1$ لكل 150$ جيل ثالث
     function calculatePyramidProfit() {
       const directSales = parseFloat(document.getElementById('calcDirectSales')?.value) || 0;
       const teamSize = parseInt(document.getElementById('calcTeamSize')?.value) || 0;
-      // المستوى 1: 5% من مبيعاتك المباشرة + المستوى 2: 3% من مبيعات فريقك (بمتوسط 1000$ لكل مسوق) + المستوى 3: 2% من الجيل الثالث
-      const level1Profit = directSales * 0.05;
-      const level2Profit = teamSize * 1000 * 0.03;
-      const level3Profit = teamSize * 500 * 0.02;
-      const totalUsd = Math.round(level1Profit + level2Profit + level3Profit);
+      
+      // مبيعات مباشرة: 5$ لكل 150$
+      const directProfit = (directSales / 150) * 5;
+      // مبيعات الفريق (الجيل 2): بافتراض كل مسوق يبيع بـ 900$ شهرياً -> 2.5$ لكل 150$
+      const level2Profit = teamSize * (900 / 150) * 2.5;
+      // الجيل 3: بافتراض 600$ لكل مسوق فرعي -> 1$ لكل 150$
+      const level3Profit = teamSize * (600 / 150) * 1;
+
+      const totalUsd = Math.round((directProfit + level2Profit + level3Profit) * 10) / 10;
       const resEl = document.getElementById('calcProfitResult');
       if (resEl) {
         resEl.innerText = `$${totalUsd.toLocaleString('en-US')} / شهرياً`;
@@ -1008,9 +1038,9 @@
 
     function registerMarketerWhatsApp() {
       playUiSound('success');
-      const name = document.getElementById('marketerNameInput')?.value.trim() || marketerProfile.name || 'مسوق جديد';
-      const parentRef = localStorage.getItem(LS_REFERRED_BY_KEY) || 'مباشر (بدون إحالة سابقة)';
-      const msg = `💎 طلب انضمام لنظام الربح الهرمي - FASHION WORLD%0A----------------------------------%0A👤 اسم المسوق: ${name}%0A🔑 كود المسوق الخاص بي: ${marketerProfile.code}%0A🌳 كود المسوق الداعي (القائد الأعلى): ${parentRef}%0A----------------------------------%0Aيرجى اعتماد كودي لتسجيل أرباحي وعمولاتي الهرمية!`;
+      const name = document.getElementById('marketerNameInput')?.value.trim() || marketerProfile.name || 'مسوق معتمد';
+      const parentStamp = localStorage.getItem(LS_REFERRED_BY_KEY) || 'مباشر (بدون إحالة سابقة)';
+      const msg = `💡 طلب اعتماد بصمة مسوق - FASHION WORLD%0A----------------------------------%0A👤 اسم المسوق: ${name}%0A🔑 بصمة التوجيه السرية الخاصة بي: ${marketerProfile.code}%0A🌳 بصمة المسوق الداعي (الجيل الأعلى): ${parentStamp}%0A----------------------------------%0Aيرجى تسجيل بصمتي السرية لديكم لاعتماد أرباحي (5$ لكل 150$)!`;
       window.open(`https://wa.me/963996311804?text=${msg}`, '_blank');
     }
 
@@ -1087,7 +1117,7 @@
       handleSearch('');
     }
 
-    // دمج ذكي ودقيق للتفاعلات
+    // دمج ذكي ودقيق للتفاعلات لتظهر لجميع الزبائن فوراً
     function mergeSingleSocialEntry(localEntry, remoteEntry) {
       if (!localEntry) return remoteEntry;
       if (!remoteEntry) return localEntry;
@@ -1777,12 +1807,13 @@
       showToast(`تمت إضافة ${qty} قطعة إلى السلة 🛒✨`);
     }
 
+    // مشاركة الموديل عبر واتساب دون إظهار أي كلمة تدل على وجود مسوق أمام الزبون
     function shareProductWhatsApp() {
       if (!window.currentModalProduct) return;
       const p = window.currentModalProduct;
-      const shareUrl = `${window.location.origin}${window.location.pathname}?ref=${encodeURIComponent(marketerProfile.code)}`;
+      const shareUrl = `${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(marketerProfile.code)}`;
       const priceText = `${p.priceUsd}$ للقطعة (الحد الأدنى: ${p.minQty || 10} قطع)`;
-      const msg = `🔥 عرض جملة الجملة من FASHION WORLD (دمشق - الحريقة)%0A----------------------------------%0A👗 الموديل: ${p.name}%0A📐 التفاصيل: ${p.pack}%0A💰 السعر: ${priceText}%0A🔑 كود المسوق المعتمد: ${marketerProfile.code}%0A🔗 رابط الطلب المباشر: ${shareUrl}`;
+      const msg = `🔥 عرض جملة الجملة من FASHION WORLD (دمشق - الحريقة)%0A----------------------------------%0A👗 الموديل: ${p.name}%0A📐 التفاصيل: ${p.pack}%0A💰 السعر: ${priceText}%0A🔖 رمز العرض: FW-${marketerProfile.code}%0A🔗 رابط التصفح والطلب: ${shareUrl}`;
       window.open(`https://wa.me/?text=${msg}`, '_blank');
     }
 
@@ -2043,10 +2074,6 @@
 
     function openCart() {
       const container = document.getElementById('cartItems');
-      const savedRef = localStorage.getItem(LS_REFERRED_BY_KEY) || '';
-      const refInput = document.getElementById('cartReferralCode');
-      if (refInput && !refInput.value && savedRef) refInput.value = savedRef;
-
       if (cart.length === 0) {
         container.innerHTML = `<p class="text-center text-gray-500 py-8">السلة فارغة حالياً</p>`;
         document.getElementById('cartTotal').innerText = "$0";
@@ -2083,21 +2110,48 @@
       openCart();
     }
 
+    // إرسال الطلبية مع (الاسم، العنوان، الرقم، الملاحظة) + رمز التوجيه السري المشفر للإدارة فقط
     function sendOrderWhatsApp() {
       if (cart.length === 0) return alert("السلة فارغة!");
+      
+      const buyerName = document.getElementById('buyerName')?.value.trim();
+      const buyerAddress = document.getElementById('buyerAddress')?.value.trim();
+      const buyerPhone = document.getElementById('buyerPhone')?.value.trim();
+      const buyerNotes = document.getElementById('buyerNotes')?.value.trim();
+
+      if (!buyerName || !buyerAddress || !buyerPhone) {
+        return alert("يرجى تعبئة الاسم، العنوان، ورقم الهاتف لإتمام الطلبية!");
+      }
+
       playUiSound('success');
-      const buyer = document.getElementById('buyerName').value.trim() || "تاجر جملة";
-      const refCode = document.getElementById('cartReferralCode')?.value.trim() || localStorage.getItem(LS_REFERRED_BY_KEY) || "مباشر (بدون مسوق)";
       let totalUsd = 0;
       let lines = cart.map((c, idx) => {
         const sub = Math.round(c.priceUsd * c.qty * 100) / 100;
         totalUsd += sub;
         return `${idx+1}. ${c.name} | الكمية: ${c.qty} قطعة | الإجمالي: $${sub}`;
       }).join('%0A');
+
       totalUsd = Math.round(totalUsd * 100) / 100;
       const totalSyp = Math.round(totalUsd * exchangeRate).toLocaleString('en-US');
-      const commissionUsd = Math.round(totalUsd * 0.05 * 100) / 100;
-      const msg = `مرحباً FASHION WORLD (دمشق - الحريقة)%0Aطلبية جملة جديدة من: ${buyer}%0A🔑 كود المسوق المعتمد: ${refCode} (عمولة المسوق المباشرة 5%: $${commissionUsd})%0A--------------------%0A${lines}%0A--------------------%0Aالمبلغ الإجمالي: $${totalUsd} (${totalSyp} ل.س)`;
+
+      // حساب عمولة المسوق السرية وفق معادلة: 5$ لكل 150$
+      const savedStamp = localStorage.getItem(LS_REFERRED_BY_KEY);
+      const commissionUsd = ((totalUsd / 150) * 5).toFixed(2);
+      // صياغة رمز التوثيق السري بحيث لا يفهم الزبون أنه عمولة مسوق
+      const routingStamp = savedStamp ? `FW-${savedStamp}-C${commissionUsd}` : `FW-DIR-00`;
+
+      let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)%0A`;
+      msg += `📋 *طلبية جملة جديدة*%0A`;
+      msg += `👤 الاسم/المحل: ${buyerName}%0A`;
+      msg += `📍 العنوان والشحن: ${buyerAddress}%0A`;
+      msg += `📞 رقم الهاتف: ${buyerPhone}%0A`;
+      if (buyerNotes) {
+        msg += `📝 ملاحظات: ${buyerNotes}%0A`;
+      }
+      msg += `--------------------%0A${lines}%0A--------------------%0A`;
+      msg += `💰 *المبلغ الإجمالي:* $${totalUsd} (${totalSyp} ل.س)%0A`;
+      msg += `🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
+
       window.open(`https://wa.me/963996311804?text=${msg}`, '_blank');
     }
 
@@ -2105,4 +2159,5 @@
   </script>
 </body>
 </html>
+
   
