@@ -295,7 +295,8 @@
       </div>
     </div>
   </div>
-    <!-- نوافذ الإدارة ومن نحن -->
+
+  <!-- نوافذ الإدارة ومن نحن -->
   <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-3">
     <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔐 مصادقة الإدارة</h3><button onclick="closeFirebaseLoginModal()" class="text-gray-400">✕</button></div>
@@ -391,7 +392,6 @@
           </div>
         </div>
         
-        <!-- صندوق إشعار وتطبيق خصم 2% للفواتير فوق 400$ -->
         <div id="tierDiscountNotice" class="hidden bg-emerald-950/40 p-2 rounded-xl border border-emerald-500/40 text-[10px] text-emerald-300 font-bold flex justify-between items-center">
           <span>🎉 مبروك! بلغت فاتورتك 400$ أو أكثر، تم تطبيق خصم جملة 2% تلقائياً.</span>
           <strong id="discountAmountText" class="text-yellow-300">-$0</strong>
@@ -428,7 +428,7 @@
     };
   </script>
 
-  <!-- سكربت الفايربيز والمنطق البرمجي المكمل -->
+  <!-- مصادقة Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -622,6 +622,36 @@
     function closeCloudSetupModal() { toggleModal('cloudSetupModal', false); }
     function closeFirebaseLoginModal() { toggleModal('firebaseLoginModal', false); }
     window.closeFirebaseLoginModal = closeFirebaseLoginModal;
+
+    function openZoomModal(imgSrc) {
+      const modal = document.getElementById('imageZoomModal');
+      const img = document.getElementById('zoomModalImg');
+      if (modal && img) {
+        img.src = imgSrc;
+        img.classList.remove('zoomed-img');
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+      }
+    }
+    function closeZoomModal() {
+      const modal = document.getElementById('imageZoomModal');
+      if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+    }
+    function toggleDoubleZoom(imgEl) {
+      imgEl.classList.toggle('zoomed-img');
+    }
+
+    function sendVipRequestWhatsApp(e) {
+      e.preventDefault();
+      playUiSound('success');
+      const merchant = document.getElementById('vipMerchantName').value.trim();
+      const cat = document.getElementById('vipCat').value;
+      const qty = document.getElementById('vipQty').value;
+      const phone = document.getElementById('vipPhone').value.trim();
+      const details = document.getElementById('vipDetails').value.trim();
+      const msg = `👑 *طلب تصنيع خاص لكبار التجار (VIP)* - FASHION WORLD\n----------------------------------\n👤 التاجر / الشركة: ${merchant}\n👗 القسم المطلوب: ${cat}\n📦 الكمية التقديرية: ${qty} قطعة\n📞 رقم التواصل: ${phone}\n📝 المواصفات والتفاصيل: ${details}\n----------------------------------\nيرجى مراجعة الطلب وتحديد السعر الخاص وموعد التسليم.`;
+      closeVipModal();
+      window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
+    }
 
     function initAffiliateSystem() {
       try {
@@ -1038,6 +1068,22 @@
       return `<div class="flex flex-col leading-tight"><span class="text-yellow-400 font-bold text-xs sm:text-sm">$${numUsd} <span class="text-[8px] text-gray-400">/قطعة</span></span><span class="text-emerald-400 font-bold text-[9px] sm:text-[10px]">${syp} ل.س</span></div>`;
     }
 
+    function getProductRatingLabel(p) {
+      const c = Number(p.ratingCount) || 0, s = Number(p.ratingSum) || 0;
+      if (c <= 0 || s <= 0) return '4.8';
+      return Math.min(5, Math.max(1, s / c)).toFixed(1);
+    }
+
+    function getDiscountBadgeText(p) {
+      if (!p.hasDiscount) return '';
+      const pct = parseInt(p.discountPercent) || 0;
+      return pct > 0 ? `حسم ${pct}% 🔥` : `حسم خاص 🔥`;
+    }
+
+    function toggleDiscountPercentInput() {
+      document.getElementById('discountPercentWrapper')?.classList.toggle('hidden', !document.getElementById('pHasDiscount')?.checked);
+    }
+
     function renderProducts() {
       const rateFormatted = exchangeRate.toLocaleString('en-US');
       if (document.getElementById('heroRate')) document.getElementById('heroRate').innerText = rateFormatted;
@@ -1111,6 +1157,17 @@
     }
     window.renderProducts = renderProducts;
 
+    function updateModalHeaderSocial(p) {
+      const smart = getConsistentSmartSocial(p);
+      if (document.getElementById('modalViews')) document.getElementById('modalViews').innerText = `👁️ ${smart.views}`;
+      const likeBtn = document.getElementById('modalLikeBtn');
+      const isLiked = !!likedProducts[p.id];
+      if (likeBtn) {
+        likeBtn.className = `${isLiked ? 'bg-red-900/40 border border-red-500 text-red-300' : 'bg-neutral-800 text-gray-300 border border-gray-700'} px-2 py-0.5 rounded-md text-[10px] font-bold transition`;
+        likeBtn.innerHTML = `${isLiked ? '❤️ معجب' : '🤍 إعجاب'} (${p.likes || smart.likes})`;
+      }
+    }
+
     async function openProductModal(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
@@ -1131,7 +1188,6 @@
       document.getElementById('modalPack').innerText = `📐 القياسات والتفاصيل: ${p.pack}`;
       document.getElementById('modalWeightInfo').innerText = `⚖️ وزن تقريبي للقطعة الواحدة: ${getPieceWeightGrams(p)} غرام`;
 
-      // حساب مقترح البيع بالمفرق (+40% فوق سعر الجملة)
       const retailSuggestionUsd = Math.round((Number(p.priceUsd) * 1.4) * 100) / 100;
       const retailSuggestionSyp = Math.round(retailSuggestionUsd * exchangeRate).toLocaleString('en-US');
       document.getElementById('modalRetailSuggestion').innerText = `💡 مقترح البيع بالمفرق: $${retailSuggestionUsd} (${retailSuggestionSyp} ل.س)`;
@@ -1281,7 +1337,6 @@
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // ميزة حجز الموديل مع إرسال رسالة للواتساب لتأكيد العربون
     function reserveProductWhatsApp() {
       if (!window.currentModalProduct) return;
       const p = window.currentModalProduct;
@@ -1449,7 +1504,6 @@
       }
     }
 
-    // حساب إجمالي السلة مع تطبيق حسم 2% إذا زادت الفاتورة عن 400$
     function getCartSmartMetrics() {
       let totalPieces = 0, totalPacks = 0, totalGrams = 0, rawTotalUsd = 0;
       cart.forEach(c => {
@@ -1464,7 +1518,7 @@
       let discountUsd = 0;
       let finalTotalUsd = rawTotalUsd;
       if (rawTotalUsd >= 400) {
-        discountUsd = Math.round(rawTotalUsd * 0.02 * 100) / 100; // حسم 2%
+        discountUsd = Math.round(rawTotalUsd * 0.02 * 100) / 100;
         finalTotalUsd = Math.round((rawTotalUsd - discountUsd) * 100) / 100;
       }
 
@@ -1486,7 +1540,6 @@
       document.getElementById('cartSummaryPacks').innerText = `${m.totalPacks} سيرية`;
       document.getElementById('cartSummaryWeight').innerText = `~${m.totalWeightKg} كغ`;
 
-      // إظهار أو إخفاء إشعار خصم 400$
       const tierNotice = document.getElementById('tierDiscountNotice');
       if (m.rawTotalUsd >= 400) {
         tierNotice.classList.remove('hidden');
@@ -1567,7 +1620,7 @@
 
       let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)\n📋 *طلبية جملة جديدة*\n👤 الاسم/المحل: ${buyerName}\n📍 العنوان والشحن: ${buyerAddress}\n📞 رقم الهاتف: ${buyerPhone}\n`;
       if (buyerNotes) msg += `📝 ملاحظات: ${buyerNotes}\n`;
-      msg += `--------------------\n${lines}\n--------------------\n📦 *تفاصيل الطرد الذكي:* ${m.totalPieces} قطعة | ${m.totalPacks} سيرية | الوزن التقريبي: ~${m.totalWeightKg} كغ\n💰 *المبلغ الإجمالي النهائي (مع خصم 2% إن وجد):* $${m.totalUsd} (${totalSyp} ل.س)\n🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
+      msg += `--------------------\n${lines}\n--------------------\n📦 *تفاصيل الطرد الذكي:* ${m.totalPieces} قطعة | ${m.totalPacks} سيرية | الوزن التقريبي: ~${m.totalWeightKg} كغ\n💰 *المبلغ الإجمالي النهائي (مع خصم 2% إن وجد):* $${m.totalUsd} (${totalSyp} ل.س)\n🔖 رمز التوثيق: ${routingStamp}`;
 
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
@@ -1576,5 +1629,3 @@
   </script>
 </body>
 </html>
-
-  <!-- نترك البقية وناسك الجافاسكريبت للجزء الثاني المكمل -->
