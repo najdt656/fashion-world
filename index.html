@@ -241,7 +241,7 @@
     </div>
   </div>
 
-  <!-- نافذة كيف يمكنك الربح + لوحة المسوق -->
+  <!-- نافذة كيف يمكنك الربح + لوحة المسوق المباشر -->
   <div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/50 text-xs">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-extrabold text-yellow-400 text-sm">💡 كيف يمكنك الربح من موقعنا + لوحة المسوق</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
@@ -250,11 +250,11 @@
         <!-- الشريط التوضيحي لشرح الآلية للزبون -->
         <div class="bg-amber-950/40 border border-amber-500/40 rounded-xl p-2.5 text-amber-200 text-[11px] space-y-1">
           <p class="font-black text-yellow-400">📖 كيف تعمل أرباحك معنا؟</p>
-          <p>1️⃣ انسخ رابطك السري وشاركه مع زبائنك.<br>2️⃣ عندما يطلب الزبون من خلاله، يُسجيل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من قِبل إدارة المعمل، تتحول الأرباح فوراً إلى (أرباح مؤكدة قابلة للصرف)!</p>
+          <p>1️⃣ انسخ رابطك السري وشاركه مع زبائنك.<br>2️⃣ عندما يطلب الزبون من خلاله، يُسجيل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من قِبل إدارة المعمل، تتحول الأرباح فوراً إلى (أرباح مؤكدة ومتاحة للصرف)!</p>
         </div>
 
         <div class="bg-emerald-950/40 border border-yellow-500/35 rounded-xl p-2.5 text-center">
-          <p class="text-yellow-300 font-black">🚀 اربح 5$ عن كل 150$ مبيعات من هاتفك وبسرية تامة أمام زبائنك!</p>
+          <p class="text-yellow-300 font-black">🚀 اربح 5$ عن كل 150$ مبيعات مباشرة من هاتفك وبسرية تامة أمام زبائنك!</p>
           <p class="text-gray-300 text-[10px] mt-0.5">لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك برمز توجيه سري خاص بك لدى الإدارة!</p>
         </div>
         <div class="glossy-box p-2.5 rounded-xl space-y-2">
@@ -280,17 +280,10 @@
           <div id="dashOrdersLog" class="max-h-32 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-1.5 rounded-lg"></div>
           <div id="adminResetMarketerBox" class="hidden pt-1 text-left"><button onclick="adminClearMarketerOrders()" class="bg-red-600/80 text-white text-[9px] font-bold px-2 py-1 rounded">🗑️ تصفير سجل هذه البصمة (أدمن)</button></div>
         </div>
-        <div class="grid grid-cols-3 gap-1.5 text-center">
-          <div class="glossy-box p-2 rounded-lg"><span class="text-[9px] text-emerald-300 font-bold block">مبيعاتك المباشرة</span><p class="text-xs font-black text-emerald-400">5$ لكل 150$</p></div>
-          <div class="glossy-box p-2 rounded-lg"><span class="text-[9px] text-yellow-300 font-bold block">فريقك (الجيل 2)</span><p class="text-xs font-black text-yellow-400">2.5$ لكل 150$</p></div>
-          <div class="glossy-box p-2 rounded-lg"><span class="text-[9px] text-purple-300 font-bold block">الجيل 3 + مكافأة</span><p class="text-xs font-black text-purple-400">1$ لكل 150$ 🏆</p></div>
-        </div>
+
         <div class="glossy-box p-2.5 rounded-xl space-y-1.5">
-          <div class="flex justify-between items-center"><span class="font-extrabold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك الشهرية:</span><span id="calcProfitResult" class="text-xs font-black text-yellow-400">$126 / شهرياً</span></div>
-          <div class="grid grid-cols-2 gap-2 text-[10px]">
-            <div><label class="text-gray-300 block">مبيعات زبائنك ($):</label><input id="calcDirectSales" type="number" step="50" value="1500" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold" /></div>
-            <div><label class="text-gray-300 block">مسوقين فريقك:</label><input id="calcTeamSize" type="number" value="4" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold" /></div>
-          </div>
+          <div class="flex justify-between items-center"><span class="font-extrabold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك المباشرة:</span><span id="calcProfitResult" class="text-xs font-black text-yellow-400">$50 / شهرياً</span></div>
+          <div><label class="text-gray-300 block text-[10px] mb-1">إجمالي مبيعات زبائنك الشهرية ($):</label><input id="calcDirectSales" type="number" step="50" value="1500" oninput="calculateDirectProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold text-xs" /></div>
         </div>
       </div>
       <div class="flex gap-2 pt-2.5 border-t border-gray-800 mt-2">
@@ -656,7 +649,7 @@
           if (clean !== marketerProfile.code) localStorage.setItem(LS_REFERRED_BY_KEY, clean);
         }
         updateAffiliateModalUI();
-        calculatePyramidProfit();
+        calculateDirectProfit();
       } catch (e) {}
     }
 
@@ -703,7 +696,7 @@
         socialDataMap._marketerOrders[stampCode].push({
           id: nowMs, date: `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`,
           totalUsd: Number(totalUsd) || 0, commissionUsd: Number(commissionUsd) || 0, pieces: Number(totalPieces) || 0,
-          status: 'PENDING' // الحالة الافتتاحية معلقة لحين موافقة الأدمن
+          status: 'PENDING'
         });
         localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
         await pushPublicSocialState(null);
@@ -762,7 +755,7 @@
       renderMarketerDashboard();
     }
 
-    function openAffiliateModal() { updateAffiliateModalUI(); calculatePyramidProfit(); toggleModal('affiliateModal', true); }
+    function openAffiliateModal() { updateAffiliateModalUI(); calculateDirectProfit(); toggleModal('affiliateModal', true); }
     function closeAffiliateModal() { toggleModal('affiliateModal', false); }
 
     function copyAffiliateLink() {
@@ -774,10 +767,9 @@
       showToast("تم نسخ رابطك السري! 📋");
     }
 
-    function calculatePyramidProfit() {
+    function calculateDirectProfit() {
       const directSales = parseFloat(document.getElementById('calcDirectSales')?.value) || 0;
-      const teamSize = parseInt(document.getElementById('calcTeamSize')?.value) || 0;
-      const totalUsd = Math.round((((directSales / 150) * 5) + (teamSize * 6 * 2.5) + (teamSize * 4 * 1)) * 10) / 10;
+      const totalUsd = Math.round(((directSales / 150) * 5) * 10) / 10;
       const resEl = document.getElementById('calcProfitResult');
       if (resEl) resEl.innerText = `$${totalUsd.toLocaleString('en-US')} / شهرياً`;
     }
@@ -787,7 +779,7 @@
       const name = document.getElementById('marketerNameInput')?.value.trim() || marketerProfile.name || 'مسوق';
       const myOrders = socialDataMap?._marketerOrders?.[marketerProfile.code] || [];
       let confComm = 0; myOrders.forEach(o => { if (o.status === 'CONFIRMED') confComm += Number(o.commissionUsd) || 0; });
-      const msg = `💡 طلب اعتماد بصمة وصرف أرباح المؤكدة - FASHION WORLD\n👤 الاسم: ${name}\n🔑 البصمة: ${marketerProfile.code}\n💰 الأرباح المؤكدة للصرف: $${confComm.toFixed(2)}`;
+      const msg = `💡 طلب اعتماد بصمة وصرف الأرباح المؤكدة - FASHION WORLD\n👤 الاسم: ${name}\n🔑 البصمة: ${marketerProfile.code}\n💰 الأرباح المؤكدة للصرف: $${confComm.toFixed(2)}`;
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
