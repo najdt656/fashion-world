@@ -2647,116 +2647,40 @@
             <div class="no-print" style="text-align:left; margin-bottom:12px;">
               <button onclick="window.print()" style="background:#D4AF37;color:#000;border:none;padding:8px 18px;border-radius:8px;font-family:'Cairo';font-weight:800;cursor:pointer;">🖨️ طباعة / حفظ كملف PDF</button>
             </div>
-            <div class="header">
-              <div>
-                <div class="brand">FASHION WORLD</div>
-                <div class="meta">عالم الأزياء لتجارة الألبسة بالجملة | سوريا - دمشق - الحريقة</div>
-                <div class="meta">واتساب الإدارة: 0996311804 | +963996311804</div>
-              </div>
-              <div class="meta" style="text-align:left;">
-                <div><strong>رقم الفاتورة:</strong> ${invoiceNo}</div>
-                <div><strong>التاريخ:</strong> ${dateStr}</div>
-                <div><strong>سعر الصرف:</strong> ${exchangeRate.toLocaleString('en-US')} ل.س</div>
-              </div>
-            </div>
-
-            <div class="client-box">
-              <div><strong>👤 التاجر / المحل:</strong> ${escapeHtml(buyerName)}</div>
-              <div><strong>📞 رقم الهاتف:</strong> ${escapeHtml(buyerPhone)}</div>
-              <div><strong>📍 العنوان والشحن:</strong> ${escapeHtml(buyerAddress)}</div>
-              <div><strong>📝 ملاحظات:</strong> ${escapeHtml(buyerNotes)}</div>
-            </div>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>اسم الموديل / الكود</th>
-                  <th>القسم</th>
-                  <th>الكمية والباكيت</th>
-                  <th>سعر القطعة</th>
-                  <th>الإجمالي</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${rowsHtml}
-              </tbody>
-            </table>
-
-            <div class="summary-grid">
-              <div>📦 إجمالي القطع: <strong>${metrics.totalPieces} قطعة</strong></div>
-              <div>🛍️ عدد الباكيتات: <strong>${metrics.totalPacks} باكيت</strong></div>
-              <div>⚖️ الوزن التقريبي للطرد: <strong>~${metrics.totalWeightKg} كغ</strong> (شامل التغليف)</div>
-            </div>
-
-            <div class="total-bar">
-              <span>المبلغ الإجمالي النهائي:</span>
-              <span style="color:#D4AF37;">$${metrics.totalUsd} (${totalSyp} ل.س)</span>
-            </div>
-
-            <div class="footer">
-              شكراً لثقتكم بشركة FASHION WORLD - البضاعة تُجهز وتُشحن من المعمل مباشرة | رمز التوثيق: ${routingStamp}
-            </div>
-          </div>
-          <script>setTimeout(() => { window.print(); }, 500);<\/script>
-        </body>
-        </html>
-      `);
-      win.document.close();
+    function openVipModal() {
+      const modal = document.getElementById('vipModal');
+      if(modal) {
+        modal.classList.add('flex');
+        modal.classList.remove('hidden');
+      }
     }
 
-    // إرسال الطلبية عبر واتساب مشفرة بالكامل (تمنع قص الواتساب بسبب الـ #) وتسجيلها للمسوق
-    async function sendOrderWhatsApp() {
-      if (cart.length === 0) return alert("السلة فارغة!");
-      
-      const buyerName = document.getElementById('buyerName')?.value.trim();
-      const buyerAddress = document.getElementById('buyerAddress')?.value.trim();
-      const buyerPhone = document.getElementById('buyerPhone')?.value.trim();
-      const buyerNotes = document.getElementById('buyerNotes')?.value.trim();
-
-      if (!buyerName || !buyerAddress || !buyerPhone) {
-        return alert("يرجى تعبئة الاسم، العنوان، ورقم الهاتف لإتمام الطلبية!");
+    function closeVipModal() {
+      const modal = document.getElementById('vipModal');
+      if(modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
       }
-
-      playUiSound('success');
-      saveBuyerInfoToStorage();
-
-      const metrics = getCartSmartMetrics();
-      let lines = cart.map((c, idx) => {
-        const sub = Math.round(c.priceUsd * c.qty * 100) / 100;
-        const packs = Math.max(1, Math.ceil(c.qty / (c.minQty || 10)));
-        return `${idx+1}. ${c.name} | الكمية: ${c.qty} قطعة (${packs} باكيت) | $${sub}`;
-      }).join('\n');
-
-      const totalSyp = Math.round(metrics.totalUsd * exchangeRate).toLocaleString('en-US');
-
-      const savedStamp = localStorage.getItem(LS_REFERRED_BY_KEY);
-      const commissionUsd = ((metrics.totalUsd / 150) * 5).toFixed(2);
-      const routingStamp = savedStamp ? `FW-${savedStamp}-C${commissionUsd}` : `FW-DIR-00`;
-
-      if (savedStamp) {
-        recordMarketerOrderInCloud(savedStamp, metrics.totalUsd, commissionUsd, metrics.totalPieces);
-      }
-
-      let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)\n`;
-      msg += `📋 *طلبية جملة جديدة*\n`;
-      msg += `👤 الاسم/المحل: ${buyerName}\n`;
-      msg += `📍 العنوان والشحن: ${buyerAddress}\n`;
-      msg += `📞 رقم الهاتف: ${buyerPhone}\n`;
-      if (buyerNotes) {
-        msg += `📝 ملاحظات: ${buyerNotes}\n`;
-      }
-      msg += `--------------------\n${lines}\n--------------------\n`;
-      msg += `📦 *تفاصيل الطرد الذكي:* ${metrics.totalPieces} قطعة | ${metrics.totalPacks} باكيت | الوزن: ~${metrics.totalWeightKg} كغ\n`;
-      msg += `💰 *المبلغ الإجمالي:* $${metrics.totalUsd} (${totalSyp} ل.س)\n`;
-      msg += `🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
-
-      // تشفير الرابط بالكامل لمنع مشكلة الحذف عند وجود رمز #
-      const encodedMsg = encodeURIComponent(msg);
-      window.open(`https://wa.me/963996311804?text=${encodedMsg}`, '_blank');
     }
 
-    initApp();
-  </script>
-</body>
-</html>
+    function sendVipRequestWhatsApp(e) {
+      e.preventDefault();
+      const merchant = document.getElementById('vipMerchantName')?.value.trim() || '';
+      const cat = document.getElementById('vipCat')?.value || '';
+      const qty = document.getElementById('vipQty')?.value || '';
+      const phone = document.getElementById('vipPhone')?.value.trim() || '';
+      const details = document.getElementById('vipDetails')?.value.trim() || '';
+
+      let msg = `👑 *طلب تصنيع خاص لكبار التجار (VIP)* - FASHION WORLD\n`;
+      msg += `----------------------------------\n`;
+      msg += `👤 التاجر / الشركة: ${merchant}\n`;
+      msg += `👗 القسم المطلوب: ${cat}\n`;
+      msg += `📦 الكمية التقديرية: ${qty} قطعة\n`;
+      msg += `📞 رقم التواصل: ${phone}\n`;
+      msg += `📝 المواصفات والتفاصيل: ${details}\n`;
+      msg += `----------------------------------\n`;
+      msg += `يرجى مراجعة الطلب وتحديد السعر الخاص.`;
+
+      closeVipModal();
+      window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
+    }
