@@ -149,7 +149,7 @@
       border: 1px solid #ddd6fe;
     }
     .stock-badge-soldout {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       border: 1px solid #ef4444;
       color: #f87171;
     }
@@ -378,7 +378,7 @@
     <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5"></div>
   </main>
 
-  <!-- 👑 الميزة 5: نافذة طلبات التصنيع الخاص والكميات الضخمة (B2B VIP Requests) -->
+  <!-- 👑 نافذة طلبات التصنيع الخاص والكميات الضخمة (B2B VIP Requests) -->
   <div id="vipModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[92vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden border border-purple-500/50">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3 flex-shrink-0">
@@ -428,7 +428,7 @@
     </div>
   </div>
 
-  <!-- 💡 نافذة "كيف يمكنك الربح من موقعنا" + 📊 الميزة 4: لوحة تحكم ومتابعة أرباح المسوق -->
+  <!-- 💡 نافذة "كيف يمكنك الربح من موقعنا" + بصمة ذكية ثابتة لا تضيع + لوحة المسوق المحمية -->
   <div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden border border-yellow-500/50">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3 flex-shrink-0">
@@ -446,27 +446,51 @@
           <p class="text-gray-200 text-[11px] leading-relaxed">انشر رابطك الخاص للتجار والزبائن؛ لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك ببصمة توجيه سرية خاصة بك لدى الإدارة!</p>
         </div>
 
-        <!-- 📊 الميزة 4: لوحة تحكم وإحصائيات المسوق الحية (Affiliate Dashboard) -->
+        <!-- 🔑 توليد أو استرجاع البصمة السرية الثابتة (الاسم + آخر 4 أرقام من الهاتف) -->
+        <div class="glossy-box p-3 rounded-2xl space-y-2 border border-yellow-500/35">
+          <p class="font-extrabold text-yellow-400 text-[11px]">🔑 أنشئ أو استرجع بصمتك السرية الثابتة (تعمل من أي هاتف):</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+            <input id="marketerNameInput" type="text" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white text-xs focus:border-yellow-400 focus:outline-none" placeholder="اسمك (مثال: أحمد)..." />
+            <input id="marketerPhoneDigits" type="tel" maxlength="4" dir="ltr" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-center text-yellow-300 font-bold text-xs focus:border-yellow-400 focus:outline-none" placeholder="آخر 4 أرقام هاتفك (مثال: 1804)" />
+            <button onclick="generateMarketerProfile()" class="gold-gradient-bg text-black font-black px-3 py-2 rounded-xl text-xs">تثبيت / استرجاع بصمتي ✨</button>
+          </div>
+          <div class="bg-black/80 p-2.5 rounded-xl border border-gray-800 space-y-1.5">
+            <div class="flex justify-between items-center text-[11px]">
+              <span class="text-gray-400">بصمة التوجيه السرية الخاصة بك:</span>
+              <strong id="myAffiliateCode" class="text-yellow-400 font-mono text-xs select-all tracking-wider">893K-X7</strong>
+            </div>
+            <div class="flex gap-1">
+              <input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded-lg px-2 py-1.5 text-emerald-400 text-[10px] focus:outline-none" dir="ltr" />
+              <button onclick="copyAffiliateLink()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] flex-shrink-0">نسخ الرابط 📋</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 📊 لوحة تحكم وإحصائيات المسوق المحمية من التكرار -->
         <div class="glossy-box p-3 rounded-2xl space-y-2.5 border border-emerald-500/50">
           <div class="flex justify-between items-center border-b border-gray-800 pb-1.5">
-            <span class="font-extrabold text-emerald-400 text-xs flex items-center gap-1">📊 لوحة إحصائيات وأرباح بصمتك:</span>
+            <span class="font-extrabold text-emerald-400 text-[11px] flex items-center gap-1">📊 سجل الطلبيات المرسلة ببصمتك (تُصرف بعد تثبيت الفاتورة):</span>
             <span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded-lg font-mono text-[10px] border border-yellow-500/40">893K-X7</span>
           </div>
           <div class="grid grid-cols-3 gap-2 text-center">
             <div class="bg-black/80 p-2 rounded-xl border border-gray-800">
-              <span class="text-[10px] text-gray-400 block">طلبيات عبر رابطك</span>
+              <span class="text-[9px] text-gray-400 block">فواتير مرسلة</span>
               <strong id="dashOrdersCount" class="text-white font-black text-sm">0</strong>
             </div>
             <div class="bg-black/80 p-2 rounded-xl border border-gray-800">
-              <span class="text-[10px] text-gray-400 block">إجمالي المبيعات</span>
+              <span class="text-[9px] text-gray-400 block">قيمة الفواتير</span>
               <strong id="dashTotalSales" class="text-sky-400 font-black text-sm">$0</strong>
             </div>
             <div class="bg-black/80 p-2 rounded-xl border border-emerald-500/30">
-              <span class="text-[10px] text-gray-400 block">أرباحك المستحقة</span>
+              <span class="text-[9px] text-gray-400 block">الربح المقدر</span>
               <strong id="dashTotalCommission" class="text-emerald-400 font-black text-sm">$0.00</strong>
             </div>
           </div>
           <div id="dashOrdersLog" class="max-h-24 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-2 rounded-xl border border-gray-800/80"></div>
+          <!-- زر خاص بالأدمن فقط لتصفير سجل المسوق بعد محاسبته -->
+          <div id="adminResetMarketerBox" class="hidden pt-1 text-left">
+            <button onclick="adminClearMarketerOrders()" class="bg-red-600/80 hover:bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">🗑️ تصفير سجل هذه البصمة بعد المحاسبة (أدمن)</button>
+          </div>
         </div>
 
         <!-- مستويات الأرباح (5$ لكل 150$ وأقل نسبياً) -->
@@ -491,30 +515,11 @@
           </div>
         </div>
 
-        <!-- توليد البصمة السرية للمسوق ورابط الإحالة -->
-        <div class="glossy-box p-3 rounded-2xl space-y-2 border border-yellow-500/35">
-          <p class="font-extrabold text-yellow-400 text-[11px]">🔑 استخرج رمز البصمة السري ورابطك الخاص مجاناً:</p>
-          <div class="flex gap-1.5">
-            <input id="marketerNameInput" type="text" class="flex-1 bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white text-xs focus:border-yellow-400 focus:outline-none" placeholder="اكتب اسمك أو لقبك لتوليد بصمتك..." />
-            <button onclick="generateMarketerProfile()" class="gold-gradient-bg text-black font-black px-3 py-2 rounded-xl text-xs">توليد بصمتي ✨</button>
-          </div>
-          <div class="bg-black/80 p-2.5 rounded-xl border border-gray-800 space-y-1.5">
-            <div class="flex justify-between items-center text-[11px]">
-              <span class="text-gray-400">بصمة التوجيه السرية الخاصة بك:</span>
-              <strong id="myAffiliateCode" class="text-yellow-400 font-mono text-xs select-all tracking-wider">893K-X7</strong>
-            </div>
-            <div class="flex gap-1">
-              <input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded-lg px-2 py-1.5 text-emerald-400 text-[10px] focus:outline-none" dir="ltr" />
-              <button onclick="copyAffiliateLink()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] flex-shrink-0">نسخ الرابط 📋</button>
-            </div>
-          </div>
-        </div>
-
         <!-- حاسبة الأرباح التفاعلية وفق معادلة (5$ لكل 150$) -->
         <div class="glossy-box p-3 rounded-2xl space-y-2 border border-emerald-500/30">
           <div class="flex justify-between items-center">
             <span class="font-extrabold text-emerald-400 text-[11px]">🧮 حاسبة أرباحك الشهرية المتوقعة:</span>
-            <span id="calcProfitResult" class="text-sm font-black text-yellow-400">$100 / شهرياً</span>
+            <span id="calcProfitResult" class="text-sm font-black text-yellow-400">$126 / شهرياً</span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-[10px]">
             <div>
@@ -531,7 +536,7 @@
 
       <div class="flex gap-2 pt-3 border-t border-gray-800 mt-3 flex-shrink-0">
         <button onclick="registerMarketerWhatsApp()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-black font-black py-2.5 rounded-xl text-xs shadow-lg flex items-center justify-center gap-1">
-          <span>📲 تفعيل بصمتي وصرف الأرباح عبر واتساب</span>
+          <span>📲 اعتماد بصمتي وصرف الأرباح عبر واتساب</span>
         </button>
         <button onclick="closeAffiliateModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold">إغلاق</button>
       </div>
@@ -734,7 +739,7 @@
     </div>
   </div>
 
-  <!-- نافذة إضافة/تعديل موديل للأدمن (مع وزن القطعة بالغرام + حالة توفر المخزون) -->
+  <!-- نافذة إضافة/تعديل موديل للأدمن -->
   <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[92vh] p-5 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-3 flex-shrink-0">
@@ -758,7 +763,7 @@
             </select>
           </div>
           <div>
-            <label class="block text-gray-300 mb-1 font-bold">سعر القطعة</label>
+            <label class="block text-gray-300 mb-1 font-bold">سعر القطعة الصافي (بعد أي حسم)</label>
             <div class="flex gap-1">
               <input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white" placeholder="السعر" />
               <select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold">
@@ -779,7 +784,6 @@
           </div>
         </div>
 
-        <!-- الميزة 1 و 3: وزن القطعة بالغرام + حالة المخزون والحجز المسبق -->
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-amber-300 mb-1 font-bold">⚖️ وزن القطعة (بالغرام)</label>
@@ -804,7 +808,7 @@
             </div>
             <div id="discountPercentWrapper" class="hidden flex items-center gap-1">
               <span class="text-gray-300 font-bold text-[11px]">نسبة الحسم:</span>
-              <input id="pDiscountPercent" type="number" min="1" max="99" value="15" class="w-14 bg-black border border-yellow-400 text-center text-yellow-300 font-black rounded-lg py-1 text-xs focus:outline-none" />
+              <input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-14 bg-black border border-yellow-400 text-center text-yellow-300 font-black rounded-lg py-1 text-xs focus:outline-none" />
               <span class="text-red-400 font-black text-xs">%</span>
             </div>
           </div>
@@ -823,17 +827,20 @@
     </div>
   </div>
 
-  <!-- 🛒 نافذة سلة الشراء المطورة (مع حاسبة الطرد الذكية + زر طباعة فاتورة PDF + إرسال واتساب) -->
+  <!-- 🛒 نافذة سلة الشراء المحفوظة تلقائياً (مع أزرار زيادة/نقصان + حاسبة الطرد + PDF + واتساب) -->
   <div id="cartModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[94vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2 flex-shrink-0">
-        <h3 class="font-extrabold text-yellow-400 text-sm">🛒 سلة طلبات الجملة وحاسبة الطرد</h3>
+        <div class="flex items-center gap-2">
+          <h3 class="font-extrabold text-yellow-400 text-sm">🛒 سلة طلبات الجملة</h3>
+          <button onclick="clearEntireCart()" class="text-[10px] text-red-400 hover:text-red-300 bg-red-950/40 px-2 py-0.5 rounded-lg border border-red-500/30 font-bold">تفريغ السلة</button>
+        </div>
         <button onclick="closeCart()" class="bg-neutral-800 hover:bg-neutral-700 text-gray-300 w-7 h-7 rounded-full flex items-center justify-center text-xs">✕</button>
       </div>
       <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 text-xs pl-1 max-h-40"></div>
       
       <div class="border-t border-gray-800 pt-2.5 mt-2 space-y-2 flex-shrink-0">
-        <!-- 📦 الميزة 1: حاسبة الطرد الذكية (Smart Carton Calculator) -->
+        <!-- 📦 حاسبة الطرد الذكية -->
         <div class="glossy-box p-2.5 rounded-xl border border-sky-500/35 space-y-1">
           <p class="text-[10px] text-sky-300 font-extrabold flex items-center gap-1">📦 حاسبة الطرد والشحن الذكية (شامل 0.5 كغ تغليف):</p>
           <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
@@ -858,13 +865,12 @@
         </div>
 
         <div class="space-y-1.5 text-xs">
-          <input id="buyerName" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none" placeholder="👤 اسم التاجر / اسم المحل..." />
-          <input id="buyerAddress" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن..." />
-          <input id="buyerPhone" type="tel" dir="ltr" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white focus:border-yellow-500 focus:outline-none" placeholder="📞 رقم الهاتف / واتساب للتواصل..." />
-          <textarea id="buyerNotes" rows="1" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none resize-none" placeholder="📝 ملاحظة إضافية حول الطلبية أو الألوان (اختياري)..."></textarea>
+          <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none" placeholder="👤 اسم التاجر / اسم المحل..." />
+          <input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن..." />
+          <input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white focus:border-yellow-500 focus:outline-none" placeholder="📞 رقم الهاتف / واتساب للتواصل..." />
+          <textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white focus:border-yellow-500 focus:outline-none resize-none" placeholder="📝 ملاحظة إضافية حول الطلبية أو الألوان (اختياري)..."></textarea>
         </div>
 
-        <!-- 🖨️ الميزة 2: زر طباعة فاتورة الجملة الرسمية PDF + زر إرسال واتساب -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-0.5">
           <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1 shadow-lg transition">
             <span>📲 إرسال الطلبية عبر واتساب</span>
@@ -923,6 +929,11 @@
         if (wrapper) wrapper.classList.add('hidden');
         if (menu) menu.classList.add('hidden');
       }
+      const resetBox = document.getElementById('adminResetMarketerBox');
+      if (resetBox) {
+        if (user) resetBox.classList.remove('hidden');
+        else resetBox.classList.add('hidden');
+      }
       if (typeof window.renderProducts === 'function') window.renderProducts();
       if (window.currentModalProduct && typeof window.renderComments === 'function') {
         window.renderComments(window.currentModalProduct);
@@ -955,6 +966,7 @@
         window.isAdmin = false;
         document.getElementById('adminDropdownWrapper').classList.add('hidden');
         document.getElementById('adminDropdownMenu').classList.add('hidden');
+        document.getElementById('adminResetMarketerBox').classList.add('hidden');
         window.renderProducts();
         window.showToast("تم تسجيل خروج الإدارة بأمان 🔒");
       });
@@ -973,8 +985,10 @@
     const LS_RATED_KEY = 'fw_user_rated_master';
     const LS_SOCIAL_CACHE = 'fw_social_cache_master';
     const LS_THEME_KEY = 'fw_theme_mode_master';
-    const LS_MARKETER_KEY = 'fw_marketer_profile_v2';
-    const LS_REFERRED_BY_KEY = 'fw_referred_by_code_v2';
+    const LS_MARKETER_KEY = 'fw_marketer_profile_v3';
+    const LS_REFERRED_BY_KEY = 'fw_referred_by_code_v3';
+    const LS_CART_KEY = 'fw_cart_persistent_v1';
+    const LS_BUYER_KEY = 'fw_buyer_info_v1';
 
     // محرك الصوت التفاعلي المدمج
     let audioCtx = null;
@@ -1038,20 +1052,22 @@
     }
     migrateLegacyStorage();
 
-    function createRandomStamp() {
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
-      const nums = Math.floor(100 + Math.random() * 900);
-      const c1 = chars.charAt(Math.floor(Math.random() * chars.length));
-      const c2 = chars.charAt(Math.floor(Math.random() * chars.length));
-      const n2 = Math.floor(1 + Math.random() * 9);
-      return `${nums}${c1}-${c2}${n2}`;
+    // حماية ضد ثغرات XSS في التعليقات
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
     let likedProducts = {};
     let viewedProducts = {};
     let userRatings = {};
     let socialDataMap = {};
-    let marketerProfile = { name: '', code: createRandomStamp() };
+    let marketerProfile = { name: '', code: '893K-X7' };
 
     try {
       likedProducts = JSON.parse(localStorage.getItem(LS_LIKED_KEY) || '{}');
@@ -1061,8 +1077,6 @@
       const savedMarketer = JSON.parse(localStorage.getItem(LS_MARKETER_KEY) || 'null');
       if (savedMarketer && savedMarketer.code) {
         marketerProfile = savedMarketer;
-      } else {
-        localStorage.setItem(LS_MARKETER_KEY, JSON.stringify(marketerProfile));
       }
     } catch (e) {}
 
@@ -1079,13 +1093,59 @@
     window.currentModalProduct = null;
     let isSyncingGithub = false;
 
-    // ⚖️ الميزة 1: تقدير وزن القطعة الذكي حسب القسم أو الوزن المخصص
+    // استرجاع السلة وبيانات التاجر المحفوظة تلقائياً
+    try {
+      const savedCart = localStorage.getItem(LS_CART_KEY);
+      if (savedCart) cart = JSON.parse(savedCart);
+    } catch (e) {}
+
+    function saveCartToStorage() {
+      try {
+        localStorage.setItem(LS_CART_KEY, JSON.stringify(cart));
+      } catch (e) {}
+      updateCartBadges();
+    }
+
+    function saveBuyerInfoToStorage() {
+      try {
+        const info = {
+          name: document.getElementById('buyerName')?.value || '',
+          address: document.getElementById('buyerAddress')?.value || '',
+          phone: document.getElementById('buyerPhone')?.value || '',
+          notes: document.getElementById('buyerNotes')?.value || ''
+        };
+        localStorage.setItem(LS_BUYER_KEY, JSON.stringify(info));
+      } catch (e) {}
+    }
+
+    function loadBuyerInfoFromStorage() {
+      try {
+        const raw = localStorage.getItem(LS_BUYER_KEY);
+        if (raw) {
+          const info = JSON.parse(raw);
+          if (document.getElementById('buyerName')) document.getElementById('buyerName').value = info.name || '';
+          if (document.getElementById('buyerAddress')) document.getElementById('buyerAddress').value = info.address || '';
+          if (document.getElementById('buyerPhone')) document.getElementById('buyerPhone').value = info.phone || '';
+          if (document.getElementById('buyerNotes')) document.getElementById('buyerNotes').value = info.notes || '';
+        }
+      } catch (e) {}
+    }
+
+    function clearEntireCart() {
+      if (confirm("هل أنت متأكد من تفريغ السلة بالكامل؟")) {
+        cart = [];
+        saveCartToStorage();
+        openCart();
+        showToast("تم تفريغ السلة", "error");
+      }
+    }
+
     function getPieceWeightGrams(p) {
       if (p && Number(p.pieceWeight) > 0) return Number(p.pieceWeight);
       const cat = p ? p.category : '';
       if (cat === 'ولادي') return 220;
       if (cat === 'ب.ب') return 150;
-      return 350; // نسواني أو رجالي افتراضياً 350 غرام
+      return 350;
     }
 
     function autoSuggestWeight(cat) {
@@ -1096,7 +1156,6 @@
       else weightInput.value = 350;
     }
 
-    // ⚠️ الميزة 3: شارات حالة المخزون والحجز المسبق
     function getStockBadgeInfo(p) {
       const status = p.stockStatus || 'AVAILABLE';
       if (status === 'LOW') {
@@ -1111,7 +1170,6 @@
       return null;
     }
 
-    // 👑 الميزة 5: نافذة طلبات التصنيع الخاص (VIP B2B)
     function openVipModal() {
       document.getElementById('vipModal').classList.add('flex');
       document.getElementById('vipModal').classList.remove('hidden');
@@ -1140,10 +1198,10 @@
       msg += `يرجى مراجعة الطلب والتواصل لتحديد السعر الخاص وموعد التسليم.`;
 
       closeVipModal();
-      window.open(`https://wa.me/963996311804?text=${msg}`, '_blank');
+      window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // 💡📊 الميزة 4: نظام الربح ولوحة إحصائيات المسوق السحابية
+    // 💡 نظام بصمة المسوق الثابتة الذكية (الاسم + آخر 4 أرقام من الهاتف) لمنع ضياع الأرباح
     function initAffiliateSystem() {
       try {
         const urlParams = new URLSearchParams(window.location.search);
@@ -1189,7 +1247,7 @@
           logContainer.innerHTML = myOrders.slice().reverse().map((o, idx) => `
             <div class="flex justify-between items-center bg-black/80 px-2 py-1 rounded border border-gray-800">
               <span>#${myOrders.length - idx} | 📅 ${o.date} (${o.pieces} قطعة)</span>
-              <span class="text-emerald-400 font-black">ربحك: +$${Number(o.commissionUsd).toFixed(2)}</span>
+              <span class="text-emerald-400 font-black">ربح مقدر: +$${Number(o.commissionUsd).toFixed(2)}</span>
             </div>
           `).join('');
         }
@@ -1205,10 +1263,15 @@
         if (!Array.isArray(socialDataMap._marketerOrders[stampCode])) {
           socialDataMap._marketerOrders[stampCode] = [];
         }
+        // منع تكرار نفس الطلبية بنفس القيمة في نفس الدقيقة
+        const nowMs = Date.now();
+        const recentDuplicate = socialDataMap._marketerOrders[stampCode].some(o => (nowMs - (o.id || 0)) < 60000 && o.totalUsd === Number(totalUsd));
+        if (recentDuplicate) return;
+
         const now = new Date();
         const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`;
         socialDataMap._marketerOrders[stampCode].push({
-          id: Date.now(),
+          id: nowMs,
           date: dateStr,
           totalUsd: Number(totalUsd) || 0,
           commissionUsd: Number(commissionUsd) || 0,
@@ -1219,12 +1282,51 @@
       } catch (e) {}
     }
 
+    // زر خاص بالأدمن لتصفير رصيد مسوق بعد محاسبته
+    async function adminClearMarketerOrders() {
+      if (!window.isAdmin) return;
+      if (confirm(`هل أنت متأكد من تصفير وإغلاق سجل طلبيات البصمة (${marketerProfile.code}) بعد المحاسبة؟`)) {
+        if (socialDataMap && socialDataMap._marketerOrders) {
+          socialDataMap._marketerOrders[marketerProfile.code] = [];
+          localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
+          await pushPublicSocialState(null);
+          renderMarketerDashboard();
+          playUiSound('success');
+          showToast("تم تصفير سجل البصمة بنجاح ✅");
+        }
+      }
+    }
+
+    // توليد بصمة ثابتة مبنية على (الاسم + آخر 4 أرقام من الهاتف)
+    function generateMarketerProfile() {
+      const nameInput = document.getElementById('marketerNameInput');
+      const phoneInput = document.getElementById('marketerPhoneDigits');
+      const rawName = (nameInput ? nameInput.value.trim() : '') || 'PRO';
+      const phoneDigits = (phoneInput ? phoneInput.value.trim() : '') || '1804';
+
+      const englishOnly = rawName.replace(/[^a-zA-Z]/g, '').toUpperCase();
+      let prefix = englishOnly.length >= 2 ? englishOnly.slice(0, 2) : 'FW';
+      const cleanDigits = phoneDigits.replace(/\D/g, '').slice(-4) || '0000';
+
+      marketerProfile = {
+        name: rawName,
+        phone: cleanDigits,
+        code: `${cleanDigits}-${prefix}`
+      };
+      try { localStorage.setItem(LS_MARKETER_KEY, JSON.stringify(marketerProfile)); } catch (e) {}
+      updateAffiliateModalUI();
+      playUiSound('success');
+      showToast(`تم تثبيت / استرجاع بصمتك السرية الثابتة (${marketerProfile.code}) بنجاح! ✨`);
+    }
+
     function updateAffiliateModalUI() {
       const codeEl = document.getElementById('myAffiliateCode');
       const linkEl = document.getElementById('affiliateLinkInput');
       const nameEl = document.getElementById('marketerNameInput');
+      const phoneEl = document.getElementById('marketerPhoneDigits');
       if (codeEl) codeEl.innerText = marketerProfile.code;
       if (nameEl && marketerProfile.name) nameEl.value = marketerProfile.name;
+      if (phoneEl && marketerProfile.phone) phoneEl.value = marketerProfile.phone;
       const baseUrl = window.location.origin + window.location.pathname;
       if (linkEl) linkEl.value = `${baseUrl}?k=${encodeURIComponent(marketerProfile.code)}`;
       renderMarketerDashboard();
@@ -1240,29 +1342,6 @@
     function closeAffiliateModal() {
       document.getElementById('affiliateModal').classList.add('hidden');
       document.getElementById('affiliateModal').classList.remove('flex');
-    }
-
-    function generateMarketerProfile() {
-      const nameInput = document.getElementById('marketerNameInput');
-      const rawName = (nameInput ? nameInput.value.trim() : '') || '';
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
-      let customLetters = '';
-      const englishOnly = rawName.replace(/[^a-zA-Z]/g, '').toUpperCase();
-      if (englishOnly.length >= 2) {
-        customLetters = englishOnly.slice(0, 2);
-      } else {
-        customLetters = chars.charAt(Math.floor(Math.random() * chars.length)) + chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      const n1 = Math.floor(100 + Math.random() * 900);
-      const n2 = Math.floor(1 + Math.random() * 9);
-      marketerProfile = {
-        name: rawName,
-        code: `${n1}${customLetters.charAt(0)}-${customLetters.charAt(1)}${n2}`
-      };
-      try { localStorage.setItem(LS_MARKETER_KEY, JSON.stringify(marketerProfile)); } catch (e) {}
-      updateAffiliateModalUI();
-      playUiSound('success');
-      showToast(`تم توليد بصمتك السرية (${marketerProfile.code}) بنجاح! ✨`);
     }
 
     function copyAffiliateLink() {
@@ -1306,8 +1385,8 @@
       let totalComm = 0;
       myOrders.forEach(o => totalComm += Number(o.commissionUsd) || 0);
 
-      const msg = `💡 طلب اعتماد بصمة مسوق وصرف أرباح - FASHION WORLD%0A----------------------------------%0A👤 اسم المسوق: ${name}%0A🔑 بصمة التوجيه السرية: ${marketerProfile.code}%0A🌳 بصمة المسوق الداعي: ${parentStamp}%0A📊 إجمالي الطلبيات المحققة: ${myOrders.length} طلبية%0A💰 الرصيد المستحق: $${totalComm.toFixed(2)}%0A----------------------------------%0Aيرجى اعتماد بصمتي السرية لديكم!`;
-      window.open(`https://wa.me/963996311804?text=${msg}`, '_blank');
+      const msg = `💡 طلب اعتماد بصمة مسوق وصرف أرباح - FASHION WORLD%0A----------------------------------%0A👤 اسم المسوق: ${name}%0A🔑 بصمة التوجيه السرية: ${marketerProfile.code}%0A🌳 بصمة المسوق الداعي: ${parentStamp}%0A📊 فواتير مرسلة: ${myOrders.length} فاتورة%0A💰 الأرباح المقدرة: $${totalComm.toFixed(2)}%0A----------------------------------%0Aيرجى اعتماد بصمتي السرية لديكم!`;
+      window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function applySavedTheme() {
@@ -1622,6 +1701,7 @@
     async function initApp() {
       applySavedTheme();
       initAffiliateSystem();
+      loadBuyerInfoFromStorage();
       let localParsed = null;
       try {
         const localRaw = localStorage.getItem(LS_STATE_KEY);
@@ -1753,9 +1833,24 @@
       }
     }
 
-    function formatPrice(usd) {
-      const numUsd = Math.round((Number(usd) || 0) * 100) / 100;
+    // إظهار السعر القديم مشطوباً عند تفعيل الحسم الوامض
+    function formatPrice(p) {
+      const numUsd = Math.round((Number(p.priceUsd) || 0) * 100) / 100;
       const syp = Math.round(numUsd * exchangeRate).toLocaleString('en-US');
+
+      if (p.hasDiscount && p.discountPercent > 0) {
+        const pct = Number(p.discountPercent) || 0;
+        const oldUsd = Math.round((numUsd / (1 - pct / 100)) * 100) / 100;
+        const oldSyp = Math.round(oldUsd * exchangeRate).toLocaleString('en-US');
+        if (currencyMode === 'USD') {
+          return `<div class="flex items-center gap-1.5"><span class="text-gray-400 line-through text-[10px]">$${oldUsd}</span><span class="text-yellow-400 font-black text-xs sm:text-sm">$${numUsd}</span></div>`;
+        }
+        if (currencyMode === 'SYP') {
+          return `<div class="flex items-center gap-1.5"><span class="text-gray-400 line-through text-[10px]">${oldSyp} ل.س</span><span class="text-emerald-400 font-black text-[11px] sm:text-xs">${syp} ل.س</span></div>`;
+        }
+        return `<div class="flex flex-col leading-tight"><div class="flex items-center gap-1.5"><span class="text-gray-400 line-through text-[9px]">$${oldUsd}</span><span class="text-yellow-400 font-black text-xs">$${numUsd}</span></div><span class="text-emerald-400 font-bold text-[9px] sm:text-[10px]">${syp} ل.س</span></div>`;
+      }
+
       if (currencyMode === 'USD') return `<span class="text-yellow-400 font-black text-xs sm:text-sm">$${numUsd} <span class="text-[9px] text-gray-400">/قطعة</span></span>`;
       if (currencyMode === 'SYP') return `<span class="text-emerald-400 font-black text-[11px] sm:text-xs">${syp} ل.س</span>`;
       return `<div class="flex flex-col leading-tight"><span class="text-yellow-400 font-black text-xs sm:text-sm">$${numUsd} <span class="text-[8px] text-gray-400">/قطعة</span></span><span class="text-emerald-400 font-bold text-[9px] sm:text-[10px]">${syp} ل.س</span></div>`;
@@ -1834,14 +1929,14 @@
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
           <div class="relative h-44 sm:h-60 overflow-hidden bg-neutral-900 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${p.id})">
-            <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
+            <img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
             
             <div class="watermark-logo">
               <span class="text-[7px] sm:text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span>
             </div>
 
             <span class="absolute top-2 right-2 gold-gradient-bg text-black font-extrabold text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full shadow">
-              ${p.category}
+              ${escapeHtml(p.category)}
             </span>
             ${p.hasDiscount ? `<span class="absolute top-8 right-2 discount-flash text-white font-black text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full">${discountText}</span>` : ''}
             ${stockBadge ? `<span class="absolute ${p.hasDiscount ? 'top-14' : 'top-8'} right-2 ${stockBadge.className} font-extrabold text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full shadow">${stockBadge.text}</span>` : ''}
@@ -1855,12 +1950,12 @@
 
           <div class="p-2.5 sm:p-3.5 flex-1 flex flex-col justify-between space-y-2">
             <div>
-              <h3 class="font-extrabold text-white text-[11px] sm:text-sm mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${p.id})">${p.name}</h3>
-              <p class="text-[10px] text-gray-400 line-clamp-1">📐 ${p.pack}</p>
+              <h3 class="font-extrabold text-white text-[11px] sm:text-sm mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${p.id})">${escapeHtml(p.name)}</h3>
+              <p class="text-[10px] text-gray-400 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>
             </div>
 
             <div class="flex items-center justify-between border-t border-gray-800/80 pt-1.5">
-              ${formatPrice(p.priceUsd)}
+              ${formatPrice(p)}
               <button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800/90 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">
                 ${isLiked ? '❤️' : '🤍'} ${p.likes || 0}
               </button>
@@ -1904,6 +1999,7 @@
         saveAllState(false, p);
       }
 
+      document.getElementById('modalTitleinnerText'] = p.name;
       document.getElementById('modalTitle').innerText = p.name;
       document.getElementById('modalMainImg').src = p.img;
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
@@ -1950,7 +2046,7 @@
       document.getElementById('modalQtyInput').value = minQty;
       document.getElementById('modalQtyInput').min = minQty;
 
-      document.getElementById('modalPriceContainer').innerHTML = formatPrice(p.priceUsd);
+      document.getElementById('modalPriceContainer').innerHTML = formatPrice(p);
       calculateModalTotal();
 
       renderModalStars(p);
@@ -2016,6 +2112,7 @@
       await saveAllState(true, p);
     }
 
+    // عرض التعليقات بعد تنظيفها برمجياً ضد ثغرات XSS
     function renderComments(p) {
       const list = document.getElementById('commentsList');
       const comments = p.comments || [];
@@ -2026,8 +2123,8 @@
       list.innerHTML = comments.map(c => `
         <div class="flex justify-between items-center bg-black/70 p-2 rounded-xl border border-yellow-500/20 text-[11px]">
           <div>
-            <span class="text-yellow-400 font-extrabold">${c.author}:</span>
-            <span class="text-gray-200 mr-1">${c.text}</span>
+            <span class="text-yellow-400 font-extrabold">${escapeHtml(c.author)}:</span>
+            <span class="text-gray-200 mr-1">${escapeHtml(c.text)}</span>
           </div>
           ${window.isAdmin ? `<button onclick="deleteComment(${p.id},${c.id})" class="text-red-400 hover:text-red-300 text-[10px] font-bold px-1.5 py-0.5 bg-red-950/40 rounded" title="حذف التعليق نهائياً">🗑️</button>` : ''}
         </div>
@@ -2050,8 +2147,8 @@
       }
       const newComment = {
         id: Date.now(),
-        author,
-        text
+        author: escapeHtml(author),
+        text: escapeHtml(text)
       };
       window.currentModalProduct.comments.push(newComment);
 
@@ -2095,7 +2192,6 @@
       const subtotalSyp = Math.round(subtotalUsd * exchangeRate).toLocaleString('en-US');
       document.getElementById('modalSubtotal').innerText = `$${subtotalUsd} (${subtotalSyp} ل.س)`;
 
-      // حساب عدد الباكيتات والوزن الفوري داخل نافذة الموديل
       const packsCount = Math.max(1, Math.ceil(qty / minQty));
       const pieceWeight = getPieceWeightGrams(window.currentModalProduct);
       const weightKg = ((qty * pieceWeight) / 1000).toFixed(2);
@@ -2106,7 +2202,7 @@
     }
 
     function updateCartBadges() {
-      const totalItems = cart.reduce((a, b) => a + b.qty, 0);
+      const totalItems = cart.reduce((a, b) => a + (Number(b.qty) || 0), 0);
       const desktopBadge = document.getElementById('cartCount');
       if (desktopBadge) desktopBadge.innerText = totalItems;
     }
@@ -2128,9 +2224,20 @@
       } else {
         cart.push({ ...window.currentModalProduct, qty: qty });
       }
-      updateCartBadges();
+      saveCartToStorage();
       closeProductModal();
       showToast(`تمت إضافة ${qty} قطعة إلى السلة 🛒✨`);
+    }
+
+    // إمكانية زيادة أو نقصان الكمية مباشرة من داخل السلة
+    function adjustCartItemQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      const minQty = item.minQty || 10;
+      item.qty += delta;
+      if (item.qty < minQty) item.qty = minQty;
+      saveCartToStorage();
+      openCart();
     }
 
     function shareProductWhatsApp() {
@@ -2139,7 +2246,7 @@
       const shareUrl = `${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(marketerProfile.code)}`;
       const priceText = `${p.priceUsd}$ للقطعة (الحد الأدنى: ${p.minQty || 10} قطع)`;
       const msg = `🔥 عرض جملة الجملة من FASHION WORLD (دمشق - الحريقة)%0A----------------------------------%0A👗 الموديل: ${p.name}%0A📐 التفاصيل: ${p.pack}%0A💰 السعر: ${priceText}%0A🔖 رمز العرض: FW-${marketerProfile.code}%0A🔗 رابط التصفح والطلب: ${shareUrl}`;
-      window.open(`https://wa.me/?text=${msg}`, '_blank');
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     async function toggleLikeProduct(e, id) {
@@ -2324,7 +2431,7 @@
         const pieceWeight = parseInt(document.getElementById('pPieceWeight').value) || 350;
         const stockStatus = document.getElementById('pStockStatus').value || 'AVAILABLE';
         const hasDiscount = document.getElementById('pHasDiscount').checked;
-        const discountPercent = hasDiscount ? Math.min(99, Math.max(1, parseInt(document.getElementById('pDiscountPercent').value) || 15)) : 0;
+        const discountPercent = hasDiscount ? Math.min(90, Math.max(1, parseInt(document.getElementById('pDiscountPercent').value) || 15)) : 0;
         const mainFile = document.getElementById('pImgFile');
         const extraFiles = document.getElementById('pExtraImgFile');
 
@@ -2408,7 +2515,6 @@
       }
     }
 
-    // 📦 حساب إحصائيات الطرد الذكي داخل السلة
     function getCartSmartMetrics() {
       let totalPieces = 0;
       let totalPacks = 0;
@@ -2426,7 +2532,6 @@
       });
 
       totalUsd = Math.round(totalUsd * 100) / 100;
-      // إضافة 0.5 كغ (500 غرام) وزن الكرتونة والتغليف إذا كانت السلة غير فارغة
       const totalWeightKg = totalPieces > 0 ? ((totalGrams + 500) / 1000).toFixed(2) : "0";
       return { totalPieces, totalPacks, totalWeightKg, totalUsd };
     }
@@ -2448,11 +2553,16 @@
           const packs = Math.max(1, Math.ceil(c.qty / (c.minQty || 10)));
           return `<div class="flex justify-between items-center glossy-box p-2.5 rounded-xl gap-2">
             <div class="flex-1 min-w-0">
-              <p class="font-bold text-white text-xs truncate">${c.name}</p>
+              <p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p>
               <p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} قطعة (${packs} باكيت)</p>
             </div>
+            <div class="flex items-center gap-1">
+              <button onclick="adjustCartItemQty(${c.id}, -${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button>
+              <span class="text-white font-black text-xs px-1">${c.qty}</span>
+              <button onclick="adjustCartItemQty(${c.id}, ${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button>
+            </div>
             <span class="text-emerald-400 font-black text-xs">$${sub}</span>
-            <button onclick="playUiSound('tap'); removeFromCart(${c.id})" class="text-red-400 hover:text-red-300 text-[10px] font-bold px-2 py-1 bg-red-950/40 rounded-lg">حذف</button>
+            <button onclick="playUiSound('tap'); removeFromCart(${c.id})" class="text-red-400 hover:text-red-300 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button>
           </div>`;
         }).join('');
         const totalSyp = Math.round(metrics.totalUsd * exchangeRate).toLocaleString('en-US');
@@ -2469,11 +2579,11 @@
 
     function removeFromCart(id) {
       cart = cart.filter(c => c.id !== id);
-      updateCartBadges();
+      saveCartToStorage();
       openCart();
     }
 
-    // 🖨️ الميزة 2: طباعة أو حفظ فاتورة الجملة الرسمية PDF
+    // طباعة أو حفظ فاتورة الجملة PDF
     function printWholesaleInvoice() {
       if (cart.length === 0) return alert("السلة فارغة! أضف موديلات أولاً لطباعة الفاتورة.");
       playUiSound('success');
@@ -2497,8 +2607,8 @@
         return `
           <tr>
             <td>${idx + 1}</td>
-            <td style="text-align:right;font-weight:bold;">${c.name}</td>
-            <td>${c.category}</td>
+            <td style="text-align:right;font-weight:bold;">${escapeHtml(c.name)}</td>
+            <td>${escapeHtml(c.category)}</td>
             <td>${c.qty} قطعة (${packs} باكيت)</td>
             <td>$${c.priceUsd}</td>
             <td style="font-weight:bold;">$${sub}</td>
@@ -2551,10 +2661,10 @@
             </div>
 
             <div class="client-box">
-              <div><strong>👤 التاجر / المحل:</strong> ${buyerName}</div>
-              <div><strong>📞 رقم الهاتف:</strong> ${buyerPhone}</div>
-              <div><strong>📍 العنوان والشحن:</strong> ${buyerAddress}</div>
-              <div><strong>📝 ملاحظات:</strong> ${buyerNotes}</div>
+              <div><strong>👤 التاجر / المحل:</strong> ${escapeHtml(buyerName)}</div>
+              <div><strong>📞 رقم الهاتف:</strong> ${escapeHtml(buyerPhone)}</div>
+              <div><strong>📍 العنوان والشحن:</strong> ${escapeHtml(buyerAddress)}</div>
+              <div><strong>📝 ملاحظات:</strong> ${escapeHtml(buyerNotes)}</div>
             </div>
 
             <table>
@@ -2595,7 +2705,7 @@
       win.document.close();
     }
 
-    // إرسال الطلبية عبر واتساب + تسجيل الطلبية في لوحة المسوق السحابية تلقائياً
+    // إرسال الطلبية عبر واتساب مشفرة بالكامل (تمنع قص الواتساب بسبب الـ #) وتسجيلها للمسوق
     async function sendOrderWhatsApp() {
       if (cart.length === 0) return alert("السلة فارغة!");
       
@@ -2609,39 +2719,41 @@
       }
 
       playUiSound('success');
+      saveBuyerInfoToStorage();
+
       const metrics = getCartSmartMetrics();
       let lines = cart.map((c, idx) => {
         const sub = Math.round(c.priceUsd * c.qty * 100) / 100;
         const packs = Math.max(1, Math.ceil(c.qty / (c.minQty || 10)));
         return `${idx+1}. ${c.name} | الكمية: ${c.qty} قطعة (${packs} باكيت) | $${sub}`;
-      }).join('%0A');
+      }).join('\n');
 
       const totalSyp = Math.round(metrics.totalUsd * exchangeRate).toLocaleString('en-US');
 
-      // حساب عمولة المسوق السرية وفق معادلة: 5$ لكل 150$
       const savedStamp = localStorage.getItem(LS_REFERRED_BY_KEY);
       const commissionUsd = ((metrics.totalUsd / 150) * 5).toFixed(2);
       const routingStamp = savedStamp ? `FW-${savedStamp}-C${commissionUsd}` : `FW-DIR-00`;
 
-      // تسجيل الطلبية في لوحة تحكم المسوق السحابية إذا كان هناك مسوق
       if (savedStamp) {
         recordMarketerOrderInCloud(savedStamp, metrics.totalUsd, commissionUsd, metrics.totalPieces);
       }
 
-      let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)%0A`;
-      msg += `📋 *طلبية جملة جديدة*%0A`;
-      msg += `👤 الاسم/المحل: ${buyerName}%0A`;
-      msg += `📍 العنوان والشحن: ${buyerAddress}%0A`;
-      msg += `📞 رقم الهاتف: ${buyerPhone}%0A`;
+      let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)\n`;
+      msg += `📋 *طلبية جملة جديدة*\n`;
+      msg += `👤 الاسم/المحل: ${buyerName}\n`;
+      msg += `📍 العنوان والشحن: ${buyerAddress}\n`;
+      msg += `📞 رقم الهاتف: ${buyerPhone}\n`;
       if (buyerNotes) {
-        msg += `📝 ملاحظات: ${buyerNotes}%0A`;
+        msg += `📝 ملاحظات: ${buyerNotes}\n`;
       }
-      msg += `--------------------%0A${lines}%0A--------------------%0A`;
-      msg += `📦 *تفاصيل الطرد الذكي:* ${metrics.totalPieces} قطعة | ${metrics.totalPacks} باكيت | الوزن: ~${metrics.totalWeightKg} كغ%0A`;
-      msg += `💰 *المبلغ الإجمالي:* $${metrics.totalUsd} (${totalSyp} ل.س)%0A`;
+      msg += `--------------------\n${lines}\n--------------------\n`;
+      msg += `📦 *تفاصيل الطرد الذكي:* ${metrics.totalPieces} قطعة | ${metrics.totalPacks} باكيت | الوزن: ~${metrics.totalWeightKg} كغ\n`;
+      msg += `💰 *المبلغ الإجمالي:* $${metrics.totalUsd} (${totalSyp} ل.س)\n`;
       msg += `🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
 
-      window.open(`https://wa.me/963996311804?text=${msg}`, '_blank');
+      // تشفير الرابط بالكامل لمنع مشكلة الحذف عند وجود رمز #
+      const encodedMsg = encodeURIComponent(msg);
+      window.open(`https://wa.me/963996311804?text=${encodedMsg}`, '_blank');
     }
 
     initApp();
