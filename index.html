@@ -2,499 +2,406 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>FASHION WORLD | عالم الأزياء لتجارة الألبسة بالجملة - دمشق الحريقة</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --gold: #D4AF37; --gold-light: #FFF3B0; --gold-dark: #9A6F1A; }
+    :root { --gold: #D4AF37; }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { width: 100%; max-width: 100vw; overflow-x: hidden; margin: 0; padding: 0; touch-action: pan-y; -webkit-text-size-adjust: 100%; }
+    html, body { width: 100%; max-width: 100vw; overflow-x: hidden; margin: 0; padding: 0; }
     body {
-      font-family: 'Cairo', sans-serif;
-      background-color: #050507;
-      background-image: radial-gradient(circle at 12% 12%, rgba(212,175,55,0.11) 0%, transparent 40%), radial-gradient(circle at 88% 85%, rgba(16,185,129,0.06) 0%, transparent 40%);
-      color: #f5f5f5;
-      transition: background-color 0.25s ease, color 0.25s ease;
+      font-family: 'Cairo', sans-serif; background-color: #050507;
+      background-image: radial-gradient(circle at 12% 12%, rgba(212,175,55,0.1) 0%, transparent 40%), radial-gradient(circle at 88% 85%, rgba(16,185,129,0.05) 0%, transparent 40%);
+      color: #f5f5f5; transition: background-color 0.25s, color 0.25s;
     }
-    body.light-mode {
-      background-color: #f8fafc;
-      background-image: radial-gradient(circle at 15% 15%, rgba(212,175,55,0.15) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(56,189,248,0.08) 0%, transparent 45%);
-      color: #0f172a;
-    }
-    body.light-mode .glass-panel { background: rgba(255,255,255,0.96); border: 1px solid rgba(212,175,55,0.45); color: #0f172a; box-shadow: 0 8px 24px rgba(15,23,42,0.06); }
-    body.light-mode .card-luxury { background: linear-gradient(180deg, #ffffff 0%, #fefce8 100%); border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    body.light-mode { background-color: #f8fafc; color: #0f172a; }
+    body.light-mode .glass-panel { background: rgba(255,255,255,0.95); border-color: rgba(212,175,55,0.4); color: #0f172a; }
+    body.light-mode .card-luxury { background: linear-gradient(180deg, #fff 0%, #fefce8 100%); border-color: rgba(212,175,55,0.35); }
     body.light-mode .card-luxury h3 { color: #0f172a !important; }
     body.light-mode .card-luxury p, body.light-mode .text-gray-300, body.light-mode .text-gray-400 { color: #334155 !important; }
-    body.light-mode input, body.light-mode select, body.light-mode textarea { background-color: #ffffff !important; color: #0f172a !important; border-color: rgba(212,175,55,0.5) !important; }
+    body.light-mode input, body.light-mode select, body.light-mode textarea { background-color: #fff !important; color: #0f172a !important; border-color: rgba(212,175,55,0.5) !important; }
     .font-cinzel { font-family: 'Cinzel', serif; }
     .gold-gradient-text { background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #AA771C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .gold-gradient-bg { background: linear-gradient(135deg, #FFE885 0%, #D4AF37 50%, #9A6F1A 100%); box-shadow: 0 3px 12px rgba(212,175,55,0.25); transition: transform 0.18s ease, filter 0.18s ease; }
-    .gold-gradient-bg:hover { filter: brightness(1.08); }
-    .gold-gradient-bg:active { transform: scale(0.95); }
-    .glossy-box { background: linear-gradient(145deg, rgba(30,30,38,0.9), rgba(14,14,18,0.95)); border: 1px solid rgba(212,175,55,0.32); box-shadow: inset 0 1px 1px rgba(255,255,255,0.08); }
-    .gold-border { border: 1px solid rgba(212,175,55,0.4); }
-    .glass-panel { background: rgba(14,14,18,0.94); border: 1px solid rgba(212,175,55,0.28); box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
-    .card-luxury { background: linear-gradient(165deg, #191920 0%, #0b0b0e 100%); border: 1px solid rgba(212,175,55,0.26); box-shadow: 0 6px 18px rgba(0,0,0,0.45); transition: transform 0.25s ease, border-color 0.25s ease; }
-    @keyframes discountPulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.06); filter: brightness(1.18); } }
-    .discount-flash { background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%); border: 1px solid #fde047; animation: discountPulse 1.4s infinite ease-in-out; }
-    .stock-badge-low { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 1px solid #fef08a; animation: discountPulse 1.8s infinite ease-in-out; }
-    .stock-badge-preorder { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); border: 1px solid #ddd6fe; }
-    .stock-badge-soldout { background: rgba(15,23,42,0.92); border: 1px solid #ef4444; color: #f87171; }
-    @keyframes emeraldPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); } 50% { box-shadow: 0 0 0 5px rgba(16,185,129,0); } }
-    .affiliate-glow { animation: emeraldPulse 2s infinite ease-in-out; }
-    .watermark-logo { position: absolute; top: 8px; left: 8px; opacity: 0.92; pointer-events: none; z-index: 10; background: rgba(0,0,0,0.75); padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.45); display: flex; align-items: center; }
+    .gold-gradient-bg { background: linear-gradient(135deg, #FFE885 0%, #D4AF37 50%, #9A6F1A 100%); box-shadow: 0 3px 12px rgba(212,175,55,0.22); transition: 0.18s; }
+    .gold-gradient-bg:active { transform: scale(0.96); }
+    .glossy-box { background: linear-gradient(145deg, rgba(28,28,36,0.88), rgba(12,12,16,0.92)); border: 1px solid rgba(212,175,55,0.28); }
+    .glass-panel { background: rgba(14,14,18,0.94); border: 1px solid rgba(212,175,55,0.26); box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+    .card-luxury { background: linear-gradient(165deg, #17171e 0%, #0a0a0d 100%); border: 1px solid rgba(212,175,55,0.22); box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: 0.25s; }
+    /* شارات مصغرة وشفافة مريحة للنظر لا تغطي الموديل */
+    .badge-glass { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font-size: 8.5px; line-height: 1.2; padding: 2px 6px; border-radius: 6px; font-weight: 800; letter-spacing: 0.1px; }
+    @keyframes softPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+    .discount-flash { background: rgba(220, 38, 38, 0.72); border: 1px solid rgba(253, 224, 71, 0.55); color: #fff; animation: softPulse 1.8s infinite ease-in-out; }
+    .stock-badge-low { background: rgba(217, 119, 6, 0.72); border: 1px solid rgba(254, 240, 138, 0.5); color: #fff; }
+    .stock-badge-preorder { background: rgba(109, 40, 217, 0.72); border: 1px solid rgba(221, 214, 254, 0.5); color: #fff; }
+    .stock-badge-soldout { background: rgba(15, 23, 42, 0.82); border: 1px solid rgba(239, 68, 68, 0.6); color: #fca5a5; }
+    .watermark-logo { position: absolute; top: 6px; left: 6px; pointer-events: none; z-index: 10; background: rgba(0,0,0,0.42); backdrop-filter: blur(4px); padding: 1.5px 5px; border-radius: 5px; border: 1px solid rgba(212,175,55,0.3); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    @keyframes slideIn { from { transform: translateY(-16px) scale(0.96); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
-    .toast-anim { animation: slideIn 0.25s ease-out forwards; }
-    .app-icon-box { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0,0,0,0.5); transition: transform 0.2s ease; }
-    .app-icon-link:hover .app-icon-box { transform: translateY(-3px) scale(1.05); }
+    @keyframes slideIn { from { transform: translateY(-14px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .toast-anim { animation: slideIn 0.22s ease-out forwards; }
+    .zoomed-img { transform: scale(2.1); cursor: zoom-out !important; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col" id="mainBody">
 
-  <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[110] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs sm:max-w-sm"></div>
+  <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[120] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs"></div>
+
+  <!-- مكبر الصور بملء الشاشة (Lightbox) -->
+  <div id="imageZoomModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[115] p-2 select-none" onclick="closeZoomModal()">
+    <button onclick="closeZoomModal()" class="fixed top-4 right-4 z-[120] bg-neutral-800/90 text-white w-9 h-9 rounded-full font-black text-sm border border-yellow-500/40">✕</button>
+    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[120] bg-black/80 text-yellow-300 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط على الصورة للتكبير 2x أو الإغلاق</div>
+    <div class="w-full h-full flex items-center justify-center overflow-auto" onclick="event.stopPropagation()">
+      <img id="zoomModalImg" src="" onclick="toggleDoubleZoom(this)" class="max-w-full max-h-[92vh] object-contain transition-transform duration-300 cursor-zoom-in rounded-lg" />
+    </div>
+  </div>
 
   <!-- الشريط العلوي -->
-  <div class="bg-gradient-to-r from-black via-neutral-950 to-black border-b border-yellow-500/30 text-[10px] sm:text-[11px] py-1.5 px-2.5 sm:px-4 w-full">
+  <div class="bg-black border-b border-yellow-500/25 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
     <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 text-gray-200">
       <div class="flex items-center gap-1.5 truncate">
         <span class="text-yellow-400 font-extrabold truncate">📍 سوريا - دمشق - الحريقة</span>
-        <span class="hidden sm:inline text-gray-600">|</span>
-        <span class="hidden sm:inline text-emerald-400 font-semibold">شحن مباشر من المعمل لجميع المحافظات</span>
+        <span class="hidden sm:inline text-emerald-400 font-semibold">| شحن مباشر من المعمل</span>
       </div>
-      <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-        <button onclick="playUiSound('tap'); openAffiliateModal()" class="affiliate-glow text-emerald-300 font-extrabold bg-emerald-600/30 hover:bg-emerald-500/40 px-2 py-0.5 rounded-lg border border-emerald-400/60 transition text-[9px] sm:text-[11px]">💡 كيف يمكنك الربح من موقعنا</button>
-        <button onclick="playUiSound('tap'); openVipModal()" class="text-amber-300 font-extrabold bg-purple-600/25 hover:bg-purple-600/40 px-2 py-0.5 rounded-lg border border-purple-400/50 transition text-[9px] sm:text-[11px]">👑 طلب تصنيع خاص VIP</button>
-        <button onclick="playUiSound('tap'); openAboutModal()" class="text-yellow-300 font-extrabold bg-yellow-500/20 hover:bg-yellow-500/30 px-2 py-0.5 rounded-lg border border-yellow-400/50 transition text-[9px] sm:text-[11px]">ℹ️ من نحن</button>
+      <div class="flex items-center gap-1 flex-shrink-0">
+        <button onclick="playUiSound('tap'); openAffiliateModal()" class="text-emerald-300 font-extrabold bg-emerald-600/25 px-2 py-0.5 rounded-md border border-emerald-400/50 text-[9px] sm:text-[10px]">💡 كيف يمكنك الربح من موقعنا</button>
+        <button onclick="playUiSound('tap'); openVipModal()" class="text-amber-300 font-extrabold bg-purple-600/25 px-2 py-0.5 rounded-md border border-purple-400/50 text-[9px] sm:text-[10px]">👑 تصنيع VIP</button>
+        <button onclick="playUiSound('tap'); openAboutModal()" class="text-yellow-300 font-extrabold bg-yellow-500/20 px-2 py-0.5 rounded-md border border-yellow-400/40 text-[9px] sm:text-[10px]">ℹ️ من نحن</button>
       </div>
     </div>
   </div>
 
-  <!-- الهيدر الرئيسي -->
-  <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/30 w-full">
-    <div class="max-w-7xl mx-auto px-2.5 sm:px-6 py-2.5 flex items-center justify-between gap-1.5 sm:gap-3">
+  <!-- الهيدر -->
+  <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/25 w-full">
+    <div class="max-w-7xl mx-auto px-2.5 sm:px-6 py-2 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2 cursor-pointer select-none min-w-0" onclick="logoSecretClick()">
-        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl gold-border bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center shadow-lg flex-shrink-0">
-          <svg viewBox="0 0 64 64" class="w-5 h-5 sm:w-6 sm:h-6"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF3B0"/><stop offset="50%" stop-color="#D4AF37"/><stop offset="100%" stop-color="#8A5A10"/></linearGradient></defs><path fill="url(#g1)" d="M25 8 L28 18 L32 14 L36 18 L39 8 L42 22 C42 28 38 32 39 39 L47 56 L17 56 L25 39 C26 32 22 28 22 22 Z"/></svg>
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-yellow-500/40 bg-black flex items-center justify-center shadow flex-shrink-0">
+          <svg viewBox="0 0 64 64" class="w-5 h-5"><path fill="#D4AF37" d="M25 8 L28 18 L32 14 L36 18 L39 8 L42 22 C42 28 38 32 39 39 L47 56 L17 56 L25 39 C26 32 22 28 22 22 Z"/></svg>
         </div>
         <div class="min-w-0">
-          <h1 class="font-cinzel text-xs sm:text-xl font-black tracking-wide gold-gradient-text leading-none truncate">FASHION WORLD</h1>
-          <p class="text-[8px] sm:text-[11px] text-gray-400 mt-0.5 font-semibold truncate">تجارة الألبسة بالجملة - دمشق</p>
+          <h1 class="font-cinzel text-xs sm:text-lg font-black gold-gradient-text leading-none truncate">FASHION WORLD</h1>
+          <p class="text-[8px] sm:text-[10px] text-gray-400 mt-0.5 font-semibold truncate">تجارة الألبسة بالجملة - دمشق</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+      <div class="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
         <div id="adminDropdownWrapper" class="hidden">
-          <button onclick="playUiSound('tap'); toggleAdminMenu()" class="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-black font-black px-2.5 sm:px-3 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1 shadow-md border border-yellow-200">
-            <span>👑</span><span class="hidden sm:inline">الإدارة</span><span id="adminArrow" class="text-[8px] transition-transform duration-200">▼</span>
-          </button>
+          <button onclick="playUiSound('tap'); toggleAdminMenu()" class=" gold-gradient-bg text-black font-black px-2.5 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1">👑 <span class="hidden sm:inline">الإدارة</span></button>
         </div>
-        <div class="hidden lg:flex items-center gap-1.5 glossy-box px-2.5 py-1.5 rounded-xl text-xs text-gray-200">
-          <span>💱 الصرف:</span><strong id="headerRateDesktop" class="text-yellow-400">15,000</strong><span>ل.س</span>
-        </div>
-        <button onclick="playUiSound('tap'); toggleThemeMode()" id="themeToggleBtn" class="glossy-box hover:border-yellow-400 text-yellow-400 w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs flex items-center justify-center shadow transition">🌙</button>
-        <select id="currencySelector" onchange="playUiSound('tap'); setCurrencyMode(this.value)" class="glossy-box text-yellow-400 rounded-xl px-1.5 sm:px-2.5 py-1.5 text-[10px] sm:text-xs font-extrabold focus:outline-none cursor-pointer shadow">
-          <option value="BOTH">💵 $ + ل.س</option>
-          <option value="USD">💵 دولار ($)</option>
-          <option value="SYP">🇸🇾 ليرة (ل.س)</option>
+        <div class="hidden lg:flex items-center gap-1 glossy-box px-2.5 py-1 rounded-xl text-xs"><span>💱 الصرف:</span><strong id="headerRateDesktop" class="text-yellow-400">15,000</strong><span>ل.س</span></div>
+        <button onclick="playUiSound('tap'); toggleThemeMode()" id="themeToggleBtn" class="glossy-box text-yellow-400 w-8 h-8 rounded-xl text-xs flex items-center justify-center">🌙</button>
+        <select id="currencySelector" onchange="playUiSound('tap'); setCurrencyMode(this.value)" class="glossy-box text-yellow-400 rounded-xl px-1.5 py-1.5 text-[10px] font-extrabold focus:outline-none">
+          <option value="BOTH">💵 $ + ل.س</option><option value="USD">💵 دولار ($)</option><option value="SYP">🇸🇾 ليرة (ل.س)</option>
         </select>
-        <button onclick="playUiSound('tap'); openCart()" class="relative gold-gradient-bg text-black font-extrabold px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1">
-          <span>🛒</span><span>السلة</span><span id="cartCount" class="bg-black text-yellow-400 px-1.5 py-0.2 rounded-full text-[9px] sm:text-[10px] font-black border border-yellow-500/40">0</span>
+        <button onclick="playUiSound('tap'); openCart()" class="gold-gradient-bg text-black font-extrabold px-2.5 py-1.5 rounded-xl text-[10px] sm:text-xs flex items-center gap-1">
+          <span>🛒</span><span>السلة</span><span id="cartCount" class="bg-black text-yellow-400 px-1.5 rounded-full text-[9px] font-black">0</span>
         </button>
       </div>
     </div>
 
-    <!-- شريط الإدارة -->
-    <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/40 bg-gradient-to-b from-neutral-900 via-black to-neutral-950 px-2.5 sm:px-6 py-2.5 shadow-2xl">
-      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
-        <div class="flex items-center justify-between">
-          <span class="text-yellow-400 font-extrabold text-[11px]">👑 لوحة تحكم الإدارة السريعة</span>
-          <span class="bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full text-[10px] border border-emerald-500/40 font-bold">سعر الصرف: <b id="adminRateDisplay">15,000</b> ل.س</span>
-        </div>
-        <div class="grid grid-cols-5 sm:flex sm:items-center gap-1.5">
-          <button onclick="playUiSound('tap'); openAddModal(); toggleAdminMenu();" class="col-span-2 sm:col-auto gold-gradient-bg text-black font-black py-2 px-3 rounded-xl text-[10px] sm:text-xs shadow">➕ نشر موديل</button>
-          <button onclick="playUiSound('tap'); openBannerModal(); toggleAdminMenu();" class="bg-amber-500/15 text-yellow-300 border border-yellow-500/40 py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">🖼️ الغلاف</button>
-          <button onclick="playUiSound('tap'); changeExchangeRate(); toggleAdminMenu();" class="bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">💱 الصرف</button>
-          <div class="col-span-5 sm:col-auto grid grid-cols-2 sm:flex gap-1.5 mt-0.5 sm:mt-0">
-            <button onclick="playUiSound('tap'); openCloudSetupModal(); toggleAdminMenu();" class="bg-sky-500/15 text-sky-300 border border-sky-500/40 py-1.5 sm:py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">🔗 التوكن السحابي</button>
-            <button onclick="playUiSound('tap'); logoutAdmin(); toggleAdminMenu();" class="bg-red-600/90 text-white py-1.5 sm:py-2 px-2.5 rounded-xl font-extrabold text-[10px] sm:text-xs">خروج 🔒</button>
-          </div>
+    <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/30 bg-neutral-950 px-2.5 py-2">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-1.5 text-xs">
+        <span class="text-yellow-400 font-bold text-[10px]">👑 الإدارة (الصرف: <b id="adminRateDisplay">15,000</b> ل.س)</span>
+        <div class="flex flex-wrap gap-1">
+          <button onclick="openAddModal(); toggleAdminMenu();" class="gold-gradient-bg text-black font-black py-1 px-2.5 rounded-lg text-[10px]">➕ نشر موديل</button>
+          <button onclick="openBannerModal(); toggleAdminMenu();" class="bg-amber-500/20 text-yellow-300 border border-yellow-500/30 py-1 px-2 rounded-lg text-[10px] font-bold">🖼️ الغلاف</button>
+          <button onclick="changeExchangeRate(); toggleAdminMenu();" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 py-1 px-2 rounded-lg text-[10px] font-bold">💱 الصرف</button>
+          <button onclick="openCloudSetupModal(); toggleAdminMenu();" class="bg-sky-500/20 text-sky-300 border border-sky-500/30 py-1 px-2 rounded-lg text-[10px] font-bold">🔗 التوكن</button>
+          <button onclick="logoutAdmin(); toggleAdminMenu();" class="bg-red-600 text-white py-1 px-2 rounded-lg text-[10px] font-bold">خروج 🔒</button>
         </div>
       </div>
     </div>
   </header>
 
   <!-- بانر الغلاف -->
-  <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-3 w-full">
-    <div id="bannerSection" class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-yellow-500/40 bg-cover bg-center py-7 sm:py-12 px-3 sm:px-8 shadow-2xl">
-      <div class="max-w-2xl mx-auto text-center relative z-10 space-y-2.5">
-        <span class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-black/80 border border-yellow-400/50 text-yellow-300 text-[10px] sm:text-xs font-extrabold shadow">✨ المنصة الرسمية لتجار الجملة والمسوقين ✨</span>
-        <h2 class="text-xl sm:text-4xl font-black leading-snug text-white drop-shadow">أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة الجملة 🔥</span></h2>
-        <p class="text-gray-200 text-[11px] sm:text-sm max-w-lg mx-auto leading-relaxed font-medium">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، احسب وزن وكمية طردك الذكي، واحصل على فاتورة جملة رسمية مختومة فوراً.</p>
-        <div class="flex flex-wrap justify-center items-center gap-2 pt-1 text-[11px] sm:text-xs">
-          <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-3.5 py-2 rounded-xl shadow-lg">💬 واتساب: 0996311804</a>
-          <button onclick="playUiSound('tap'); openAffiliateModal()" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-black px-3 py-2 rounded-xl shadow-lg border border-emerald-300/50 transition">💡 كيف يمكنك الربح من موقعنا</button>
-          <button onclick="playUiSound('tap'); openVipModal()" class="bg-purple-700/85 hover:bg-purple-600 text-yellow-300 font-black px-3 py-2 rounded-xl shadow-lg border border-yellow-400/50 transition">👑 طلب تصنيع كميات خاصة (VIP)</button>
-          <div class="lg:hidden bg-black/85 border border-yellow-400/40 px-3 py-2 rounded-xl text-gray-100 font-bold shadow">💱 الصرف: <strong id="heroRate" class="text-emerald-400">15,000</strong> ل.س</div>
+  <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full">
+    <div id="bannerSection" class="relative overflow-hidden rounded-2xl border border-yellow-500/35 bg-cover bg-center py-6 sm:py-10 px-3 sm:px-6 shadow-xl">
+      <div class="max-w-2xl mx-auto text-center relative z-10 space-y-2">
+        <span class="inline-block px-2.5 py-0.5 rounded-full bg-black/70 border border-yellow-400/40 text-yellow-300 text-[9px] sm:text-xs font-extrabold">✨ المنصة الرسمية لتجار الجملة والمسوقين ✨</span>
+        <h2 class="text-lg sm:text-3xl font-black text-white">أحدث موديلات الموسم بأسعار <span class="gold-gradient-text">جملة الجملة 🔥</span></h2>
+        <p class="text-gray-200 text-[10px] sm:text-xs max-w-lg mx-auto">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، احسب وزن وكمية السيريات، واحصل على فاتورة جملة رسمية فوراً.</p>
+        <div class="flex flex-wrap justify-center items-center gap-1.5 pt-1 text-[10px] sm:text-xs">
+          <a href="https://wa.me/963996311804" target="_blank" class="gold-gradient-bg text-black font-black px-3 py-1.5 rounded-xl">💬 واتساب: 0996311804</a>
+          <button onclick="openAffiliateModal()" class="bg-emerald-600/90 text-white font-black px-2.5 py-1.5 rounded-xl border border-emerald-300/40">💡 كيف يمكنك الربح من موقعنا</button>
+          <button onclick="openVipModal()" class="bg-purple-700/85 text-yellow-300 font-black px-2.5 py-1.5 rounded-xl border border-yellow-400/40">👑 تصنيع كميات خاصة (VIP)</button>
+          <div class="lg:hidden bg-black/80 border border-yellow-400/30 px-2.5 py-1.5 rounded-xl text-gray-100 font-bold">💱 الصرف: <strong id="heroRate" class="text-emerald-400">15,000</strong> ل.س</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- البحث والأقسام -->
-  <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-3 w-full space-y-2">
-    <div class="glass-panel rounded-xl sm:rounded-2xl p-2 flex items-center border border-yellow-500/35">
+  <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full space-y-1.5">
+    <div class="glass-panel rounded-xl p-1.5 flex items-center border border-yellow-500/30">
       <div class="relative flex-1 flex items-center">
-        <span class="absolute right-3 text-yellow-400 text-xs sm:text-sm pointer-events-none">🔍</span>
-        <input id="searchInput" type="text" oninput="handleSearch(this.value)" placeholder="ابحث عن اسم الموديل، الكود، أو القسم..." class="w-full bg-black/85 border border-yellow-500/35 focus:border-yellow-400 rounded-xl pr-8 pl-7 py-2 text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none" />
-        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-2.5 text-gray-300 hover:text-white text-xs bg-neutral-800 px-1.5 py-0.5 rounded-md">✕</button>
+        <span class="absolute right-3 text-yellow-400 text-xs pointer-events-none">🔍</span>
+        <input id="searchInput" type="text" oninput="handleSearch(this.value)" placeholder="ابحث عن اسم الموديل، الكود، أو القسم..." class="w-full bg-black/80 border border-yellow-500/30 rounded-lg pr-8 pl-7 py-1.5 text-xs text-white focus:outline-none" />
+        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-2 text-gray-300 text-xs bg-neutral-800 px-1.5 rounded">✕</button>
       </div>
     </div>
-    <div class="glass-panel rounded-xl sm:rounded-2xl p-1.5 sm:p-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar border border-yellow-500/30" id="categoryTabs">
-      <button onclick="playUiSound('tap'); filterCategory('ALL')" data-cat="ALL" class="cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs shadow">✨ الكل</button>
-      <button onclick="playUiSound('tap'); filterCategory('نسواني')" data-cat="نسواني" class="cat-btn flex-shrink-0 glossy-box text-pink-200 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs">👗 نسواني</button>
-      <button onclick="playUiSound('tap'); filterCategory('رجالي')" data-cat="رجالي" class="cat-btn flex-shrink-0 glossy-box text-sky-200 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs">👔 رجالي</button>
-      <button onclick="playUiSound('tap'); filterCategory('ولادي')" data-cat="ولادي" class="cat-btn flex-shrink-0 glossy-box text-emerald-200 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs">🧒 ولادي</button>
-      <button onclick="playUiSound('tap'); filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn flex-shrink-0 glossy-box text-purple-200 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs">👶 ب.ب</button>
-      <button onclick="playUiSound('tap'); filterCategory('TREND')" data-cat="TREND" class="cat-btn flex-shrink-0 glossy-box text-amber-300 font-extrabold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs">🔥 الترند الأسبوعي</button>
+    <div class="glass-panel rounded-xl p-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar border border-yellow-500/25" id="categoryTabs">
+      <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3 py-1 rounded-lg text-[11px]">✨ الكل</button>
+      <button onclick="filterCategory('نسواني')" data-cat="نسواني" class="cat-btn flex-shrink-0 glossy-box text-pink-200 font-extrabold px-3 py-1 rounded-lg text-[11px]">👗 نسواني</button>
+      <button onclick="filterCategory('رجالي')" data-cat="رجالي" class="cat-btn flex-shrink-0 glossy-box text-sky-200 font-extrabold px-3 py-1 rounded-lg text-[11px]">👔 رجالي</button>
+      <button onclick="filterCategory('ولادي')" data-cat="ولادي" class="cat-btn flex-shrink-0 glossy-box text-emerald-200 font-extrabold px-3 py-1 rounded-lg text-[11px]">🧒 ولادي</button>
+      <button onclick="filterCategory('ب.ب')" data-cat="ب.ب" class="cat-btn flex-shrink-0 glossy-box text-purple-200 font-extrabold px-3 py-1 rounded-lg text-[11px]">👶 ب.ب</button>
+      <button onclick="filterCategory('TREND')" data-cat="TREND" class="cat-btn flex-shrink-0 glossy-box text-amber-300 font-extrabold px-3 py-1 rounded-lg text-[11px]">🔥 الترند الأسبوعي</button>
     </div>
   </section>
 
-  <!-- شبكة المنتجات -->
-  <main class="max-w-7xl mx-auto px-2.5 sm:px-6 py-4 flex-1 w-full">
-    <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5"></div>
+  <!-- شبكة الموديلات -->
+  <main class="max-w-7xl mx-auto px-2.5 sm:px-6 py-3 flex-1 w-full">
+    <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4"></div>
   </main>
 
-  <!-- نافذة تصنيع خاص VIP -->
-  <div id="vipModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[92vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden border border-purple-500/50">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3">
-        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">👑 قسم كبار التجار وتصنيع الكميات الخاصة (VIP)</h3>
-        <button onclick="closeVipModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs">✕</button>
+  <!-- نافذة تفاصيل الموديل (مع صورة كاملة بدون قص + تكبير شاشة كاملة) -->
+  <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[93vh] p-3.5 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
+        <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-xs sm:text-base truncate pl-2">تفاصيل الموديل</h3>
+        <button onclick="closeProductModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs">✕</button>
       </div>
-      <form onsubmit="sendVipRequestWhatsApp(event)" class="overflow-y-auto flex-1 space-y-3 text-xs pl-1">
-        <div class="bg-purple-900/30 border border-purple-400/40 p-3 rounded-2xl text-gray-200">
-          <p class="font-black text-yellow-300 mb-1">🏭 خدمة التصنيع المباشر من معامل Fashion World بدمشق:</p>
-          <p class="text-[11px]">لطلب تفصيل موديل معين بكميات كبيرة، أو حجز دفعة إنتاج كاملة بأسعار المعمل الخاصة.</p>
+      <div class="overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-1">
+        <div class="space-y-2 flex flex-col">
+          <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-neutral-950 border border-yellow-500/30 flex items-center justify-center cursor-zoom-in group" onclick="openZoomModal(document.getElementById('modalMainImg').src)">
+            <img id="modalMainImg" src="" class="w-full h-full object-contain transition duration-300" />
+            <div class="watermark-logo"><span class="text-[8px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span></div>
+            <span id="modalDiscountBadge" class="hidden absolute top-2 right-2 badge-glass discount-flash"></span>
+            <span id="modalStockBadge" class="hidden absolute top-2 left-20 badge-glass"></span>
+            <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/65 backdrop-blur-sm text-yellow-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط لتكبير الصورة بملء الشاشة</span>
+          </div>
+          <div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div>
+          <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-600/20 text-emerald-300 border border-emerald-500/40 font-extrabold py-1.5 rounded-xl text-[11px]">📲 مشاركة الموديل عبر واتساب</button>
         </div>
+
+        <div class="space-y-2 flex flex-col justify-between text-xs">
+          <div class="space-y-2 glossy-box p-3 rounded-2xl">
+            <div class="flex justify-between items-center">
+              <span id="modalCategory" class="bg-yellow-500/15 text-yellow-300 border border-yellow-500/30 px-2 py-0.5 rounded-md font-extrabold text-[10px]"></span>
+              <div class="flex items-center gap-1.5">
+                <span id="modalViews" class="text-[10px] text-sky-300 font-bold bg-sky-500/10 px-2 py-0.5 rounded-md border border-sky-500/25">👁️ 0</span>
+                <button id="modalLikeBtn" onclick="toggleLikeProduct(event, currentModalProduct ? currentModalProduct.id : 0)" class="px-2 py-0.5 rounded-md text-[10px] font-extrabold"></button>
+              </div>
+            </div>
+            <p id="modalPack" class="text-gray-200 font-bold text-[11px]"></p>
+            <p id="modalWeightInfo" class="text-[10px] text-amber-300 font-bold"></p>
+            <div class="flex items-center justify-between pt-1 border-t border-gray-800">
+              <span class="text-yellow-300 font-bold text-[11px]">تقييم التجار:</span>
+              <div id="modalStarsContainer" class="flex items-center gap-0.5 text-base cursor-pointer"></div>
+            </div>
+            <div id="modalPriceContainer" class="pt-1 border-t border-gray-800 flex items-center justify-between"></div>
+            <div class="pt-2 border-t border-gray-800 space-y-1.5 bg-black/60 p-2 rounded-xl border border-yellow-500/25">
+              <div class="flex justify-between items-center">
+                <span class="text-yellow-300 font-bold text-[10px]">الكمية المطلوبة:</span>
+                <span id="modalMinNotice" class="text-[9px] bg-yellow-500/15 text-yellow-300 px-1.5 py-0.5 rounded border border-yellow-500/30 font-bold">حجم السيرية: 10</span>
+              </div>
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="adjustModalQty(-5)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-[10px]">-5</button>
+                <button onclick="adjustModalQty(-1)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-xs">-</button>
+                <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-14 bg-black border border-yellow-500/50 text-center text-yellow-400 font-black rounded-lg py-1 text-xs" />
+                <button onclick="adjustModalQty(1)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-xs">+</button>
+                <button onclick="adjustModalQty(5)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-[10px]">+5</button>
+              </div>
+              <div class="flex justify-between items-center pt-1 text-gray-300 font-bold text-[11px]"><span>الإجمالي الفرعي:</span><span id="modalSubtotal" class="text-emerald-400 font-black">$0</span></div>
+              <div class="flex justify-between items-center text-[10px] text-sky-300 font-bold"><span>📦 عدد السيريات والوزن:</span><span id="modalPackAndWeight">1 سيرية | ~3.5 كغ</span></div>
+            </div>
+          </div>
+
+          <div class="glossy-box p-2.5 rounded-2xl space-y-1.5 text-xs">
+            <p class="font-extrabold text-yellow-400 text-[10px]">💬 تعليقات وآراء التجار:</p>
+            <div id="commentsList" class="space-y-1 max-h-24 overflow-y-auto pr-1"></div>
+            <div class="flex gap-1 pt-1">
+              <input id="commentAuthor" class="w-1/3 bg-black border border-yellow-500/30 rounded-lg px-2 py-1 text-white text-[10px]" placeholder="اسمك / المحل..." />
+              <input id="commentText" class="flex-1 bg-black border border-yellow-500/30 rounded-lg px-2 py-1 text-white text-[10px]" placeholder="اكتب تعليقك..." />
+              <button onclick="addComment()" class="gold-gradient-bg text-black font-extrabold px-2.5 py-1 rounded-lg text-[10px]">إرسال</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-2 pt-2 border-t border-gray-800 mt-2">
+        <button id="modalAddToCartBtn" onclick="addCustomQtyToCart()" class="flex-1 gold-gradient-bg text-black font-black py-2 rounded-xl text-xs">🛒 أضف الكمية إلى السلة</button>
+        <button onclick="closeProductModal()" class="bg-neutral-800 text-white px-4 py-2 rounded-xl text-xs font-bold">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- نافذة تصنيع VIP -->
+  <div id="vipModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg p-4 sm:p-5 flex flex-col space-y-3 text-xs border border-purple-500/50">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-extrabold text-yellow-400 text-sm">👑 قسم كبار التجار وتصنيع الكميات الخاصة (VIP)</h3><button onclick="closeVipModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
+      <form onsubmit="sendVipRequestWhatsApp(event)" class="space-y-2.5">
         <input id="vipMerchantName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="👤 اسم التاجر / الشركة والمحافظة..." />
         <div class="grid grid-cols-2 gap-2">
-          <select id="vipCat" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white">
-            <option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب (بيبي)</option><option value="تشكيلة متنوعة">تشكيلة متنوعة</option>
-          </select>
-          <input id="vipQty" type="number" min="50" value="100" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-yellow-400 font-black" placeholder="الكمية بالقطع" />
+          <select id="vipCat" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white"><option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option><option value="تشكيلة متنوعة">تشكيلة متنوعة</option></select>
+          <input id="vipQty" type="number" min="50" value="100" required class="bg-black border border-gray-700 rounded-xl px-3 py-2 text-yellow-400 font-black" placeholder="الكمية بالقطع" />
         </div>
         <input id="vipPhone" type="tel" required dir="ltr" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-right text-white" placeholder="📞 رقم الهاتف / واتساب المباشر..." />
         <textarea id="vipDetails" rows="3" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white resize-none" placeholder="📝 مواصفات الموديل أو نوع القماش المطلوب..."></textarea>
-        <button type="submit" class="w-full gold-gradient-bg text-black font-black py-2.5 rounded-xl shadow-lg">📲 إرسال طلب VIP لإدارة المعمل مباشرة</button>
+        <button type="submit" class="w-full gold-gradient-bg text-black font-black py-2.5 rounded-xl">📲 إرسال طلب VIP لإدارة المعمل مباشرة</button>
       </form>
     </div>
   </div>
 
   <!-- نافذة كيف يمكنك الربح + لوحة المسوق -->
   <div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden border border-yellow-500/50">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3">
-        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">💡 كيف يمكنك الربح من موقعنا + لوحة المسوق</h3>
-        <button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs">✕</button>
-      </div>
-      <div class="overflow-y-auto flex-1 space-y-3 text-xs pl-1">
-        <div class="bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-yellow-500/40 rounded-2xl p-3 text-center">
-          <p class="text-yellow-300 font-black">🚀 اربح معنا بالدولار من هاتفك وبسرية تامة أمام زبائنك!</p>
-          <p class="text-gray-200 text-[11px] mt-1">انشر رابطك للتجار؛ لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك ببصمة توجيه سرية خاصة بك لدى الإدارة!</p>
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/50 text-xs">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-extrabold text-yellow-400 text-sm">💡 كيف يمكنك الربح من موقعنا + لوحة المسوق</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
+      <div class="overflow-y-auto flex-1 space-y-2.5 pl-1">
+        <div class="bg-emerald-950/40 border border-yellow-500/35 rounded-xl p-2.5 text-center">
+          <p class="text-yellow-300 font-black">🚀 اربح 5$ عن كل 150$ مبيعات من هاتفك وبسرية تامة أمام زبائنك!</p>
+          <p class="text-gray-300 text-[10px] mt-0.5">لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك برمز توجيه سري خاص بك لدى الإدارة!</p>
         </div>
-        <div class="glossy-box p-3 rounded-2xl space-y-2 border border-yellow-500/35">
-          <p class="font-extrabold text-yellow-400 text-[11px]">🔑 أنشئ أو استرجع بصمتك السرية الثابتة (تعمل من أي هاتف):</p>
+        <div class="glossy-box p-2.5 rounded-xl space-y-2">
+          <p class="font-extrabold text-yellow-400 text-[10px]">🔑 أنشئ أو استرجع بصمتك السرية الثابتة:</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
-            <input id="marketerNameInput" type="text" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white text-xs" placeholder="اسمك (مثال: أحمد)..." />
-            <input id="marketerPhoneDigits" type="tel" maxlength="4" dir="ltr" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-center text-yellow-300 font-bold text-xs" placeholder="آخر 4 أرقام هاتفك" />
-            <button onclick="generateMarketerProfile()" class="gold-gradient-bg text-black font-black px-3 py-2 rounded-xl text-xs">تثبيت / استرجاع بصمتي ✨</button>
+            <input id="marketerNameInput" type="text" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white" placeholder="اسمك (مثال: أحمد)..." />
+            <input id="marketerPhoneDigits" type="tel" maxlength="4" dir="ltr" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-center text-yellow-300 font-bold" placeholder="آخر 4 أرقام هاتفك" />
+            <button onclick="generateMarketerProfile()" class="gold-gradient-bg text-black font-black px-3 py-1.5 rounded-lg">تثبيت بصمتي ✨</button>
           </div>
-          <div class="bg-black/80 p-2.5 rounded-xl border border-gray-800 space-y-1.5">
-            <div class="flex justify-between items-center text-[11px]">
-              <span class="text-gray-400">بصمة التوجيه السرية الخاصة بك:</span>
-              <strong id="myAffiliateCode" class="text-yellow-400 font-mono text-xs">1804-FW</strong>
-            </div>
-            <div class="flex gap-1">
-              <input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded-lg px-2 py-1.5 text-emerald-400 text-[10px]" dir="ltr" />
-              <button onclick="copyAffiliateLink()" class="bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] flex-shrink-0">نسخ الرابط 📋</button>
-            </div>
+          <div class="bg-black/80 p-2 rounded-lg border border-gray-800 space-y-1">
+            <div class="flex justify-between items-center text-[10px]"><span class="text-gray-400">بصمة التوجيه السرية:</span><strong id="myAffiliateCode" class="text-yellow-400 font-mono">1804-FW</strong></div>
+            <div class="flex gap-1"><input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded px-2 py-1 text-emerald-400 text-[10px]" dir="ltr" /><button onclick="copyAffiliateLink()" class="bg-emerald-600 text-white font-bold px-2.5 py-1 rounded text-[10px] flex-shrink-0">نسخ الرابط 📋</button></div>
           </div>
         </div>
-        <div class="glossy-box p-3 rounded-2xl space-y-2 border border-emerald-500/50">
-          <div class="flex justify-between items-center border-b border-gray-800 pb-1.5">
-            <span class="font-extrabold text-emerald-400 text-[11px]">📊 سجل الطلبيات المرسلة ببصمتك:</span>
-            <span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded-lg font-mono text-[10px] border border-yellow-500/40">1804-FW</span>
+        <div class="glossy-box p-2.5 rounded-xl space-y-1.5 border border-emerald-500/40">
+          <div class="flex justify-between items-center"><span class="font-extrabold text-emerald-400 text-[10px]">📊 سجل الطلبيات المرسلة ببصمتك:</span><span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded font-mono text-[10px]">1804-FW</span></div>
+          <div class="grid grid-cols-3 gap-1.5 text-center">
+            <div class="bg-black/80 p-1.5 rounded-lg"><span class="text-[9px] text-gray-400 block">فواتير مرسلة</span><strong id="dashOrdersCount" class="text-white font-black">0</strong></div>
+            <div class="bg-black/80 p-1.5 rounded-lg"><span class="text-[9px] text-gray-400 block">قيمة الفواتير</span><strong id="dashTotalSales" class="text-sky-400 font-black">$0</strong></div>
+            <div class="bg-black/80 p-1.5 rounded-lg"><span class="text-[9px] text-gray-400 block">الربح المقدر</span><strong id="dashTotalCommission" class="text-emerald-400 font-black">$0.00</strong></div>
           </div>
-          <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="bg-black/80 p-2 rounded-xl border border-gray-800"><span class="text-[9px] text-gray-400 block">فواتير مرسلة</span><strong id="dashOrdersCount" class="text-white font-black text-sm">0</strong></div>
-            <div class="bg-black/80 p-2 rounded-xl border border-gray-800"><span class="text-[9px] text-gray-400 block">قيمة الفواتير</span><strong id="dashTotalSales" class="text-sky-400 font-black text-sm">$0</strong></div>
-            <div class="bg-black/80 p-2 rounded-xl border border-emerald-500/30"><span class="text-[9px] text-gray-400 block">الربح المقدر</span><strong id="dashTotalCommission" class="text-emerald-400 font-black text-sm">$0.00</strong></div>
-          </div>
-          <div id="dashOrdersLog" class="max-h-24 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-2 rounded-xl border border-gray-800"></div>
-          <div id="adminResetMarketerBox" class="hidden pt-1 text-left">
-            <button onclick="adminClearMarketerOrders()" class="bg-red-600/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">🗑️ تصفير سجل هذه البصمة بعد المحاسبة (أدمن)</button>
-          </div>
+          <div id="dashOrdersLog" class="max-h-20 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-1.5 rounded-lg"></div>
+          <div id="adminResetMarketerBox" class="hidden pt-1 text-left"><button onclick="adminClearMarketerOrders()" class="bg-red-600/80 text-white text-[9px] font-bold px-2 py-1 rounded">🗑️ تصفير سجل هذه البصمة (أدمن)</button></div>
         </div>
-        <div class="grid grid-cols-3 gap-2 text-center">
-          <div class="glossy-box p-2 rounded-xl border border-emerald-500/40"><span class="text-[10px] text-emerald-300 font-black block">مبيعاتك المباشرة</span><p class="text-sm font-black text-emerald-400">5$ لكل 150$</p></div>
-          <div class="glossy-box p-2 rounded-xl border border-yellow-500/40"><span class="text-[10px] text-yellow-300 font-black block">فريقك (الجيل 2)</span><p class="text-sm font-black text-yellow-400">2.5$ لكل 150$</p></div>
-          <div class="glossy-box p-2 rounded-xl border border-purple-500/40"><span class="text-[10px] text-purple-300 font-black block">الجيل 3 + مكافأة</span><p class="text-sm font-black text-purple-400">1$ لكل 150$ 🏆</p></div>
+        <div class="grid grid-cols-3 gap-1.5 text-center">
+          <div class="glossy-box p-2 rounded-lg"><span class="text-[9px] text-emerald-300 font-bold block">مبيعاتك المباشرة</span><p class="text-xs font-black text-emerald-400">5$ لكل 150$</p></div>
+          <div class="glossy-box p-2 rounded-lg"><span class="text-[9px] text-yellow-300 font-bold block">فريقك (الجيل 2)</span><p class="text-xs font-black text-yellow-400">2.5$ لكل 150$</p></div>
+          <div class="glossy-box p-2 rounded-lg"><span class="text-[9px] text-purple-300 font-bold block">الجيل 3 + مكافأة</span><p class="text-xs font-black text-purple-400">1$ لكل 150$ 🏆</p></div>
         </div>
-        <div class="glossy-box p-3 rounded-2xl space-y-2 border border-emerald-500/30">
-          <div class="flex justify-between items-center">
-            <span class="font-extrabold text-emerald-400 text-[11px]">🧮 حاسبة أرباحك الشهرية المتوقعة:</span>
-            <span id="calcProfitResult" class="text-sm font-black text-yellow-400">$126 / شهرياً</span>
-          </div>
+        <div class="glossy-box p-2.5 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center"><span class="font-extrabold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك الشهرية:</span><span id="calcProfitResult" class="text-xs font-black text-yellow-400">$126 / شهرياً</span></div>
           <div class="grid grid-cols-2 gap-2 text-[10px]">
-            <div><label class="text-gray-300 block mb-1">مبيعات زبائنك شهرياً ($):</label><input id="calcDirectSales" type="number" step="50" value="1500" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1 text-white font-bold" /></div>
-            <div><label class="text-gray-300 block mb-1">عدد المسوقين في فريقك:</label><input id="calcTeamSize" type="number" value="4" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded-lg px-2 py-1 text-white font-bold" /></div>
+            <div><label class="text-gray-300 block">مبيعات زبائنك ($):</label><input id="calcDirectSales" type="number" step="50" value="1500" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold" /></div>
+            <div><label class="text-gray-300 block">مسوقين فريقك:</label><input id="calcTeamSize" type="number" value="4" oninput="calculatePyramidProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold" /></div>
           </div>
         </div>
       </div>
-      <div class="flex gap-2 pt-3 border-t border-gray-800 mt-3">
-        <button onclick="registerMarketerWhatsApp()" class="flex-1 bg-emerald-500 text-black font-black py-2.5 rounded-xl text-xs shadow-lg">📲 اعتماد بصمتي وصرف الأرباح عبر واتساب</button>
-        <button onclick="closeAffiliateModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold">إغلاق</button>
+      <div class="flex gap-2 pt-2.5 border-t border-gray-800 mt-2">
+        <button onclick="registerMarketerWhatsApp()" class="flex-1 bg-emerald-500 text-black font-black py-2 rounded-xl">📲 اعتماد بصمتي وصرف الأرباح واتساب</button>
+        <button onclick="closeAffiliateModal()" class="bg-neutral-800 text-white px-4 py-2 rounded-xl font-bold">إغلاق</button>
       </div>
     </div>
   </div>
 
-  <!-- نافذة مصادقة الأدمن -->
+  <!-- نوافذ الإدارة ومن نحن -->
   <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-3">
-    <div class="glass-panel rounded-3xl w-full max-w-sm p-5 flex flex-col shadow-2xl space-y-3 text-xs border border-yellow-500/40">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
-        <h3 class="font-extrabold text-yellow-400 text-sm">🔐 مصادقة الإدارة الآمنة</h3>
-        <button onclick="closeFirebaseLoginModal()" class="text-gray-400 text-lg px-2">✕</button>
-      </div>
-      <form onsubmit="handleAdminFirebaseLogin(event)" class="space-y-3">
-        <input id="adminEmailInput" type="email" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2.5 text-white text-xs" dir="ltr" placeholder="البريد الإلكتروني للأدمن..." />
-        <input id="adminPassInput" type="password" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2.5 text-white text-xs" dir="ltr" placeholder="كلمة المرور..." />
-        <button id="adminLoginSubmitBtn" type="submit" class="w-full gold-gradient-bg text-black font-black py-2.5 rounded-xl shadow-lg">تسجيل الدخول وتفعيل الإدارة 👑</button>
+    <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/40">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-extrabold text-yellow-400 text-sm">🔐 مصادقة الإدارة</h3><button onclick="closeFirebaseLoginModal()" class="text-gray-400">✕</button></div>
+      <form onsubmit="handleAdminFirebaseLogin(event)" class="space-y-2.5">
+        <input id="adminEmailInput" type="email" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Email..." />
+        <input id="adminPassInput" type="password" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Password..." />
+        <button id="adminLoginSubmitBtn" type="submit" class="w-full gold-gradient-bg text-black font-black py-2.5 rounded-xl">تسجيل الدخول 👑</button>
       </form>
     </div>
   </div>
 
-  <!-- نافذة إعداد التوكن -->
   <div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
-    <div class="glass-panel rounded-3xl w-full max-w-md p-5 flex flex-col shadow-2xl space-y-3 text-xs">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
-        <h3 class="font-extrabold text-yellow-400 text-sm">🔗 إعداد مفتاح المزامنة (GitHub Token)</h3>
-        <button onclick="closeCloudSetupModal()" class="text-gray-400 text-lg px-2">✕</button>
-      </div>
-      <p class="text-gray-300">أدخل مفتاح (Token) الخاص بـ GitHub لحفظ الموديلات والأسعار تلقائياً لجميع الزبائن:</p>
-      <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2.5 text-white text-xs" placeholder="ghp_..." />
-      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow">حفظ وتفعيل المزامنة التلقائية ✅</button>
+    <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-extrabold text-yellow-400 text-sm">🔗 مفتاح المزامنة (GitHub Token)</h3><button onclick="closeCloudSetupModal()" class="text-gray-400">✕</button></div>
+      <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="ghp_..." />
+      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl">حفظ وتفعيل المزامنة ✅</button>
     </div>
   </div>
 
-  <!-- نافذة من نحن -->
-  <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[90vh] p-5 flex flex-col shadow-2xl overflow-hidden">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-3">
-        <h3 class="font-extrabold text-yellow-400 text-sm sm:text-base">✨ من نحن - Fashion World</h3>
-        <button onclick="closeAboutModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs">✕</button>
-      </div>
-      <div class="overflow-y-auto flex-1 space-y-3 text-xs sm:text-sm text-gray-200 leading-relaxed">
-        <p class="font-bold text-white">للتجار والتاجرات وللمندوبين والمسوقين المهتمين بملابس (نسواني - رجالي - ولادي - ب.ب) التركية وأجمل الترندات بسعر جملة الجملة 🔥✨</p>
-        <p class="font-bold text-emerald-400">نشحن لك الملابس من المعمل مباشرة | سوريا - دمشق - الحريقة</p>
-        <div class="space-y-2 text-xs">
-          <div class="glossy-box p-3 rounded-xl">💎 مسؤولون عن تجهيز البضاعة ووصولها لمكتب الشحن الخاص بك بأمان وسرعة.</div>
-          <div class="glossy-box p-3 rounded-xl">💎 نضمن لك التميز والتنافس بالسعر والجودة في متجرك.</div>
-        </div>
-        <div class="pt-3 border-t border-gray-800">
-          <p class="text-yellow-300 font-extrabold text-center text-xs mb-3">تواصل معنا وتابعنا عبر منصاتنا الرسمية</p>
-          <div class="grid grid-cols-4 gap-3 text-center" dir="ltr">
-            <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="app-icon-link flex flex-col items-center gap-1"><div class="app-icon-box bg-[#1877F2] text-white font-black text-xl">f</div><span class="text-[10px] font-bold text-gray-200">Facebook</span></a>
-            <a href="https://wa.me/963996311804" target="_blank" class="app-icon-link flex flex-col items-center gap-1"><div class="app-icon-box bg-[#25D366] text-white font-black text-xl">W</div><span class="text-[10px] font-bold text-gray-200">WhatsApp</span></a>
-            <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="app-icon-link flex flex-col items-center gap-1"><div class="app-icon-box bg-[#229ED9] text-white font-black text-xl">T</div><span class="text-[10px] font-bold text-gray-200">Telegram</span></a>
-            <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="app-icon-link flex flex-col items-center gap-1"><div class="app-icon-box bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white font-black text-xl">In</div><span class="text-[10px] font-bold text-gray-200">Instagram</span></a>
-          </div>
-        </div>
+  <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
+    <div class="glass-panel rounded-3xl w-full max-w-lg p-5 space-y-3 text-xs text-gray-200">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-extrabold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3><button onclick="closeAboutModal()" class="text-gray-400">✕</button></div>
+      <p class="font-bold text-white">تجارة وتصنيع الألبسة بالجملة (نسواني - رجالي - ولادي - ب.ب) بأفضل الأسعار.</p>
+      <p class="text-emerald-400 font-bold">📍 سوريا - دمشق - الحريقة | شحن مباشر لجميع المحافظات.</p>
+      <div class="grid grid-cols-4 gap-2 text-center pt-2" dir="ltr">
+        <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="glossy-box py-2 rounded-xl text-blue-400 font-bold">Facebook</a>
+        <a href="https://wa.me/963996311804" target="_blank" class="glossy-box py-2 rounded-xl text-emerald-400 font-bold">WhatsApp</a>
+        <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="glossy-box py-2 rounded-xl text-sky-400 font-bold">Telegram</a>
+        <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="glossy-box py-2 rounded-xl text-pink-400 font-bold">Instagram</a>
       </div>
     </div>
   </div>
 
-  <!-- نافذة تفاصيل الموديل -->
-  <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[92vh] p-3.5 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5">
-        <h3 id="modalTitle" class="font-extrabold text-yellow-400 text-xs sm:text-base truncate pl-2">تفاصيل الموديل</h3>
-        <button onclick="closeProductModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs">✕</button>
-      </div>
-      <div class="overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5 pl-1">
-        <div class="space-y-2 flex flex-col">
-          <div class="relative h-60 sm:h-72 rounded-2xl overflow-hidden bg-black border border-yellow-500/30">
-            <img id="modalMainImg" src="" class="w-full h-full object-cover" />
-            <div class="watermark-logo"><span class="text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span></div>
-            <span id="modalDiscountBadge" class="hidden absolute top-2.5 right-2.5 discount-flash text-white font-black text-[11px] px-3 py-0.5 rounded-full">حسم 🔥</span>
-            <span id="modalStockBadge" class="hidden absolute bottom-2.5 right-2.5 text-white font-black text-[10px] px-2.5 py-0.5 rounded-full"></span>
-          </div>
-          <div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div>
-          <button onclick="playUiSound('tap'); shareProductWhatsApp()" class="w-full bg-emerald-600/20 text-emerald-300 border border-emerald-500/40 font-extrabold py-2 rounded-xl text-[11px]">📲 مشاركة الموديل عبر واتساب</button>
-        </div>
-
-        <div class="space-y-2.5 flex flex-col justify-between text-xs">
-          <div class="space-y-2 glossy-box p-3 rounded-2xl">
-            <div class="flex justify-between items-center">
-              <span id="modalCategory" class="bg-yellow-500/15 text-yellow-300 border border-yellow-500/40 px-2.5 py-0.5 rounded-lg font-extrabold text-[11px]"></span>
-              <div class="flex items-center gap-1.5">
-                <span id="modalViews" class="text-[10px] text-sky-300 font-bold bg-sky-500/10 px-2 py-0.5 rounded-lg border border-sky-500/30">👁️ 0</span>
-                <button id="modalLikeBtn" onclick="toggleLikeProduct(event, currentModalProduct ? currentModalProduct.id : 0)" class="px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold"></button>
-              </div>
-            </div>
-            <p id="modalPack" class="text-gray-200 font-bold text-[11px] sm:text-xs"></p>
-            <p id="modalWeightInfo" class="text-[10px] text-amber-300 font-bold"></p>
-            <div class="flex items-center justify-between pt-1.5 border-t border-gray-800">
-              <span class="text-yellow-300 font-bold text-[11px]">تقييم الموديل:</span>
-              <div id="modalStarsContainer" class="flex items-center gap-0.5 text-base cursor-pointer"></div>
-            </div>
-            <div id="modalPriceContainer" class="pt-1.5 border-t border-gray-800 flex items-center justify-between"></div>
-            <div class="pt-2 border-t border-gray-800 space-y-1.5 bg-black/70 p-2.5 rounded-xl border border-yellow-500/30">
-              <div class="flex justify-between items-center">
-                <span class="text-yellow-300 font-bold text-[11px]">الكمية المطلوبة:</span>
-                <span id="modalMinNotice" class="text-[9px] bg-yellow-500/15 text-yellow-300 px-1.5 py-0.5 rounded border border-yellow-500/40 font-bold">الحد الأدنى: 10</span>
-              </div>
-              <div class="flex items-center justify-center gap-1.5 pt-0.5">
-                <button onclick="playUiSound('tap'); adjustModalQty(-5)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-[10px]">-5</button>
-                <button onclick="playUiSound('tap'); adjustModalQty(-1)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-xs">-</button>
-                <input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-14 bg-black border border-yellow-500/50 text-center text-yellow-400 font-black rounded-lg py-1 text-xs" />
-                <button onclick="playUiSound('tap'); adjustModalQty(1)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-xs">+</button>
-                <button onclick="playUiSound('tap'); adjustModalQty(5)" class="glossy-box text-white w-7 h-7 rounded-lg font-bold text-[10px]">+5</button>
-              </div>
-              <div class="flex justify-between items-center pt-1 text-gray-300 font-bold text-[11px]"><span>الإجمالي الفرعي:</span><span id="modalSubtotal" class="text-emerald-400 font-black">$0</span></div>
-              <div class="flex justify-between items-center text-[10px] text-sky-300 font-bold"><span>📦 تقدير الطرد والوزن:</span><span id="modalPackAndWeight">1 باكيت | ~3.5 كغ</span></div>
-            </div>
-          </div>
-
-          <div class="glossy-box p-3 rounded-2xl space-y-2 text-xs">
-            <p class="font-extrabold text-yellow-400 text-[11px]">💬 تعليقات وآراء التجار (تظهر للجميع):</p>
-            <div id="commentsList" class="space-y-1.5 max-h-28 overflow-y-auto pr-1"></div>
-            <div class="flex gap-1 pt-1">
-              <input id="commentAuthor" class="w-1/3 bg-black border border-yellow-500/30 rounded-lg px-2 py-1.5 text-white text-[10px]" placeholder="اسمك / المحل..." />
-              <input id="commentText" class="flex-1 bg-black border border-yellow-500/30 rounded-lg px-2 py-1.5 text-white text-[10px]" placeholder="اكتب تعليقك..." />
-              <button onclick="addComment()" class="gold-gradient-bg text-black font-extrabold px-3 py-1.5 rounded-lg text-[10px]">إرسال</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex gap-2 pt-2.5 border-t border-gray-800 mt-2.5">
-        <button id="modalAddToCartBtn" onclick="addCustomQtyToCart()" class="flex-1 gold-gradient-bg text-black font-black py-2.5 rounded-xl text-xs shadow-lg">🛒 أضف الكمية إلى السلة</button>
-        <button onclick="closeProductModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold">إغلاق</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- نافذة تغيير الغلاف -->
   <div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
-    <div class="glass-panel rounded-3xl w-full max-w-sm p-5 flex flex-col shadow-2xl space-y-3 text-xs">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
-        <h3 class="font-extrabold text-yellow-400 text-sm">🖼️ تغيير صورة الغلاف</h3>
-        <button onclick="closeBannerModal()" class="text-gray-400 text-lg px-2">✕</button>
-      </div>
-      <input id="bannerFileInput" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-gray-300 text-xs" />
-      <button id="bannerSaveBtn" onclick="saveNewBanner()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl text-xs shadow">تحديث وحفظ الغلاف تلقائياً ✨</button>
+    <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-extrabold text-yellow-400 text-sm">🖼️ تغيير صورة الغلاف</h3><button onclick="closeBannerModal()" class="text-gray-400">✕</button></div>
+      <input id="bannerFileInput" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-xl p-2 text-gray-300" />
+      <button id="bannerSaveBtn" onclick="saveNewBanner()" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl">تحديث وحفظ الغلاف ✨</button>
     </div>
   </div>
 
   <!-- نافذة إضافة/تعديل موديل -->
   <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[92vh] p-5 flex flex-col shadow-2xl overflow-hidden">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-3">
-        <h3 id="modalHeaderTitle" class="font-extrabold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3>
-        <button onclick="closeAddModal()" class="text-gray-400 text-lg px-2">✕</button>
-      </div>
-      <form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2.5 text-xs pl-1">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5"><h3 id="modalHeaderTitle" class="font-extrabold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3><button onclick="closeAddModal()" class="text-gray-400">✕</button></div>
+      <form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2 pl-1">
         <input type="hidden" id="editIndex" value="-1" />
         <input id="pName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="اسم الموديل / الكود (مثال: طقم كتان #405)" />
         <div class="grid grid-cols-2 gap-2">
-          <select id="pCat" onchange="autoSuggestWeight(this.value)" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white">
-            <option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option>
-          </select>
-          <div class="flex gap-1">
-            <input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white" placeholder="السعر الصافي" />
-            <select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold"><option value="USD">$</option><option value="SYP">ل.س</option></select>
-          </div>
+          <select id="pCat" onchange="autoSuggestWeight(this.value)" class="bg-black border border-gray-700 rounded-xl px-2 py-2 text-white"><option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option></select>
+          <div class="flex gap-1"><input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2 py-2 text-white" placeholder="السعر الصافي" /><select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold"><option value="USD">$</option><option value="SYP">ل.س</option></select></div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <input id="pMinQty" type="number" min="1" value="10" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="الحد الأدنى (10)" />
-          <input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="القياسات (M-L-XL)" />
+          <input id="pMinQty" type="number" min="1" value="10" required class="bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="حجم السيرية (10)" />
+          <input id="pPack" required class="bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="القياسات (M-L-XL)" />
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="block text-amber-300 mb-1 font-bold text-[10px]">⚖️ وزن القطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/40 rounded-xl px-3 py-1.5 text-yellow-300 font-bold" /></div>
-          <div><label class="block text-emerald-300 mb-1 font-bold text-[10px]">📦 حالة المخزون</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/40 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">باقي 3 باكيتات ⚠️</option><option value="PREORDER">حجز مسبق 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div>
+          <div><label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن القطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/40 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold" /></div>
+          <div><label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 توفر السيريات</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/40 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">باقي 3 سيريات فقط ⚠️</option><option value="PREORDER">حجز مسبق 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div>
         </div>
-        <div class="glossy-box p-2.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <input type="checkbox" id="pHasDiscount" onchange="toggleDiscountPercentInput()" class="w-4 h-4 accent-yellow-400" />
-            <label for="pHasDiscount" class="text-yellow-400 font-extrabold cursor-pointer">شارة الحسم الوامضة 🔥</label>
-          </div>
-          <div id="discountPercentWrapper" class="hidden flex items-center gap-1">
-            <input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-12 bg-black border border-yellow-400 text-center text-yellow-300 font-black rounded-lg py-0.5 text-xs" /><span class="text-red-400 font-black">%</span>
-          </div>
+        <div class="glossy-box p-2 rounded-xl flex items-center justify-between">
+          <div class="flex items-center gap-1.5"><input type="checkbox" id="pHasDiscount" onchange="toggleDiscountPercentInput()" class="w-4 h-4 accent-yellow-400" /><label for="pHasDiscount" class="text-yellow-400 font-bold cursor-pointer">شارة الحسم 🔥</label></div>
+          <div id="discountPercentWrapper" class="hidden flex items-center gap-1"><input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-12 bg-black border border-yellow-400 text-center text-yellow-300 font-black rounded py-0.5" /><span class="text-red-400 font-black">%</span></div>
         </div>
         <div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-yellow-300 font-bold mb-1">📷 الصورة الرئيسية:</label><input id="pImgFile" type="file" accept="image/*" class="w-full text-gray-300 text-[10px]" /></div>
         <div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-gray-300 font-bold mb-1">📸 صور إضافية (اختياري):</label><input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full text-gray-300 text-[10px]" /></div>
-        <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl shadow-lg">حفظ ونشر تلقائياً لجميع الزبائن ✅</button>
+        <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl">حفظ ونشر الموديل ✅</button>
       </form>
     </div>
   </div>
 
-  <!-- نافذة سلة الشراء وحاسبة الطرد -->
+  <!-- نافذة السلة وحاسبة الطرد (بالسيرية) -->
   <div id="cartModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[94vh] p-4 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[94vh] p-4 flex flex-col overflow-hidden text-xs">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
-        <div class="flex items-center gap-2">
-          <h3 class="font-extrabold text-yellow-400 text-sm">🛒 سلة طلبات الجملة</h3>
-          <button onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded-lg border border-red-500/30 font-bold">تفريغ السلة</button>
-        </div>
-        <button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs">✕</button>
+        <div class="flex items-center gap-2"><h3 class="font-extrabold text-yellow-400 text-sm">🛒 سلة طلبات الجملة</h3><button onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded border border-red-500/30 font-bold">تفريغ السلة</button></div>
+        <button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button>
       </div>
-      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 text-xs pl-1 max-h-40"></div>
-      <div class="border-t border-gray-800 pt-2.5 mt-2 space-y-2">
-        <div class="glossy-box p-2.5 rounded-xl border border-sky-500/35 space-y-1">
+      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 pl-1 max-h-40"></div>
+      <div class="border-t border-gray-800 pt-2 mt-2 space-y-2">
+        <div class="glossy-box p-2 rounded-xl border border-sky-500/35 space-y-1">
           <p class="text-[10px] text-sky-300 font-extrabold">📦 حاسبة الطرد والشحن الذكية (شامل 0.5 كغ تغليف):</p>
           <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
-            <div class="bg-black/70 py-1 px-1.5 rounded-lg border border-gray-800"><span class="text-gray-400 block">إجمالي القطع</span><strong id="cartSummaryPieces" class="text-white font-black">0 قطعة</strong></div>
-            <div class="bg-black/70 py-1 px-1.5 rounded-lg border border-gray-800"><span class="text-gray-400 block">عدد الباكيتات</span><strong id="cartSummaryPacks" class="text-yellow-400 font-black">0 باكيت</strong></div>
-            <div class="bg-black/70 py-1 px-1.5 rounded-lg border border-gray-800"><span class="text-gray-400 block">الوزن التقريبي</span><strong id="cartSummaryWeight" class="text-emerald-400 font-black">0 كغ</strong></div>
+            <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">إجمالي القطع</span><strong id="cartSummaryPieces" class="text-white font-black">0 قطعة</strong></div>
+            <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">عدد السيريات</span><strong id="cartSummaryPacks" class="text-yellow-400 font-black">0 سيرية</strong></div>
+            <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">الوزن التقريبي</span><strong id="cartSummaryWeight" class="text-emerald-400 font-black">0 كغ</strong></div>
           </div>
         </div>
-        <div class="flex justify-between font-extrabold text-xs bg-black/60 p-2 rounded-xl border border-yellow-500/30"><span>الإجمالي الكلي للفاتورة:</span><span id="cartTotal" class="text-yellow-400">$0</span></div>
-        <div class="space-y-1.5 text-xs">
+        <div class="flex justify-between font-extrabold bg-black/60 p-2 rounded-xl border border-yellow-500/30"><span>الإجمالي الكلي للفاتورة:</span><span id="cartTotal" class="text-yellow-400">$0</span></div>
+        <div class="space-y-1.5">
           <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم التاجر / اسم المحل..." />
           <input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن..." />
           <input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 رقم الهاتف / واتساب للتواصل..." />
           <textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white resize-none" placeholder="📝 ملاحظة إضافية حول الطلبية أو الألوان (اختياري)..."></textarea>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-0.5">
-          <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-500 text-black font-black py-2.5 rounded-xl text-xs shadow-lg">📲 إرسال الطلبية عبر واتساب</button>
-          <button onclick="printWholesaleInvoice()" class="w-full gold-gradient-bg text-black font-black py-2.5 rounded-xl text-xs shadow-lg">🖨️ طباعة / حفظ فاتورة PDF</button>
+        <div class="grid grid-cols-2 gap-1.5 pt-0.5">
+          <button onclick="sendOrderWhatsApp()" class="bg-emerald-500 text-black font-black py-2.5 rounded-xl">📲 إرسال عبر واتساب</button>
+          <button onclick="printWholesaleInvoice()" class="gold-gradient-bg text-black font-black py-2.5 rounded-xl">🖨️ طباعة فاتورة PDF</button>
         </div>
       </div>
     </div>
   </div>
 
-  <footer class="bg-black/95 border-t border-yellow-500/30 py-6 px-4 text-center text-[11px] text-gray-400 mt-6">
-    <p class="font-cinzel text-base font-black gold-gradient-text mb-1">FASHION WORLD</p>
-    <p class="mb-1">📍 سوريا - دمشق - الحريقة | تجارة الألبسة بالجملة</p>
-    <p class="text-yellow-400 font-bold">واتساب محلي: 0996311804 | واتساب دولي: +963996311804</p>
+  <footer class="bg-black/95 border-t border-yellow-500/25 py-5 px-4 text-center text-[11px] text-gray-400 mt-4">
+    <p class="font-cinzel text-sm font-black gold-gradient-text mb-0.5">FASHION WORLD</p>
+    <p>📍 سوريا - دمشق - الحريقة | واتساب: 0996311804</p>
   </footer>
-    <!-- البيانات الافتراضية -->
-  <script id="initialDataScript">
-    window.INITIAL_STORE_STATE = {
-      updatedAt: 1700000000000,
-      exchangeRate: 15000,
-      bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-      products: [
-        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pieceWeight: 350, stockStatus: "LOW", pack: "قياسات (M-L-XL-2XL)", views: 18, likes: 7, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "قماش ممتاز جداً"}], hasDiscount: true, discountPercent: 20, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] },
-        { id: 102, name: "فستان سهرة مخمل مطرز ذهبي #102", category: "نسواني", priceUsd: 18, minQty: 10, pieceWeight: 420, stockStatus: "AVAILABLE", pack: "قياسات (S-M-L-XL)", views: 24, likes: 11, ratingSum: 19, ratingCount: 4, comments: [{id: 2, author: "تاجرة دمشق", text: "الموديل مطلوب جداً"}], hasDiscount: false, discountPercent: 0, img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80", extras: [] }
-      ]
-    };
-  </script>
-
-  <!-- مصادقة Firebase الآمنة -->
+    <!-- مصادقة Firebase الآمنة -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -513,36 +420,20 @@
 
     onAuthStateChanged(auth, (user) => {
       window.isAdmin = !!user;
-      const wrapper = document.getElementById('adminDropdownWrapper');
-      const menu = document.getElementById('adminDropdownMenu');
-      const resetBox = document.getElementById('adminResetMarketerBox');
-      if (wrapper) wrapper.classList.toggle('hidden', !user);
-      if (!user && menu) menu.classList.add('hidden');
-      if (resetBox) resetBox.classList.toggle('hidden', !user);
+      document.getElementById('adminDropdownWrapper')?.classList.toggle('hidden', !user);
+      if (!user) document.getElementById('adminDropdownMenu')?.classList.add('hidden');
+      document.getElementById('adminResetMarketerBox')?.classList.toggle('hidden', !user);
       if (typeof window.renderProducts === 'function') window.renderProducts();
-      if (window.currentModalProduct && typeof window.renderComments === 'function') {
-        window.renderComments(window.currentModalProduct);
-      }
     });
 
     window.handleAdminFirebaseLogin = async function(e) {
       e.preventDefault();
-      const email = document.getElementById('adminEmailInput').value.trim();
-      const pass = document.getElementById('adminPassInput').value;
-      const btn = document.getElementById('adminLoginSubmitBtn');
-      btn.innerText = "جاري التحقق... ⏳";
-      btn.disabled = true;
       try {
-        await signInWithEmailAndPassword(auth, email, pass);
-        window.closeFirebaseLoginModal();
+        await signInWithEmailAndPassword(auth, document.getElementById('adminEmailInput').value.trim(), document.getElementById('adminPassInput').value);
+        closeFirebaseLoginModal();
         window.playUiSound('success');
-        window.showToast("تم تفعيل لوحة الإدارة بنجاح 👑");
-      } catch (err) {
-        alert("بيانات الدخول غير صحيحة! تأكد من البريد وكلمة المرور.");
-      } finally {
-        btn.innerText = "تسجيل الدخول وتفعيل الإدارة 👑";
-        btn.disabled = false;
-      }
+        window.showToast("تم تفعيل الإدارة بنجاح 👑");
+      } catch (err) { alert("بيانات الدخول غير صحيحة!"); }
     };
 
     window.logoutAdmin = function() {
@@ -550,7 +441,6 @@
         window.isAdmin = false;
         document.getElementById('adminDropdownWrapper')?.classList.add('hidden');
         document.getElementById('adminDropdownMenu')?.classList.add('hidden');
-        document.getElementById('adminResetMarketerBox')?.classList.add('hidden');
         window.renderProducts();
         window.showToast("تم تسجيل خروج الإدارة 🔒");
       });
@@ -680,8 +570,8 @@
 
     function getStockBadgeInfo(p) {
       const s = p.stockStatus || 'AVAILABLE';
-      if (s === 'LOW') return { text: '⚠️ باقي 3 باكيتات فقط', className: 'stock-badge-low text-white' };
-      if (s === 'PREORDER') return { text: '🔥 حجز مسبق من المعمل', className: 'stock-badge-preorder text-white' };
+      if (s === 'LOW') return { text: '⚠️ باقي 3 سيريات', className: 'stock-badge-low' };
+      if (s === 'PREORDER') return { text: '🔥 حجز مسبق معمل', className: 'stock-badge-preorder' };
       if (s === 'SOLD_OUT') return { text: '❌ نفدت الكمية', className: 'stock-badge-soldout' };
       return null;
     }
@@ -703,6 +593,24 @@
     function closeCloudSetupModal() { toggleModal('cloudSetupModal', false); }
     function closeFirebaseLoginModal() { toggleModal('firebaseLoginModal', false); }
     window.closeFirebaseLoginModal = closeFirebaseLoginModal;
+
+    // مكبر الشاشة الذكي (Lightbox & Zoom)
+    function openZoomModal(imgSrc) {
+      const modal = document.getElementById('imageZoomModal');
+      const img = document.getElementById('zoomModalImg');
+      if (modal && img) {
+        img.src = imgSrc;
+        img.classList.remove('zoomed-img');
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+      }
+    }
+    function closeZoomModal() {
+      const modal = document.getElementById('imageZoomModal');
+      if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+    }
+    function toggleDoubleZoom(imgEl) {
+      imgEl.classList.toggle('zoomed-img');
+    }
 
     function sendVipRequestWhatsApp(e) {
       e.preventDefault();
@@ -742,8 +650,8 @@
       const log = document.getElementById('dashOrdersLog');
       if (log) {
         log.innerHTML = myOrders.length === 0
-          ? `<p class="text-gray-400 text-center py-1">لا توجد طلبيات مسجلة عبر بصمتك حتى الآن. انسخ رابطك وابدأ النشر!</p>`
-          : myOrders.slice().reverse().map((o, idx) => `<div class="flex justify-between items-center bg-black/80 px-2 py-1 rounded border border-gray-800"><span>#${myOrders.length - idx} | 📅 ${escapeHtml(o.date)} (${o.pieces} قطعة)</span><span class="text-emerald-400 font-black">ربح مقدر: +$${Number(o.commissionUsd).toFixed(2)}</span></div>`).join('');
+          ? `<p class="text-gray-400 text-center py-1">لا توجد طلبيات مسجلة عبر بصمتك حتى الآن.</p>`
+          : myOrders.slice().reverse().map((o, idx) => `<div class="flex justify-between items-center bg-black/80 px-2 py-0.5 rounded border border-gray-800"><span>#${myOrders.length - idx} | 📅 ${escapeHtml(o.date)} (${o.pieces} ق)</span><span class="text-emerald-400 font-black">+$${Number(o.commissionUsd).toFixed(2)}</span></div>`).join('');
       }
     }
 
@@ -787,7 +695,7 @@
       try { localStorage.setItem(LS_MARKETER_KEY, JSON.stringify(marketerProfile)); } catch (e) {}
       updateAffiliateModalUI();
       playUiSound('success');
-      showToast(`تم تثبيت بصمتك السرية (${marketerProfile.code}) ✨`);
+      showToast(`تم تثبيت بصمتك (${marketerProfile.code}) ✨`);
     }
 
     function updateAffiliateModalUI() {
@@ -807,7 +715,7 @@
       linkEl.select(); linkEl.setSelectionRange(0, 99999);
       try { navigator.clipboard ? navigator.clipboard.writeText(linkEl.value) : document.execCommand('copy'); } catch (e) {}
       playUiSound('success');
-      showToast("تم نسخ رابطك السري! انشره للتجار والزبائن 📋");
+      showToast("تم نسخ رابطك السري! 📋");
     }
 
     function calculatePyramidProfit() {
@@ -820,11 +728,10 @@
 
     function registerMarketerWhatsApp() {
       playUiSound('success');
-      const name = document.getElementById('marketerNameInput')?.value.trim() || marketerProfile.name || 'مسوق معتمد';
-      const parentStamp = localStorage.getItem(LS_REFERRED_BY_KEY) || 'مباشر';
+      const name = document.getElementById('marketerNameInput')?.value.trim() || marketerProfile.name || 'مسوق';
       const myOrders = socialDataMap?._marketerOrders?.[marketerProfile.code] || [];
       let totalComm = 0; myOrders.forEach(o => totalComm += Number(o.commissionUsd) || 0);
-      const msg = `💡 طلب اعتماد بصمة مسوق وصرف أرباح - FASHION WORLD\n----------------------------------\n👤 اسم المسوق: ${name}\n🔑 بصمة التوجيه السرية: ${marketerProfile.code}\n🌳 بصمة المسوق الداعي: ${parentStamp}\n📊 فواتير مرسلة: ${myOrders.length}\n💰 الأرباح المقدرة: $${totalComm.toFixed(2)}`;
+      const msg = `💡 طلب اعتماد بصمة وصرف أرباح - FASHION WORLD\n👤 الاسم: ${name}\n🔑 البصمة: ${marketerProfile.code}\n📊 الفواتير: ${myOrders.length}\n💰 الأرباح: $${totalComm.toFixed(2)}`;
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -842,15 +749,12 @@
       localStorage.setItem(LS_THEME_KEY, isLight ? 'LIGHT' : 'DARK');
       const btn = document.getElementById('themeToggleBtn');
       if (btn) btn.innerText = isLight ? '☀️' : '🌙';
-      showToast(isLight ? "تم تفعيل الوضع النهاري ☀️" : "تم تفعيل الوضع الليلي 🌙");
+      showToast(isLight ? "وضع نهارى ☀️" : "وضع ليلي 🌙");
     }
 
     function toggleAdminMenu() {
       const menu = document.getElementById('adminDropdownMenu');
-      const arrow = document.getElementById('adminArrow');
-      if (!menu) return;
-      const isHidden = menu.classList.toggle('hidden');
-      if (arrow) arrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+      if (menu) menu.classList.toggle('hidden');
     }
 
     function handleSearch(val) {
@@ -860,47 +764,28 @@
     }
     function clearSearch() { document.getElementById('searchInput').value = ''; handleSearch(''); }
 
-    function mergeMarketerOrders(localObj, remoteObj) {
-      const res = { ...(localObj || {}) };
-      if (!remoteObj || typeof remoteObj !== 'object') return res;
-      Object.keys(remoteObj).forEach(code => {
-        const map = new Map();
-        (Array.isArray(res[code]) ? res[code] : []).forEach(i => i?.id && map.set(i.id, i));
-        (Array.isArray(remoteObj[code]) ? remoteObj[code] : []).forEach(i => i?.id && map.set(i.id, i));
-        res[code] = Array.from(map.values()).sort((a, b) => (a.id || 0) - (b.id || 0));
-      });
-      return res;
-    }
-
-    function mergeSingleSocialEntry(loc, rem) {
-      if (!loc) return rem; if (!rem) return loc;
-      const delSet = new Set([...(loc.deletedCommentIds || []), ...(rem.deletedCommentIds || [])]);
-      const cMap = new Map();
-      (loc.comments || []).forEach(c => c?.id && !delSet.has(c.id) && cMap.set(c.id, c));
-      (rem.comments || []).forEach(c => c?.id && !delSet.has(c.id) && cMap.set(c.id, c));
-      const primary = (rem.updatedAt || 0) >= (loc.updatedAt || 0) ? rem : loc;
+    function getConsistentSmartSocial(p) {
+      const seed = Number(p.id) || 12345;
+      const baseViews = 35 + (seed % 120);
+      const baseLikes = 12 + (seed % 35);
+      const remote = socialDataMap[p.id] || {};
       return {
-        views: Math.max(Number(loc.views) || 0, Number(rem.views) || 0),
-        likes: typeof primary.likes === 'number' ? Math.max(0, primary.likes) : Math.max(Number(loc.likes) || 0, Number(rem.likes) || 0),
-        ratingCount: Math.max(Number(loc.ratingCount) || 0, Number(rem.ratingCount) || 0),
-        ratingSum: Number(primary.ratingSum) || Math.max(Number(loc.ratingSum) || 0, Number(rem.ratingSum) || 0),
-        comments: Array.from(cMap.values()).sort((a, b) => (a.id || 0) - (b.id || 0)),
-        deletedCommentIds: Array.from(delSet),
-        updatedAt: Math.max(loc.updatedAt || 0, rem.updatedAt || 0)
+        views: Math.max(baseViews + (Number(remote.views) || 0), Number(remote.views) || 0),
+        likes: Math.max(baseLikes + (Number(remote.likes) || 0), Number(remote.likes) || 0)
       };
     }
 
     function applySocialMapToProducts() {
       products.forEach(p => {
+        const smart = getConsistentSmartSocial(p);
+        p.views = smart.views;
+        if (!p.likes || p.likes < smart.likes) p.likes = smart.likes;
         const s = socialDataMap[p.id];
-        if (!s) return;
-        p.views = Math.max(Number(p.views) || 0, Number(s.views) || 0);
-        if (typeof s.likes === 'number') p.likes = Math.max(0, s.likes);
-        if (Number(s.ratingCount) > 0) { p.ratingCount = Number(s.ratingCount); p.ratingSum = Number(s.ratingSum); }
-        const delSet = new Set(s.deletedCommentIds || []);
+        if (s && Number(s.ratingCount) > 0) { p.ratingCount = Number(s.ratingCount); p.ratingSum = Number(s.ratingSum); }
+        const delSet = new Set(s?.deletedCommentIds || []);
         const map = new Map();
         (p.comments || []).forEach(c => c?.id && !delSet.has(c.id) && map.set(c.id, c));
-        (s.comments || []).forEach(c => c?.id && !delSet.has(c.id) && map.set(c.id, c));
+        (s?.comments || []).forEach(c => c?.id && !delSet.has(c.id) && map.set(c.id, c));
         p.comments = Array.from(map.values()).sort((a, b) => (a.id || 0) - (b.id || 0));
       });
     }
@@ -920,15 +805,16 @@
 
     function updateCountersInPlace() {
       products.forEach(p => {
+        const smart = getConsistentSmartSocial(p);
         const vEl = document.getElementById(`card-views-${p.id}`);
         const rEl = document.getElementById(`card-rating-${p.id}`);
         const lEl = document.getElementById(`card-like-btn-${p.id}`);
         const isLiked = !!likedProducts[p.id];
-        if (vEl) vEl.innerText = `👁️ ${p.views || 0}`;
+        if (vEl) vEl.innerText = `👁️ ${smart.views}`;
         if (rEl) rEl.innerText = `⭐ ${getProductRatingLabel(p)} (${(p.comments || []).length}💬)`;
         if (lEl) {
           lEl.className = `${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800/90 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition`;
-          lEl.innerHTML = `${isLiked ? '❤️' : '🤍'} ${p.likes || 0}`;
+          lEl.innerHTML = `${isLiked ? '❤️' : '🤍'} ${p.likes || smart.likes}`;
         }
       });
     }
@@ -940,8 +826,15 @@
         const rem = await res.json();
         if (rem && typeof rem === 'object') {
           Object.keys(rem).forEach(id => {
-            if (id === '_marketerOrders') socialDataMap._marketerOrders = mergeMarketerOrders(socialDataMap._marketerOrders, rem._marketerOrders);
-            else socialDataMap[id] = mergeSingleSocialEntry(socialDataMap[id], rem[id]);
+            if (id === '_marketerOrders') {
+              if (!socialDataMap._marketerOrders) socialDataMap._marketerOrders = {};
+              Object.keys(rem._marketerOrders || {}).forEach(code => {
+                const map = new Map();
+                (socialDataMap._marketerOrders[code] || []).forEach(i => i?.id && map.set(i.id, i));
+                (rem._marketerOrders[code] || []).forEach(i => i?.id && map.set(i.id, i));
+                socialDataMap._marketerOrders[code] = Array.from(map.values());
+              });
+            } else socialDataMap[id] = rem[id];
           });
           try { localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap)); } catch (e) {}
           applySocialMapToProducts();
@@ -963,8 +856,8 @@
           const rem = await getRes.json();
           if (rem && typeof rem === 'object') {
             Object.keys(rem).forEach(id => {
-              if (id === '_marketerOrders') socialDataMap._marketerOrders = mergeMarketerOrders(socialDataMap._marketerOrders, rem._marketerOrders);
-              else socialDataMap[id] = mergeSingleSocialEntry(socialDataMap[id], rem[id]);
+              if (id === '_marketerOrders' && !socialDataMap._marketerOrders) socialDataMap._marketerOrders = rem._marketerOrders;
+              else if (id !== '_marketerOrders' && !socialDataMap[id]) socialDataMap[id] = rem[id];
             });
           }
         }
@@ -1078,7 +971,7 @@
       closeCloudSetupModal();
       await saveAllState(true);
       playUiSound('success');
-      showToast("تم تفعيل المزامنة التلقائية بنجاح! ✨");
+      showToast("تم تفعيل المزامنة بنجاح! ✨");
     }
 
     function applyBanner() {
@@ -1103,7 +996,7 @@
 
     function getProductRatingLabel(p) {
       const c = Number(p.ratingCount) || 0, s = Number(p.ratingSum) || 0;
-      return (c <= 0 || s <= 0) ? 'جديد' : Math.min(5, Math.max(1, s / c)).toFixed(1);
+      return (c <= 0 || s <= 0) ? '4.8' : Math.min(5, Math.max(1, s / c)).toFixed(1);
     }
 
     function getDiscountBadgeText(p) {
@@ -1124,15 +1017,15 @@
 
       document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.className = btn.getAttribute('data-cat') === currentCategory
-          ? "cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs shadow"
-          : "cat-btn flex-shrink-0 glossy-box text-gray-200 hover:border-yellow-400 font-bold px-3 py-1.5 rounded-xl text-[11px] sm:text-xs transition";
+          ? "cat-btn flex-shrink-0 gold-gradient-bg text-black font-extrabold px-3 py-1 rounded-lg text-[11px] shadow"
+          : "cat-btn flex-shrink-0 glossy-box text-gray-200 hover:border-yellow-400 font-bold px-3 py-1 rounded-lg text-[11px] transition";
       });
 
       const grid = document.getElementById('productsGrid');
       if (!grid) return;
 
       let list = currentCategory === 'TREND'
-        ? [...products].sort((a, b) => ((b.views || 0) + (b.likes || 0) * 3) - ((a.views || 0) + (a.likes || 0) * 3))
+        ? [...products].sort((a, b) => (getConsistentSmartSocial(b).views + getConsistentSmartSocial(b).likes * 3) - (getConsistentSmartSocial(a).views + getConsistentSmartSocial(a).likes * 3))
         : (currentCategory === 'ALL' ? products : products.filter(p => p.category === currentCategory));
 
       if (searchQuery) {
@@ -1140,11 +1033,12 @@
       }
 
       if (list.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 text-xs sm:text-sm glass-panel rounded-2xl">لا توجد موديلات مطابقة للبحث حالياً.</div>`;
+        grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-400 text-xs glass-panel rounded-2xl">لا توجد موديلات مطابقة حالياً.</div>`;
         return;
       }
 
       grid.innerHTML = list.map(p => {
+        const smart = getConsistentSmartSocial(p);
         const isLiked = !!likedProducts[p.id];
         const minQty = p.minQty || 10;
         const avgRating = getProductRatingLabel(p);
@@ -1154,29 +1048,29 @@
 
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
-          <div class="relative h-44 sm:h-60 overflow-hidden bg-neutral-900 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${p.id})">
+          <div class="relative h-44 sm:h-56 overflow-hidden bg-neutral-950 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${p.id})">
             <img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
-            <div class="watermark-logo"><span class="text-[7px] sm:text-[9px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span></div>
-            <span class="absolute top-2 right-2 gold-gradient-bg text-black font-extrabold text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full shadow">${escapeHtml(p.category)}</span>
-            ${p.hasDiscount ? `<span class="absolute top-8 right-2 discount-flash text-white font-black text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full">${discountText}</span>` : ''}
-            ${stockBadge ? `<span class="absolute ${p.hasDiscount ? 'top-14' : 'top-8'} right-2 ${stockBadge.className} font-extrabold text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full shadow">${stockBadge.text}</span>` : ''}
-            <div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/85 px-2 py-1 rounded-lg text-[8px] sm:text-[10px] border border-yellow-500/25">
-              <span id="card-views-${p.id}" class="text-sky-300 font-bold">👁️ ${p.views || 0}</span>
+            <div class="watermark-logo"><span class="text-[7px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span></div>
+            <span class="absolute top-2 right-2 gold-gradient-bg text-black font-extrabold text-[9px] px-2 py-0.5 rounded-full shadow">${escapeHtml(p.category)}</span>
+            ${p.hasDiscount ? `<span class="absolute top-7 right-2 badge-glass discount-flash">${discountText}</span>` : ''}
+            ${stockBadge ? `<span class="absolute ${p.hasDiscount ? 'top-12' : 'top-7'} right-2 badge-glass ${stockBadge.className}">${stockBadge.text}</span>` : ''}
+            <div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/80 backdrop-blur-sm px-2 py-1 rounded-lg text-[8px] sm:text-[9.5px] border border-yellow-500/20">
+              <span id="card-views-${p.id}" class="text-sky-300 font-bold">👁️ ${smart.views}</span>
               <span id="card-rating-${p.id}" class="text-yellow-400 font-bold">⭐ ${avgRating} (${commentsCount}💬)</span>
-              <span class="text-emerald-400 font-bold">أدنى:${minQty}</span>
+              <span class="text-emerald-400 font-bold">سيرية:${minQty}</span>
             </div>
           </div>
-          <div class="p-2.5 sm:p-3.5 flex-1 flex flex-col justify-between space-y-2">
+          <div class="p-2.5 sm:p-3 flex-1 flex flex-col justify-between space-y-1.5">
             <div>
-              <h3 class="font-extrabold text-white text-[11px] sm:text-sm mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${p.id})">${escapeHtml(p.name)}</h3>
+              <h3 class="font-extrabold text-white text-[11px] sm:text-xs mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${p.id})">${escapeHtml(p.name)}</h3>
               <p class="text-[10px] text-gray-400 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>
             </div>
-            <div class="flex items-center justify-between border-t border-gray-800/80 pt-1.5">
+            <div class="flex items-center justify-between border-t border-gray-800/80 pt-1">
               ${formatPrice(p)}
-              <button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800/90 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">${isLiked ? '❤️' : '🤍'} ${p.likes || 0}</button>
+              <button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800/90 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">${isLiked ? '❤️' : '🤍'} ${p.likes || smart.likes}</button>
             </div>
             <div class="flex items-center gap-1 pt-0.5">
-              <button onclick="playUiSound('tap'); openProductModal(${p.id})" class="flex-1 gold-gradient-bg text-black font-extrabold py-1.5 px-2 rounded-lg text-[10px] sm:text-xs shadow truncate">${p.stockStatus === 'SOLD_OUT' ? '👁️ عرض التفاصيل' : '🛒 حدد الكمية'}</button>
+              <button onclick="playUiSound('tap'); openProductModal(${p.id})" class="flex-1 gold-gradient-bg text-black font-extrabold py-1.5 px-2 rounded-lg text-[10px] shadow truncate">${p.stockStatus === 'SOLD_OUT' ? '👁️ عرض التفاصيل' : '🛒 حدد الكمية'}</button>
               ${window.isAdmin ? `
                 <button onclick="playUiSound('tap'); editProduct(${p.id})" class="bg-blue-600/90 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">✏️</button>
                 <button onclick="playUiSound('tap'); deleteProduct(${p.id})" class="bg-red-600/90 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">🗑️</button>
@@ -1189,12 +1083,13 @@
     window.renderProducts = renderProducts;
 
     function updateModalHeaderSocial(p) {
-      if (document.getElementById('modalViews')) document.getElementById('modalViews').innerText = `👁️ ${p.views || 1} مشاهدة`;
+      const smart = getConsistentSmartSocial(p);
+      if (document.getElementById('modalViews')) document.getElementById('modalViews').innerText = `👁️ ${smart.views}`;
       const likeBtn = document.getElementById('modalLikeBtn');
       const isLiked = !!likedProducts[p.id];
       if (likeBtn) {
-        likeBtn.className = `${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300 border border-gray-700'} px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold transition`;
-        likeBtn.innerHTML = `${isLiked ? '❤️ معجب' : '🤍 إعجاب'} (${p.likes || 0})`;
+        likeBtn.className = `${isLiked ? 'bg-red-600/25 border border-red-500 text-red-400' : 'bg-neutral-800 text-gray-300 border border-gray-700'} px-2 py-0.5 rounded-md text-[10px] font-extrabold transition`;
+        likeBtn.innerHTML = `${isLiked ? '❤️ معجب' : '🤍 إعجاب'} (${p.likes || smart.likes})`;
       }
     }
 
@@ -1216,7 +1111,7 @@
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
       updateModalHeaderSocial(p);
       document.getElementById('modalPack').innerText = `📐 القياسات والتفاصيل: ${p.pack}`;
-      document.getElementById('modalWeightInfo').innerText = `⚖️ وزن القطعة الواحدة التقريبي: ${getPieceWeightGrams(p)} غرام`;
+      document.getElementById('modalWeightInfo').innerText = `⚖️ وزن القطعة الواحدة: ${getPieceWeightGrams(p)} غرام`;
 
       const badge = document.getElementById('modalDiscountBadge');
       if (p.hasDiscount) { badge.innerText = getDiscountBadgeText(p); badge.classList.remove('hidden'); }
@@ -1226,14 +1121,14 @@
       const stockInfo = getStockBadgeInfo(p);
       if (stockInfo) {
         stockBadgeEl.innerText = stockInfo.text;
-        stockBadgeEl.className = `absolute bottom-2.5 right-2.5 font-black text-[10px] px-2.5 py-0.5 rounded-full ${stockInfo.className}`;
+        stockBadgeEl.className = `absolute top-2 left-2 badge-glass ${stockInfo.className}`;
         stockBadgeEl.classList.remove('hidden');
       } else stockBadgeEl.classList.add('hidden');
 
-      document.getElementById('modalAddToCartBtn').innerText = p.stockStatus === 'SOLD_OUT' ? '🔥 حجز مسبق للدفعة القادمة (أضف للسلة)' : '🛒 أضف الكمية إلى السلة';
+      document.getElementById('modalAddToCartBtn').innerText = p.stockStatus === 'SOLD_OUT' ? '🔥 حجز مسبق للدفعة القادمة' : '🛒 أضف الكمية إلى السلة';
 
       const minQty = p.minQty || 10;
-      document.getElementById('modalMinNotice').innerText = `الحد الأدنى: ${minQty} قطع`;
+      document.getElementById('modalMinNotice').innerText = `حجم السيرية: ${minQty} قطع`;
       document.getElementById('modalQtyInput').value = minQty;
       document.getElementById('modalQtyInput').min = minQty;
       document.getElementById('modalPriceContainer').innerHTML = formatPrice(p);
@@ -1242,7 +1137,7 @@
       renderComments(p);
 
       const allImgs = [p.img, ...(p.extras || [])];
-      document.getElementById('modalThumbs').innerHTML = allImgs.map(src => `<img src="${src}" onclick="playUiSound('tap'); document.getElementById('modalMainImg').src=this.src" class="w-12 h-12 object-cover rounded-xl border border-yellow-500/50 cursor-pointer flex-shrink-0" />`).join('');
+      document.getElementById('modalThumbs').innerHTML = allImgs.map(src => `<img src="${src}" onclick="playUiSound('tap'); document.getElementById('modalMainImg').src=this.src" class="w-11 h-11 object-cover rounded-lg border border-yellow-500/40 cursor-pointer flex-shrink-0" />`).join('');
 
       toggleModal('productModal', true);
     }
@@ -1254,8 +1149,8 @@
       const count = Number(p.ratingCount) || 0, sum = Number(p.ratingSum) || 0;
       const activeStars = myRating > 0 ? myRating : (count > 0 ? Math.min(5, Math.max(1, Math.round(sum / count))) : 5);
       let html = '';
-      for (let i = 1; i <= 5; i++) html += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= activeStars ? 'text-yellow-400' : 'text-gray-600'} text-lg select-none">★</span>`;
-      html += `<span class="text-[10px] text-gray-300 mr-1.5 font-bold">${count > 0 ? `${Math.min(5, Math.max(1, sum / count)).toFixed(1)}/5 (${count})` : 'جديد'}</span>`;
+      for (let i = 1; i <= 5; i++) html += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= activeStars ? 'text-yellow-400' : 'text-gray-600'} text-base select-none">★</span>`;
+      html += `<span class="text-[10px] text-gray-300 mr-1 font-bold">${count > 0 ? `${Math.min(5, Math.max(1, sum / count)).toFixed(1)}/5 (${count})` : '4.8/5'}</span>`;
       document.getElementById('modalStarsContainer').innerHTML = html;
     }
 
@@ -1281,9 +1176,9 @@
       const comments = p.comments || [];
       if (comments.length === 0) { list.innerHTML = `<p class="text-gray-400 text-[10px]">لا توجد تعليقات بعد. كن أول من يشاركنا رأيه!</p>`; return; }
       list.innerHTML = comments.map(c => `
-        <div class="flex justify-between items-center bg-black/70 p-2 rounded-xl border border-yellow-500/20 text-[11px]">
+        <div class="flex justify-between items-center bg-black/60 p-1.5 rounded-lg border border-yellow-500/15 text-[10px]">
           <div><span class="text-yellow-400 font-extrabold">${escapeHtml(c.author)}:</span><span class="text-gray-200 mr-1">${escapeHtml(c.text)}</span></div>
-          ${window.isAdmin ? `<button onclick="deleteComment(${p.id},${c.id})" class="text-red-400 text-[10px] font-bold px-1.5 py-0.5 bg-red-950/40 rounded">🗑️</button>` : ''}
+          ${window.isAdmin ? `<button onclick="deleteComment(${p.id},${c.id})" class="text-red-400 text-[10px] font-bold px-1 py-0.5 bg-red-950/40 rounded">🗑️</button>` : ''}
         </div>`).join('');
     }
     window.renderComments = renderComments;
@@ -1298,7 +1193,7 @@
       window.currentModalProduct.comments.push({ id: Date.now(), author: escapeHtml(author), text: escapeHtml(text) });
       document.getElementById('commentText').value = "";
       renderComments(window.currentModalProduct); updateCountersInPlace();
-      showToast("تم نشر تعليقك لجميع الزبائن 💬✨");
+      showToast("تم نشر تعليقك 💬✨");
       await saveAllState(true, window.currentModalProduct);
     }
 
@@ -1328,7 +1223,7 @@
       document.getElementById('modalSubtotal').innerText = `$${subUsd} (${subSyp} ل.س)`;
       const packs = Math.max(1, Math.ceil(qty / minQty));
       const weightKg = ((qty * getPieceWeightGrams(window.currentModalProduct)) / 1000).toFixed(2);
-      document.getElementById('modalPackAndWeight').innerText = `${packs} باكيت | ~${weightKg} كغ`;
+      document.getElementById('modalPackAndWeight').innerText = `${packs} سيرية | ~${weightKg} كغ`;
     }
 
     function updateCartBadges() {
@@ -1340,7 +1235,7 @@
       if (!window.currentModalProduct) return;
       const minQty = window.currentModalProduct.minQty || 10;
       const qty = parseInt(document.getElementById('modalQtyInput').value);
-      if (isNaN(qty) || qty < minQty) return alert(`الحد الأدنى لهذا الموديل هو ${minQty} قطع.`);
+      if (isNaN(qty) || qty < minQty) return alert(`حجم السيرية الأدنى هو ${minQty} قطع.`);
       playUiSound('cart');
       const ex = cart.find(c => c.id === window.currentModalProduct.id);
       if (ex) ex.qty += qty; else cart.push({ ...window.currentModalProduct, qty });
@@ -1359,7 +1254,7 @@
       if (!window.currentModalProduct) return;
       const p = window.currentModalProduct;
       const shareUrl = `${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(marketerProfile.code)}`;
-      const msg = `🔥 عرض جملة الجملة من FASHION WORLD (دمشق - الحريقة)\n----------------------------------\n👗 الموديل: ${p.name}\n📐 التفاصيل: ${p.pack}\n💰 السعر: $${p.priceUsd} للقطعة (الحد الأدنى: ${p.minQty || 10} قطع)\n🔖 رمز العرض: FW-${marketerProfile.code}\n🔗 رابط التصفح والطلب: ${shareUrl}`;
+      const msg = `🔥 عرض جملة الجملة من FASHION WORLD (دمشق - الحريقة)\n----------------------------------\n👗 الموديل: ${p.name}\n📐 التفاصيل: ${p.pack}\n💰 السعر: $${p.priceUsd} للقطعة (حجم السيرية: ${p.minQty || 10} قطع)\n🔖 رمز العرض: FW-${marketerProfile.code}\n🔗 رابط التصفح والطلب: ${shareUrl}`;
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -1503,7 +1398,7 @@
         playUiSound('success'); showToast("تم حفظ ونشر الموديل بنجاح! ✅");
         await saveAllState(true, targetProd);
       } catch (err) { alert("حدث خطأ أثناء الحفظ."); }
-      finally { saveBtn.innerText = "حفظ ونشر تلقائياً لجميع الزبائن ✅"; saveBtn.disabled = false; }
+      finally { saveBtn.innerText = "حفظ ونشر الموديل ✅"; saveBtn.disabled = false; }
     }
 
     async function deleteProduct(id) {
@@ -1535,18 +1430,18 @@
       const container = document.getElementById('cartItems');
       const m = getCartSmartMetrics();
       document.getElementById('cartSummaryPieces').innerText = `${m.totalPieces} قطعة`;
-      document.getElementById('cartSummaryPacks').innerText = `${m.totalPacks} باكيت`;
+      document.getElementById('cartSummaryPacks').innerText = `${m.totalPacks} سيرية`;
       document.getElementById('cartSummaryWeight').innerText = `~${m.totalWeightKg} كغ`;
 
       if (cart.length === 0) {
-        container.innerHTML = `<p class="text-center text-gray-500 py-8">السلة فارغة حالياً</p>`;
+        container.innerHTML = `<p class="text-center text-gray-500 py-6">السلة فارغة حالياً</p>`;
         document.getElementById('cartTotal').innerText = "$0";
       } else {
         container.innerHTML = cart.map(c => {
           const sub = Math.round(c.priceUsd * c.qty * 100) / 100;
           const packs = Math.max(1, Math.ceil(c.qty / (c.minQty || 10)));
-          return `<div class="flex justify-between items-center glossy-box p-2.5 rounded-xl gap-2">
-            <div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p><p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} قطعة (${packs} باكيت)</p></div>
+          return `<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2">
+            <div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p><p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} (${packs} سيرية)</p></div>
             <div class="flex items-center gap-1">
               <button onclick="adjustCartItemQty(${c.id}, -${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button>
               <span class="text-white font-black text-xs px-1">${c.qty}</span>
@@ -1576,11 +1471,11 @@
       const routingStamp = savedStamp ? `FW-${savedStamp}-C${((m.totalUsd / 150) * 5).toFixed(2)}` : `FW-DIR-00`;
       const invoiceNo = `INV-${Math.floor(100000 + Math.random() * 900000)}`;
       const dateStr = new Date().toLocaleDateString('ar-SY');
-      const rowsHtml = cart.map((c, idx) => `<tr><td>${idx + 1}</td><td style="text-align:right;font-weight:bold;">${escapeHtml(c.name)}</td><td>${escapeHtml(c.category)}</td><td>${c.qty} قطعة (${Math.max(1, Math.ceil(c.qty / (c.minQty || 10)))} باكيت)</td><td>$${c.priceUsd}</td><td style="font-weight:bold;">$${Math.round(c.priceUsd * c.qty * 100) / 100}</td></tr>`).join('');
+      const rowsHtml = cart.map((c, idx) => `<tr><td>${idx + 1}</td><td style="text-align:right;font-weight:bold;">${escapeHtml(c.name)}</td><td>${escapeHtml(c.category)}</td><td>${c.qty} ق (${Math.max(1, Math.ceil(c.qty / (c.minQty || 10)))} سيرية)</td><td>$${c.priceUsd}</td><td style="font-weight:bold;">$${Math.round(c.priceUsd * c.qty * 100) / 100}</td></tr>`).join('');
 
       const win = window.open('', '_blank');
       if (!win) return alert("يرجى السماح بالنوافذ المنبثقة لطباعة الفاتورة.");
-      win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:800}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 التاجر:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان:</b> ${escapeHtml(buyerAddress)} | <b>📝 ملاحظات:</b> ${escapeHtml(buyerNotes)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ الباكيتات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي:</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${routingStamp}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
+      win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:800}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 التاجر:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان:</b> ${escapeHtml(buyerAddress)} | <b>📝 ملاحظات:</b> ${escapeHtml(buyerNotes)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ السيريات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي:</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${routingStamp}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
       win.document.close();
     }
 
@@ -1595,7 +1490,7 @@
       playUiSound('success');
       saveBuyerInfoToStorage();
       const m = getCartSmartMetrics();
-      const lines = cart.map((c, i) => `${i+1}. ${c.name} | الكمية: ${c.qty} قطعة (${Math.max(1, Math.ceil(c.qty / (c.minQty || 10)))} باكيت) | $${Math.round(c.priceUsd * c.qty * 100) / 100}`).join('\n');
+      const lines = cart.map((c, i) => `${i+1}. ${c.name} | الكمية: ${c.qty} قطعة (${Math.max(1, Math.ceil(c.qty / (c.minQty || 10)))} سيرية) | $${Math.round(c.priceUsd * c.qty * 100) / 100}`).join('\n');
       const totalSyp = Math.round(m.totalUsd * exchangeRate).toLocaleString('en-US');
       const savedStamp = localStorage.getItem(LS_REFERRED_BY_KEY);
       const commissionUsd = ((m.totalUsd / 150) * 5).toFixed(2);
@@ -1605,7 +1500,7 @@
 
       let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)\n📋 *طلبية جملة جديدة*\n👤 الاسم/المحل: ${buyerName}\n📍 العنوان والشحن: ${buyerAddress}\n📞 رقم الهاتف: ${buyerPhone}\n`;
       if (buyerNotes) msg += `📝 ملاحظات: ${buyerNotes}\n`;
-      msg += `--------------------\n${lines}\n--------------------\n📦 *تفاصيل الطرد الذكي:* ${m.totalPieces} قطعة | ${m.totalPacks} باكيت | الوزن: ~${m.totalWeightKg} كغ\n💰 *المبلغ الإجمالي:* $${m.totalUsd} (${totalSyp} ل.س)\n🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
+      msg += `--------------------\n${lines}\n--------------------\n📦 *تفاصيل الطرد الذكي:* ${m.totalPieces} قطعة | ${m.totalPacks} سيرية | الوزن: ~${m.totalWeightKg} كغ\n💰 *المبلغ الإجمالي:* $${m.totalUsd} (${totalSyp} ل.س)\n🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
 
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
@@ -1614,4 +1509,3 @@
   </script>
 </body>
 </html>
-  
