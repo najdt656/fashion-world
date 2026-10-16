@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --gold: #D4AF37; --dark-bg: #0b0b0e; --panel-bg: rgba(18,18,24,0.92); }
+    :root { --gold: #D4AF37; --dark-bg: #0b0b0e; --panel-bg: rgba(18,18,24,0.94); }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { width: 100%; max-width: 100vw; overflow-x: hidden; margin: 0; padding: 0; }
     body {
@@ -30,40 +30,43 @@
     .card-luxury { background: linear-gradient(165deg, #14141a 0%, #08080a 100%); border: 1px solid rgba(212,175,55,0.18); box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.25s; }
     .badge-glass { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font-size: 8.5px; line-height: 1.2; padding: 2px 6px; border-radius: 6px; font-weight: 800; letter-spacing: 0.1px; }
     @keyframes softPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-    .discount-flash { background: rgba(185, 28, 28, 0.7); border: 1px solid rgba(253, 224, 71, 0.4); color: #fff; animation: softPulse 2s infinite ease-in-out; }
-    .stock-badge-low { background: rgba(180, 83, 9, 0.7); border: 1px solid rgba(254, 240, 138, 0.4); color: #fff; }
-    .stock-badge-preorder { background: rgba(91, 33, 182, 0.7); border: 1px solid rgba(221, 214, 254, 0.4); color: #fff; }
-    .stock-badge-soldout { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(239, 68, 68, 0.5); color: #fca5a5; }
-    .watermark-logo { position: absolute; top: 6px; left: 6px; pointer-events: none; z-index: 10; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); padding: 1.5px 5px; border-radius: 5px; border: 1px solid rgba(212,175,55,0.25); }
+    .discount-flash { background: rgba(185, 28, 28, 0.75); border: 1px solid rgba(253, 224, 71, 0.45); color: #fff; animation: softPulse 2s infinite ease-in-out; }
+    .stock-badge-low { background: rgba(180, 83, 9, 0.75); border: 1px solid rgba(254, 240, 138, 0.45); color: #fff; }
+    .stock-badge-preorder { background: rgba(91, 33, 182, 0.75); border: 1px solid rgba(221, 214, 254, 0.45); color: #fff; }
+    .stock-badge-soldout { background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(239, 68, 68, 0.55); color: #fca5a5; }
+    .fomo-strip { background: linear-gradient(90deg, rgba(153,27,27,0.25) 0%, rgba(180,83,9,0.25) 100%); border: 1px solid rgba(245,158,11,0.3); }
+    .watermark-logo { position: absolute; top: 6px; left: 6px; pointer-events: none; z-index: 10; background: rgba(0,0,0,0.45); backdrop-filter: blur(4px); padding: 1.5px 5px; border-radius: 5px; border: 1px solid rgba(212,175,55,0.25); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     @keyframes slideIn { from { transform: translateY(-12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     .toast-anim { animation: slideIn 0.2s ease-out forwards; }
+    @keyframes drawerSlide { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+    .drawer-anim { animation: drawerSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     .zoomed-img { transform: scale(2.1); cursor: zoom-out !important; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col" id="mainBody">
+<body class="min-h-screen flex flex-col pb-20" id="mainBody">
 
-  <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[120] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs"></div>
+  <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[130] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs"></div>
 
   <!-- مكبر الصور بملء الشاشة -->
-  <div id="imageZoomModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[115] p-2 select-none" onclick="closeZoomModal()">
-    <button onclick="closeZoomModal()" class="fixed top-4 right-4 z-[120] bg-neutral-800 text-white w-9 h-9 rounded-full font-bold text-sm border border-yellow-500/30">✕</button>
-    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[120] bg-black/80 text-yellow-300 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط على الصورة للتكبير 2x أو الإغلاق</div>
+  <div id="imageZoomModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[125] p-2 select-none" onclick="closeZoomModal()">
+    <button onclick="closeZoomModal()" class="fixed top-4 right-4 z-[130] bg-neutral-800 text-white w-9 h-9 rounded-full font-bold text-sm border border-yellow-500/30">✕</button>
+    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[130] bg-black/80 text-yellow-300 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط على الصورة للتكبير 2x أو الإغلاق</div>
     <div class="w-full h-full flex items-center justify-center overflow-auto" onclick="event.stopPropagation()">
       <img id="zoomModalImg" src="" onclick="toggleDoubleZoom(this)" class="max-w-full max-h-[92vh] object-contain transition-transform duration-300 cursor-zoom-in rounded-lg" />
     </div>
   </div>
 
-  <!-- الشريط العلوي -->
-  <div class="bg-black/90 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
-    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 text-gray-300">
+  <!-- الشريط العلوي للموقع + شريط حالة الشحن المعملية الحي -->
+  <div class="bg-black/95 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 text-gray-300">
       <div class="flex items-center gap-1.5 truncate">
-        <span class="text-yellow-400 font-bold truncate">📍 سوريا - دمشق - الحريقة</span>
-        <span class="hidden sm:inline text-emerald-400 font-semibold">| شحن مباشر من المعمل</span>
+        <span class="text-yellow-400 font-bold">📍 سوريا - دمشق - الحريقة</span>
+        <span class="text-emerald-400 font-semibold">| شحن مباشر من المعمل</span>
       </div>
-      <div class="text-gray-400 font-semibold">
-        <span>مرحباً بك في منصة الجملة الرسمية</span>
+      <div class="text-amber-300/95 font-bold text-[9.5px] sm:text-[10px] text-center bg-amber-950/30 border border-amber-500/25 px-2.5 py-0.5 rounded-full">
+        🚚 الطلبيات المؤكدة اليوم تُشحن خلال 24 ساعة عبر المكاتب المعتمدة | طلبات المسبق تُشحن خلال 24 ساعة فور إتمام التحويل
       </div>
     </div>
   </div>
@@ -130,11 +133,14 @@
 
   <!-- البحث والأقسام -->
   <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full space-y-1.5">
-    <div class="glass-panel rounded-xl p-1.5 flex items-center border border-yellow-500/20">
+    <div class="glass-panel rounded-xl p-1.5 flex items-center justify-between gap-2 border border-yellow-500/20">
       <div class="relative flex-1 flex items-center">
         <span class="absolute right-3 text-yellow-400 text-xs pointer-events-none">🔍</span>
         <input id="searchInput" type="text" oninput="handleSearch(this.value)" placeholder="ابحث عن اسم الموديل، الكود، أو القسم..." class="w-full bg-black/70 border border-yellow-500/20 rounded-lg pr-8 pl-7 py-1.5 text-xs text-white focus:outline-none" />
         <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-2 text-gray-300 text-xs bg-neutral-800 px-1.5 rounded">✕</button>
+      </div>
+      <div class="lg:hidden bg-black/80 border border-yellow-500/25 px-2.5 py-1.5 rounded-lg text-[10px] text-gray-200 font-bold flex-shrink-0">
+        💱 الصرف: <strong id="heroRate" class="text-emerald-400">15,000</strong>
       </div>
     </div>
     <div class="glass-panel rounded-xl p-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar border border-yellow-500/20" id="categoryTabs">
@@ -152,7 +158,7 @@
     <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4"></div>
   </main>
 
-  <!-- نافذة تفاصيل الموديل -->
+  <!-- نافذة تفاصيل الموديل (مع حاسبة ربح المفرق + مشاركة فيسبوك وواتساب + إشعار FOMO) -->
   <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[93vh] p-3.5 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
@@ -169,9 +175,12 @@
             <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-sm text-yellow-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-yellow-500/25 pointer-events-none">🔍 اضغط لتكبير الصورة بملء الشاشة</span>
           </div>
           <div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div>
-          <div class="grid grid-cols-2 gap-1.5">
-            <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-900/30 text-emerald-300 border border-emerald-500/30 font-bold py-1.5 rounded-xl text-[11px]">📲 مشاركة واتساب</button>
-            <button onclick="reserveProductWhatsApp()" class="w-full bg-amber-600/30 text-amber-300 border border-amber-500/30 font-bold py-1.5 rounded-xl text-[11px]">🔒 حجز موديل</button>
+          
+          <!-- أزرار المشاركة عبر واتساب وفيسبوك وحجز الموديل -->
+          <div class="grid grid-cols-3 gap-1.5">
+            <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-900/35 text-emerald-300 border border-emerald-500/35 font-bold py-1.5 rounded-xl text-[10px]">📲 واتساب</button>
+            <button onclick="shareProductFacebook()" class="w-full bg-blue-900/35 text-blue-300 border border-blue-500/35 font-bold py-1.5 rounded-xl text-[10px]">📘 فيسبوك</button>
+            <button onclick="reserveProductWhatsApp()" class="w-full bg-amber-600/30 text-amber-300 border border-amber-500/35 font-bold py-1.5 rounded-xl text-[10px]">🔒 حجز برعبون</button>
           </div>
         </div>
 
@@ -184,9 +193,16 @@
                 <button id="modalLikeBtn" onclick="toggleLikeProduct(event, currentModalProduct ? currentModalProduct.id : 0)" class="px-2 py-0.5 rounded-md text-[10px] font-bold transition"></button>
               </div>
             </div>
+
+            <!-- شريط التنبيه الحي لانخفاض المخزون والطلبات اليومية (FOMO) -->
+            <div id="modalFomoBanner" class="hidden fomo-strip px-2.5 py-1.5 rounded-xl text-[10px] text-amber-200 font-bold flex items-center justify-between"></div>
+
             <p id="modalPack" class="text-gray-200 font-bold text-[11px]"></p>
             <p id="modalWeightInfo" class="text-[10px] text-amber-300 font-bold"></p>
-            <p id="modalRetailSuggestion" class="text-[10px] text-emerald-300 font-bold bg-emerald-950/20 p-1.5 rounded border border-emerald-500/20"></p>
+            
+            <!-- حاسبة الأرباح التقديرية للعميل النهائي (+40%) -->
+            <div id="modalRetailSuggestion" class="text-[10px] text-emerald-300 font-bold bg-emerald-950/30 p-2 rounded-xl border border-emerald-500/30 leading-relaxed"></div>
+
             <div class="flex items-center justify-between pt-1 border-t border-gray-800">
               <span class="text-yellow-300 font-bold text-[11px]">تقييم التجار:</span>
               <div id="modalStarsContainer" class="flex items-center gap-0.5 text-base cursor-pointer"></div>
@@ -244,21 +260,34 @@
     </div>
   </div>
 
-  <!-- نافذة برنامج الشركاء والعمولات (لوحة الشريك) -->
+  <!-- نافذة برنامج الشركاء والعمولات (مع نظام المستويات: برونزي، ذهبي، ماسي) -->
   <div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/40 text-xs">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-bold text-yellow-400 text-sm">💡 برنامج الشركاء والعمولات + لوحة الشريك</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-bold text-yellow-400 text-sm">💡 برنامج الشركاء والعمولات + نظام المستويات</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
       <div class="overflow-y-auto flex-1 space-y-2.5 pl-1">
         
         <div class="bg-amber-950/30 border border-amber-500/30 rounded-xl p-2.5 text-amber-200 text-[11px] space-y-1">
-          <p class="font-bold text-yellow-400">📖 كيف تعمل أرباحك معنا كشريك؟</p>
-          <p>1️⃣ انسخ رابطك السري وشاركه مع عملائك.<br>2️⃣ عندما يطلب العميل من خلاله، يُسجيل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من قِبل إدارة المعمل، تتحول الأرباح فوراً إلى (أرباح مؤكدة ومتاحة للسحب)!</p>
+          <p class="font-bold text-yellow-400">📖 كيف تعمل أرباحك معنا كشريك نجاح؟</p>
+          <p>1️⃣ انسخ رابطك السري وشاركه مع عملائك.<br>2️⃣ عندما يطلب العميل من خلاله، يُسجل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من قِبل إدارة المعمل، تتحول الأرباح فوراً إلى (أرباح مؤكدة ومتاحة للسحب) وترتفع رتبتك التنافسية!</p>
         </div>
 
-        <div class="bg-emerald-950/30 border border-yellow-500/25 rounded-xl p-2.5 text-center">
-          <p class="text-yellow-300 font-bold">🚀 اربح 5$ عن كل 150$ مبيعات مباشرة (وتتزايد أو تتناقص نسبياً حسب حجم مبيعاتك) بكل سرية تامة أمام عملائك!</p>
-          <p class="text-gray-300 text-[10px] mt-0.5">لا يظهر للعميل أبداً أي تفاصيل عن الأرباح، بل يُوثق طلبك برمز توجيه سري خاص بك لدى الإدارة!</p>
+        <!-- بطاقة مستويات الشركاء (Tiered Partner Ranks) -->
+        <div class="glossy-box p-2.5 rounded-xl border border-yellow-500/30 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-yellow-400 text-[11px]">🏆 مستواك الحالي في برنامج الشركاء:</span>
+            <span id="partnerRankBadge" class="bg-amber-700/40 text-amber-200 border border-amber-400/40 px-2.5 py-0.5 rounded-full font-bold text-[10px]">🥉 شريك برونزي</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1.5 text-center text-[9.5px]">
+            <div class="bg-black/60 p-1.5 rounded-lg border border-amber-700/40"><strong class="text-amber-400 block">🥉 برونزي</strong><span class="text-gray-400">أقل من $500</span><span class="text-emerald-400 block font-bold">5$ / 150$</span></div>
+            <div class="bg-black/60 p-1.5 rounded-lg border border-yellow-500/40"><strong class="text-yellow-300 block">🥇 ذهبي</strong><span class="text-gray-400">$500 - $1499</span><span class="text-emerald-400 block font-bold">6$ / 150$</span></div>
+            <div class="bg-black/60 p-1.5 rounded-lg border border-sky-400/40"><strong class="text-sky-300 block">💎 ماسي</strong><span class="text-gray-400">+1500$ مبيعات</span><span class="text-emerald-400 block font-bold">7.5$ / 150$</span></div>
+          </div>
+          <div class="w-full bg-black rounded-full h-2 overflow-hidden border border-gray-800">
+            <div id="partnerRankProgress" class="gold-gradient-bg h-full transition-all duration-500" style="width: 10%"></div>
+          </div>
+          <p id="partnerNextRankHint" class="text-[9.5px] text-gray-300 text-center font-semibold">حقق مبيعات مؤكدة بقيمة $500 للترقية إلى المستوى الذهبي 🥇 وزيادة عمولتك!</p>
         </div>
+
         <div class="glossy-box p-2.5 rounded-xl space-y-2">
           <p class="font-bold text-yellow-400 text-[10px]">🔑 أنشئ أو استرجع بصمتك السرية الثابتة:</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
@@ -271,6 +300,7 @@
             <div class="flex gap-1"><input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded px-2 py-1 text-emerald-400 text-[10px]" dir="ltr" /><button onclick="copyAffiliateLink()" class="bg-emerald-700 text-white font-bold px-2.5 py-1 rounded text-[10px] flex-shrink-0">نسخ الرابط 📋</button></div>
           </div>
         </div>
+
         <div class="glossy-box p-2.5 rounded-xl space-y-1.5 border border-emerald-500/30">
           <div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">📊 سجل الطلبيات المرسلة ببصمتك:</span><span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded font-mono text-[10px]">1804-FW</span></div>
           
@@ -286,16 +316,17 @@
         <!-- صندوق طلب سحب الأرباح شام كاش وإرسالها للواتساب -->
         <div class="glossy-box p-3 rounded-xl space-y-2 border border-yellow-500/30 bg-neutral-900/90">
           <p class="font-bold text-yellow-400 text-[11px]">💳 طلب سحب الأرباح المؤكدة (شام كاش / حوالة):</p>
-          <div class="grid grid-cols-2 gap-1.5">
-            <input id="payoutReceiverName" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1 text-white text-[10px]" placeholder="اسم المستلم الثلاثي..." />
-            <input id="payoutAccountInfo" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1 text-white text-[10px]" placeholder="رقم الشام كاش / المحفظة..." />
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+            <input id="payoutReceiverName" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="اسم المستلم الثلاثي..." />
+            <input id="payoutCity" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="العنوان / المحافظة ورقم الهاتف..." />
+            <input id="payoutAccountInfo" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="رقم الشام كاش أو إرفاق باركود بالواتساب..." />
           </div>
-          <button onclick="requestWithdrawalWhatsApp()" class="w-full gold-gradient-bg font-bold py-2 rounded-xl text-[11px]">📲 إرسال طلب سحب الأرباح عبر الواتساب</button>
-          <p class="text-[9px] text-gray-400 text-center">ملاحظة: يتم تحويل المستحقات خلال مدة أقصاها 12 ساعة كحد أقصى من قِبل الإدارة.</p>
+          <button onclick="requestWithdrawalWhatsApp()" class="w-full gold-gradient-bg font-bold py-2 rounded-xl text-[11px]">📲 إرسال طلب السحب وإرفاق باركود شام كاش واتساب</button>
+          <p class="text-[9.5px] text-amber-300/90 text-center font-semibold">⏳ يرجى الانتظار قليلاً بعد إرسال الطلب؛ يتم تدقيق وتحويل الأرباح من قِبل الإدارة خلال مدة أقصاها 12 ساعة.</p>
         </div>
 
         <div class="glossy-box p-2.5 rounded-xl space-y-1.5">
-          <div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك التناسبية:</span><span id="calcProfitResult" class="text-xs font-bold text-yellow-400">$10.00 / شهرياً</span></div>
+          <div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك التناسبية (5$ لكل 150$):</span><span id="calcProfitResult" class="text-xs font-bold text-yellow-400">$10.00 / شهرياً</span></div>
           <div><label class="text-gray-300 block text-[10px] mb-1">إجمالي مبيعات عملائك الشهرية ($):</label><input id="calcDirectSales" type="number" step="50" value="300" oninput="calculateDirectProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold text-xs" /></div>
         </div>
       </div>
@@ -304,11 +335,10 @@
       </div>
     </div>
   </div>
-
-  <!-- نوافذ الإدارة ومن نحن -->
-  <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-3">
+    <!-- نوافذ الإدارة ومن نحن -->
+  <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[110] p-3">
     <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔐 مصادقة الإدارة</h3><button onclick="closeFirebaseLoginModal()" class="text-gray-400">✕</button></div>
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔐 مصادقة الإدارة المحمية</h3><button onclick="closeFirebaseLoginModal()" class="text-gray-400">✕</button></div>
       <form onsubmit="handleAdminFirebaseLogin(event)" class="space-y-2.5">
         <input id="adminEmailInput" type="email" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Email..." />
         <input id="adminPassInput" type="password" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Password..." />
@@ -319,9 +349,13 @@
 
   <div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
     <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔗 مفتاح المزامنة (GitHub Token)</h3><button onclick="closeCloudSetupModal()" class="text-gray-400">✕</button></div>
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔗 مفتاح المزامنة الآمن (GitHub Token)</h3><button onclick="closeCloudSetupModal()" class="text-gray-400">✕</button></div>
+      <p class="text-[10px] text-gray-400">يُحفظ المفتاح في جهازك الشخصي فقط لرفع التعديلات. احرص على مسحه إذا كنت تستخدم جهازاً عاماً.</p>
       <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="ghp_..." />
-      <button onclick="saveCloudToken()" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ وتفعيل المزامنة ✅</button>
+      <div class="flex gap-2">
+        <button onclick="saveCloudToken()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ وتفعيل المزامنة ✅</button>
+        <button onclick="clearCloudToken()" class="bg-red-800/80 text-white font-bold px-3 py-2.5 rounded-xl">مسح المفتاح 🗑️</button>
+      </div>
     </div>
   </div>
 
@@ -329,12 +363,12 @@
     <div class="glass-panel rounded-3xl w-full max-w-lg p-5 space-y-3 text-xs text-gray-200">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3><button onclick="closeAboutModal()" class="text-gray-400">✕</button></div>
       <p class="font-bold text-white">تجارة وتصنيع الألبسة بالجملة (نسواني - رجالي - ولادي - ب.ب) بأفضل الأسعار.</p>
-      <p class="text-emerald-400 font-bold">📍 سوريا - دمشق - الحريقة | شحن مباشر لجميع المحافظات.</p>
+      <p class="text-emerald-400 font-bold">📍 سوريا - دمشق - الحريقة | شحن مباشر لجميع المحافظات خلال 24 ساعة.</p>
       <div class="grid grid-cols-4 gap-2 text-center pt-2" dir="ltr">
-        <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" class="glossy-box py-2 rounded-xl text-blue-400 font-bold">Facebook</a>
-        <a href="https://wa.me/963996311804" target="_blank" class="glossy-box py-2 rounded-xl text-emerald-400 font-bold">WhatsApp</a>
-        <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" class="glossy-box py-2 rounded-xl text-sky-400 font-bold">Telegram</a>
-        <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" class="glossy-box py-2 rounded-xl text-pink-400 font-bold">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" rel="noopener noreferrer" class="glossy-box py-2 rounded-xl text-blue-400 font-bold">Facebook</a>
+        <a href="https://wa.me/963996311804" target="_blank" rel="noopener noreferrer" class="glossy-box py-2 rounded-xl text-emerald-400 font-bold">WhatsApp</a>
+        <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" rel="noopener noreferrer" class="glossy-box py-2 rounded-xl text-sky-400 font-bold">Telegram</a>
+        <a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" rel="noopener noreferrer" class="glossy-box py-2 rounded-xl text-pink-400 font-bold">Instagram</a>
       </div>
     </div>
   </div>
@@ -347,9 +381,9 @@
     </div>
   </div>
 
-  <!-- نافذة إضافة/تعديل موديل -->
+  <!-- نافذة إضافة/تعديل موديل (مع خيارات تنبيه المخزون والطلبات الوهمية FOMO للأدمن) -->
   <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs">
+    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[93vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5"><h3 id="modalHeaderTitle" class="font-bold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3><button onclick="closeAddModal()" class="text-gray-400">✕</button></div>
       <form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2 pl-1">
         <input type="hidden" id="editIndex" value="-1" />
@@ -364,12 +398,19 @@
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div><label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن تقريبي للقطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/30 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold" /></div>
-          <div><label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 توفر السيريات</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">باقي 3 سيريات فقط ⚠️</option><option value="PREORDER">حجز مسبق 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div>
+          <div><label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 حالة المستودع</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">كمية محدودة ⚠️</option><option value="PREORDER">حجز مسبق 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div>
         </div>
 
+        <!-- إعدادات التفاعل الوهمي للأدمن -->
         <div class="grid grid-cols-2 gap-2 bg-neutral-950 p-2 rounded-xl border border-yellow-500/20">
-          <div><label class="block text-sky-300 mb-0.5 font-bold text-[9px]">👁️ المشاهدات الوهمية (اختياري)</label><input id="pCustomViews" type="number" min="0" placeholder="عشوائي (50-500)" class="w-full bg-black border border-sky-500/30 rounded-lg px-2 py-1 text-sky-300 font-bold text-xs" /></div>
-          <div><label class="block text-red-300 mb-0.5 font-bold text-[9px]">❤️ الإعجابات الوهمية (اختياري)</label><input id="pCustomLikes" type="number" min="0" placeholder="عشوائي (15-150)" class="w-full bg-black border border-red-500/30 rounded-lg px-2 py-1 text-red-300 font-bold text-xs" /></div>
+          <div><label class="block text-sky-300 mb-0.5 font-bold text-[9px]">👁️ المشاهدات (اختياري)</label><input id="pCustomViews" type="number" min="0" placeholder="عشوائي (50-500)" class="w-full bg-black border border-sky-500/30 rounded-lg px-2 py-1 text-sky-300 font-bold text-xs" /></div>
+          <div><label class="block text-red-300 mb-0.5 font-bold text-[9px]">❤️ الإعجابات (اختياري)</label><input id="pCustomLikes" type="number" min="0" placeholder="عشوائي (15-150)" class="w-full bg-black border border-red-500/30 rounded-lg px-2 py-1 text-red-300 font-bold text-xs" /></div>
+        </div>
+
+        <!-- إعدادات تنبيه انخفاض المخزون والطلبات اليومية الوهمية (FOMO) -->
+        <div class="grid grid-cols-2 gap-2 bg-amber-950/20 p-2 rounded-xl border border-amber-500/30">
+          <div><label class="block text-amber-300 mb-0.5 font-bold text-[9px]">⚠️ السيريات المتبقية (وهمي)</label><input id="pFomoLeft" type="number" min="0" placeholder="مثال: 2 (فارغ=إخفاء)" class="w-full bg-black border border-amber-500/30 rounded-lg px-2 py-1 text-amber-300 font-bold text-xs" /></div>
+          <div><label class="block text-orange-300 mb-0.5 font-bold text-[9px]">🔥 تم حجز اليوم (وهمي)</label><input id="pFomoBooked" type="number" min="0" placeholder="مثال: 3 سيريات" class="w-full bg-black border border-orange-500/30 rounded-lg px-2 py-1 text-orange-300 font-bold text-xs" /></div>
         </div>
 
         <div class="glossy-box p-2 rounded-xl flex items-center justify-between">
@@ -383,15 +424,43 @@
     </div>
   </div>
 
-  <!-- نافذة السلة وحاسبة الطرد مع نظام الخسم التلقائي (2% عند 400$) -->
-  <div id="cartModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-    <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[94vh] p-4 flex flex-col overflow-hidden text-xs">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
-        <div class="flex items-center gap-2"><h3 class="font-bold text-yellow-400 text-sm">🛒 سلة طلبات الجملة</h3><button onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded border border-red-500/30 font-bold">تفريغ السلة</button></div>
-        <button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button>
+  <!-- شريط سلة المشتريات العائمة الذكية أسفل الشاشة (Floating Mini-Cart Bar) -->
+  <div id="floatingMiniCart" class="fixed bottom-2.5 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-3xl hidden">
+    <div class="glass-panel rounded-2xl p-2.5 sm:px-4 border border-yellow-500/40 shadow-2xl flex items-center justify-between gap-2 bg-neutral-950/95">
+      <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" onclick="playUiSound('tap'); openCart()">
+        <div class="relative gold-gradient-bg w-10 h-10 rounded-xl flex items-center justify-center text-base font-black flex-shrink-0">
+          🛒
+          <span id="floatingCartBadge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border border-black">0</span>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 text-xs font-bold text-white truncate">
+            <span id="floatingCartTotal" class="text-yellow-400 font-black">$0</span>
+            <span class="text-gray-500">|</span>
+            <span id="floatingCartMeta" class="text-[10px] text-sky-300 truncate">0 سيرية (~0 كغ)</span>
+          </div>
+          <p id="floatingDiscountHint" class="text-[9.5px] text-emerald-400 font-semibold truncate">أضف موديلات بقيمة $400 للحصول على حسم جملة 2% فوراً</p>
+        </div>
       </div>
-      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 pl-1 max-h-40"></div>
-      <div class="border-t border-gray-800 pt-2 mt-2 space-y-2">
+      <div class="flex items-center gap-1.5 flex-shrink-0">
+        <button onclick="playUiSound('tap'); openCart()" class="gold-gradient-bg font-black px-3 py-2 rounded-xl text-[10px] sm:text-xs shadow">عرض السلة وإتمام الطلب ⬅️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- درج السلة الجانبي العصري (Slide-over Cart Drawer) -->
+  <div id="cartModal" class="fixed inset-0 bg-black/80 hidden justify-end z-50" onclick="closeCart()">
+    <div class="glass-panel w-full max-w-md h-full p-4 flex flex-col justify-between overflow-hidden text-xs border-r border-yellow-500/30 drawer-anim" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
+        <div class="flex items-center gap-2">
+          <h3 class="font-bold text-yellow-400 text-sm">🛒 درج طلبية الجملة الذكي</h3>
+          <button onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded border border-red-500/30 font-bold">تفريغ</button>
+        </div>
+        <button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
+      </div>
+
+      <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 my-2.5 pr-1"></div>
+
+      <div class="border-t border-gray-800 pt-2.5 space-y-2">
         <div class="glossy-box p-2 rounded-xl border border-sky-500/30 space-y-1">
           <p class="text-[10px] text-sky-300 font-bold">📦 حاسبة الطرد الشاملة (وزن تقريبي مع 0.5 كغ تغليف):</p>
           <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
@@ -402,13 +471,13 @@
         </div>
         
         <div id="tierDiscountNotice" class="hidden bg-emerald-950/40 p-2 rounded-xl border border-emerald-500/40 text-[10px] text-emerald-300 font-bold flex justify-between items-center">
-          <span>🎉 مبروك! بلغت فاتورتك 400$ أو أكثر، تم تطبيق خصم جملة 2% تلقائياً.</span>
+          <span>🎉 مبروك! فاتورتك 400$+ وتم تطبيق حسم 2% تلقائياً</span>
           <strong id="discountAmountText" class="text-yellow-300">-$0</strong>
         </div>
 
         <div class="flex justify-between font-bold bg-black/60 p-2 rounded-xl border border-yellow-500/25"><span>الإجمالي النهائي:</span><span id="cartTotal" class="text-yellow-400">$0</span></div>
         <div class="space-y-1.5">
-          <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم التاجر / اسم المحل..." />
+          <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم العميل / اسم المحل..." />
           <input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن..." />
           <input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 رقم الهاتف / واتساب للتواصل..." />
           <textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white resize-none" placeholder="📝 ملاحظة إضافية حول الطلبية أو الألوان (اختياري)..."></textarea>
@@ -432,12 +501,12 @@
       exchangeRate: 15000,
       bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
       products: [
-        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pieceWeight: 350, stockStatus: "LOW", pack: "قياسات (M-L-XL)", customViews: 142, customLikes: 68, ratingSum: 23, ratingCount: 5, comments: [{id: 1, author: "محل النور", text: "بضاعة ممتازة"}], hasDiscount: true, discountPercent: 20, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] }
+        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pieceWeight: 350, stockStatus: "LOW", fomoLeft: 2, fomoBooked: 3, pack: "قياسات (M-L-XL)", customViews: 142, customLikes: 68, ratingSum: 23, ratingCount: 5, comments: [{id: 1, author: "محل النور", text: "بضاعة ممتازة"}], hasDiscount: true, discountPercent: 20, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] }
       ]
     };
   </script>
 
-  <!-- مصادقة Firebase والجافاسكريبت بالكامل -->
+  <!-- مصادقة Firebase المحمية ضد التلاعب -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -454,11 +523,16 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+    window.checkAdminAuth = function() {
+      return !!(auth && auth.currentUser);
+    };
+
     onAuthStateChanged(auth, (user) => {
-      window.isAdmin = !!user;
-      document.getElementById('adminDropdownWrapper')?.classList.toggle('hidden', !user);
-      if (!user) document.getElementById('adminDropdownMenu')?.classList.add('hidden');
-      document.getElementById('adminResetMarketerBox')?.classList.toggle('hidden', !user);
+      const isAuth = !!user;
+      window.isAdmin = isAuth;
+      document.getElementById('adminDropdownWrapper')?.classList.toggle('hidden', !isAuth);
+      if (!isAuth) document.getElementById('adminDropdownMenu')?.classList.add('hidden');
+      document.getElementById('adminResetMarketerBox')?.classList.toggle('hidden', !isAuth);
       if (typeof window.renderProducts === 'function') window.renderProducts();
       if (typeof window.renderMarketerDashboard === 'function') window.renderMarketerDashboard();
     });
@@ -528,6 +602,17 @@
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
+    function sanitizeImgUrl(url) {
+      if (!url) return '';
+      const s = String(url).trim();
+      if (s.startsWith('data:image/') || s.startsWith('https://') || s.startsWith('http://') || s.startsWith('./') || s.startsWith('/')) return s;
+      return '';
+    }
+
+    function isAdminVerified() {
+      return typeof window.checkAdminAuth === 'function' ? window.checkAdminAuth() : !!window.isAdmin;
+    }
+
     let likedProducts = {}, viewedProducts = {}, userRatings = {}, socialDataMap = {};
     let marketerProfile = { name: '', phone: '1804', code: '1804-FW' };
     let localUpdatedAt = window.INITIAL_STORE_STATE.updatedAt || 0;
@@ -555,9 +640,9 @@
       if (!container) return;
       const toast = document.createElement('div');
       toast.className = `toast-anim px-3.5 py-2.5 rounded-xl shadow-2xl text-[11px] font-bold border flex items-center gap-1.5 pointer-events-auto text-center justify-center w-full ${type === 'success' ? 'bg-neutral-900/95 text-yellow-300 border-yellow-500/50' : 'bg-neutral-900/95 text-red-400 border-red-500/50'}`;
-      toast.innerHTML = `<span>${type === 'success' ? '✨' : '⚠️'}</span><span>${message}</span>`;
+      toast.innerHTML = `<span>${type === 'success' ? '✨' : '⚠️'}</span><span>${escapeHtml(message)}</span>`;
       container.appendChild(toast);
-      setTimeout(() => toast.remove(), 2800);
+      setTimeout(() => toast.remove(), 3000);
     }
     window.showToast = showToast;
 
@@ -608,10 +693,29 @@
 
     function getStockBadgeInfo(p) {
       const s = p.stockStatus || 'AVAILABLE';
-      if (s === 'LOW') return { text: '⚠️ باقي 3 سيريات', className: 'stock-badge-low' };
+      const left = Number(p.fomoLeft) || 0;
+      if (s === 'LOW' || left > 0) {
+        const leftTxt = left === 1 ? 'بقيت سيرية واحدة' : (left === 2 ? 'بقيت سيريتان فقط' : `باقي ${left || 3} سيريات فقط`);
+        return { text: `⚠️ ${leftTxt}`, className: 'stock-badge-low' };
+      }
       if (s === 'PREORDER') return { text: '🔥 حجز مسبق معمل', className: 'stock-badge-preorder' };
       if (s === 'SOLD_OUT') return { text: '❌ نفدت الكمية', className: 'stock-badge-soldout' };
       return null;
+    }
+
+    // توليد نص تنبيه انخفاض المخزون والطلبات اليومية الوهمية (FOMO)
+    function getFomoText(p) {
+      if (p.stockStatus === 'SOLD_OUT') return '';
+      const left = Number(p.fomoLeft) || 0;
+      const booked = Number(p.fomoBooked) || 0;
+      const parts = [];
+      if (left > 0) {
+        parts.push(left === 1 ? '⚠️ بقيت سيرية واحدة فقط' : (left === 2 ? '⚠️ بقيت سيريتان فقط' : `⚠️ باقي ${left} سيريات فقط`));
+      }
+      if (booked > 0) {
+        parts.push(`🔥 تم حجز ${booked} سيريات اليوم`);
+      }
+      return parts.join(' - ');
     }
 
     function toggleModal(id, show) {
@@ -625,9 +729,9 @@
     function closeVipModal() { toggleModal('vipModal', false); }
     function openAboutModal() { toggleModal('aboutModal', true); }
     function closeAboutModal() { toggleModal('aboutModal', false); }
-    function openBannerModal() { if (window.isAdmin) { document.getElementById('bannerFileInput').value = ""; toggleModal('bannerModal', true); } }
+    function openBannerModal() { if (isAdminVerified()) { document.getElementById('bannerFileInput').value = ""; toggleModal('bannerModal', true); } }
     function closeBannerModal() { toggleModal('bannerModal', false); }
-    function openCloudSetupModal() { document.getElementById('ghTokenInput').value = localStorage.getItem(LS_TOKEN_KEY) || ""; toggleModal('cloudSetupModal', true); }
+    function openCloudSetupModal() { if (isAdminVerified()) { document.getElementById('ghTokenInput').value = localStorage.getItem(LS_TOKEN_KEY) || ""; toggleModal('cloudSetupModal', true); } }
     function closeCloudSetupModal() { toggleModal('cloudSetupModal', false); }
     function closeFirebaseLoginModal() { toggleModal('firebaseLoginModal', false); }
     window.closeFirebaseLoginModal = closeFirebaseLoginModal;
@@ -636,7 +740,7 @@
       const modal = document.getElementById('imageZoomModal');
       const img = document.getElementById('zoomModalImg');
       if (modal && img) {
-        img.src = imgSrc;
+        img.src = sanitizeImgUrl(imgSrc);
         img.classList.remove('zoomed-img');
         modal.classList.remove('hidden'); modal.classList.add('flex');
       }
@@ -657,7 +761,7 @@
       const qty = document.getElementById('vipQty').value;
       const phone = document.getElementById('vipPhone').value.trim();
       const details = document.getElementById('vipDetails').value.trim();
-      const msg = `👑 *طلب تصنيع خاص لكبار التجار (VIP)* - FASHION WORLD\n----------------------------------\n👤 التاجر / الشركة: ${merchant}\n👗 القسم المطلوب: ${cat}\n📦 الكمية التقديرية: ${qty} قطعة\n📞 رقم التواصل: ${phone}\n📝 المواصفات والتفاصيل: ${details}\n----------------------------------\nيرجى مراجعة الطلب وتحديد السعر الخاص وموعد التسليم.`;
+      const msg = `👑 *طلب تصنيع خاص لكبار التجار (VIP)* - FASHION WORLD\n----------------------------------\n👤 العميل / الشركة: ${merchant}\n👗 القسم المطلوب: ${cat}\n📦 الكمية التقديرية: ${qty} قطعة\n📞 رقم التواصل: ${phone}\n📝 المواصفات والتفاصيل: ${details}\n----------------------------------\nيرجى مراجعة الطلب وتحديد السعر الخاص وموعد التسليم.`;
       closeVipModal();
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
@@ -667,41 +771,67 @@
         const params = new URLSearchParams(window.location.search);
         const incoming = params.get('k') || params.get('ref');
         if (incoming && incoming.trim()) {
-          const clean = incoming.trim().toUpperCase();
-          if (clean !== marketerProfile.code) localStorage.setItem(LS_REFERRED_BY_KEY, clean);
+          const clean = incoming.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+          if (clean && clean !== marketerProfile.code) localStorage.setItem(LS_REFERRED_BY_KEY, clean);
         }
         updateAffiliateModalUI();
         calculateDirectProfit();
       } catch (e) {}
     }
 
+    // حساب مستوى الشريك (برونزي، ذهبي، ماسي) بناءً على المبيعات المعتمدة
+    function getPartnerRankInfo(confirmedSalesUsd) {
+      const sales = Number(confirmedSalesUsd) || 0;
+      if (sales >= 1500) {
+        return { title: '💎 شريك ماسي', ratePer150: 7.5, progress: 100, hint: '🎉 أنت في أعلى قمة شركاء النجاح (المستوى الماسي - عمولة 7.5$ لكل 150$)!' };
+      }
+      if (sales >= 500) {
+        const pct = Math.min(100, Math.round(((sales - 500) / 1000) * 100));
+        const rem = Math.max(0, 1500 - sales).toFixed(0);
+        return { title: '🥇 شريك ذهبي', ratePer150: 6.0, progress: pct, hint: `متبقي لك $${rem} من المبيعات المؤكدة للترقية إلى المستوى الماسي 💎!` };
+      }
+      const pct = Math.max(8, Math.min(100, Math.round((sales / 500) * 100)));
+      const rem = Math.max(0, 500 - sales).toFixed(0);
+      return { title: '🥉 شريك برونزي', ratePer150: 5.0, progress: pct, hint: `حقق مبيعات مؤكدة بقيمة $${rem} إضافية للترقية إلى المستوى الذهبي 🥇!` };
+    }
+
     function renderMarketerDashboard() {
       const stampBadge = document.getElementById('dashboardStampBadge');
       if (stampBadge) stampBadge.innerText = marketerProfile.code;
       const myOrders = Array.isArray(socialDataMap?._marketerOrders?.[marketerProfile.code]) ? socialDataMap._marketerOrders[marketerProfile.code] : [];
-      let pendingComm = 0, confirmedComm = 0;
+      let pendingComm = 0, confirmedComm = 0, confirmedSalesUsd = 0;
       myOrders.forEach(o => {
         const comm = Number(o.commissionUsd) || 0;
-        if (o.status === 'CONFIRMED') confirmedComm += comm;
-        else pendingComm += comm;
+        if (o.status === 'CONFIRMED') {
+          confirmedComm += comm;
+          confirmedSalesUsd += (Number(o.totalUsd) || 0);
+        } else if (o.status !== 'CANCELLED') {
+          pendingComm += comm;
+        }
       });
       if (document.getElementById('dashPendingComm')) document.getElementById('dashPendingComm').innerText = `$${pendingComm.toFixed(2)}`;
       if (document.getElementById('dashConfirmedComm')) document.getElementById('dashConfirmedComm').innerText = `$${confirmedComm.toFixed(2)}`;
       
+      // تحديث واجهة مستويات الشركاء
+      const rankInfo = getPartnerRankInfo(confirmedSalesUsd);
+      if (document.getElementById('partnerRankBadge')) document.getElementById('partnerRankBadge').innerText = rankInfo.title;
+      if (document.getElementById('partnerRankProgress')) document.getElementById('partnerRankProgress').style.width = `${rankInfo.progress}%`;
+      if (document.getElementById('partnerNextRankHint')) document.getElementById('partnerNextRankHint').innerText = rankInfo.hint;
+
       const log = document.getElementById('dashOrdersLog');
       if (log) {
         log.innerHTML = myOrders.length === 0
           ? `<p class="text-gray-400 text-center py-1">لا توجد طلبيات مسجلة عبر بصمتك حتى الآن.</p>`
-          : myOrders.slice().reverse().map((o, idx) => {
+          : myOrders.slice().reverse().map(o => {
               const statusBadge = o.status === 'CONFIRMED' 
                 ? '<span class="text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded">مؤكدة ✅</span>' 
                 : (o.status === 'CANCELLED' ? '<span class="text-red-400 font-bold bg-red-950/60 px-1.5 py-0.5 rounded">ملغية ❌</span>' : '<span class="text-yellow-400 font-bold bg-yellow-950/60 px-1.5 py-0.5 rounded">معلقة ⏳</span>');
               
               let adminActions = '';
-              if (window.isAdmin && o.status !== 'CONFIRMED' && o.status !== 'CANCELLED') {
-                adminActions = `<div class="flex gap-1 mt-1"><button onclick="adminUpdateOrderStatus('${marketerProfile.code}', ${o.id}, 'CONFIRMED')" class="bg-emerald-700 text-white text-[9px] px-2 py-0.5 rounded font-bold">اعتماد ✅</button><button onclick="adminUpdateOrderStatus('${marketerProfile.code}', ${o.id}, 'CANCELLED')" class="bg-red-700 text-white text-[9px] px-2 py-0.5 rounded font-bold">إلغاء ❌</button></div>`;
+              if (isAdminVerified() && o.status !== 'CONFIRMED' && o.status !== 'CANCELLED') {
+                adminActions = `<div class="flex gap-1 mt-1"><button onclick="adminUpdateOrderStatus('${escapeHtml(marketerProfile.code)}', ${Number(o.id)}, 'CONFIRMED')" class="bg-emerald-700 text-white text-[9px] px-2 py-0.5 rounded font-bold">اعتماد ✅</button><button onclick="adminUpdateOrderStatus('${escapeHtml(marketerProfile.code)}', ${Number(o.id)}, 'CANCELLED')" class="bg-red-700 text-white text-[9px] px-2 py-0.5 rounded font-bold">إلغاء ❌</button></div>`;
               }
-              return `<div class="bg-black/85 p-2 rounded border border-gray-800 space-y-1"><div class="flex justify-between items-center"><span>📅 ${escapeHtml(o.date)} (${o.pieces} ق)</span><div class="flex items-center gap-1.5"><span class="text-sky-300 font-bold">+$${Number(o.commissionUsd).toFixed(2)}</span>${statusBadge}</div></div>${adminActions}</div>`;
+              return `<div class="bg-black/85 p-2 rounded border border-gray-800 space-y-1"><div class="flex justify-between items-center"><span>📅 ${escapeHtml(o.date)} (${Number(o.pieces) || 0} ق)</span><div class="flex items-center gap-1.5"><span class="text-sky-300 font-bold">+$${Number(o.commissionUsd).toFixed(2)}</span>${statusBadge}</div></div>${adminActions}</div>`;
             }).join('');
       }
     }
@@ -727,7 +857,7 @@
     }
 
     async function adminUpdateOrderStatus(stampCode, orderId, newStatus) {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return alert("صلاحية الإدارة مطلوبة!");
       try {
         if (socialDataMap?._marketerOrders?.[stampCode]) {
           const ord = socialDataMap._marketerOrders[stampCode].find(o => o.id === orderId);
@@ -744,7 +874,7 @@
     window.adminUpdateOrderStatus = adminUpdateOrderStatus;
 
     async function adminClearMarketerOrders() {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       if (confirm(`تصفير سجل طلبيات البصمة (${marketerProfile.code}) بعد المحاسبة؟`)) {
         if (socialDataMap?._marketerOrders) {
           socialDataMap._marketerOrders[marketerProfile.code] = [];
@@ -789,9 +919,10 @@
       showToast("تم نسخ رابطك السري! 📋");
     }
 
+    // حساب العمولة التناسبية بدقة (قاعدة 5$ لكل 150$ وتتزايد أو تنقص نسبياً)
     function calculateDirectProfit() {
       const directSales = parseFloat(document.getElementById('calcDirectSales')?.value) || 0;
-      const totalUsd = Math.round(((directSales / 150) * 5) * 10) / 10;
+      const totalUsd = Math.round(((directSales / 150) * 5) * 100) / 100;
       const resEl = document.getElementById('calcProfitResult');
       if (resEl) resEl.innerText = `$${totalUsd.toLocaleString('en-US')} / شهرياً`;
     }
@@ -799,16 +930,17 @@
     function requestWithdrawalWhatsApp() {
       playUiSound('success');
       const receiver = document.getElementById('payoutReceiverName')?.value.trim();
+      const city = document.getElementById('payoutCity')?.value.trim();
       const accountInfo = document.getElementById('payoutAccountInfo')?.value.trim();
-      if (!receiver || !accountInfo) return alert("يرجى إدخال اسم المستلم ومعلومات الشام كاش / المحفظة أولاً!");
+      if (!receiver || !city || !accountInfo) return alert("يرجى إدخال اسم المستلم، العنوان/الرقم، ومعلومات الشام كاش أو الحوالة أولاً!");
       
       const myOrders = socialDataMap?._marketerOrders?.[marketerProfile.code] || [];
       let confComm = 0; 
       myOrders.forEach(o => { if (o.status === 'CONFIRMED') confComm += Number(o.commissionUsd) || 0; });
 
-      const msg = `💳 *طلب سحب أرباح شركاء النجاح* - FASHION WORLD\n----------------------------------\n👤 اسم الشريك / المسوق: ${marketerProfile.name || 'بدون اسم'}\n🔑 البصمة: ${marketerProfile.code}\n💰 المبلغ المطلوب سحبه: $${confComm.toFixed(2)}\n📥 اسم المستلم: ${receiver}\n📱 رقم الشام كاش / المحفظة: ${accountInfo}\n----------------------------------\nيرجى تحويل المستحقات ولكم جزيل الشكر.`;
+      const msg = `💳 *طلب سحب أرباح شركاء النجاح* - FASHION WORLD\n----------------------------------\n👤 اسم الشريك: ${marketerProfile.name || receiver}\n🔑 البصمة: ${marketerProfile.code}\n💰 الرصيد المؤكد المطلوب سحبه: $${confComm.toFixed(2)}\n📥 اسم المستلم: ${receiver}\n📍 العنوان والهاتف: ${city}\n📱 رقم الشام كاش / الحوالة: ${accountInfo}\n📸 (سأقوم بإرفاق صورة باركود الشام كاش هنا بالمحادثة إن وجد)\n----------------------------------\n⏳ نعلم أن تحويل الأرباح يتم خلال مدة أقصاها 12 ساعة من قِبل الإدارة، ولكم جزيل الشكر.`;
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
-      showToast("تم إرسال طلب السحب للواتساب بنجاح! سيتم تحويل المستحقات خلال 12 ساعة كحد أقصى ✅");
+      showToast("تم تجهيز طلب السحب! يرجى الانتظار قليلاً، يتم التحويل خلال 12 ساعة كحد أقصى ✅");
     }
 
     function applySavedTheme() {
@@ -825,12 +957,12 @@
       localStorage.setItem(LS_THEME_KEY, isLight ? 'LIGHT' : 'DARK');
       const btn = document.getElementById('themeToggleBtn');
       if (btn) btn.innerText = isLight ? '☀️' : '🌙';
-      showToast(isLight ? "وضع نهارى ☀️" : "وضع ليلي 🌙");
+      showToast(isLight ? "وضع نهاري ☀️" : "وضع ليلي 🌙");
     }
 
     function toggleAdminMenu() {
-      const menu = document.getElementById('adminDropdownMenu');
-      if (menu) menu.classList.toggle('hidden');
+      if (!isAdminVerified()) return;
+      document.getElementById('adminDropdownMenu')?.classList.toggle('hidden');
     }
 
     function handleSearch(val) {
@@ -990,7 +1122,6 @@
       applySavedTheme();
       initAffiliateSystem();
       loadBuyerInfoFromStorage();
-      updateCartBadges();
 
       try {
         const localRaw = localStorage.getItem(LS_STATE_KEY);
@@ -1005,6 +1136,7 @@
       applySocialMapToProducts();
       applyBanner();
       renderProducts();
+      updateCartBadges();
 
       try {
         const res = await fetch(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' });
@@ -1021,6 +1153,7 @@
             await saveAllState(false);
             applyBanner();
             renderProducts();
+            updateCartBadges();
           }
         }
       } catch (e) {}
@@ -1035,7 +1168,7 @@
       const payload = { updatedAt: localUpdatedAt, exchangeRate, bannerImg, products };
       try { localStorage.setItem(LS_STATE_KEY, JSON.stringify(payload)); } catch (e) {}
       const ghToken = localStorage.getItem(LS_TOKEN_KEY);
-      if (autoCloudSync && ghToken) syncToGithubSilent(payload, ghToken);
+      if (autoCloudSync && ghToken && isAdminVerified()) syncToGithubSilent(payload, ghToken);
     }
 
     async function syncToGithubSilent(payload, ghToken) {
@@ -1054,6 +1187,7 @@
     }
 
     async function saveCloudToken() {
+      if (!isAdminVerified()) return;
       const token = document.getElementById('ghTokenInput').value.trim();
       if (!token) return alert("يرجى لصق المفتاح أولاً!");
       localStorage.setItem(LS_TOKEN_KEY, token);
@@ -1063,9 +1197,16 @@
       showToast("تم تفعيل المزامنة بنجاح! ✨");
     }
 
+    function clearCloudToken() {
+      localStorage.removeItem(LS_TOKEN_KEY);
+      document.getElementById('ghTokenInput').value = "";
+      closeCloudSetupModal();
+      showToast("تم مسح مفتاح التوكن من هذا المتصفح بنجاح 🔒", "error");
+    }
+
     function applyBanner() {
       const el = document.getElementById('bannerSection');
-      if (el) el.style.backgroundImage = `linear-gradient(to bottom, rgba(6,6,6,0.75), rgba(6,6,6,0.92)), url('${bannerImg}')`;
+      if (el) el.style.backgroundImage = `linear-gradient(to bottom, rgba(6,6,6,0.75), rgba(6,6,6,0.92)), url('${sanitizeImgUrl(bannerImg)}')`;
     }
 
     function formatPrice(p) {
@@ -1127,6 +1268,7 @@
         return;
       }
 
+      const adminActive = isAdminVerified();
       grid.innerHTML = list.map(p => {
         const smart = getConsistentSmartSocial(p);
         const isLiked = !!likedProducts[p.id];
@@ -1135,15 +1277,16 @@
         const commentsCount = (p.comments || []).length;
         const discountText = getDiscountBadgeText(p);
         const stockBadge = getStockBadgeInfo(p);
+        const fomoTxt = getFomoText(p);
 
         return `
         <div class="card-luxury rounded-2xl overflow-hidden flex flex-col">
-          <div class="relative h-44 sm:h-56 overflow-hidden bg-neutral-950 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${p.id})">
-            <img src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
+          <div class="relative h-44 sm:h-56 overflow-hidden bg-neutral-950 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})">
+            <img src="${sanitizeImgUrl(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
             <div class="watermark-logo"><span class="text-[7px] font-cinzel font-bold gold-gradient-text">FASHION WORLD</span></div>
             <span class="absolute top-2 right-2 gold-gradient-bg font-bold text-[9px] px-2 py-0.5 rounded-full shadow">${escapeHtml(p.category)}</span>
             ${p.hasDiscount ? `<span class="absolute top-7 right-2 badge-glass discount-flash">${discountText}</span>` : ''}
-            ${stockBadge ? `<span class="absolute ${p.hasDiscount ? 'top-12' : 'top-7'} right-2 badge-glass ${stockBadge.className}">${stockBadge.text}</span>` : ''}
+            ${stockBadge ? `<span class="absolute ${p.hasDiscount ? 'top-12' : 'top-7'} right-2 badge-glass ${stockBadge.className}">${escapeHtml(stockBadge.text)}</span>` : ''}
             <div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/85 backdrop-blur-sm px-2 py-1 rounded-lg text-[8px] sm:text-[9.5px] border border-yellow-500/20">
               <span id="card-views-${p.id}" class="text-sky-300 font-bold">👁️ ${smart.views}</span>
               <span id="card-rating-${p.id}" class="text-yellow-400 font-bold">⭐ ${avgRating} (${commentsCount}💬)</span>
@@ -1152,18 +1295,19 @@
           </div>
           <div class="p-2.5 sm:p-3 flex-1 flex flex-col justify-between space-y-1.5">
             <div>
-              <h3 class="font-bold text-white text-[11px] sm:text-xs mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${p.id})">${escapeHtml(p.name)}</h3>
+              <h3 class="font-bold text-white text-[11px] sm:text-xs mb-0.5 cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})">${escapeHtml(p.name)}</h3>
               <p class="text-[10px] text-gray-400 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>
+              ${fomoTxt ? `<p class="text-[9px] text-amber-300 font-bold mt-1 fomo-strip px-1.5 py-0.5 rounded truncate">${escapeHtml(fomoTxt)}</p>` : ''}
             </div>
             <div class="flex items-center justify-between border-t border-gray-800/80 pt-1">
               ${formatPrice(p)}
-              <button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${p.id})" class="${isLiked ? 'bg-red-900/40 border border-red-500 text-red-300' : 'bg-neutral-800 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">${isLiked ? '❤️' : '🤍'} ${p.likes || smart.likes}</button>
+              <button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${Number(p.id)})" class="${isLiked ? 'bg-red-900/40 border border-red-500 text-red-300' : 'bg-neutral-800 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">${isLiked ? '❤️' : '🤍'} ${p.likes || smart.likes}</button>
             </div>
             <div class="flex items-center gap-1 pt-0.5">
-              <button onclick="playUiSound('tap'); openProductModal(${p.id})" class="flex-1 gold-gradient-bg font-bold py-1.5 px-2 rounded-lg text-[10px] shadow truncate">${p.stockStatus === 'SOLD_OUT' ? '👁️ عرض التفاصيل' : '🛒 حدد الكمية'}</button>
-              ${window.isAdmin ? `
-                <button onclick="playUiSound('tap'); editProduct(${p.id})" class="bg-blue-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">✏️</button>
-                <button onclick="playUiSound('tap'); deleteProduct(${p.id})" class="bg-red-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">🗑️</button>
+              <button onclick="playUiSound('tap'); openProductModal(${Number(p.id)})" class="flex-1 gold-gradient-bg font-bold py-1.5 px-2 rounded-lg text-[10px] shadow truncate">${p.stockStatus === 'SOLD_OUT' ? '👁️ عرض التفاصيل' : '🛒 حدد الكمية'}</button>
+              ${adminActive ? `
+                <button onclick="playUiSound('tap'); editProduct(${Number(p.id)})" class="bg-blue-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">✏️</button>
+                <button onclick="playUiSound('tap'); deleteProduct(${Number(p.id)})" class="bg-red-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">🗑️</button>
               ` : ''}
             </div>
           </div>
@@ -1197,15 +1341,25 @@
       }
 
       document.getElementById('modalTitle').innerText = p.name;
-      document.getElementById('modalMainImg').src = p.img;
+      document.getElementById('modalMainImg').src = sanitizeImgUrl(p.img);
       document.getElementById('modalCategory').innerText = `قسم: ${p.category}`;
       updateModalHeaderSocial(p);
       document.getElementById('modalPack').innerText = `📐 القياسات والتفاصيل: ${p.pack}`;
       document.getElementById('modalWeightInfo').innerText = `⚖️ وزن تقريبي للقطعة الواحدة: ${getPieceWeightGrams(p)} غرام`;
 
-      const retailSuggestionUsd = Math.round((Number(p.priceUsd) * 1.4) * 100) / 100;
-      const retailSuggestionSyp = Math.round(retailSuggestionUsd * exchangeRate).toLocaleString('en-US');
-      document.getElementById('modalRetailSuggestion').innerText = `💡 مقترح البيع بالمفرق: $${retailSuggestionUsd} (${retailSuggestionSyp} ل.س)`;
+      // عرض شريط التنبيه الحي لانخفاض المخزون والطلبات اليومية (FOMO)
+      const fomoEl = document.getElementById('modalFomoBanner');
+      const fomoTxt = getFomoText(p);
+      if (fomoEl) {
+        if (fomoTxt) { fomoEl.innerText = fomoTxt; fomoEl.classList.remove('hidden'); }
+        else fomoEl.classList.add('hidden');
+      }
+
+      // حاسبة الأرباح التقديرية للعميل النهائي (+40%) بالصيغة المطلوبة
+      const wholesaleUsd = Math.round((Number(p.priceUsd) || 0) * 100) / 100;
+      const retailSuggestionUsd = Math.round((wholesaleUsd * 1.4) * 100) / 100;
+      const expectedProfitUsd = Math.round((retailSuggestionUsd - wholesaleUsd) * 100) / 100;
+      document.getElementById('modalRetailSuggestion').innerText = `💡 سعر الجملة عليك: $${wholesaleUsd} | السعر المقترح للبيع بالمفرق: $${retailSuggestionUsd} | ربحك المتوقع للقطعة: $${expectedProfitUsd}`;
 
       const badge = document.getElementById('modalDiscountBadge');
       if (p.hasDiscount) { badge.innerText = getDiscountBadgeText(p); badge.classList.remove('hidden'); }
@@ -1230,7 +1384,7 @@
       renderModalStars(p);
       renderComments(p);
 
-      const allImgs = [p.img, ...(p.extras || [])];
+      const allImgs = [p.img, ...(p.extras || [])].map(sanitizeImgUrl).filter(Boolean);
       document.getElementById('modalThumbs').innerHTML = allImgs.map(src => `<img src="${src}" onclick="playUiSound('tap'); document.getElementById('modalMainImg').src=this.src" class="w-11 h-11 object-cover rounded-lg border border-yellow-500/30 cursor-pointer flex-shrink-0" />`).join('');
 
       toggleModal('productModal', true);
@@ -1243,7 +1397,7 @@
       const count = Number(p.ratingCount) || 0, sum = Number(p.ratingSum) || 0;
       const activeStars = myRating > 0 ? myRating : (count > 0 ? Math.min(5, Math.max(1, Math.round(sum / count))) : 5);
       let html = '';
-      for (let i = 1; i <= 5; i++) html += `<span onclick="rateProduct(${p.id}, ${i})" class="${i <= activeStars ? 'text-yellow-400' : 'text-gray-600'} text-base select-none">★</span>`;
+      for (let i = 1; i <= 5; i++) html += `<span onclick="rateProduct(${Number(p.id)}, ${i})" class="${i <= activeStars ? 'text-yellow-400' : 'text-gray-600'} text-base select-none">★</span>`;
       html += `<span class="text-[10px] text-gray-300 mr-1 font-bold">${count > 0 ? `${Math.min(5, Math.max(1, sum / count)).toFixed(1)}/5 (${count})` : '4.8/5'}</span>`;
       document.getElementById('modalStarsContainer').innerHTML = html;
     }
@@ -1269,17 +1423,18 @@
       const list = document.getElementById('commentsList');
       const comments = p.comments || [];
       if (comments.length === 0) { list.innerHTML = `<p class="text-gray-400 text-[10px]">لا توجد تعليقات بعد. كن أول من يشاركنا رأيه!</p>`; return; }
+      const adminActive = isAdminVerified();
       list.innerHTML = comments.map(c => `
         <div class="flex justify-between items-center bg-black/60 p-1.5 rounded-lg border border-yellow-500/15 text-[10px]">
           <div><span class="text-yellow-400 font-bold">${escapeHtml(c.author)}:</span><span class="text-gray-200 mr-1">${escapeHtml(c.text)}</span></div>
-          ${window.isAdmin ? `<button onclick="deleteComment(${p.id},${c.id})" class="text-red-400 text-[10px] font-bold px-1 py-0.5 bg-red-950/40 rounded">🗑️</button>` : ''}
+          ${adminActive ? `<button onclick="deleteComment(${Number(p.id)},${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1 py-0.5 bg-red-950/40 rounded">🗑️</button>` : ''}
         </div>`).join('');
     }
     window.renderComments = renderComments;
 
     async function addComment() {
       if (!window.currentModalProduct) return;
-      const author = escapeHtml(document.getElementById('commentAuthor').value.trim() || "تاجر معتمد");
+      const author = escapeHtml(document.getElementById('commentAuthor').value.trim() || "عميل معتمد");
       const text = escapeHtml(document.getElementById('commentText').value.trim());
       if (!text) return alert("يرجى كتابة نص التعليق أولاً!");
       playUiSound('cart');
@@ -1292,7 +1447,7 @@
     }
 
     async function deleteComment(productId, commentId) {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       const p = products.find(item => item.id === productId);
       if (!p || !p.comments) return;
       p.comments = p.comments.filter(c => c.id !== commentId);
@@ -1320,9 +1475,31 @@
       document.getElementById('modalPackAndWeight').innerText = `${packs} سيرية | ~${weightKg} كغ`;
     }
 
+    // تحديث عداد السلة + السلة العائمة الذكية (Floating Mini-Cart Bar)
     function updateCartBadges() {
+      const m = getCartSmartMetrics();
       const b = document.getElementById('cartCount');
-      if (b) b.innerText = cart.reduce((a, c) => a + (Number(c.qty) || 0), 0);
+      if (b) b.innerText = m.totalPieces;
+
+      const floatBar = document.getElementById('floatingMiniCart');
+      if (!floatBar) return;
+      if (m.totalPieces <= 0) {
+        floatBar.classList.add('hidden');
+      } else {
+        floatBar.classList.remove('hidden');
+        if (document.getElementById('floatingCartBadge')) document.getElementById('floatingCartBadge').innerText = m.totalPieces;
+        if (document.getElementById('floatingCartTotal')) document.getElementById('floatingCartTotal').innerText = `$${m.totalUsd}`;
+        if (document.getElementById('floatingCartMeta')) document.getElementById('floatingCartMeta').innerText = `${m.totalPacks} سيرية (~${m.totalWeightKg} كغ)`;
+        const hintEl = document.getElementById('floatingDiscountHint');
+        if (hintEl) {
+          if (m.rawTotalUsd >= 400) {
+            hintEl.innerText = `🎉 تم تفعيل حسم 2% تلقائياً (وفرت $${m.discountUsd})!`;
+          } else {
+            const rem = Math.max(0, 400 - m.rawTotalUsd).toFixed(0);
+            hintEl.innerText = `أضف بقيمة $${rem} إضافية لتحصل على حسم جملة 2% تلقائياً!`;
+          }
+        }
+      }
     }
 
     function addCustomQtyToCart() {
@@ -1334,6 +1511,7 @@
       const ex = cart.find(c => c.id === window.currentModalProduct.id);
       if (ex) ex.qty += qty; else cart.push({ ...window.currentModalProduct, qty });
       saveCartToStorage(); closeProductModal();
+      openCart();
       showToast(`تمت إضافة ${qty} قطعة إلى السلة 🛒✨`);
     }
 
@@ -1352,10 +1530,23 @@
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
+    // ميزة مشاركة الموديل عبر فيسبوك مع نسخ الكليشة التسويقية تلقائياً
+    function shareProductFacebook() {
+      if (!window.currentModalProduct) return;
+      const p = window.currentModalProduct;
+      const shareUrl = `${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(marketerProfile.code)}`;
+      const postText = `🔥 أحدث موديلات الجملة من FASHION WORLD (دمشق - الحريقة)\n👗 الموديل: ${p.name}\n📐 القياسات: ${p.pack}\n💰 سعر الجملة: $${p.priceUsd} للقطعة (حجم السيرية: ${p.minQty || 10} قطع)\n🔗 اطلب الآن مباشرة عبر الرابط:\n${shareUrl}`;
+      try { if (navigator.clipboard) navigator.clipboard.writeText(postText); } catch (e) {}
+      playUiSound('success');
+      showToast("تم نسخ وصف الموديل والرابط! الصقه في منشور فيسبوك 📘✨");
+      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(postText)}`;
+      window.open(fbUrl, '_blank');
+    }
+
     function reserveProductWhatsApp() {
       if (!window.currentModalProduct) return;
       const p = window.currentModalProduct;
-      const msg = `🔒 طلب حجز موديل - FASHION WORLD\n----------------------------------\n👗 الموديل: ${p.name} (كود #${p.id})\n📐 القياسات: ${p.pack}\n💰 السعر: $${p.priceUsd}\n\nأرغب بحجز هذا الموديل، يرجى تزويدي بطريقة تحويل العربون لتأكيد الحجز رسمياً.`;
+      const msg = `🔒 *طلب حجز موديل برعبون* - FASHION WORLD\n----------------------------------\n👗 الموديل: ${p.name} (كود #${p.id})\n📐 القياسات: ${p.pack}\n💰 السعر: $${p.priceUsd} للقطعة\n----------------------------------\nأرغب بحجز هذا الموديل، وأعلم أن إتمام الحجز يتطلب تحويل رعبون. يرجى تزويدي بتفاصيل التحويل وبانتظار رد الإدارة الكريمة.`;
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
@@ -1379,34 +1570,34 @@
       secretClicks++;
       if (secretClicks >= 3) {
         secretClicks = 0; playUiSound('tap');
-        if (window.isAdmin) toggleAdminMenu(); else toggleModal('firebaseLoginModal', true);
+        if (isAdminVerified()) toggleAdminMenu(); else toggleModal('firebaseLoginModal', true);
       }
       setTimeout(() => { secretClicks = 0; }, 2200);
     }
 
     async function changeExchangeRate() {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       const val = prompt("أدخل سعر صرف الدولار مقابل الليرة السورية:", exchangeRate);
       if (val !== null) {
         const clean = parseCleanNumber(val);
-        if (clean > 0) { exchangeRate = clean; renderProducts(); await saveAllState(true); showToast("تم تحديث سعر الصرف ✨"); }
+        if (clean > 0) { exchangeRate = clean; renderProducts(); updateCartBadges(); await saveAllState(true); showToast("تم تحديث سعر الصرف ✨"); }
       }
     }
 
     async function saveNewBanner() {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       const fileInput = document.getElementById('bannerFileInput');
       const btn = document.getElementById('bannerSaveBtn');
       if (fileInput.files?.[0]) {
         btn.innerText = "جاري الحفظ... ⏳";
         const comp = await compressImageFile(fileInput.files[0], 800, 0.55);
-        btn.innerText = "تحديث وحفظ الغلاف تلقائياً ✨";
+        btn.innerText = "تحديث وحفظ الغلاف ✨";
         if (comp) { bannerImg = comp; applyBanner(); closeBannerModal(); await saveAllState(true); showToast("تم تحديث الغلاف ✨"); }
       } else alert("اختر صورة أولاً!");
     }
 
     function openAddModal() {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       document.getElementById('editIndex').value = "-1";
       document.getElementById('modalHeaderTitle').innerText = "➕ نشر موديل جملة جديد";
       document.getElementById('pName').value = "";
@@ -1419,6 +1610,8 @@
       document.getElementById('pStockStatus').value = "AVAILABLE";
       document.getElementById('pCustomViews').value = "";
       document.getElementById('pCustomLikes').value = "";
+      document.getElementById('pFomoLeft').value = "";
+      document.getElementById('pFomoBooked').value = "";
       document.getElementById('pImgFile').value = "";
       document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = false;
@@ -1429,7 +1622,7 @@
     function closeAddModal() { toggleModal('addModal', false); }
 
     function editProduct(id) {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       const p = products.find(item => item.id === id);
       if (!p) return;
       document.getElementById('editIndex').value = p.id;
@@ -1444,6 +1637,8 @@
       document.getElementById('pStockStatus').value = p.stockStatus || "AVAILABLE";
       document.getElementById('pCustomViews').value = p.customViews ?? "";
       document.getElementById('pCustomLikes').value = p.customLikes ?? "";
+      document.getElementById('pFomoLeft').value = p.fomoLeft ?? "";
+      document.getElementById('pFomoBooked').value = p.fomoBooked ?? "";
       document.getElementById('pImgFile').value = "";
       document.getElementById('pExtraImgFile').value = "";
       document.getElementById('pHasDiscount').checked = !!p.hasDiscount;
@@ -1454,21 +1649,23 @@
 
     async function saveNewProduct(e) {
       e.preventDefault();
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return alert("صلاحية الإدارة مطلوبة!");
       const saveBtn = document.getElementById('saveProductBtn');
       saveBtn.innerText = "جاري النشر... ⏳"; saveBtn.disabled = true;
       try {
         const editId = Number(document.getElementById('editIndex').value);
-        const name = escapeHtml(document.getElementById('pName').value.trim());
+        const name = document.getElementById('pName').value.trim();
         const category = document.getElementById('pCat').value;
         const rawPrice = parseCleanNumber(document.getElementById('pPriceInput').value);
         const priceUsd = document.getElementById('pInputCurrency').value === 'SYP' ? Math.round((rawPrice / exchangeRate) * 100) / 100 : rawPrice;
         const minQty = parseInt(document.getElementById('pMinQty').value) || 10;
-        const pack = escapeHtml(document.getElementById('pPack').value.trim());
+        const pack = document.getElementById('pPack').value.trim();
         const pieceWeight = parseInt(document.getElementById('pPieceWeight').value) || 350;
         const stockStatus = document.getElementById('pStockStatus').value || 'AVAILABLE';
         const customViews = document.getElementById('pCustomViews').value.trim();
         const customLikes = document.getElementById('pCustomLikes').value.trim();
+        const fomoLeft = document.getElementById('pFomoLeft').value.trim();
+        const fomoBooked = document.getElementById('pFomoBooked').value.trim();
         const hasDiscount = document.getElementById('pHasDiscount').checked;
         const discountPercent = hasDiscount ? Math.min(90, Math.max(1, parseInt(document.getElementById('pDiscountPercent').value) || 15)) : 0;
 
@@ -1487,7 +1684,7 @@
         if (editId !== -1) {
           const idx = products.findIndex(p => p.id === editId);
           if (idx !== -1) {
-            Object.assign(products[idx], { name, category, priceUsd, minQty, pack, pieceWeight, stockStatus, customViews, customLikes, hasDiscount, discountPercent });
+            Object.assign(products[idx], { name, category, priceUsd, minQty, pack, pieceWeight, stockStatus, customViews, customLikes, fomoLeft, fomoBooked, hasDiscount, discountPercent });
             if (mainImgData) products[idx].img = mainImgData;
             if (extrasData.length > 0) products[idx].extras = extrasData;
             targetProd = products[idx];
@@ -1495,7 +1692,7 @@
         } else {
           targetProd = {
             id: Date.now(), name, category, priceUsd, minQty, pieceWeight, stockStatus, pack,
-            customViews, customLikes, views: 0, likes: 0, ratingSum: 0, ratingCount: 0, comments: [], hasDiscount, discountPercent,
+            customViews, customLikes, fomoLeft, fomoBooked, views: 0, likes: 0, ratingSum: 0, ratingCount: 0, comments: [], hasDiscount, discountPercent,
             img: mainImgData || "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",
             extras: extrasData
           };
@@ -1509,7 +1706,7 @@
     }
 
     async function deleteProduct(id) {
-      if (!window.isAdmin) return;
+      if (!isAdminVerified()) return;
       if (confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")) {
         products = products.filter(p => p.id !== id);
         delete socialDataMap[id];
@@ -1526,7 +1723,7 @@
         totalPieces += qty;
         totalPacks += Math.max(1, Math.ceil(qty / minQty));
         totalGrams += (qty * getPieceWeightGrams(c));
-        rawTotalUsd += Math.round(c.priceUsd * qty * 100) / 100;
+        rawTotalUsd += Math.round((Number(c.priceUsd) || 0) * qty * 100) / 100;
       });
       rawTotalUsd = Math.round(rawTotalUsd * 100) / 100;
       
@@ -1573,12 +1770,12 @@
           return `<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2">
             <div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p><p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} (${packs} سيرية)</p></div>
             <div class="flex items-center gap-1">
-              <button onclick="adjustCartItemQty(${c.id}, -${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button>
+              <button onclick="adjustCartItemQty(${Number(c.id)}, -${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button>
               <span class="text-white font-bold text-xs px-1">${c.qty}</span>
-              <button onclick="adjustCartItemQty(${c.id}, ${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button>
+              <button onclick="adjustCartItemQty(${Number(c.id)}, ${c.minQty || 10})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button>
             </div>
             <span class="text-emerald-400 font-bold text-xs">$${sub}</span>
-            <button onclick="playUiSound('tap'); removeFromCart(${c.id})" class="text-red-400 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button>
+            <button onclick="playUiSound('tap'); removeFromCart(${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button>
           </div>`;
         }).join('');
         
@@ -1595,7 +1792,7 @@
     function printWholesaleInvoice() {
       if (cart.length === 0) return alert("السلة فارغة! أضف موديلات أولاً لطباعة الفاتورة.");
       playUiSound('success');
-      const buyerName = escapeHtml(document.getElementById('buyerName')?.value.trim() || "تاجر جملة معتمد");
+      const buyerName = escapeHtml(document.getElementById('buyerName')?.value.trim() || "عميل جملة معتمد");
       const buyerAddress = escapeHtml(document.getElementById('buyerAddress')?.value.trim() || "سوريا");
       const buyerPhone = escapeHtml(document.getElementById('buyerPhone')?.value.trim() || "—");
       const buyerNotes = escapeHtml(document.getElementById('buyerNotes')?.value.trim() || "لا يوجد");
@@ -1610,7 +1807,7 @@
 
       const win = window.open('', '_blank');
       if (!win) return alert("يرجى السماح بالنوافذ المنبثقة لطباعة الفاتورة.");
-      win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 العميل:</b> ${buyerName} | <b>📞 الهاتف:</b> ${buyerPhone}<br><b>📍 العنوان:</b> ${buyerAddress} | <b>📝 ملاحظات:</b> ${buyerNotes}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ السيريات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي (مشمول خصم 2% إذا تجاوز 400$):</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${routingStamp}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
+      win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 العميل:</b> ${buyerName} | <b>📞 الهاتف:</b> ${buyerPhone}<br><b>📍 العنوان:</b> ${buyerAddress} | <b>📝 ملاحظات:</b> ${buyerNotes}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ السيريات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي (مشمول خصم 2% إذا تجاوز 400$):</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${escapeHtml(routingStamp)}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
       win.document.close();
     }
 
@@ -1620,7 +1817,7 @@
       const buyerAddress = document.getElementById('buyerAddress')?.value.trim();
       const buyerPhone = document.getElementById('buyerPhone')?.value.trim();
       const buyerNotes = document.getElementById('buyerNotes')?.value.trim();
-      if (!buyerName || !buyerAddress || !buyerPhone) return alert("يرجى تعبئة الاسم، العنوان، ورقم الهاتف لإتمام الطلبية!");
+      if (!buyerName || !buyerAddress || !buyerPhone) return alert("يرجى تعبئة اسم العميل، العنوان، ورقم الهاتف لإتمام الطلبية!");
 
       playUiSound('success');
       saveBuyerInfoToStorage();
@@ -1644,4 +1841,6 @@
   </script>
 </body>
 </html>
-  <!-- ننتقل للجزء الثاني المكمل لجميع النوافذ والجافاسكريبت بالكامل -->
+
+  
+  <!-- نهاية الجزء الأول - الصق الجزء الثاني مباشرة تحت هذا السطر -->
