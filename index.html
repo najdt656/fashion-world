@@ -246,6 +246,13 @@
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/50 text-xs">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-extrabold text-yellow-400 text-sm">💡 كيف يمكنك الربح من موقعنا + لوحة المسوق</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
       <div class="overflow-y-auto flex-1 space-y-2.5 pl-1">
+        
+        <!-- الشريط التوضيحي لشرح الآلية للزبون -->
+        <div class="bg-amber-950/40 border border-amber-500/40 rounded-xl p-2.5 text-amber-200 text-[11px] space-y-1">
+          <p class="font-black text-yellow-400">📖 كيف تعمل أرباحك معنا؟</p>
+          <p>1️⃣ انسخ رابطك السري وشاركه مع زبائنك.<br>2️⃣ عندما يطلب الزبون من خلاله، يُسجيل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من قِبل إدارة المعمل، تتحول الأرباح فوراً إلى (أرباح مؤكدة قابلة للصرف)!</p>
+        </div>
+
         <div class="bg-emerald-950/40 border border-yellow-500/35 rounded-xl p-2.5 text-center">
           <p class="text-yellow-300 font-black">🚀 اربح 5$ عن كل 150$ مبيعات من هاتفك وبسرية تامة أمام زبائنك!</p>
           <p class="text-gray-300 text-[10px] mt-0.5">لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك برمز توجيه سري خاص بك لدى الإدارة!</p>
@@ -264,12 +271,13 @@
         </div>
         <div class="glossy-box p-2.5 rounded-xl space-y-1.5 border border-emerald-500/40">
           <div class="flex justify-between items-center"><span class="font-extrabold text-emerald-400 text-[10px]">📊 سجل الطلبيات المرسلة ببصمتك:</span><span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded font-mono text-[10px]">1804-FW</span></div>
-          <div class="grid grid-cols-3 gap-1.5 text-center">
-            <div class="bg-black/80 p-1.5 rounded-lg"><span class="text-[9px] text-gray-400 block">فواتير مرسلة</span><strong id="dashOrdersCount" class="text-white font-black">0</strong></div>
-            <div class="bg-black/80 p-1.5 rounded-lg"><span class="text-[9px] text-gray-400 block">قيمة الفواتير</span><strong id="dashTotalSales" class="text-sky-400 font-black">$0</strong></div>
-            <div class="bg-black/80 p-1.5 rounded-lg"><span class="text-[9px] text-gray-400 block">الربح المقدر</span><strong id="dashTotalCommission" class="text-emerald-400 font-black">$0.00</strong></div>
+          
+          <div class="grid grid-cols-2 gap-1.5 text-center">
+            <div class="bg-amber-950/30 border border-amber-500/30 p-1.5 rounded-lg"><span class="text-[9px] text-amber-300 block">⏳ أرباح معلقة (بانتظار الاعتماد)</span><strong id="dashPendingComm" class="text-yellow-400 font-black">$0.00</strong></div>
+            <div class="bg-emerald-950/30 border border-emerald-500/30 p-1.5 rounded-lg"><span class="text-[9px] text-emerald-300 block">✨ أرباح مؤكدة ومتاحة</span><strong id="dashConfirmedComm" class="text-emerald-400 font-black">$0.00</strong></div>
           </div>
-          <div id="dashOrdersLog" class="max-h-20 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-1.5 rounded-lg"></div>
+
+          <div id="dashOrdersLog" class="max-h-32 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-1.5 rounded-lg"></div>
           <div id="adminResetMarketerBox" class="hidden pt-1 text-left"><button onclick="adminClearMarketerOrders()" class="bg-red-600/80 text-white text-[9px] font-bold px-2 py-1 rounded">🗑️ تصفير سجل هذه البصمة (أدمن)</button></div>
         </div>
         <div class="grid grid-cols-3 gap-1.5 text-center">
@@ -436,6 +444,7 @@
       if (!user) document.getElementById('adminDropdownMenu')?.classList.add('hidden');
       document.getElementById('adminResetMarketerBox')?.classList.toggle('hidden', !user);
       if (typeof window.renderProducts === 'function') window.renderProducts();
+      if (typeof window.renderMarketerDashboard === 'function') window.renderMarketerDashboard();
     });
 
     window.handleAdminFirebaseLogin = async function(e) {
@@ -454,6 +463,7 @@
         document.getElementById('adminDropdownWrapper')?.classList.add('hidden');
         document.getElementById('adminDropdownMenu')?.classList.add('hidden');
         window.renderProducts();
+        window.renderMarketerDashboard();
         window.showToast("تم تسجيل خروج الإدارة 🔒");
       });
     };
@@ -654,18 +664,33 @@
       const stampBadge = document.getElementById('dashboardStampBadge');
       if (stampBadge) stampBadge.innerText = marketerProfile.code;
       const myOrders = Array.isArray(socialDataMap?._marketerOrders?.[marketerProfile.code]) ? socialDataMap._marketerOrders[marketerProfile.code] : [];
-      let totalSales = 0, totalComm = 0;
-      myOrders.forEach(o => { totalSales += Number(o.totalUsd) || 0; totalComm += Number(o.commissionUsd) || 0; });
-      if (document.getElementById('dashOrdersCount')) document.getElementById('dashOrdersCount').innerText = myOrders.length;
-      if (document.getElementById('dashTotalSales')) document.getElementById('dashTotalSales').innerText = `$${Math.round(totalSales).toLocaleString('en-US')}`;
-      if (document.getElementById('dashTotalCommission')) document.getElementById('dashTotalCommission').innerText = `$${totalComm.toFixed(2)}`;
+      let pendingComm = 0, confirmedComm = 0;
+      myOrders.forEach(o => {
+        const comm = Number(o.commissionUsd) || 0;
+        if (o.status === 'CONFIRMED') confirmedComm += comm;
+        else pendingComm += comm;
+      });
+      if (document.getElementById('dashPendingComm')) document.getElementById('dashPendingComm').innerText = `$${pendingComm.toFixed(2)}`;
+      if (document.getElementById('dashConfirmedComm')) document.getElementById('dashConfirmedComm').innerText = `$${confirmedComm.toFixed(2)}`;
+      
       const log = document.getElementById('dashOrdersLog');
       if (log) {
         log.innerHTML = myOrders.length === 0
           ? `<p class="text-gray-400 text-center py-1">لا توجد طلبيات مسجلة عبر بصمتك حتى الآن.</p>`
-          : myOrders.slice().reverse().map((o, idx) => `<div class="flex justify-between items-center bg-black/80 px-2 py-0.5 rounded border border-gray-800"><span>#${myOrders.length - idx} | 📅 ${escapeHtml(o.date)} (${o.pieces} ق)</span><span class="text-emerald-400 font-black">+$${Number(o.commissionUsd).toFixed(2)}</span></div>`).join('');
+          : myOrders.slice().reverse().map((o, idx) => {
+              const statusBadge = o.status === 'CONFIRMED' 
+                ? '<span class="text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded">مؤكدة ✅</span>' 
+                : (o.status === 'CANCELLED' ? '<span class="text-red-400 font-bold bg-red-950/60 px-1.5 py-0.5 rounded">ملغية ❌</span>' : '<span class="text-yellow-400 font-bold bg-yellow-950/60 px-1.5 py-0.5 rounded">معلقة ⏳</span>');
+              
+              let adminActions = '';
+              if (window.isAdmin && o.status !== 'CONFIRMED' && o.status !== 'CANCELLED') {
+                adminActions = `<div class="flex gap-1 mt-1"><button onclick="adminUpdateOrderStatus('${marketerProfile.code}', ${o.id}, 'CONFIRMED')" class="bg-emerald-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">اعتماد ✅</button><button onclick="adminUpdateOrderStatus('${marketerProfile.code}', ${o.id}, 'CANCELLED')" class="bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">إلغاء ❌</button></div>`;
+              }
+              return `<div class="bg-black/85 p-2 rounded border border-gray-800 space-y-1"><div class="flex justify-between items-center"><span>📅 ${escapeHtml(o.date)} (${o.pieces} ق)</span><div class="flex items-center gap-1.5"><span class="text-sky-300 font-black">+$${Number(o.commissionUsd).toFixed(2)}</span>${statusBadge}</div></div>${adminActions}</div>`;
+            }).join('');
       }
     }
+    window.renderMarketerDashboard = renderMarketerDashboard;
 
     async function recordMarketerOrderInCloud(stampCode, totalUsd, commissionUsd, totalPieces) {
       if (!stampCode) return;
@@ -677,12 +702,31 @@
         const d = new Date();
         socialDataMap._marketerOrders[stampCode].push({
           id: nowMs, date: `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`,
-          totalUsd: Number(totalUsd) || 0, commissionUsd: Number(commissionUsd) || 0, pieces: Number(totalPieces) || 0
+          totalUsd: Number(totalUsd) || 0, commissionUsd: Number(commissionUsd) || 0, pieces: Number(totalPieces) || 0,
+          status: 'PENDING' // الحالة الافتتاحية معلقة لحين موافقة الأدمن
         });
         localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
         await pushPublicSocialState(null);
+        renderMarketerDashboard();
       } catch (e) {}
     }
+
+    async function adminUpdateOrderStatus(stampCode, orderId, newStatus) {
+      if (!window.isAdmin) return;
+      try {
+        if (socialDataMap?._marketerOrders?.[stampCode]) {
+          const ord = socialDataMap._marketerOrders[stampCode].find(o => o.id === orderId);
+          if (ord) {
+            ord.status = newStatus;
+            localStorage.setItem(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
+            await pushPublicSocialState(null);
+            renderMarketerDashboard();
+            showToast(newStatus === 'CONFIRMED' ? "تم اعتماد الطلبية وتثبيت الأرباح بنجاح ✅" : "تم إلغاء الطلبية ❌", newStatus === 'CONFIRMED' ? 'success' : 'error');
+          }
+        }
+      } catch (e) {}
+    }
+    window.adminUpdateOrderStatus = adminUpdateOrderStatus;
 
     async function adminClearMarketerOrders() {
       if (!window.isAdmin) return;
@@ -742,8 +786,8 @@
       playUiSound('success');
       const name = document.getElementById('marketerNameInput')?.value.trim() || marketerProfile.name || 'مسوق';
       const myOrders = socialDataMap?._marketerOrders?.[marketerProfile.code] || [];
-      let totalComm = 0; myOrders.forEach(o => totalComm += Number(o.commissionUsd) || 0);
-      const msg = `💡 طلب اعتماد بصمة وصرف أرباح - FASHION WORLD\n👤 الاسم: ${name}\n🔑 البصمة: ${marketerProfile.code}\n📊 الفواتير: ${myOrders.length}\n💰 الأرباح: $${totalComm.toFixed(2)}`;
+      let confComm = 0; myOrders.forEach(o => { if (o.status === 'CONFIRMED') confComm += Number(o.commissionUsd) || 0; });
+      const msg = `💡 طلب اعتماد بصمة وصرف أرباح المؤكدة - FASHION WORLD\n👤 الاسم: ${name}\n🔑 البصمة: ${marketerProfile.code}\n💰 الأرباح المؤكدة للصرف: $${confComm.toFixed(2)}`;
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
