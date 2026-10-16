@@ -28,7 +28,6 @@
     .glossy-box { background: linear-gradient(145deg, rgba(28,28,36,0.88), rgba(12,12,16,0.92)); border: 1px solid rgba(212,175,55,0.28); }
     .glass-panel { background: rgba(14,14,18,0.94); border: 1px solid rgba(212,175,55,0.26); box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
     .card-luxury { background: linear-gradient(165deg, #17171e 0%, #0a0a0d 100%); border: 1px solid rgba(212,175,55,0.22); box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: 0.25s; }
-    /* شارات مصغرة وشفافة مريحة للنظر لا تغطي الموديل */
     .badge-glass { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font-size: 8.5px; line-height: 1.2; padding: 2px 6px; border-radius: 6px; font-weight: 800; letter-spacing: 0.1px; }
     @keyframes softPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
     .discount-flash { background: rgba(220, 38, 38, 0.72); border: 1px solid rgba(253, 224, 71, 0.55); color: #fff; animation: softPulse 1.8s infinite ease-in-out; }
@@ -233,7 +232,7 @@
         <input id="vipMerchantName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="👤 اسم التاجر / الشركة والمحافظة..." />
         <div class="grid grid-cols-2 gap-2">
           <select id="vipCat" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white"><option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option><option value="تشكيلة متنوعة">تشكيلة متنوعة</option></select>
-          <input id="vipQty" type="number" min="50" value="100" required class="bg-black border border-gray-700 rounded-xl px-3 py-2 text-yellow-400 font-black" placeholder="الكمية بالقطع" />
+          <input id="vipQty" type="number" min="50" value="100" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-yellow-400 font-black" placeholder="الكمية بالقطع" />
         </div>
         <input id="vipPhone" type="tel" required dir="ltr" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-right text-white" placeholder="📞 رقم الهاتف / واتساب المباشر..." />
         <textarea id="vipDetails" rows="3" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white resize-none" placeholder="📝 مواصفات الموديل أو نوع القماش المطلوب..."></textarea>
@@ -347,8 +346,8 @@
           <div class="flex gap-1"><input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2 py-2 text-white" placeholder="السعر الصافي" /><select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold"><option value="USD">$</option><option value="SYP">ل.س</option></select></div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <input id="pMinQty" type="number" min="1" value="10" required class="bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="حجم السيرية (10)" />
-          <input id="pPack" required class="bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="القياسات (M-L-XL)" />
+          <input id="pMinQty" type="number" min="1" value="10" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="حجم السيرية (10)" />
+          <input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="القياسات (M-L-XL)" />
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div><label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن القطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/40 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold" /></div>
@@ -359,7 +358,7 @@
           <div id="discountPercentWrapper" class="hidden flex items-center gap-1"><input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-12 bg-black border border-yellow-400 text-center text-yellow-300 font-black rounded py-0.5" /><span class="text-red-400 font-black">%</span></div>
         </div>
         <div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-yellow-300 font-bold mb-1">📷 الصورة الرئيسية:</label><input id="pImgFile" type="file" accept="image/*" class="w-full text-gray-300 text-[10px]" /></div>
-        <div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-gray-300 font-bold mb-1">📸 صور إضافية (اختياري):</label><input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full text-gray-300 text-[10px]" /></div>
+        <div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-yellow-300 font-bold mb-1">📸 صور إضافية (اختياري):</label><input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full text-gray-300 text-[10px]" /></div>
         <button id="saveProductBtn" type="submit" class="w-full gold-gradient-bg text-black font-extrabold py-2.5 rounded-xl">حفظ ونشر الموديل ✅</button>
       </form>
     </div>
@@ -401,7 +400,20 @@
     <p class="font-cinzel text-sm font-black gold-gradient-text mb-0.5">FASHION WORLD</p>
     <p>📍 سوريا - دمشق - الحريقة | واتساب: 0996311804</p>
   </footer>
-    <!-- مصادقة Firebase الآمنة -->
+
+  <!-- إدراج كائن التهيئة الأساسي لمنع تعطل الأزرار -->
+  <script id="initialDataScript">
+    window.INITIAL_STORE_STATE = {
+      updatedAt: Date.now(),
+      exchangeRate: 15000,
+      bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+      products: [
+        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pieceWeight: 350, stockStatus: "LOW", pack: "قياسات (M-L-XL)", views: 45, likes: 18, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "بضاعة ممتازة"}], hasDiscount: true, discountPercent: 20, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] }
+      ]
+    };
+  </script>
+
+  <!-- مصادقة Firebase الآمنة -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -1509,15 +1521,3 @@
   </script>
 </body>
 </html>
-  <script id="initialDataScript">
-    window.INITIAL_STORE_STATE = {
-      updatedAt: Date.now(),
-      exchangeRate: 15000,
-      bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
-      products: [
-        { id: 101, name: "طقم نسواني رسمي كتان ملكي #101", category: "نسواني", priceUsd: 12, minQty: 10, pieceWeight: 350, stockStatus: "LOW", pack: "قياسات (M-L-XL)", views: 45, likes: 18, ratingSum: 20, ratingCount: 4, comments: [{id: 1, author: "محل النور", text: "بضاعة ممتازة"}], hasDiscount: true, discountPercent: 20, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80", extras: [] }
-      ]
-    };
-  </script>
-
-  
