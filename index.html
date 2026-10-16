@@ -46,7 +46,7 @@
 
   <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[120] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs"></div>
 
-  <!-- مكبر الصور بملء الشاشة (Lightbox) -->
+  <!-- مكبر الصور بملء الشاشة -->
   <div id="imageZoomModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[115] p-2 select-none" onclick="closeZoomModal()">
     <button onclick="closeZoomModal()" class="fixed top-4 right-4 z-[120] bg-neutral-800 text-white w-9 h-9 rounded-full font-bold text-sm border border-yellow-500/30">✕</button>
     <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[120] bg-black/80 text-yellow-300 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط على الصورة للتكبير 2x أو الإغلاق</div>
@@ -170,7 +170,10 @@
             <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-sm text-yellow-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-yellow-500/25 pointer-events-none">🔍 اضغط لتكبير الصورة بملء الشاشة</span>
           </div>
           <div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div>
-          <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-900/30 text-emerald-300 border border-emerald-500/30 font-bold py-1.5 rounded-xl text-[11px]">📲 مشاركة الموديل عبر واتساب</button>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button onclick="shareProductWhatsApp()" class="w-full bg-emerald-900/30 text-emerald-300 border border-emerald-500/30 font-bold py-1.5 rounded-xl text-[11px]">📲 مشاركة واتساب</button>
+            <button onclick="reserveProductWhatsApp()" class="w-full bg-amber-600/30 text-amber-300 border border-amber-500/30 font-bold py-1.5 rounded-xl text-[11px]">🔒 حجز موديل</button>
+          </div>
         </div>
 
         <div class="space-y-2 flex flex-col justify-between text-xs">
@@ -184,6 +187,7 @@
             </div>
             <p id="modalPack" class="text-gray-200 font-bold text-[11px]"></p>
             <p id="modalWeightInfo" class="text-[10px] text-amber-300 font-bold"></p>
+            <p id="modalRetailSuggestion" class="text-[10px] text-emerald-300 font-bold bg-emerald-950/20 p-1.5 rounded border border-emerald-500/20"></p>
             <div class="flex items-center justify-between pt-1 border-t border-gray-800">
               <span class="text-yellow-300 font-bold text-[11px]">تقييم التجار:</span>
               <div id="modalStarsContainer" class="flex items-center gap-0.5 text-base cursor-pointer"></div>
@@ -247,14 +251,13 @@
       <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-bold text-yellow-400 text-sm">💡 كيف يمكنك الربح من موقعنا + لوحة المسوق</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div>
       <div class="overflow-y-auto flex-1 space-y-2.5 pl-1">
         
-        <!-- الشريط التوضيحي لشرح الآلية للزبون -->
         <div class="bg-amber-950/30 border border-amber-500/30 rounded-xl p-2.5 text-amber-200 text-[11px] space-y-1">
           <p class="font-bold text-yellow-400">📖 كيف تعمل أرباحك معنا؟</p>
           <p>1️⃣ انسخ رابطك السري وشاركه مع زبائنك.<br>2️⃣ عندما يطلب الزبون من خلاله، يُسجيل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من قِبل إدارة المعمل، تتحول الأرباح فوراً إلى (أرباح مؤكدة ومتاحة للصرف)!</p>
         </div>
 
         <div class="bg-emerald-950/30 border border-yellow-500/25 rounded-xl p-2.5 text-center">
-          <p class="text-yellow-300 font-bold">🚀 اربح 5$ عن كل 150$ مبيعات مباشرة من هاتفك وبسرية تامة أمام زبائنك!</p>
+          <p class="text-yellow-300 font-bold">🚀 اربح 0.50$ عن كل مبيعات مباشرة من هاتفك وبسرية تامة أمام زبائنك!</p>
           <p class="text-gray-300 text-[10px] mt-0.5">لا يظهر للزبون أبداً أنك تربح منه، بل يُوثق طلبك برمز توجيه سري خاص بك لدى الإدارة!</p>
         </div>
         <div class="glossy-box p-2.5 rounded-xl space-y-2">
@@ -282,7 +285,7 @@
         </div>
 
         <div class="glossy-box p-2.5 rounded-xl space-y-1.5">
-          <div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك المباشرة:</span><span id="calcProfitResult" class="text-xs font-bold text-yellow-400">$10 / شهرياً</span></div>
+          <div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">🧮 حاسبة أرباحك المباشرة:</span><span id="calcProfitResult" class="text-xs font-bold text-yellow-400">$1.00 / شهرياً</span></div>
           <div><label class="text-gray-300 block text-[10px] mb-1">إجمالي مبيعات زبائنك الشهرية ($):</label><input id="calcDirectSales" type="number" step="50" value="300" oninput="calculateDirectProfit()" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-white font-bold text-xs" /></div>
         </div>
       </div>
@@ -292,8 +295,7 @@
       </div>
     </div>
   </div>
-
-  <!-- نوافذ الإدارة ومن نحن -->
+    <!-- نوافذ الإدارة ومن نحن -->
   <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-3">
     <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔐 مصادقة الإدارة</h3><button onclick="closeFirebaseLoginModal()" class="text-gray-400">✕</button></div>
@@ -354,8 +356,7 @@
           <div><label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن تقريبي للقطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/30 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold" /></div>
           <div><label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 توفر السيريات</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">باقي 3 سيريات فقط ⚠️</option><option value="PREORDER">حجز مسبق 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div>
         </div>
-        
-        <!-- حقول التفاعلات الوهمية المخصصة للأدمن -->
+
         <div class="grid grid-cols-2 gap-2 bg-neutral-950 p-2 rounded-xl border border-yellow-500/20">
           <div><label class="block text-sky-300 mb-0.5 font-bold text-[9px]">👁️ المشاهدات الوهمية (اختياري)</label><input id="pCustomViews" type="number" min="0" placeholder="عشوائي (50-500)" class="w-full bg-black border border-sky-500/30 rounded-lg px-2 py-1 text-sky-300 font-bold text-xs" /></div>
           <div><label class="block text-red-300 mb-0.5 font-bold text-[9px]">❤️ الإعجابات الوهمية (اختياري)</label><input id="pCustomLikes" type="number" min="0" placeholder="عشوائي (15-150)" class="w-full bg-black border border-red-500/30 rounded-lg px-2 py-1 text-red-300 font-bold text-xs" /></div>
@@ -372,7 +373,7 @@
     </div>
   </div>
 
-  <!-- نافذة السلة وحاسبة الطرد -->
+  <!-- نافذة السلة وحاسبة الطرد مع نظام الخسم التلقائي (2% عند 400$) -->
   <div id="cartModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
     <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[94vh] p-4 flex flex-col overflow-hidden text-xs">
       <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
@@ -382,14 +383,21 @@
       <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 pl-1 max-h-40"></div>
       <div class="border-t border-gray-800 pt-2 mt-2 space-y-2">
         <div class="glossy-box p-2 rounded-xl border border-sky-500/30 space-y-1">
-          <p class="text-[10px] text-sky-300 font-bold">📦 حاسبة الطرد والشحن الذكية (وزن تقريبي شامل 0.5 كغ تغليف):</p>
+          <p class="text-[10px] text-sky-300 font-bold">📦 حاسبة الطرد الشاملة (وزن تقريبي مع 0.5 كغ تغليف):</p>
           <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
             <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">إجمالي القطع</span><strong id="cartSummaryPieces" class="text-white font-bold">0 قطعة</strong></div>
             <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">عدد السيريات</span><strong id="cartSummaryPacks" class="text-yellow-400 font-bold">0 سيرية</strong></div>
             <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">الوزن التقريبي</span><strong id="cartSummaryWeight" class="text-emerald-400 font-bold">0 كغ</strong></div>
           </div>
         </div>
-        <div class="flex justify-between font-bold bg-black/60 p-2 rounded-xl border border-yellow-500/25"><span>الإجمالي الكلي للفاتورة:</span><span id="cartTotal" class="text-yellow-400">$0</span></div>
+        
+        <!-- صندوق إشعار وتطبيق خصم 2% للفواتير فوق 400$ -->
+        <div id="tierDiscountNotice" class="hidden bg-emerald-950/40 p-2 rounded-xl border border-emerald-500/40 text-[10px] text-emerald-300 font-bold flex justify-between items-center">
+          <span>🎉 مبروك! بلغت فاتورتك 400$ أو أكثر، تم تطبيق خصم جملة 2% تلقائياً.</span>
+          <strong id="discountAmountText" class="text-yellow-300">-$0</strong>
+        </div>
+
+        <div class="flex justify-between font-bold bg-black/60 p-2 rounded-xl border border-yellow-500/25"><span>الإجمالي النهائي:</span><span id="cartTotal" class="text-yellow-400">$0</span></div>
         <div class="space-y-1.5">
           <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم التاجر / اسم المحل..." />
           <input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن..." />
@@ -409,7 +417,6 @@
     <p>📍 سوريا - دمشق - الحريقة | واتساب: 0996311804</p>
   </footer>
 
-  <!-- إدراج كائن التهيئة الأساسي -->
   <script id="initialDataScript">
     window.INITIAL_STORE_STATE = {
       updatedAt: Date.now(),
@@ -421,7 +428,7 @@
     };
   </script>
 
-  <!-- مصادقة Firebase -->
+  <!-- سكربت الفايربيز والمنطق البرمجي المكمل -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -616,36 +623,6 @@
     function closeFirebaseLoginModal() { toggleModal('firebaseLoginModal', false); }
     window.closeFirebaseLoginModal = closeFirebaseLoginModal;
 
-    function openZoomModal(imgSrc) {
-      const modal = document.getElementById('imageZoomModal');
-      const img = document.getElementById('zoomModalImg');
-      if (modal && img) {
-        img.src = imgSrc;
-        img.classList.remove('zoomed-img');
-        modal.classList.remove('hidden'); modal.classList.add('flex');
-      }
-    }
-    function closeZoomModal() {
-      const modal = document.getElementById('imageZoomModal');
-      if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
-    }
-    function toggleDoubleZoom(imgEl) {
-      imgEl.classList.toggle('zoomed-img');
-    }
-
-    function sendVipRequestWhatsApp(e) {
-      e.preventDefault();
-      playUiSound('success');
-      const merchant = document.getElementById('vipMerchantName').value.trim();
-      const cat = document.getElementById('vipCat').value;
-      const qty = document.getElementById('vipQty').value;
-      const phone = document.getElementById('vipPhone').value.trim();
-      const details = document.getElementById('vipDetails').value.trim();
-      const msg = `👑 *طلب تصنيع خاص لكبار التجار (VIP)* - FASHION WORLD\n----------------------------------\n👤 التاجر / الشركة: ${merchant}\n👗 القسم المطلوب: ${cat}\n📦 الكمية التقديرية: ${qty} قطعة\n📞 رقم التواصل: ${phone}\n📝 المواصفات والتفاصيل: ${details}\n----------------------------------\nيرجى مراجعة الطلب وتحديد السعر الخاص وموعد التسليم.`;
-      closeVipModal();
-      window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
     function initAffiliateSystem() {
       try {
         const params = new URLSearchParams(window.location.search);
@@ -775,7 +752,7 @@
 
     function calculateDirectProfit() {
       const directSales = parseFloat(document.getElementById('calcDirectSales')?.value) || 0;
-      const totalUsd = Math.round(((directSales / 150) * 5) * 10) / 10;
+      const totalUsd = Math.round(((directSales / 150) * 0.5) * 10) / 10;
       const resEl = document.getElementById('calcProfitResult');
       if (resEl) resEl.innerText = `$${totalUsd.toLocaleString('en-US')} / شهرياً`;
     }
@@ -818,17 +795,15 @@
     }
     function clearSearch() { document.getElementById('searchInput').value = ''; handleSearch(''); }
 
-    // دول التفاعلات والتقييمات الذكية المربوطة والمبنية بشكل واقعي (عشوائي بين 15-150 للأعجاب وتتأثر بالمشاهدات)
     function getConsistentSmartSocial(p) {
       const seed = Number(p.id) || 12345;
-      // إذا حدد الأدمن قيم مخصصة، نعتمدها، وإلا يتم توليد قيم واقعية وعشوائية تبدو حقيقية
       const views = (p.customViews !== undefined && p.customViews !== '' && !isNaN(p.customViews)) 
         ? Number(p.customViews) 
-        : (50 + (seed % 451)); // بين 50 و 500 مشاهدة
+        : (50 + (seed % 451));
       
       const likes = (p.customLikes !== undefined && p.customLikes !== '' && !isNaN(p.customLikes)) 
         ? Number(p.customLikes) 
-        : (15 + (seed % 136)); // بين 15 و 150 قلب عشوائي واقعي
+        : (15 + (seed % 136));
 
       const remote = socialDataMap[p.id] || {};
       return {
@@ -847,7 +822,6 @@
           p.ratingCount = Number(s.ratingCount); 
           p.ratingSum = Number(s.ratingSum); 
         } else {
-          // ربط التقييم تلقائياً بمدى تفاعل المشاهدات والإعجابات ليبدو حقيقياً وعالياً للمنتجات المرغوبة
           const autoRating = Math.min(5.0, Math.max(4.6, 4.5 + (p.likes / 300)));
           p.ratingSum = Math.round(autoRating * 10);
           p.ratingCount = 10;
@@ -1064,22 +1038,6 @@
       return `<div class="flex flex-col leading-tight"><span class="text-yellow-400 font-bold text-xs sm:text-sm">$${numUsd} <span class="text-[8px] text-gray-400">/قطعة</span></span><span class="text-emerald-400 font-bold text-[9px] sm:text-[10px]">${syp} ل.س</span></div>`;
     }
 
-    function getProductRatingLabel(p) {
-      const c = Number(p.ratingCount) || 0, s = Number(p.ratingSum) || 0;
-      if (c <= 0 || s <= 0) return '4.8';
-      return Math.min(5, Math.max(1, s / c)).toFixed(1);
-    }
-
-    function getDiscountBadgeText(p) {
-      if (!p.hasDiscount) return '';
-      const pct = parseInt(p.discountPercent) || 0;
-      return pct > 0 ? `حسم ${pct}% 🔥` : `حسم خاص 🔥`;
-    }
-
-    function toggleDiscountPercentInput() {
-      document.getElementById('discountPercentWrapper')?.classList.toggle('hidden', !document.getElementById('pHasDiscount')?.checked);
-    }
-
     function renderProducts() {
       const rateFormatted = exchangeRate.toLocaleString('en-US');
       if (document.getElementById('heroRate')) document.getElementById('heroRate').innerText = rateFormatted;
@@ -1153,17 +1111,6 @@
     }
     window.renderProducts = renderProducts;
 
-    function updateModalHeaderSocial(p) {
-      const smart = getConsistentSmartSocial(p);
-      if (document.getElementById('modalViews')) document.getElementById('modalViews').innerText = `👁️ ${smart.views}`;
-      const likeBtn = document.getElementById('modalLikeBtn');
-      const isLiked = !!likedProducts[p.id];
-      if (likeBtn) {
-        likeBtn.className = `${isLiked ? 'bg-red-900/40 border border-red-500 text-red-300' : 'bg-neutral-800 text-gray-300 border border-gray-700'} px-2 py-0.5 rounded-md text-[10px] font-bold transition`;
-        likeBtn.innerHTML = `${isLiked ? '❤️ معجب' : '🤍 إعجاب'} (${p.likes || smart.likes})`;
-      }
-    }
-
     async function openProductModal(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
@@ -1183,6 +1130,11 @@
       updateModalHeaderSocial(p);
       document.getElementById('modalPack').innerText = `📐 القياسات والتفاصيل: ${p.pack}`;
       document.getElementById('modalWeightInfo').innerText = `⚖️ وزن تقريبي للقطعة الواحدة: ${getPieceWeightGrams(p)} غرام`;
+
+      // حساب مقترح البيع بالمفرق (+40% فوق سعر الجملة)
+      const retailSuggestionUsd = Math.round((Number(p.priceUsd) * 1.4) * 100) / 100;
+      const retailSuggestionSyp = Math.round(retailSuggestionUsd * exchangeRate).toLocaleString('en-US');
+      document.getElementById('modalRetailSuggestion').innerText = `💡 مقترح البيع بالمفرق: $${retailSuggestionUsd} (${retailSuggestionSyp} ل.س)`;
 
       const badge = document.getElementById('modalDiscountBadge');
       if (p.hasDiscount) { badge.innerText = getDiscountBadgeText(p); badge.classList.remove('hidden'); }
@@ -1327,6 +1279,14 @@
       const shareUrl = `${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(marketerProfile.code)}`;
       const msg = `🔥 عرض جملة الجملة من FASHION WORLD (دمشق - الحريقة)\n----------------------------------\n👗 الموديل: ${p.name}\n📐 التفاصيل: ${p.pack}\n💰 السعر: $${p.priceUsd} للقطعة (حجم السيرية: ${p.minQty || 10} قطع)\n🔖 رمز العرض: FW-${marketerProfile.code}\n🔗 رابط التصفح والطلب: ${shareUrl}`;
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // ميزة حجز الموديل مع إرسال رسالة للواتساب لتأكيد العربون
+    function reserveProductWhatsApp() {
+      if (!window.currentModalProduct) return;
+      const p = window.currentModalProduct;
+      const msg = `🔒 طلب حجز موديل - FASHION WORLD\n----------------------------------\n👗 الموديل: ${p.name} (كود #${p.id})\n📐 القياسات: ${p.pack}\n💰 السعر: $${p.priceUsd}\n\nأرغب بحجز هذا الموديل، يرجى تزويدي بطريقة تحويل العربون لتأكيد الحجز رسمياً.`;
+      window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     async function toggleLikeProduct(e, id) {
@@ -1489,17 +1449,33 @@
       }
     }
 
+    // حساب إجمالي السلة مع تطبيق حسم 2% إذا زادت الفاتورة عن 400$
     function getCartSmartMetrics() {
-      let totalPieces = 0, totalPacks = 0, totalGrams = 0, totalUsd = 0;
+      let totalPieces = 0, totalPacks = 0, totalGrams = 0, rawTotalUsd = 0;
       cart.forEach(c => {
         const qty = Number(c.qty) || 0, minQty = Number(c.minQty) || 10;
         totalPieces += qty;
         totalPacks += Math.max(1, Math.ceil(qty / minQty));
         totalGrams += (qty * getPieceWeightGrams(c));
-        totalUsd += Math.round(c.priceUsd * qty * 100) / 100;
+        rawTotalUsd += Math.round(c.priceUsd * qty * 100) / 100;
       });
-      totalUsd = Math.round(totalUsd * 100) / 100;
-      return { totalPieces, totalPacks, totalWeightKg: totalPieces > 0 ? ((totalGrams + 500) / 1000).toFixed(2) : "0", totalUsd };
+      rawTotalUsd = Math.round(rawTotalUsd * 100) / 100;
+      
+      let discountUsd = 0;
+      let finalTotalUsd = rawTotalUsd;
+      if (rawTotalUsd >= 400) {
+        discountUsd = Math.round(rawTotalUsd * 0.02 * 100) / 100; // حسم 2%
+        finalTotalUsd = Math.round((rawTotalUsd - discountUsd) * 100) / 100;
+      }
+
+      return { 
+        totalPieces, 
+        totalPacks, 
+        totalWeightKg: totalPieces > 0 ? ((totalGrams + 500) / 1000).toFixed(2) : "0", 
+        rawTotalUsd,
+        discountUsd,
+        totalUsd: finalTotalUsd 
+      };
     }
 
     function openCart() {
@@ -1509,6 +1485,15 @@
       document.getElementById('cartSummaryPieces').innerText = `${m.totalPieces} قطعة`;
       document.getElementById('cartSummaryPacks').innerText = `${m.totalPacks} سيرية`;
       document.getElementById('cartSummaryWeight').innerText = `~${m.totalWeightKg} كغ`;
+
+      // إظهار أو إخفاء إشعار خصم 400$
+      const tierNotice = document.getElementById('tierDiscountNotice');
+      if (m.rawTotalUsd >= 400) {
+        tierNotice.classList.remove('hidden');
+        document.getElementById('discountAmountText').innerText = `-$${m.discountUsd}`;
+      } else {
+        tierNotice.classList.add('hidden');
+      }
 
       if (cart.length === 0) {
         container.innerHTML = `<p class="text-center text-gray-500 py-6">السلة فارغة حالياً</p>`;
@@ -1528,7 +1513,11 @@
             <button onclick="playUiSound('tap'); removeFromCart(${c.id})" class="text-red-400 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button>
           </div>`;
         }).join('');
-        document.getElementById('cartTotal').innerText = `$${m.totalUsd} (${Math.round(m.totalUsd * exchangeRate).toLocaleString('en-US')} ل.س)`;
+        
+        const totalSyp = Math.round(m.totalUsd * exchangeRate).toLocaleString('en-US');
+        document.getElementById('cartTotal').innerText = m.rawTotalUsd >= 400 
+          ? `$${m.totalUsd} (مشمول حسم 2% | ${totalSyp} ل.س)` 
+          : `$${m.totalUsd} (${totalSyp} ل.س)`;
       }
       toggleModal('cartModal', true);
     }
@@ -1545,14 +1534,15 @@
       const m = getCartSmartMetrics();
       const totalSyp = Math.round(m.totalUsd * exchangeRate).toLocaleString('en-US');
       const savedStamp = localStorage.getItem(LS_REFERRED_BY_KEY);
-      const routingStamp = savedStamp ? `FW-${savedStamp}-C${((m.totalUsd / 150) * 5).toFixed(2)}` : `FW-DIR-00`;
+      const commissionUsd = ((m.totalUsd / 150) * 0.5).toFixed(2);
+      const routingStamp = savedStamp ? `FW-${savedStamp}-C${commissionUsd}` : `FW-DIR-00`;
       const invoiceNo = `INV-${Math.floor(100000 + Math.random() * 900000)}`;
       const dateStr = new Date().toLocaleDateString('ar-SY');
       const rowsHtml = cart.map((c, idx) => `<tr><td>${idx + 1}</td><td style="text-align:right;font-weight:bold;">${escapeHtml(c.name)}</td><td>${escapeHtml(c.category)}</td><td>${c.qty} ق (${Math.max(1, Math.ceil(c.qty / (c.minQty || 10)))} سيرية)</td><td>$${c.priceUsd}</td><td style="font-weight:bold;">$${Math.round(c.priceUsd * c.qty * 100) / 100}</td></tr>`).join('');
 
       const win = window.open('', '_blank');
       if (!win) return alert("يرجى السماح بالنوافذ المنبثقة لطباعة الفاتورة.");
-      win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 التاجر:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان:</b> ${escapeHtml(buyerAddress)} | <b>📝 ملاحظات:</b> ${escapeHtml(buyerNotes)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ السيريات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي:</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${routingStamp}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
+      win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 التاجر:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان:</b> ${escapeHtml(buyerAddress)} | <b>📝 ملاحظات:</b> ${escapeHtml(buyerNotes)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ السيريات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي (مشمول خصم 2% إذا تجاوز 400$):</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${routingStamp}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
       win.document.close();
     }
 
@@ -1570,14 +1560,14 @@
       const lines = cart.map((c, i) => `${i+1}. ${c.name} | الكمية: ${c.qty} قطعة (${Math.max(1, Math.ceil(c.qty / (c.minQty || 10)))} سيرية) | $${Math.round(c.priceUsd * c.qty * 100) / 100}`).join('\n');
       const totalSyp = Math.round(m.totalUsd * exchangeRate).toLocaleString('en-US');
       const savedStamp = localStorage.getItem(LS_REFERRED_BY_KEY);
-      const commissionUsd = ((m.totalUsd / 150) * 5).toFixed(2);
+      const commissionUsd = ((m.totalUsd / 150) * 0.5).toFixed(2);
       const routingStamp = savedStamp ? `FW-${savedStamp}-C${commissionUsd}` : `FW-DIR-00`;
 
       if (savedStamp) recordMarketerOrderInCloud(savedStamp, m.totalUsd, commissionUsd, m.totalPieces);
 
       let msg = `مرحباً FASHION WORLD (دمشق - الحريقة)\n📋 *طلبية جملة جديدة*\n👤 الاسم/المحل: ${buyerName}\n📍 العنوان والشحن: ${buyerAddress}\n📞 رقم الهاتف: ${buyerPhone}\n`;
       if (buyerNotes) msg += `📝 ملاحظات: ${buyerNotes}\n`;
-      msg += `--------------------\n${lines}\n--------------------\n📦 *تفاصيل الطرد الذكي:* ${m.totalPieces} قطعة | ${m.totalPacks} سيرية | الوزن التقريبي: ~${m.totalWeightKg} كغ\n💰 *المبلغ الإجمالي:* $${m.totalUsd} (${totalSyp} ل.س)\n🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
+      msg += `--------------------\n${lines}\n--------------------\n📦 *تفاصيل الطرد الذكي:* ${m.totalPieces} قطعة | ${m.totalPacks} سيرية | الوزن التقريبي: ~${m.totalWeightKg} كغ\n💰 *المبلغ الإجمالي النهائي (مع خصم 2% إن وجد):* $${m.totalUsd} (${totalSyp} ل.س)\n🔖 رمز التوجيه والتوثيق: ${routingStamp}`;
 
       window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
     }
@@ -1586,3 +1576,5 @@
   </script>
 </body>
 </html>
+
+  <!-- نترك البقية وناسك الجافاسكريبت للجزء الثاني المكمل -->
