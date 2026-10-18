@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<!-- الشريط الإخباري العلوي مع سعر الصرف المدمج لتوفير المساحة -->
+<!-- الشريط الإخباري العلوي -->
 <div class="bg-black/95 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full"><div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-1 text-gray-300"><div class="flex items-center gap-1.5"><span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span><span class="text-emerald-400 font-semibold">| شحن للمحافظات</span></div><div class="flex items-center gap-2"><span class="bg-neutral-900 border border-yellow-500/30 px-2 py-0.5 rounded text-yellow-400 font-bold">💱 الصرف: <b id="headerRateDesktop" class="text-emerald-400">15,000</b> ل.س</span></div></div></div>
 
 <!-- الهيدر الاحترافي -->
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <!-- شريط الأدوات المنسدل عند الضغط -->
+  <!-- شريط الأدوات المنسدل -->
   <div id="userToolsDrawer" class="hidden border-t border-yellow-500/20 bg-neutral-950/95 px-3 py-2">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="flex items-center gap-2 flex-wrap">
@@ -71,6 +71,7 @@
       <span class="text-yellow-400 font-bold text-[10px]">👑 الإدارة (الصرف: <b id="adminRateDisplay">15,000</b>)</span>
       <div class="flex flex-wrap items-center gap-1">
         <button onclick="openAddModal(); toggleAdminMenu();" class="gold-gradient-bg font-bold py-1 px-2.5 rounded-lg text-[10px]">➕ نشر موديل</button>
+        <button onclick="openAdminMarketersModal(); toggleAdminMenu();" class="bg-purple-600/30 text-purple-300 border border-purple-500/40 py-1 px-2 rounded-lg text-[10px] font-bold">👥 مراقبة الشركاء</button>
         <button onclick="openBannerModal(); toggleAdminMenu();" class="bg-amber-500/15 text-yellow-300 border border-yellow-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">🖼️ الغلاف</button>
         <button onclick="changeExchangeRate(); toggleAdminMenu();" class="bg-emerald-500/15 text-emerald-300 border border-emerald-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">💱 الصرف</button>
         <button onclick="changePartnerSecretCode(); toggleAdminMenu();" class="bg-purple-500/15 text-purple-300 border border-purple-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">🔑 رمز الشركاء</button>
@@ -84,7 +85,7 @@
 
 <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full"><div id="bannerSection" class="relative overflow-hidden rounded-2xl border border-yellow-500/25 bg-cover bg-center py-6 sm:py-10 px-3 sm:px-6 shadow-lg"><div class="max-w-2xl mx-auto text-center relative z-10 space-y-2.5"><span class="inline-block px-2.5 py-0.5 rounded-full bg-black/75 border border-yellow-400/30 text-yellow-300 text-[9px] sm:text-xs font-bold">✨ المنصة الاحترافية لتجار الجملة والشركاء المعتمدين ✨</span><h2 class="text-lg sm:text-3xl font-black text-white">تشكيلة الموسم الحصرية بأسعار <span class="gold-gradient-text">جملة الجملة 🔥</span></h2><p class="text-gray-300 text-[10px] sm:text-xs max-w-lg mx-auto">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، احسب وزن وطرد السيريات بدقة، واستخرج فاتورة الجملة الرسمية لحظياً.</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[10px] sm:text-xs max-w-md mx-auto"><button onclick="openAffiliateModal()" class="bg-emerald-700 text-white font-bold py-2 px-3 rounded-xl border border-emerald-500/30 flex items-center justify-center gap-1 shadow">🤝 بوابة شركاء النجاح المعتمدين</button><button onclick="openVipModal()" class="bg-purple-800 text-yellow-200 font-bold py-2 px-3 rounded-xl border border-purple-400/30 flex items-center justify-center gap-1 shadow">👑 تصنيع الكميات الخاصة (VIP)</button></div></div></div></section>
 
-<!-- شريط العروض والتصفية السريعة + البحث + الأقسام -->
+<!-- شريط العروض والتصفية + البحث + الأقسام -->
 <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full space-y-1.5">
   <div onclick="filterCategory('CLEARANCE')" class="cursor-pointer bg-gradient-to-r from-red-950/90 via-red-900/80 to-amber-950/90 border border-red-500/40 rounded-xl px-3 py-1.5 flex items-center justify-between text-[10px] sm:text-xs shadow">
     <div class="flex items-center gap-1.5 truncate font-bold text-red-200">
@@ -115,7 +116,7 @@
 
 <main class="max-w-7xl mx-auto px-2.5 sm:px-6 py-3 flex-1 w-full"><div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4"></div></main>
 
-<!-- نافذة تفاصيل الموديل (مع أزرار تحميل الصورة ونص الترند 2026) -->
+<!-- نافذة تفاصيل الموديل -->
 <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4"><div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[93vh] p-3.5 sm:p-5 flex flex-col shadow-2xl overflow-hidden"><div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2"><div class="min-w-0 pr-1"><h3 id="modalTitle" class="font-bold text-yellow-400 text-xs sm:text-base truncate">تفاصيل الموديل الاحترافية</h3><p id="modalPublishTime" class="text-[9.5px] text-gray-400 font-semibold"></p></div><button onclick="closeProductModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full text-xs flex-shrink-0">✕</button></div><div class="overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-3.5 pl-1"><div class="space-y-2 flex flex-col"><div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-neutral-950 border border-yellow-500/25 flex items-center justify-center cursor-zoom-in group" onclick="openZoomModal(document.getElementById('modalMainImg').src)"><img id="modalMainImg" src="" class="w-full h-full object-contain transition duration-300"/><div class="watermark-logo"><span class="text-[9px] font-cinzel font-bold text-yellow-400 drop-shadow-md">FASHION WORLD</span></div><div class="absolute top-2 right-2 flex flex-col items-end gap-1 z-20"><span id="modalDiscountBadge" class="hidden badge-glass discount-flash text-white font-black"></span><span id="modalStockBadge" class="hidden badge-glass font-bold text-white"></span></div><button onclick="prevImage(event)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black text-yellow-300 px-2.5 py-1.5 rounded-full text-xs font-bold border border-yellow-500/30 z-20">❮</button><button onclick="nextImage(event)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black text-yellow-300 px-2.5 py-1.5 rounded-full text-xs font-bold border border-yellow-500/30 z-20">❯</button><span class="absolute bottom-2 right-2 bg-black/75 backdrop-blur-sm text-yellow-300 text-[8.5px] font-bold px-2 py-0.5 rounded-full border border-yellow-500/25 pointer-events-none z-20">🔍 اضغط للتكبير</span></div><div id="modalThumbs" class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar"></div><div class="grid grid-cols-2 gap-1.5"><button onclick="downloadModalProductImage()" class="bg-purple-900/45 text-purple-200 border border-purple-500/45 font-bold py-1.5 rounded-xl text-[10px] flex items-center justify-center gap-1 shadow">📥 1. تحميل الصورة</button><button onclick="copyTrendWhatsAppText()" class="bg-pink-900/45 text-pink-200 border border-pink-500/45 font-bold py-1.5 rounded-xl text-[10px] flex items-center justify-center gap-1 shadow">🔮 2. نسخ نص الترند</button></div><div class="grid grid-cols-3 gap-1"><button onclick="shareProductWhatsApp()" class="bg-emerald-900/35 text-emerald-300 border border-emerald-500/35 font-bold py-1.5 rounded-xl text-[9.5px]">📲 نشر واتساب</button><button onclick="shareProductFacebook()" class="bg-blue-900/35 text-blue-300 border border-blue-500/35 font-bold py-1.5 rounded-xl text-[9.5px]">📘 فيسبوك</button><button onclick="reserveProductWhatsApp()" class="bg-amber-600/30 text-amber-300 border border-amber-500/35 font-bold py-1.5 rounded-xl text-[9.5px]">🔒 حجز</button></div></div><div class="space-y-2 flex flex-col justify-between text-xs"><div class="space-y-2 glossy-box p-3 rounded-2xl"><div class="flex justify-between items-center"><span id="modalCategory" class="bg-yellow-500/10 text-yellow-300 border border-yellow-500/25 px-2 py-0.5 rounded-md font-bold text-[10px]"></span><div class="flex items-center gap-1.5"><span id="modalViews" class="text-[10px] text-sky-300 font-bold bg-sky-950/40 px-2 py-0.5 rounded-md border border-sky-500/20">👁️ 0</span><button id="modalLikeBtn" onclick="toggleLikeProduct(event, currentModalProduct ? currentModalProduct.id : 0)" class="px-2 py-0.5 rounded-md text-[10px] font-bold transition"></button><button onclick="toggleWishlistModalItem(currentModalProduct ? currentModalProduct.id : 0)" id="modalWishlistBtn" class="px-2 py-0.5 rounded-md text-[10px] font-bold transition bg-neutral-800 text-pink-300">❤️ المفضلة</button></div></div><div id="modalFomoBanner" class="hidden fomo-strip px-2.5 py-1.5 rounded-xl text-[10px] text-amber-200 font-bold flex items-center justify-between"></div><p id="modalPack" class="text-gray-200 font-bold text-[11px]"></p><div id="modalColorCircles" class="hidden flex items-center gap-1.5 pt-1 flex-wrap"><span class="text-[10px] text-yellow-300 font-bold">🎨 تشكيلة ألوان السيرية:</span><div id="modalColorsContainer" class="flex items-center gap-1 flex-wrap"></div></div><p id="modalWeightInfo" class="text-[10px] text-amber-300 font-bold"></p><div id="modalAdminDesc" class="hidden text-[10px] text-gray-300 bg-neutral-900/80 p-2 rounded-xl border border-yellow-500/20 leading-relaxed whitespace-pre-line"></div><div id="modalRetailSuggestion" class="text-[10px] text-emerald-300 font-bold bg-emerald-950/30 p-2 rounded-xl border border-emerald-500/30 leading-relaxed"></div><div class="flex items-center justify-between pt-1 border-t border-gray-800"><span class="text-yellow-300 font-bold text-[11px]">تقييم التجار المعتمدين:</span><div id="modalStarsContainer" class="flex items-center gap-0.5 text-base cursor-pointer"></div></div><div id="modalPriceContainer" class="pt-1 border-t border-gray-800 flex items-center justify-between"></div><div class="pt-2 border-t border-gray-800 space-y-1.5 bg-black/50 p-2 rounded-xl border border-yellow-500/20"><div class="flex justify-between items-center"><span class="text-yellow-300 font-bold text-[10px]">تحديد الكمية المطلوبة:</span><span id="modalMinNotice" class="text-[9px] bg-yellow-500/10 text-yellow-300 px-1.5 py-0.5 rounded border border-yellow-500/25 font-bold">حجم السيرية: 10</span></div><div class="flex items-center justify-center gap-1.5"><button onclick="adjustModalQtyByHalf(-1)" class="glossy-box text-yellow-300 w-8 h-7 rounded-lg font-bold text-[10px]">-نصف</button><button onclick="adjustModalQtyByHalf(1)" class="glossy-box text-yellow-300 w-8 h-7 rounded-lg font-bold text-[10px]">+نصف</button><input id="modalQtyInput" type="number" min="1" value="10" oninput="calculateModalTotal()" class="w-16 bg-black border border-yellow-500/40 text-center text-yellow-400 font-bold rounded-lg py-1 text-xs"/></div><div class="flex justify-between items-center pt-1 text-gray-300 font-bold text-[11px]"><span>الإجمالي الفرعي:</span><span id="modalSubtotal" class="text-emerald-400 font-bold">$0</span></div><div class="flex justify-between items-center text-[10px] text-sky-300 font-bold"><span>📦 عدد السيريات والوزن الإجمالي:</span><span id="modalPackAndWeight">1 سيرية | ~3.5 كغ</span></div></div></div><div class="glossy-box p-2.5 rounded-2xl space-y-1.5 text-xs"><p class="font-bold text-yellow-400 text-[10px]">💬 ملاحظات ومقترحات التجار:</p><div id="commentsList" class="space-y-1 max-h-24 overflow-y-auto pr-1"></div><div class="flex gap-1 pt-1"><input id="commentAuthor" class="w-1/3 bg-black border border-yellow-500/25 rounded-lg px-2 py-1 text-white text-[10px]" placeholder="اسم التاجر / المحل..."/><input id="commentText" class="flex-1 bg-black border border-yellow-500/25 rounded-lg px-2 py-1 text-white text-[10px]" placeholder="اكتب ملاحظتك أو طلبك حول الواقع..."/><button onclick="addComment()" class="gold-gradient-bg font-bold px-2.5 py-1 rounded-lg text-[10px]">إرسال</button></div></div></div></div><div class="flex gap-2 pt-2 border-t border-gray-800 mt-2"><button id="modalAddToCartBtn" onclick="addCustomQtyToCart()" class="flex-1 gold-gradient-bg font-bold py-2 rounded-xl text-xs">🛒 إضافة إلى السلة</button><button onclick="closeProductModal()" class="bg-neutral-800 text-white px-4 py-2 rounded-xl text-xs font-bold">إغلاق</button></div></div></div>
 
 <!-- نافذة قائمة المفضلة -->
@@ -124,7 +125,7 @@
 <!-- نافذة طلبات VIP -->
 <div id="vipModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4"><div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg p-4 sm:p-5 flex flex-col space-y-3 text-xs border border-purple-500/40"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">👑 قسم كبار التجار وتصنيع الكميات الخاصة (VIP)</h3><button onclick="closeVipModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div><form onsubmit="sendVipRequestWhatsApp(event)" class="space-y-2.5"><input id="vipMerchantName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="👤 اسم التاجر / الشركة والمحافظة..."/><div class="grid grid-cols-2 gap-2"><select id="vipCat" class="bg-black border border-gray-700 rounded-xl px-2.5 py-2 text-white"><option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option><option value="تشكيلة متنوعة">تشكيلة متنوعة</option></select><input id="vipQty" type="number" min="50" value="100" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-yellow-400 font-bold" placeholder="الكمية بالقطع"/></div><input id="vipPhone" type="tel" required dir="ltr" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-right text-white" placeholder="📞 رقم الهاتف / واتساب للتواصل..."/><textarea id="vipDetails" rows="3" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white resize-none" placeholder="📝 مواصفات الموديل أو نوع القماش المطلوب بدقة..."></textarea><button type="submit" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">📲 إرسال طلب التصنيع الخاص لإدارة المعمل مباشرة</button></form></div></div>
 
-<!-- نافذة بوابة التحقق من رمز الشريك المعتمد -->
+<!-- نافذة بوابة التحقق من رمز الشريك المعتمد (مع خيار استرجاع الحساب بكود الـ 8 أحرف) -->
 <div id="partnerAuthModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs border border-emerald-500/40 shadow-2xl">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -132,54 +133,57 @@
       <button onclick="closePartnerAuthModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
     </div>
     <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-2xl p-3.5 text-gray-200 leading-relaxed space-y-2.5 text-center">
-      <p class="font-bold text-amber-200 text-xs leading-relaxed">"هل ترغب بأن تكون شريكاً لنا في النجاح وتحقيق أرباح شهرية؟ تواصل معنا عبر الواتساب لتفعيل حساب الشريك الخاص بك بعد مراجعة الطلب."</p>
-      <a href="https://wa.me/963996311804?text=✨%20*طلب%20انضمام%20إلى%20برنامج%20شركاء%20النجاح*%20-%20*FASHION%20WORLD*%0A━━━━━━━━━━━━━━━━━━━━%0Aمرحباً%20إدارة%20*FASHION%20WORLD*%20الكرام،%0Aأرغب%20بالتقدم%20لتفعيل%20حساب%20الشريك%20المعتمد%20والحصول%20على%20الرمز%20السري%20الخاص%20بعد%20مراجعة%20طلبي.%0A━━━━━━━━━━━━━━━━━━━━" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl shadow transition text-xs">💬 مراسلة الإدارة عبر واتساب لطلب الرمز</a>
+      <p class="font-bold text-amber-200 text-xs leading-relaxed">"هل ترغب بتفعيل حساب شريك معتمد؟ تواصل معنا عبر الواتساب للحصول على كودك الفريد."</p>
+      <a href="https://wa.me/963996311804?text=✨%20*طلب%20انضمام%20إلى%20برنامج%20شركاء%20النجاح*%20-%20*FASHION%20WORLD*%0A━━━━━━━━━━━━━━━━━━━━%0Aمرحباً%20إدارة%20*FASHION%20WORLD*%20الكرام،%0Aأرغب%20بالتقدم%20لتفعيل%20حساب%20الشريك%20المعتمد%20والحصول%20على%20كودي%20الفريد." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl shadow transition text-xs">💬 مراسلة الإدارة عبر واتساب لطلب الكود</a>
     </div>
-    <form onsubmit="verifyPartnerPasscode(event)" class="space-y-2 pt-2 border-t border-gray-800">
-      <label class="block text-yellow-400 font-bold text-[11px]">🔑 لديك الرمز الخاص مسبقاً؟ أدخله لفتح لوحتك (يُطلب مرة واحدة فقط):</label>
-      <input id="partnerPasscodeInput" type="password" required dir="ltr" class="w-full bg-black border border-yellow-500/40 rounded-xl px-3 py-2 text-center text-white font-mono text-sm tracking-widest" placeholder="أدخل الرمز السري هنا..."/>
+    <form onsubmit="verifyPartnerPasscode(event)" class="space-y-2.5 pt-2 border-t border-gray-800">
+      <label class="block text-yellow-400 font-bold text-[11px]">🔑 أدخل كود الشريك الخاص بك (8 خانات / أحرف وأرقام):</label>
+      <input id="partnerPasscodeInput" type="text" required dir="ltr" class="w-full bg-black border border-yellow-500/40 rounded-xl px-3 py-2 text-center text-white font-mono text-base tracking-widest uppercase" placeholder="مثال: A7K9M2X4" maxlength="8"/>
       <div class="flex gap-2 pt-1">
-        <button type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl text-xs">دخول إلى لوحة الشريك 🔓</button>
+        <button type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl text-xs">دخول إلى حسابي 🔓</button>
         <button type="button" onclick="closePartnerAuthModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold text-xs">إغلاق</button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- نافذة لوحة الشركاء والعمولات الكاملة (محدثة: برونزي 2000$، ذهبي 5000$، ماسي 12000$) -->
-<div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4"><div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/40 text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-bold text-yellow-400 text-sm">💡 برنامج الشركاء والعمولات + نظام المستويات</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div><div class="overflow-y-auto flex-1 space-y-2.5 pl-1"><div class="bg-amber-950/30 border border-amber-500/30 rounded-xl p-2.5 text-amber-200 text-[11px] space-y-1"><p class="font-bold text-yellow-400">📖 دليل شركاء النجاح والأرباح الشهرية:</p><p>1️⃣ انسخ رابطك الاحترافي وشاركه مع عملائك.<br>2️⃣ عندما يطلب العميل من خلاله، يسجل الطلب كـ (أرباح معلقة).<br>3️⃣ بعد اعتماد الطلبية من إدارة المعمل، تصبح الأرباح (متاحة للسحب الفوري) وترتفع رتبتك!</p></div><div class="glossy-box p-2.5 rounded-xl border border-yellow-500/30 space-y-2"><div class="flex justify-between items-center"><span class="font-bold text-yellow-400 text-[11px]">🏆 مستواك التنافسي الحالي:</span><span id="partnerRankBadge" class="bg-amber-700/40 text-amber-200 border border-amber-400/40 px-2.5 py-0.5 rounded-full font-bold text-[10px]">🥉 شريك برونزي</span></div><div class="grid grid-cols-3 gap-1.5 text-center text-[9.5px]"><div class="bg-black/60 p-1.5 rounded-lg border border-amber-700/40"><strong class="text-amber-400 block">🥉 برونزي</strong><span class="text-gray-400">هدف: $2,000</span><span class="text-emerald-400 block font-bold">5$ / 150$</span></div><div class="bg-black/60 p-1.5 rounded-lg border border-yellow-500/40"><strong class="text-yellow-300 block">🥇 ذهبي</strong><span class="text-gray-400">هدف: $5,000</span><span class="text-emerald-400 block font-bold">6$ / 150$</span></div><div class="bg-black/60 p-1.5 rounded-lg border border-sky-400/40"><strong class="text-sky-300 block">💎 ماسي</strong><span class="text-gray-400">هدف: $12,000</span><span class="text-emerald-400 block font-bold">7.5$ / 150$</span></div></div><div class="w-full bg-black rounded-full h-2 overflow-hidden border border-gray-800"><div id="partnerRankProgress" class="gold-gradient-bg h-full transition-all duration-500" style="width: 10%"></div></div><p id="partnerNextRankHint" class="text-[9.5px] text-gray-300 text-center font-semibold">حقق مبيعات مؤكدة بقيمة $2,000 لإكمال المستوى البرونزي والترقية إلى الذهبي 🥇!</p></div><div class="glossy-box p-2.5 rounded-xl space-y-2"><p class="font-bold text-yellow-400 text-[10px]">🔑 كود الشريك الخاص بك (آمن وغير قابل للتكرار):</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5"><input id="marketerNameInput" type="text" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white" placeholder="اسمك / اسم المحل الاحترافي..."/><button onclick="generateSecureMarketerProfile()" class="gold-gradient-bg font-bold px-3 py-1.5 rounded-lg">توليد كود خاص فريد ✨</button></div><div class="bg-black/80 p-2 rounded-lg border border-gray-800 space-y-1"><div class="flex justify-between items-center text-[10px]"><span class="text-gray-400">الكود الفرعي المعتمد:</span><strong id="myAffiliateCode" class="text-yellow-400 font-mono">1804-FW</strong></div><div class="flex gap-1"><input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded px-2 py-1 text-emerald-400 text-[10px]" dir="ltr"/><button onclick="copyAffiliateLink()" class="bg-emerald-700 text-white font-bold px-2.5 py-1 rounded text-[10px] flex-shrink-0">نسخ الرابط 📋</button></div></div></div><div class="glossy-box p-2.5 rounded-xl space-y-1.5 border border-emerald-500/30"><div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">📊 سجل العمليات عبر كودك:</span><span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded font-mono text-[10px]">1804-FW</span></div><div class="grid grid-cols-2 gap-1.5 text-center"><div class="bg-amber-950/20 border border-amber-500/25 p-1.5 rounded-lg"><span class="text-[9px] text-amber-300 block">⏳ أرباح معلقة (قيد الاعتماد)</span><strong id="dashPendingComm" class="text-yellow-400 font-bold">$0.00</strong></div><div class="bg-emerald-950/20 border border-emerald-500/25 p-1.5 rounded-lg"><span class="text-[9px] text-emerald-300 block">✨ أرباح مؤكدة ومتاحة</span><strong id="dashConfirmedComm" class="text-emerald-400 font-bold">$0.00</strong></div></div><div id="dashOrdersLog" class="max-h-28 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-1.5 rounded-lg"></div><div id="adminResetMarketerBox" class="hidden pt-1 text-left"><button onclick="adminClearMarketerOrders()" class="bg-red-700 text-white text-[9px] font-bold px-2 py-1 rounded">🗑️ تصفير السجل (أدمن)</button></div></div><div class="glossy-box p-3 rounded-xl space-y-2 border border-yellow-500/30 bg-neutral-900/90"><p class="font-bold text-yellow-400 text-[11px]">💳 طلب سحب الأرباح المؤكدة (شام كاش / حوالة):</p><div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5"><input id="payoutReceiverName" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="اسم المستلم الثلاثي..."/><input id="payoutCity" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="المحافظة ورقم الهاتف..."/><input id="payoutAccountInfo" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="رقم الشام كاش أو بيانات الحوالة..."/></div><button onclick="requestWithdrawalWhatsApp()" class="w-full gold-gradient-bg font-bold py-2 rounded-xl text-[11px]">📲 إرسال طلب السحب للإدارة عبر واتساب</button><p class="text-[9.5px] text-amber-300/90 text-center font-semibold">⏳ يتم تدقيق وتحويل الأرباح للمستفيد خلال مدة أقصاها 12 ساعة عمل.</p></div></div><div class="flex gap-2 pt-2.5 border-t border-gray-800 mt-2"><button onclick="closeAffiliateModal()" class="w-full bg-neutral-800 text-white px-4 py-2 rounded-xl font-bold">إغلاق</button></div></div></div>
+<!-- نافذة لوحة الشركاء والعمولات الكاملة -->
+<div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4"><div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/40 text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5"><h3 class="font-bold text-yellow-400 text-sm">💡 حساب الشريك المعتمد وعمولاتك</h3><button onclick="closeAffiliateModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button></div><div class="overflow-y-auto flex-1 space-y-2.5 pl-1"><div class="glossy-box p-2.5 rounded-xl border border-yellow-500/30 space-y-2"><div class="flex justify-between items-center"><span class="font-bold text-yellow-400 text-[11px]">🏆 مستواك التنافسي الحالي:</span><span id="partnerRankBadge" class="bg-amber-700/40 text-amber-200 border border-amber-400/40 px-2.5 py-0.5 rounded-full font-bold text-[10px]">🥉 شريك برونزي</span></div><div class="grid grid-cols-3 gap-1.5 text-center text-[9.5px]"><div class="bg-black/60 p-1.5 rounded-lg border border-amber-700/40"><strong class="text-amber-400 block">🥉 برونزي</strong><span class="text-gray-400">هدف: $2,000</span><span class="text-emerald-400 block font-bold">5$ / 150$</span></div><div class="bg-black/60 p-1.5 rounded-lg border border-yellow-500/40"><strong class="text-yellow-300 block">🥇 ذهبي</strong><span class="text-gray-400">هدف: $5,000</span><span class="text-emerald-400 block font-bold">6$ / 150$</span></div><div class="bg-black/60 p-1.5 rounded-lg border border-sky-400/40"><strong class="text-sky-300 block">💎 ماسي</strong><span class="text-gray-400">هدف: $12,000</span><span class="text-emerald-400 block font-bold">7.5$ / 150$</span></div></div><div class="w-full bg-black rounded-full h-2 overflow-hidden border border-gray-800"><div id="partnerRankProgress" class="gold-gradient-bg h-full transition-all duration-500" style="width: 10%"></div></div><p id="partnerNextRankHint" class="text-[9.5px] text-gray-300 text-center font-semibold">حقق مبيعات مؤكدة لإكمال المستوى!</p></div><div class="glossy-box p-2.5 rounded-xl space-y-2"><p class="font-bold text-yellow-400 text-[10px]">🔑 كودك التعريفي الفريد (المسجل رسمياً بالسحاب):</p><div class="bg-black/80 p-2 rounded-lg border border-gray-800 space-y-1"><div class="flex justify-between items-center text-[10px]"><span class="text-gray-400">كود الحساب (8 خانات):</span><strong id="myAffiliateCode" class="text-yellow-400 font-mono text-sm"></strong></div><div class="flex gap-1"><input id="affiliateLinkInput" readonly class="w-full bg-neutral-950 border border-gray-800 rounded px-2 py-1 text-emerald-400 text-[10px]" dir="ltr"/><button onclick="copyAffiliateLink()" class="bg-emerald-700 text-white font-bold px-2.5 py-1 rounded text-[10px] flex-shrink-0">نسخ الرابط 📋</button></div></div></div><div class="glossy-box p-2.5 rounded-xl space-y-1.5 border border-emerald-500/30"><div class="flex justify-between items-center"><span class="font-bold text-emerald-400 text-[10px]">📊 سجل أرباحك وعمولاتك:</span><span id="dashboardStampBadge" class="bg-black text-yellow-400 px-2 py-0.5 rounded font-mono text-[10px]">---</span></div><div class="grid grid-cols-2 gap-1.5 text-center"><div class="bg-amber-950/20 border border-amber-500/25 p-1.5 rounded-lg"><span class="text-[9px] text-amber-300 block">⏳ أرباح معلقة (قيد الاعتماد)</span><strong id="dashPendingComm" class="text-yellow-400 font-bold">$0.00</strong></div><div class="bg-emerald-950/20 border border-emerald-500/25 p-1.5 rounded-lg"><span class="text-[9px] text-emerald-300 block">✨ أرباح مؤكدة ومتاحة</span><strong id="dashConfirmedComm" class="text-emerald-400 font-bold">$0.00</strong></div></div><div id="dashOrdersLog" class="max-h-28 overflow-y-auto space-y-1 text-[10px] text-gray-300 bg-black/50 p-1.5 rounded-lg"></div></div><div class="glossy-box p-3 rounded-xl space-y-2 border border-yellow-500/30 bg-neutral-900/90"><p class="font-bold text-yellow-400 text-[11px]">💳 طلب سحب الأرباح المؤكدة:</p><div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5"><input id="payoutReceiverName" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="اسم المستلم الثلاثي..."/><input id="payoutCity" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="المحافظة ورقم الهاتف..."/><input id="payoutAccountInfo" class="bg-black border border-gray-700 rounded-lg px-2.5 py-1.5 text-white text-[10px]" placeholder="رقم الشام كاش أو بيانات الحوالة..."/></div><button onclick="requestWithdrawalWhatsApp()" class="w-full gold-gradient-bg font-bold py-2 rounded-xl text-[11px]">📲 إرسال طلب السحب للإدارة عبر واتساب</button></div></div><div class="flex gap-2 pt-2.5 border-t border-gray-800 mt-2"><button onclick="closeAffiliateModal()" class="w-full bg-neutral-800 text-white px-4 py-2 rounded-xl font-bold">إغلاق</button></div></div></div>
+
+<!-- نافذة مراقبة الشركاء للأدمن -->
+<div id="adminMarketersModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3"><div class="glass-panel rounded-3xl w-full max-w-2xl max-h-[90vh] p-4 flex flex-col space-y-3 text-xs border border-purple-500/40"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-purple-400 text-sm">👥 لوحة مراقبة وإدارة الشركاء (أدمن)</h3><button onclick="closeAdminMarketersModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><p class="text-[10px] text-gray-400">هنا تظهر أسماء جميع الشركاء المسجلين وأكوادهم الـ 8 وأرصدتهم لتتمكن من متابعتهم أو إعطاء الكود لمن نسيه:</p><div id="adminMarketersListContainer" class="overflow-y-auto flex-1 space-y-2 max-h-96 pr-1"></div><button onclick="closeAdminMarketersModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl">إغلاق</button></div></div>
 
 <!-- نافذة تسجيل دخول الإدارة -->
 <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[110] p-3"><div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔐 مصادقة الإدارة المحمية</h3><button onclick="closeFirebaseLoginModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><form onsubmit="handleAdminFirebaseLogin(event)" class="space-y-2.5"><input id="adminEmailInput" type="email" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Email..."/><input id="adminPassInput" type="password" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Password..."/><button id="adminLoginSubmitBtn" type="submit" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">تسجيل الدخول 👑</button></form></div></div>
 
 <!-- نافذة إعداد المزامنة -->
-<div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3"><div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔗 مفتاح المزامنة الآمن (GitHub Token)</h3><button onclick="closeCloudSetupModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><p class="text-[10px] text-gray-400">يُحفظ المفتاح في جهازك الشخصي فقط لتحديث الكتالوج السحابي بشكل آمن.</p><input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="ghp_..."/><div class="flex gap-2"><button onclick="saveCloudToken()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ وتفعيل المزامنة ✅</button><button onclick="clearCloudToken()" class="bg-red-800/80 text-white font-bold px-3 py-2.5 rounded-xl">مسح المفتاح 🗑️</button></div></div></div>
+<div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3"><div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🔗 مفتاح المزامنة الآمن (GitHub Token)</h3><button onclick="closeCloudSetupModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="ghp_..."/><div class="flex gap-2"><button onclick="saveCloudToken()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ وتفعيل المزامنة ✅</button><button onclick="clearCloudToken()" class="bg-red-800/80 text-white font-bold px-3 py-2.5 rounded-xl">مسح المفتاح 🗑️</button></div></div></div>
 
 <!-- نافذة من نحن -->
-<div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3"><div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs text-gray-200"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3><button onclick="closeAboutModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><p class="font-bold text-white leading-relaxed">المعقل الرئيسي لتجارة وتصنيع الألبسة بالجملة (نسواني، رجالي، ولادي، أطفال) في قلب دمشق - الحريقة. نخدم كبار التجار ومكاتب الشحن بأفضل الأسعار التنافسية.</p><div class="flex justify-center items-center gap-4 pt-3 border-t border-gray-800" dir="ltr"><a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full glossy-box flex items-center justify-center text-[#1877F2] hover:scale-110 transition shadow" title="Facebook"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://wa.me/963996311804" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full glossy-box flex items-center justify-center text-[#25D366] hover:scale-110 transition shadow" title="WhatsApp"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a><a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full glossy-box flex items-center justify-center text-[#229ED9] hover:scale-110 transition shadow" title="Telegram"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.941z"/></svg></a><a href="https://www.instagram.com/fashion.world_na?xtok=cDB4aDlyZ3h4eWQ2" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full glossy-box flex items-center justify-center text-[#E1306C] hover:scale-110 transition shadow" title="Instagram"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></div><button onclick="closeAboutModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl mt-2">إغلاق</button></div></div>
+<div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3"><div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs text-gray-200"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3><button onclick="closeAboutModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><p class="font-bold text-white leading-relaxed">المعقل الرئيسي لتجارة وتصنيع الألبسة بالجملة (نسواني، رجالي، ولادي، أطفال) في قلب دمشق - الحريقة.</p><button onclick="closeAboutModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl mt-2">إغلاق</button></div></div>
 
 <!-- نافذة تغيير الغلاف -->
 <div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3"><div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-yellow-400 text-sm">🖼️ تغيير صورة الغلاف الرئيسي</h3><button onclick="closeBannerModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><input id="bannerFileInput" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-xl p-2 text-gray-300"/><div class="flex gap-2"><button id="bannerSaveBtn" onclick="saveNewBanner()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">تحديث وحفظ الغلاف ✨</button><button onclick="closeBannerModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إغلاق</button></div></div></div>
 
 <!-- نافذة إضافة وتعديل الموديلات -->
-<div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4"><div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[93vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5"><h3 id="modalHeaderTitle" class="font-bold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3><button type="button" onclick="closeAddModal()" class="bg-red-900/60 hover:bg-red-700 text-white px-2.5 py-1 rounded-lg font-bold text-xs">إغلاق ✕</button></div><form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2 pl-1"><input type="hidden" id="editIndex" value="-1"/><input id="pName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="اسم الموديل (مثال: بجامة ب ب تركي نجوم)"/><div class="grid grid-cols-2 gap-2"><select id="pCat" onchange="autoSuggestWeight(this.value)" class="bg-black border border-gray-700 rounded-xl px-2 py-2 text-white"><option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option></select><div class="flex gap-1"><input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2 py-2 text-white" placeholder="السعر (مثال: 4.25)"/><select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold"><option value="USD">$</option><option value="SYP">ل.س</option></select></div></div><div class="grid grid-cols-2 gap-2"><input id="pMinQty" type="number" min="1" value="10" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="حجم السيرية (مثال: 18)"/><input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="القياسات (مثال: 1/2/3/4)"/></div><div><label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🎨 الألوان (رقم أو أسماء الألوان، مثال: 3 أو أسود، أبيض)</label><input id="pColors" type="text" class="w-full bg-black border border-yellow-500/30 rounded-xl px-3 py-2 text-white" placeholder="مثال: 3 أو أسود، أبيض، كحلي"/></div><div class="grid grid-cols-2 gap-2"><div><label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن القطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/30 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold"/></div><div><label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 حالة المستودع</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">كمية محدودة ⚠️</option><option value="PREORDER">تثبيت حجز 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div></div><div class="grid grid-cols-2 gap-2 bg-neutral-950 p-2 rounded-xl border border-yellow-500/20"><div><label class="block text-sky-300 mb-0.5 font-bold text-[9px]">👁️ المشاهدات (اختياري)</label><input id="pCustomViews" type="number" min="0" placeholder="تلقائي ذكي (متنامي)" class="w-full bg-black border border-sky-500/30 rounded-lg px-2 py-1 text-sky-300 font-bold text-xs"/></div><div><label class="block text-red-300 mb-0.5 font-bold text-[9px]">❤️ الإعجابات (اختياري)</label><input id="pCustomLikes" type="number" min="0" placeholder="تلقائي ذكي (متنامي)" class="w-full bg-black border border-red-500/30 rounded-lg px-2 py-1 text-red-300 font-bold text-xs"/></div></div><div class="grid grid-cols-2 gap-2 bg-amber-950/20 p-2 rounded-xl border border-amber-500/30"><div><label class="block text-amber-300 mb-0.5 font-bold text-[9px]">⚠️ السيريات المتبقية (تظهر بالوصف الداخلي)</label><input id="pFomoLeft" type="number" min="0" placeholder="مثال: 2 (فارغ=إخفاء)" class="w-full bg-black border border-amber-500/30 rounded-lg px-2 py-1 text-amber-300 font-bold text-xs"/></div><div><label class="block text-orange-300 mb-0.5 font-bold text-[9px]">🔥 نص الطلبات (يظهر بالوصف الداخلي)</label><input id="pFomoBooked" type="text" placeholder="مثال: تم بيع 5 سيريات" class="w-full bg-black border border-orange-500/30 rounded-lg px-2 py-1 text-orange-300 font-bold text-xs"/></div></div><div><label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🧵 نوع القماش والوصف (مثال: قماش تركي فرو مخمل نوع اول)</label><textarea id="pAdminDesc" rows="2" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white text-xs resize-none" placeholder="مثال: قماش تركي فرو مخمل نوع اول..."></textarea></div><div class="glossy-box p-2 rounded-xl space-y-2"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><input type="checkbox" id="pHasDiscount" onchange="toggleDiscountPercentInput()" class="w-4 h-4 accent-yellow-400"/><label for="pHasDiscount" class="text-yellow-400 font-bold cursor-pointer">شارة الحسم 🔥</label></div><div id="discountPercentWrapper" class="hidden flex items-center gap-1"><input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-12 bg-black border border-yellow-400 text-center text-yellow-300 font-bold rounded py-0.5"/><span class="text-red-400 font-bold">%</span></div></div><div class="flex items-center gap-1.5 border-t border-gray-800 pt-1.5"><input type="checkbox" id="pIsClearance" class="w-4 h-4 accent-red-500"/><label for="pIsClearance" class="text-red-400 font-bold cursor-pointer">⚡ إضافة إلى قسم "تصفية سريعة وعروض كبرى"</label></div></div><div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-yellow-300 font-bold mb-1">📷 الصورة الرئيسية:</label><input id="pImgFile" type="file" accept="image/*" class="w-full text-gray-300 text-[10px]"/></div><div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-yellow-300 font-bold mb-1">📸 صور إضافية (للتنقل يمين ويسار):</label><input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full text-gray-300 text-[10px]"/></div><div class="flex gap-2 pt-1"><button id="saveProductBtn" type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ ونشر الموديل ✅</button><button type="button" onclick="closeAddModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إلغاء وإغلاق</button></div></form></div></div>
+<div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4"><div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[93vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs"><div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5"><h3 id="modalHeaderTitle" class="font-bold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3><button type="button" onclick="closeAddModal()" class="bg-red-900/60 hover:bg-red-700 text-white px-2.5 py-1 rounded-lg font-bold text-xs">إغلاق ✕</button></div><form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2 pl-1"><input type="hidden" id="editIndex" value="-1"/><input id="pName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="اسم الموديل..."/><div class="grid grid-cols-2 gap-2"><select id="pCat" onchange="autoSuggestWeight(this.value)" class="bg-black border border-gray-700 rounded-xl px-2 py-2 text-white"><option value="نسواني">نسواني</option><option value="رجالي">رجالي</option><option value="ولادي">ولادي</option><option value="ب.ب">ب.ب</option></select><div class="flex gap-1"><input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2 py-2 text-white" placeholder="السعر"/><select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold"><option value="USD">$</option><option value="SYP">ل.س</option></select></div></div><div class="grid grid-cols-2 gap-2"><input id="pMinQty" type="number" min="1" value="10" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="حجم السيرية"/><input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="القياسات"/></div><div><label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🎨 الألوان</label><input id="pColors" type="text" class="w-full bg-black border border-yellow-500/30 rounded-xl px-3 py-2 text-white" placeholder="مثال: أسود، أبيض"/></div><div class="grid grid-cols-2 gap-2"><div><label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن القطعة (غرام)</label><input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/30 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold"/></div><div><label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 حالة المستودع</label><select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold"><option value="AVAILABLE">متوفر بالمستودع ✅</option><option value="LOW">كمية محدودة ⚠️</option><option value="PREORDER">تثبيت حجز 🔥</option><option value="SOLD_OUT">نفدت الكمية ❌</option></select></div></div><div><label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🧵 نوع القماش والوصف</label><textarea id="pAdminDesc" rows="2" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white text-xs resize-none" placeholder="نوع القماش..."></textarea></div><div class="bg-black/40 p-2 rounded-xl border border-gray-800"><label class="block text-yellow-300 font-bold mb-1">📷 الصورة الرئيسية:</label><input id="pImgFile" type="file" accept="image/*" class="w-full text-gray-300 text-[10px]"/></div><div class="flex gap-2 pt-1"><button id="saveProductBtn" type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ ونشر الموديل ✅</button><button type="button" onclick="closeAddModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إلغاء</button></div></form></div></div>
 
 <!-- السلة العائمة المصغرة -->
 <div id="floatingMiniCart" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-3xl hidden"><div class="glass-panel rounded-2xl p-2.5 sm:px-4 border border-yellow-500/40 shadow-2xl flex items-center justify-between gap-2 bg-neutral-950/95"><div class="flex items-center gap-2.5 min-w-0 cursor-pointer" onclick="playUiSound('tap'); openCart()"><div class="relative gold-gradient-bg w-10 h-10 rounded-xl flex items-center justify-center text-base font-black flex-shrink-0">🛒<span id="floatingCartBadge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border border-black">0</span></div><div class="min-w-0"><div class="flex items-center gap-1.5 text-xs font-bold text-white truncate"><span id="floatingCartTotal" class="text-yellow-400 font-black">$0</span><span class="text-gray-500">|</span><span id="floatingCartMeta" class="text-[10px] text-sky-300 truncate">0 سيرية (~0 كغ)</span></div><p id="floatingDiscountHint" class="text-[9.5px] text-emerald-400 font-semibold truncate">أضف موديلات بقيمة $400 للحصول على حسم جملة 2% فوراً</p></div></div><div class="flex items-center gap-1.5 flex-shrink-0"><button onclick="playUiSound('tap'); openCart()" class="gold-gradient-bg font-black px-3 py-2 rounded-xl text-[10px] sm:text-xs shadow">عرض السلة وإتمام الطلب ⬅️</button></div></div></div>
 
 <!-- درج السلة الكامل -->
-<div id="cartModal" class="fixed inset-0 bg-black/80 hidden justify-end z-50" onclick="closeCart()"><div class="glass-panel w-full max-w-md h-full p-4 flex flex-col justify-between overflow-hidden text-xs border-r border-yellow-500/30 drawer-anim" onclick="event.stopPropagation()"><div class="flex justify-between items-center border-b border-gray-800 pb-2.5"><div class="flex items-center gap-2"><h3 class="font-bold text-yellow-400 text-sm">🛒 درج طلبية الجملة الذكي</h3><button onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded border border-red-500/30 font-bold">تفريغ</button></div><button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><div id="cartItems" class="overflow-y-auto flex-1 space-y-2 my-2.5 pr-1"></div><div class="border-t border-gray-800 pt-2.5 space-y-2"><div class="glossy-box p-2 rounded-xl border border-sky-500/30 space-y-1"><p class="text-[10px] text-sky-300 font-bold">📦 حاسبة الطرد الشاملة (وزن تقريبي مع 0.5 كغ تغليف):</p><div class="grid grid-cols-3 gap-1.5 text-center text-[10px]"><div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">إجمالي القطع</span><strong id="cartSummaryPieces" class="text-white font-bold">0 قطعة</strong></div><div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">عدد السيريات</span><strong id="cartSummaryPacks" class="text-yellow-400 font-bold">0 سيرية</strong></div><div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">الوزن التقريبي</span><strong id="cartSummaryWeight" class="text-emerald-400 font-bold">0 كغ</strong></div></div></div><div class="bg-emerald-950/40 p-2 rounded-xl border border-emerald-500/40 text-[10px] text-emerald-300 font-bold flex flex-col gap-0.5"><span>🎉 عند بلوغ إجمالي فاتورتك 400$ فأكثر، سيتم البدء بحسم 2% من إجمالي الفاتورة تلقائياً!</span><span id="tierDiscountNotice" class="hidden text-yellow-300">تم تطبيق الحسم بنجاح!</span></div><div class="flex justify-between font-bold bg-black/60 p-2 rounded-xl border border-yellow-500/25"><span>الإجمالي النهائي:</span><span id="cartTotal" class="text-yellow-400">$0</span></div><div class="space-y-1.5"><input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم العميل / اسم المحل (إلزامي)..."/><input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 المحافظة والعنوان بالتفصيل / مكتب الشحن (إلزامي)..."/><input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 رقم الهاتف / واتساب للتواصل (إلزامي)..."/><textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white resize-none" placeholder="📝 ملاحظات حول الطلبية أو الألوان..."></textarea></div><div class="grid grid-cols-2 gap-1.5 pt-0.5"><button onclick="sendOrderWhatsApp()" class="bg-emerald-600 text-white font-bold py-2.5 rounded-xl">📲 إرسال عبر واتساب</button><button onclick="printWholesaleInvoice()" class="gold-gradient-bg font-bold py-2.5 rounded-xl">🖨️ طباعة فاتورة PDF</button></div></div></div></div>
+<div id="cartModal" class="fixed inset-0 bg-black/80 hidden justify-end z-50" onclick="closeCart()"><div class="glass-panel w-full max-w-md h-full p-4 flex flex-col justify-between overflow-hidden text-xs border-r border-yellow-500/30 drawer-anim" onclick="event.stopPropagation()"><div class="flex justify-between items-center border-b border-gray-800 pb-2.5"><div class="flex items-center gap-2"><h3 class="font-bold text-yellow-400 text-sm">🛒 درج طلبية الجملة الذكي</h3><button onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded border border-red-500/30 font-bold">تفريغ</button></div><button onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button></div><div id="cartItems" class="overflow-y-auto flex-1 space-y-2 my-2.5 pr-1"></div><div class="border-t border-gray-800 pt-2.5 space-y-2"><div class="glossy-box p-2 rounded-xl border border-sky-500/30 space-y-1"><p class="text-[10px] text-sky-300 font-bold">📦 حاسبة الطرد الشاملة:</p><div class="grid grid-cols-3 gap-1.5 text-center text-[10px]"><div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">إجمالي القطع</span><strong id="cartSummaryPieces" class="text-white font-bold">0 قطعة</strong></div><div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">عدد السيريات</span><strong id="cartSummaryPacks" class="text-yellow-400 font-bold">0 سيرية</strong></div><div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">الوزن التقريبي</span><strong id="cartSummaryWeight" class="text-emerald-400 font-bold">0 كغ</strong></div></div></div><div class="bg-emerald-950/40 p-2 rounded-xl border border-emerald-500/40 text-[10px] text-emerald-300 font-bold flex flex-col gap-0.5"><span>🎉 عند بلوغ إجمالي فاتورتك 400$ فأكثر، يتم حسم 2% تلقائياً!</span><span id="tierDiscountNotice" class="hidden text-yellow-300">تم تطبيق الحسم!</span></div><div class="flex justify-between font-bold bg-black/60 p-2 rounded-xl border border-yellow-500/25"><span>الإجمالي النهائي:</span><span id="cartTotal" class="text-yellow-400">$0</span></div><div class="space-y-1.5"><input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم العميل / المحل (إلزامي)..."/><input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 العنوان ومكتب الشحن (إلزامي)..."/><input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 رقم الهاتف / واتساب (إلزامي)..."/><textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white resize-none" placeholder="📝 ملاحظات..."></textarea></div><div class="grid grid-cols-2 gap-1.5 pt-0.5"><button onclick="sendOrderWhatsApp()" class="bg-emerald-600 text-white font-bold py-2.5 rounded-xl">📲 إرسال عبر واتساب</button><button onclick="printWholesaleInvoice()" class="gold-gradient-bg font-bold py-2.5 rounded-xl">🖨️ طباعة فاتورة PDF</button></div></div></div></div>
 
-<footer class="bg-black/95 border-t border-yellow-500/20 py-4 px-4 text-center text-[11px] text-gray-400 mt-4 flex flex-col sm:flex-row items-center justify-center gap-3"><p class="font-cinzel font-bold gold-gradient-text m-0">FASHION WORLD</p><a href="https://wa.me/963996311804?text=✨%20*استفسار%20ومعاينة%20واقع%20الموديلات*%20-%20*FASHION%20WORLD*%0A━━━━━━━━━━━━━━━━━━━━%0Aمرحباً%20إدارة%20*FASHION%20WORLD*%20الكرام،%0Aأود%20الاستفسار%20وطلب%20معاينة%20الواقع%20للموديلات%20المتوفرة%20قبل%20اعتماد%20الطلبية.%0A━━━━━━━━━━━━━━━━━━━━" target="_blank" rel="noopener noreferrer" class="bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg font-bold">💬 خدمة العملاء لطلب الواقع والملاحظات</a><p class="m-0 text-gray-500">دمشق - الحريقة</p></footer>
+<footer class="bg-black/95 border-t border-yellow-500/20 py-4 px-4 text-center text-[11px] text-gray-400 mt-4 flex flex-col sm:flex-row items-center justify-center gap-3"><p class="font-cinzel font-bold gold-gradient-text m-0">FASHION WORLD</p><a href="https://wa.me/963996311804?text=✨%20*استفسار%20ومعاينة%20واقع%20الموديلات*%20-%20*FASHION%20WORLD*" target="_blank" rel="noopener noreferrer" class="bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg font-bold">💬 خدمة العملاء</a><p class="m-0 text-gray-500">دمشق - الحريقة</p></footer>
 <script id="initialDataScript">window.INITIAL_STORE_STATE={updatedAt:Date.now(),exchangeRate:15000,partnerSecret:"NA.FA7411",bannerImg:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",products:[{id:101,createdAt:Date.now()-172800000,name:"بجامة ب ب تركي نجوم",category:"ب.ب",priceUsd:4.25,minQty:18,pieceWeight:150,stockStatus:"PREORDER",fomoLeft:2,fomoBooked:"تم بيع 5 سيريات",adminDesc:"قماش تركي فرو مخمل نوع اول",pack:"قياسات 1/2/3/4",colors:"3 ألوان مشكلة",isClearance:true,customViews:"",customLikes:"",ratingSum:23,ratingCount:5,comments:[{id:1,author:"محل النور",text:"بضاعة ممتازة"}],hasDiscount:true,discountPercent:20,img:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80",extras:[]}]};</script>
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";import{getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";const firebaseConfig={apiKey:"AIzaSyAa38Mjq8zFcpKNnJU7REheK_2qQ_GoXs4",authDomain:"najdt656-c4fe4.firebaseapp.com",projectId:"najdt656-c4fe4",storageBucket:"najdt656-c4fe4.firebasestorage.app",messagingSenderId:"229855614581",appId:"1:229855614581:web:e7429bb63e43fc5990ca3c"};const app=initializeApp(firebaseConfig);const auth=getAuth(app);window.checkAdminAuth=()=>!!(auth&&auth.currentUser);onAuthStateChanged(auth,(user)=>{const isAuth=!!user;window.isAdmin=isAuth;document.getElementById('adminDropdownWrapper')?.classList.toggle('hidden',!isAuth);if(!isAuth)document.getElementById('adminDropdownMenu')?.classList.add('hidden');document.getElementById('adminResetMarketerBox')?.classList.toggle('hidden',!isAuth);if(typeof window.renderProducts==='function')window.renderProducts();if(typeof window.renderMarketerDashboard==='function')window.renderMarketerDashboard();});window.handleAdminFirebaseLogin=async(e)=>{e.preventDefault();try{await signInWithEmailAndPassword(auth,document.getElementById('adminEmailInput').value.trim(),document.getElementById('adminPassInput').value);closeFirebaseLoginModal();window.playUiSound('success');window.showToast("تم تفعيل الإدارة بنجاح 👑");}catch(err){alert("بيانات الدخول غير صحيحة!");}};window.logoutAdmin=()=>{signOut(auth).then(()=>{window.isAdmin=false;document.getElementById('adminDropdownWrapper')?.classList.add('hidden');document.getElementById('adminDropdownMenu')?.classList.add('hidden');window.renderProducts();window.renderMarketerDashboard();window.showToast("تم تسجيل خروج الإدارة 🔒");});};
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";import{getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";const firebaseConfig={apiKey:"AIzaSyAa38Mjq8zFcpKNnJU7REheK_2qQ_GoXs4",authDomain:"najdt656-c4fe4.firebaseapp.com",projectId:"najdt656-c4fe4",storageBucket:"najdt656-c4fe4.firebasestorage.app",messagingSenderId:"229855614581",appId:"1:229855614581:web:e7429bb63e43fc5990ca3c"};const app=initializeApp(firebaseConfig);const auth=getAuth(app);window.checkAdminAuth=()=>!!(auth&&auth.currentUser);onAuthStateChanged(auth,(user)=>{const isAuth=!!user;window.isAdmin=isAuth;document.getElementById('adminDropdownWrapper')?.classList.toggle('hidden',!isAuth);if(!isAuth)document.getElementById('adminDropdownMenu')?.classList.add('hidden');document.getElementById('adminResetMarketerBox')?.classList.toggle('hidden',!isAuth);if(typeof window.renderProducts==='function')window.renderProducts();if(typeof window.renderMarketerDashboard==='function')window.renderMarketerDashboard();if(typeof window.renderAdminMarketersList==='function')window.renderAdminMarketersList();});window.handleAdminFirebaseLogin=async(e)=>{e.preventDefault();try{await signInWithEmailAndPassword(auth,document.getElementById('adminEmailInput').value.trim(),document.getElementById('adminPassInput').value);closeFirebaseLoginModal();window.playUiSound('success');window.showToast("تم تفعيل الإدارة بنجاح 👑");}catch(err){alert("بيانات الدخول غير صحيحة!");}};window.logoutAdmin=()=>{signOut(auth).then(()=>{window.isAdmin=false;document.getElementById('adminDropdownWrapper')?.classList.add('hidden');document.getElementById('adminDropdownMenu')?.classList.add('hidden');window.renderProducts();window.renderMarketerDashboard();window.showToast("تم تسجيل خروج الإدارة 🔒");});};
 </script>
 
 <script>
 const GITHUB_REPO='najdt656/fashion-world',DATA_FILE_PATH='store-data.json',PUBLIC_SOCIAL_API='https://kvdb.io/A6p7W8zPqR9xYv2LmN4kJc/fw_public_social_v1';
-const LS_STATE_KEY='fw_permanent_state_master',LS_TOKEN_KEY='fw_gh_token_master',LS_LIKED_KEY='fw_user_liked_master',LS_VIEWED_KEY='fw_user_viewed_master',LS_RATED_KEY='fw_user_rated_master',LS_SOCIAL_CACHE='fw_social_cache_master',LS_THEME_KEY='fw_theme_mode_master',LS_MARKETER_KEY='fw_marketer_profile_v3',LS_REFERRED_BY_KEY='fw_referred_by_code_v3',LS_CART_KEY='fw_cart_persistent_v1',LS_BUYER_KEY='fw_buyer_info_v1',LS_WISHLIST_KEY='fw_user_wishlist_v1',LS_PARTNER_AUTH_KEY='fw_partner_unlocked_v1';
+const LS_STATE_KEY='fw_permanent_state_master',LS_TOKEN_KEY='fw_gh_token_master',LS_LIKED_KEY='fw_user_liked_master',LS_VIEWED_KEY='fw_user_viewed_master',LS_RATED_KEY='fw_user_rated_master',LS_SOCIAL_CACHE='fw_social_cache_master',LS_THEME_KEY='fw_theme_mode_master',LS_MARKETER_PROFILE_KEY='fw_marketer_account_v8',LS_REFERRED_BY_KEY='fw_referred_by_code_v8',LS_CART_KEY='fw_cart_persistent_v1',LS_BUYER_KEY='fw_buyer_info_v1',LS_WISHLIST_KEY='fw_user_wishlist_v1';
 
 let audioCtx=null;
 function playUiSound(type='tap'){
@@ -204,7 +208,7 @@ function escapeHtml(str){if(!str)return'';return String(str).replace(/&/g,'&amp;
 function sanitizeImgUrl(url){if(!url)return'';const s=String(url).trim();if(s.startsWith('data:image/')||s.startsWith('https://')||s.startsWith('http://')||s.startsWith('./')||s.startsWith('/'))return s;return''}
 function isAdminVerified(){return typeof window.checkAdminAuth==='function'?window.checkAdminAuth():!!window.isAdmin}
 
-let likedProducts={},viewedProducts={},userRatings={},socialDataMap={},wishlistMap={},marketerProfile={name:'',phone:'1804',code:'1804-FW'},localUpdatedAt=window.INITIAL_STORE_STATE.updatedAt||0,exchangeRate=window.INITIAL_STORE_STATE.exchangeRate||15000,partnerSecret=window.INITIAL_STORE_STATE.partnerSecret||'NA.FA7411',bannerImg=window.INITIAL_STORE_STATE.bannerImg,products=JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products)),currencyMode='BOTH',currentCategory='ALL',searchQuery='',cart=[],secretClicks=0,isSyncingGithub=false,currentImageIndex=0,deepLinkedOpened=false;
+let likedProducts={},viewedProducts={},userRatings={},socialDataMap={},wishlistMap={},currentMarketer=null,localUpdatedAt=window.INITIAL_STORE_STATE.updatedAt||0,exchangeRate=window.INITIAL_STORE_STATE.exchangeRate||15000,partnerSecret=window.INITIAL_STORE_STATE.partnerSecret||'NA.FA7411',bannerImg=window.INITIAL_STORE_STATE.bannerImg,products=JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products)),currencyMode='BOTH',currentCategory='ALL',searchQuery='',cart=[],secretClicks=0,isSyncingGithub=false,currentImageIndex=0,deepLinkedOpened=false;
 window.currentModalProduct=null;
 
 try{
@@ -213,8 +217,8 @@ try{
   userRatings=JSON.parse(localStorage.getItem(LS_RATED_KEY)||'{}');
   socialDataMap=JSON.parse(localStorage.getItem(LS_SOCIAL_CACHE)||'{}');
   wishlistMap=JSON.parse(localStorage.getItem(LS_WISHLIST_KEY)||'{}');
-  const savedM=JSON.parse(localStorage.getItem(LS_MARKETER_KEY)||'null');
-  if(savedM&&savedM.code)marketerProfile=savedM;
+  const savedMarketer=JSON.parse(localStorage.getItem(LS_MARKETER_PROFILE_KEY)||'null');
+  if(savedMarketer&&savedMarketer.code)currentMarketer=savedMarketer;
   const savedCart=JSON.parse(localStorage.getItem(LS_CART_KEY)||'null');
   if(Array.isArray(savedCart))cart=savedCart;
 }catch(e){}
@@ -237,73 +241,58 @@ function getProductTimestamp(p){
 }
 
 function formatPublishDate(p){
-  const ts=getProductTimestamp(p);
-  const diffMs=Math.max(0,Date.now()-ts);
-  const mins=Math.floor(diffMs/60000);
-  const hours=Math.floor(diffMs/3600000);
-  const days=Math.floor(diffMs/86400000);
+  const ts=getProductTimestamp(p),diffMs=Math.max(0,Date.now()-ts),mins=Math.floor(diffMs/60000),hours=Math.floor(diffMs/3600000),days=Math.floor(diffMs/86400000);
   if(mins<2)return"🕒 نُشر للتو";
   if(mins<60)return`🕒 نُشر منذ ${mins} دقيقة`;
-  if(hours<24){
-    if(hours===1)return"🕒 نُشر منذ ساعة";
-    if(hours===2)return"🕒 نُشر منذ ساعتين";
-    return`🕒 نُشر منذ ${hours} ساعات`;
-  }
-  if(days<=7){
-    if(days===1)return"🗓️ نُشر منذ يوم واحد";
-    if(days===2)return"🗓️ نُشر منذ يومين";
-    return`🗓️ نُشر منذ ${days} أيام`;
-  }
+  if(hours<24)return`🕒 نُشر منذ ${hours} ساعات`;
+  if(days<=7)return`🗓️ نُشر منذ ${days} أيام`;
   const d=new Date(ts);
-  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
-  return`📅 تاريخ النشر: ${y}/${m}/${day}`;
+  return`📅 تاريخ النشر: ${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
 }
 
 function getConsistentSmartSocial(p){
-  const seed=Number(p.id)||12345;
-  const ts=getProductTimestamp(p);
-  const elapsedHours=Math.max(0,(Date.now()-ts)/3600000);
-  const maxViewsCap=220+((seed*13)%231);
-  const maxLikesCap=65+((seed*7)%66);
-  const viewRate=0.25+((seed*17)%25)/25;
-  const likeRate=0.07+((seed*11)%70)/70;
-  const baseViews=30+(seed%25);
-  const baseLikes=9+(seed%12);
-  const grownViews=Math.min(maxViewsCap,Math.floor(baseViews+(elapsedHours*viewRate)));
-  const grownLikes=Math.min(maxLikesCap,Math.floor(baseLikes+(elapsedHours*likeRate)));
+  const seed=Number(p.id)||12345,ts=getProductTimestamp(p),elapsedHours=Math.max(0,(Date.now()-ts)/3600000);
+  const maxViewsCap=220+((seed*13)%231),maxLikesCap=65+((seed*7)%66);
+  const viewRate=0.25+((seed*17)%25)/25,likeRate=0.07+((seed*11)%70)/70;
+  const grownViews=Math.min(maxViewsCap,Math.floor(30+(seed%25)+(elapsedHours*viewRate)));
+  const grownLikes=Math.min(maxLikesCap,Math.floor(9+(seed%12)+(elapsedHours*likeRate)));
   const manualViews=(p.customViews!==undefined&&p.customViews!==''&&!isNaN(p.customViews))?Number(p.customViews):0;
   const manualLikes=(p.customLikes!==undefined&&p.customLikes!==''&&!isNaN(p.customLikes))?Number(p.customLikes):0;
   const remote=socialDataMap[p.id]||{};
-  return{
-    views:Math.max(grownViews,manualViews,Number(remote.views)||0),
-    likes:Math.max(grownLikes,manualLikes,Number(remote.likes)||0)
-  };
+  return{views:Math.max(grownViews,manualViews,Number(remote.views)||0),likes:Math.max(grownLikes,manualLikes,Number(remote.likes)||0)};
 }
 
 function getProductShareLink(productId){
-  return `${window.location.origin}${window.location.pathname}?model=${encodeURIComponent(productId)}&k=${encodeURIComponent(marketerProfile.code)}`;
+  const code=currentMarketer?currentMarketer.code:'';
+  return `${window.location.origin}${window.location.pathname}?model=${encodeURIComponent(productId)}${code?`&k=${encodeURIComponent(code)}`:''}`;
 }
 
 function checkDeepLinkedModel(){
   if(deepLinkedOpened)return;
   try{
     const params=new URLSearchParams(window.location.search);
-    const modelId=params.get('model');
+    const modelId=params.get('model'),incomingK=params.get('k')||params.get('ref');
+    if(incomingK){
+      const cleanK=incomingK.trim().toUpperCase();
+      localStorage.setItem(LS_REFERRED_BY_KEY,cleanK);
+    }
     if(modelId){
       const found=products.find(p=>String(p.id)===String(modelId));
       if(found){
         deepLinkedOpened=true;
-        setTimeout(()=>openProductModal(found.id),250);
+        setTimeout(()=>{
+          openProductModal(found.id);
+          if(window.history&&window.history.replaceState){
+            const cleanUrl=window.location.protocol+"//"+window.location.host+window.location.pathname+(incomingK?`?k=${incomingK}`:'');
+            window.history.replaceState({path:cleanUrl},'',cleanUrl);
+          }
+        },250);
       }
     }
   }catch(e){}
 }
 
-function toggleToolsDrawer(){
-  const drawer=document.getElementById('userToolsDrawer');
-  if(drawer)drawer.classList.toggle('hidden');
-}
-
+function toggleToolsDrawer(){const drawer=document.getElementById('userToolsDrawer');if(drawer)drawer.classList.toggle('hidden')}
 function saveCartToStorage(){try{localStorage.setItem(LS_CART_KEY,JSON.stringify(cart))}catch(e){}updateCartBadges()}
 function saveBuyerInfoToStorage(){try{localStorage.setItem(LS_BUYER_KEY,JSON.stringify({name:document.getElementById('buyerName')?.value||'',address:document.getElementById('buyerAddress')?.value||'',phone:document.getElementById('buyerPhone')?.value||'',notes:document.getElementById('buyerNotes')?.value||''}))}catch(e){}}
 function loadBuyerInfoFromStorage(){try{const info=JSON.parse(localStorage.getItem(LS_BUYER_KEY)||'null');if(!info)return;if(document.getElementById('buyerName'))document.getElementById('buyerName').value=info.name||'';if(document.getElementById('buyerAddress'))document.getElementById('buyerAddress').value=info.address||'';if(document.getElementById('buyerPhone'))document.getElementById('buyerPhone').value=info.phone||'';if(document.getElementById('buyerNotes'))document.getElementById('buyerNotes').value=info.notes||''}catch(e){}}
@@ -332,8 +321,7 @@ function getFomoText(p){
 }
 
 function getColorHex(name){
-  const n=name.trim();
-  const map={'أسود':'#111111','اسود':'#111111','أبيض':'#ffffff','ابيض':'#ffffff','أحمر':'#dc2626','احمر':'#dc2626','كحلي':'#1e3a8a','أزرق':'#2563eb','ازرق':'#2563eb','أخضر':'#16a34a','اخضر':'#16a34a','زيتي':'#4d7c0f','بيج':'#d6d3d1','رمادي':'#6b7280','رصاصي':'#6b7280','بني':'#78350f','زهري':'#ec4899','وردي':'#f472b6','أصفر':'#eab308','اصفر':'#eab308','موف':'#9333ea','بنفسجي':'#7e22ce','خمري':'#7f1d1d','تركواز':'#0d9488','سماوي':'#38bdf8','برتقالي':'#ea580c','جملي':'#b45309','ذهبي':'#D4AF37','فضي':'#cbd5e1'};
+  const n=name.trim(),map={'أسود':'#111111','اسود':'#111111','أبيض':'#ffffff','ابيض':'#ffffff','أحمر':'#dc2626','احمر':'#dc2626','كحلي':'#1e3a8a','أزرق':'#2563eb','ازرق':'#2563eb','أخضر':'#16a34a','اخضر':'#16a34a','زيتي':'#4d7c0f','بيج':'#d6d3d1','رمادي':'#6b7280','رصاصي':'#6b7280','بني':'#78350f','زهري':'#ec4899','وردي':'#f472b6','أصفر':'#eab308','اصفر':'#eab308','موف':'#9333ea','بنفسجي':'#7e22ce','خمري':'#7f1d1d','تركواز':'#0d9488','سماوي':'#38bdf8','برتقالي':'#ea580c','جملي':'#b45309','ذهبي':'#D4AF37','فضي':'#cbd5e1'};
   for(const k in map){if(n.includes(k))return map[k]}
   return 'linear-gradient(135deg,#fde047,#ec4899,#3b82f6)';
 }
@@ -343,12 +331,9 @@ function renderColorPillsHtml(colorsStr,isCompact=false){
   const list=String(colorsStr).split(/[،,-]/).map(s=>s.trim()).filter(Boolean);
   if(list.length===0)return'';
   return list.map(c=>{
-    const bg=getColorHex(c);
-    const dotStyle=bg.startsWith('linear')?`background:${bg}`:`background-color:${bg}`;
-    if(isCompact){
-      return `<span class="inline-flex items-center gap-1 bg-black/70 border border-gray-700 px-1.5 py-0.5 rounded-full text-[8.5px] text-gray-200"><span class="w-2 h-2 rounded-full border border-white/40 flex-shrink-0" style="${dotStyle}"></span>${escapeHtml(c)}</span>`;
-    }
-    return `<span class="inline-flex items-center gap-1.5 bg-neutral-900 text-yellow-200 border border-yellow-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow"><span class="w-3 h-3 rounded-full border border-white/50 flex-shrink-0" style="${dotStyle}"></span>${escapeHtml(c)}</span>`;
+    const bg=getColorHex(c),dotStyle=bg.startsWith('linear')?`background:${bg}`:`background-color:${bg}`;
+    if(isCompact)return`<span class="inline-flex items-center gap-1 bg-black/70 border border-gray-700 px-1.5 py-0.5 rounded-full text-[8.5px] text-gray-200"><span class="w-2 h-2 rounded-full border border-white/40 flex-shrink-0" style="${dotStyle}"></span>${escapeHtml(c)}</span>`;
+    return`<span class="inline-flex items-center gap-1.5 bg-neutral-900 text-yellow-200 border border-yellow-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow"><span class="w-3 h-3 rounded-full border border-white/50 flex-shrink-0" style="${dotStyle}"></span>${escapeHtml(c)}</span>`;
   }).join('');
 }
 
@@ -365,8 +350,7 @@ function toggleDoubleZoom(imgEl){imgEl.classList.toggle('zoomed-img')}
 function nextZoomImage(e){
   if(e)e.stopPropagation();
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
+  const p=window.currentModalProduct,allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
   if(allImgs.length<=1)return;
   currentImageIndex=(currentImageIndex+1)%allImgs.length;
   document.getElementById('zoomModalImg').src=allImgs[currentImageIndex];
@@ -376,8 +360,7 @@ function nextZoomImage(e){
 function prevZoomImage(e){
   if(e)e.stopPropagation();
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
+  const p=window.currentModalProduct,allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
   if(allImgs.length<=1)return;
   currentImageIndex=(currentImageIndex-1+allImgs.length)%allImgs.length;
   document.getElementById('zoomModalImg').src=allImgs[currentImageIndex];
@@ -388,216 +371,224 @@ function toggleWishlistModalItem(id){
   const p=products.find(item=>item.id===id);
   if(!p)return;
   playUiSound('like');
-  if(wishlistMap[id]){
-    delete wishlistMap[id];
-    showToast("تمت الإزالة من قائمة المفضلة","error");
-  }else{
-    wishlistMap[id]=true;
-    showToast("تمت الإضافة إلى قائمة المفضلة ❤️");
-  }
+  if(wishlistMap[id]){delete wishlistMap[id];showToast("تمت الإزالة من المفضلة","error")}
+  else{wishlistMap[id]=true;showToast("تمت الإضافة إلى المفضلة ❤️")}
   try{localStorage.setItem(LS_WISHLIST_KEY,JSON.stringify(wishlistMap))}catch(e){}
   updateWishlistBadge();
   if(window.currentModalProduct?.id===id)updateModalWishlistBtn(p);
 }
 
-function updateWishlistBadge(){
-  const count=Object.keys(wishlistMap).length;
-  const b=document.getElementById('wishlistCount');
-  if(b)b.innerText=count;
-}
-
-function updateModalWishlistBtn(p){
-  const btn=document.getElementById('modalWishlistBtn');
-  if(!btn)return;
-  const isW=!!wishlistMap[p.id];
-  btn.className=`px-2 py-0.5 rounded-md text-[10px] font-bold transition ${isW?'bg-pink-900/50 text-pink-300 border border-pink-500':'bg-neutral-800 text-pink-300'}`;
-  btn.innerText=isW?'❤️ مفضل':'🤍 مفضلة';
-}
+function updateWishlistBadge(){const count=Object.keys(wishlistMap).length,b=document.getElementById('wishlistCount');if(b)b.innerText=count}
+function updateModalWishlistBtn(p){const btn=document.getElementById('modalWishlistBtn');if(!btn)return;const isW=!!wishlistMap[p.id];btn.className=`px-2 py-0.5 rounded-md text-[10px] font-bold transition ${isW?'bg-pink-900/50 text-pink-300 border border-pink-500':'bg-neutral-800 text-pink-300'}`;btn.innerText=isW?'❤️ مفضل':'🤍 مفضلة'}
 
 function openWishlistModal(){
   const container=document.getElementById('wishlistContainer');
   if(!container)return;
-  const ids=Object.keys(wishlistMap);
-  const list=products.filter(p=>ids.includes(String(p.id)));
-  if(list.length===0){
-    container.innerHTML=`<p class="text-center text-gray-400 py-6">قائمة المفضلة فارغة حالياً.</p>`;
-  }else{
-    container.innerHTML=list.map(p=>`<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2"><img src="${sanitizeImgUrl(p.img)}" class="w-10 h-10 object-cover rounded-lg border border-yellow-500/25"/><div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(p.name)}</p><p class="text-[10px] text-yellow-400">$${p.priceUsd} | سيرية: ${p.minQty||10}</p></div><button onclick="playUiSound('tap'); openProductModal(${Number(p.id)}); closeWishlistModal();" class="gold-gradient-bg font-bold px-2 py-1 rounded text-[10px]">عرض</button><button onclick="toggleWishlistModalItem(${Number(p.id)}); openWishlistModal();" class="bg-red-950/60 text-red-400 px-2 py-1 rounded text-[10px] font-bold">حذف</button></div>`).join('');
-  }
+  const ids=Object.keys(wishlistMap),list=products.filter(p=>ids.includes(String(p.id)));
+  if(list.length===0)container.innerHTML=`<p class="text-center text-gray-400 py-6">قائمة المفضلة فارغة حالياً.</p>`;
+  else container.innerHTML=list.map(p=>`<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2"><img src="${sanitizeImgUrl(p.img)}" class="w-10 h-10 object-cover rounded-lg border border-yellow-500/25"/><div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(p.name)}</p><p class="text-[10px] text-yellow-400">$${p.priceUsd} | سيرية: ${p.minQty||10}</p></div><button onclick="playUiSound('tap'); openProductModal(${Number(p.id)}); closeWishlistModal();" class="gold-gradient-bg font-bold px-2 py-1 rounded text-[10px]">عرض</button><button onclick="toggleWishlistModalItem(${Number(p.id)}); openWishlistModal();" class="bg-red-950/60 text-red-400 px-2 py-1 rounded text-[10px] font-bold">حذف</button></div>`).join('');
   toggleModal('wishlistModal',true);
 }
 function closeWishlistModal(){toggleModal('wishlistModal',false)}
 
 function downloadModalProductImage(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const imgUrl=sanitizeImgUrl(p.img);
+  const p=window.currentModalProduct,imgUrl=sanitizeImgUrl(p.img);
   if(!imgUrl)return alert("لا توجد صورة صالحة للتحميل!");
   playUiSound('success');
   const a=document.createElement('a');
-  a.href=imgUrl;
-  a.download=`FashionWorld-${p.name.replace(/\s+/g,'_')}.jpg`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  a.href=imgUrl;a.download=`FashionWorld-${p.name.replace(/\s+/g,'_')}.jpg`;
+  document.body.appendChild(a);a.click();a.remove();
   showToast("تم بدء تحميل الصورة بنجاح! 📥");
 }
 window.downloadModalProductImage=downloadModalProductImage;
 
 function copyTrendWhatsAppText(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const shareUrl=getProductShareLink(p.id);
+  const p=window.currentModalProduct,shareUrl=getProductShareLink(p.id);
   const text=`✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n   🧵 *القماش:* ${p.adminDesc||'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n   🎨 *الألوان:* ${p.colors||'متعددة'}\n📦 *السيرية:* ${p.minQty||10} مشكله الوان\n💰 *السعر:* $${p.priceUsd} او مايعادله بليرة السوري\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
-  try{
-    navigator.clipboard?navigator.clipboard.writeText(text):document.execCommand('copy');
-    playUiSound('success');
-    showToast("تم نسخ نص الترند التسويقي مع الرابط بنجاح! 🔮");
-  }catch(e){
-    alert("تعذر النسخ تلقائياً.");
-  }
+  try{navigator.clipboard?navigator.clipboard.writeText(text):document.execCommand('copy');playUiSound('success');showToast("تم نسخ نص الترند التسويقي مع الرابط بنجاح! 🔮");}catch(e){alert("تعذر النسخ تلقائياً.")}
 }
 window.copyTrendWhatsAppText=copyTrendWhatsAppText;
 
 function copyProductDetails(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const shareUrl=getProductShareLink(p.id);
+  const p=window.currentModalProduct,shareUrl=getProductShareLink(p.id);
   const text=`✨ *عرض جملة رسمي من شركة FASHION WORLD* ✨\n📍 دمشق - الحريقة\n━━━━━━━━━━━━━━━━━━━━\n👗 *الموديل:* ${p.name}\n📐 *القياسات:* ${p.pack}\n🎨 *تشكيلة الألوان:* ${p.colors||'تشكيلة متنوعة'}\n⚖️ *وزن القطعة:* ${getPieceWeightGrams(p)} غرام\n💰 *سعر الجملة:* $${p.priceUsd} للقطعة (السيرية: ${p.minQty||10} قطع)\n${p.adminDesc?`📝 *الوصف:* ${p.adminDesc}\n`:''}━━━━━━━━━━━━━━━━━━━━\n🔗 *رابط فتح الموديل مباشرة والطلب الفوري:*\n${shareUrl}`;
-  try{
-    navigator.clipboard?navigator.clipboard.writeText(text):document.execCommand('copy');
-    playUiSound('success');
-    showToast("تم نسخ تفاصيل الموديل مع الرابط المباشر! 📋✨");
-  }catch(e){
-    alert("تعذر النسخ تلقائياً.");
-  }
+  try{navigator.clipboard?navigator.clipboard.writeText(text):document.execCommand('copy');playUiSound('success');showToast("تم نسخ تفاصيل الموديل مع الرابط المباشر! 📋✨");}catch(e){alert("تعذر النسخ تلقائياً.")}
 }
 
 function sendVipRequestWhatsApp(e){
   e.preventDefault();
   playUiSound('success');
-  const merchant=document.getElementById('vipMerchantName').value.trim(),
-    cat=document.getElementById('vipCat').value,
-    qty=document.getElementById('vipQty').value,
-    phone=document.getElementById('vipPhone').value.trim(),
-    details=document.getElementById('vipDetails').value.trim(),
-    msg=`👑 *طلب تصنيع كميات خاصة (VIP)*\n🏢 *شركة FASHION WORLD - دمشق الحريقة*\n━━━━━━━━━━━━━━━━━━━━\n👤 *اسم التاجر / الشركة:* ${merchant}\n👗 *القسم المطلوب:* ${cat}\n📦 *الكمية التقديرية:* ${qty} قطعة\n📞 *رقم التواصل المعتمد:* ${phone}\n📝 *المواصفات ونوع القماش المطلوب:*\n${details}\n━━━━━━━━━━━━━━━━━━━━\nنرجو التفضل بدراسة الطلب وتأكيد إمكانية التصنيع والمدة الزمنية للتسليم.`;
-  closeVipModal();
-  window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`,'_blank');
+  const merchant=document.getElementById('vipMerchantName').value.trim(),cat=document.getElementById('vipCat').value,qty=document.getElementById('vipQty').value,phone=document.getElementById('vipPhone').value.trim(),details=document.getElementById('vipDetails').value.trim(),msg=`👑 *طلب تصنيع كميات خاصة (VIP)*\n🏢 *شركة FASHION WORLD - دمشق الحريقة*\n━━━━━━━━━━━━━━━━━━━━\n👤 *اسم التاجر / الشركة:* ${merchant}\n👗 *القسم المطلوب:* ${cat}\n📦 *الكمية التقديرية:* ${qty} قطعة\n📞 *رقم التواصل المعتمد:* ${phone}\n📝 *المواصفات ونوع القماش المطلوب:*\n${details}\n━━━━━━━━━━━━━━━━━━━━\nنرجو التفضل بدراسة الطلب وتأكيد إمكانية التصنيع والمدة الزمنية للتسليم.`;
+  closeVipModal();window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-function getCurrentPartnerSecret(){
-  return (socialDataMap&&socialDataMap._partnerSecret)?String(socialDataMap._partnerSecret):(partnerSecret||'NA.FA7411');
-}
-
-function isPartnerUnlocked(){
-  if(isAdminVerified())return true;
-  try{
-    const saved=localStorage.getItem(LS_PARTNER_AUTH_KEY);
-    return saved && saved.toUpperCase()===getCurrentPartnerSecret().toUpperCase();
-  }catch(e){return false;}
-}
+function getCurrentPartnerSecret(){return(socialDataMap&&socialDataMap._partnerSecret)?String(socialDataMap._partnerSecret):(partnerSecret||'NA.FA7411')}
 
 function openAffiliateModal(){
   playUiSound('tap');
-  if(isPartnerUnlocked()){
+  if(currentMarketer&&currentMarketer.code){
     updateAffiliateModalUI();
-    calculateDirectProfit();
     toggleModal('affiliateModal',true);
   }else{
-    const inp=document.getElementById('partnerPasscodeInput');
-    if(inp)inp.value='';
+    const inp=document.getElementById('partnerPasscodeInput');if(inp)inp.value='';
     toggleModal('partnerAuthModal',true);
   }
 }
 function closeAffiliateModal(){toggleModal('affiliateModal',false)}
 function closePartnerAuthModal(){toggleModal('partnerAuthModal',false)}
+function openAdminMarketersModal(){if(!isAdminVerified())return;renderAdminMarketersList();toggleModal('adminMarketersModal',true)}
+function closeAdminMarketersModal(){toggleModal('adminMarketersModal',false)}
 
 function verifyPartnerPasscode(e){
   e.preventDefault();
-  const entered=(document.getElementById('partnerPasscodeInput')?.value||'').trim();
-  const secret=getCurrentPartnerSecret();
-  if(entered.toUpperCase()===secret.toUpperCase()){
-    try{localStorage.setItem(LS_PARTNER_AUTH_KEY,secret);}catch(err){}
+  const entered=(document.getElementById('partnerPasscodeInput')?.value||'').trim().toUpperCase();
+  if(!entered||entered.length!==8)return alert("⚠️ يرجى إدخال كود الشريك الصحيح المكون من 8 خانات!");
+  
+  if(!socialDataMap._marketerAccounts||typeof socialDataMap._marketerAccounts!=='object')socialDataMap._marketerAccounts={};
+  const account=socialDataMap._marketerAccounts[entered];
+  if(account){
+    currentMarketer=account;
+    try{localStorage.setItem(LS_MARKETER_PROFILE_KEY,JSON.stringify(currentMarketer))}catch(err){}
     closePartnerAuthModal();
     playUiSound('success');
-    showToast("تم تفعيل حساب الشريك الخاص بك بنجاح! 🔓✨");
+    showToast(`أهلاً بك مجدداً يا ${account.name}! تم تسجيل دخولك بنجاح 🔓✨`);
     updateAffiliateModalUI();
-    calculateDirectProfit();
     toggleModal('affiliateModal',true);
   }else{
     playUiSound('tap');
-    alert("⚠️ الرمز غير صحيح! يرجى التواصل مع الإدارة عبر واتساب للحصول على الرمز الخاص بعد مراجعة الطلب.");
+    alert("⚠️ الكود غير موجود في السحاب! إذا كان كودك ضائعاً، تواصل مع إدارة المعمل عبر واتساب لتزويدك بكودك المسجل.");
   }
+}
+
+function registerNewMarketerAccount(rawName){
+  const name=rawName.trim();
+  if(!name)return alert("يرجى إدخال اسمك أو اسم المحل أولاً!");
+  const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',rand8=Array.from({length:8},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+  
+  if(!socialDataMap._marketerAccounts||typeof socialDataMap._marketerAccounts!=='object')socialDataMap._marketerAccounts={};
+  socialDataMap._marketerAccounts[rand8]={name,code:rand8,createdAt:Date.now()};
+  currentMarketer={name,code:rand8,createdAt:Date.now()};
+  
+  try{
+    localStorage.setItem(LS_MARKETER_PROFILE_KEY,JSON.stringify(currentMarketer));
+    localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap));
+  }catch(e){}
+  
+  saveAllState(true);
+  pushPublicSocialState(null);
+  updateAffiliateModalUI();
+  playUiSound('success');
+  showToast(`تم إنشاء حساب شريك جديد بنجاح! كودك هو: ${rand8} ✨`);
 }
 
 async function changePartnerSecretCode(){
   if(!isAdminVerified())return;
-  const current=getCurrentPartnerSecret();
-  const next=prompt("🔑 الرمز السري الحالي لبوابة الشركاء هو:\n( "+current+" )\n\nإذا نسيته يمكنك نسخه الآن، أو اكتب رمزاً جديداً لتغييره:",current);
+  const current=getCurrentPartnerSecret(),next=prompt("🔑 الرمز السري الحالي لبوابة الشركاء هو:\n( "+current+" )\n\nاكتب رمزاً جديداً لتغييره:",current);
   if(next!==null&&next.trim()!==''){
-    partnerSecret=next.trim();
-    socialDataMap._partnerSecret=partnerSecret;
-    try{
-      localStorage.setItem(LS_PARTNER_AUTH_KEY,partnerSecret);
-      localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap));
-    }catch(e){}
-    await saveAllState(true);
-    await pushPublicSocialState(null);
-    playUiSound('success');
-    showToast(`تم اعتماد رمز الشركاء: (${partnerSecret}) 🔑`);
+    partnerSecret=next.trim();socialDataMap._partnerSecret=partnerSecret;
+    try{localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap))}catch(e){}
+    await saveAllState(true);await pushPublicSocialState(null);
+    playUiSound('success');showToast(`تم اعتماد رمز الشركاء الجديد 🔑`);
   }
 }
 
-function initAffiliateSystem(){try{const params=new URLSearchParams(window.location.search),incoming=params.get('k')||params.get('ref');if(incoming&&incoming.trim()){const clean=incoming.trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');if(clean&&clean!==marketerProfile.code)localStorage.setItem(LS_REFERRED_BY_KEY,clean)}updateAffiliateModalUI();calculateDirectProfit()}catch(e){}}
+function initAffiliateSystem(){
+  try{
+    const params=new URLSearchParams(window.location.search),incoming=params.get('k')||params.get('ref');
+    if(incoming&&incoming.trim()){const clean=incoming.trim().toUpperCase();if(clean)localStorage.setItem(LS_REFERRED_BY_KEY,clean)}
+    if(currentMarketer&&currentMarketer.code)updateAffiliateModalUI();
+  }catch(e){}
+}
 
 function getPartnerRankInfo(confirmedSalesUsd){
   const sales=Number(confirmedSalesUsd)||0;
-  if(sales>=12000)return{title:'💎 شريك ماسي',ratePer150:7.5,progress:100,hint:'🎉 أنت في أعلى قمة شركاء النجاح (المستوى الماسي - عمولة 7.5$ لكل 150$)!'};
-  if(sales>=5000){const pct=Math.min(100,Math.round(((sales-5000)/7000)*100)),rem=Math.max(0,12000-sales).toFixed(0);return{title:'🥇 شريك ذهبي',ratePer150:6.0,progress:pct,hint:`متبقي لك $${rem} من المبيعات المؤكدة للترقية إلى المستوى الماسي 💎!`}}
+  if(sales>=12000)return{title:'💎 شريك ماسي',ratePer150:7.5,progress:100,hint:'🎉 أنت في أعلى قمة شركاء النجاح (المستوى الماسي)!'};
+  if(sales>=5000){const pct=Math.min(100,Math.round(((sales-5000)/7000)*100)),rem=Math.max(0,12000-sales).toFixed(0);return{title:'🥇 شريك ذهبي',ratePer150:6.0,progress:pct,hint:`متبقي لك $${rem} للمستوى الماسي 💎!`}}
   const pct=Math.max(8,Math.min(100,Math.round((sales/2000)*100))),rem=Math.max(0,2000-sales).toFixed(0);
-  return{title:'🥉 شريك برونزي',ratePer150:5.0,progress:pct,hint:`حقق مبيعات مؤكدة بقيمة $${rem} إضافية لإكمال المستوى البرونزي والترقية إلى الذهبي 🥇!`};
+  return{title:'🥉 شريك برونزي',ratePer150:5.0,progress:pct,hint:`متبقي لك $${rem} لإكمال المستوى البرونزي والترقية للذهبي 🥇!`};
 }
 
-function renderMarketerDashboard(){const stampBadge=document.getElementById('dashboardStampBadge');if(stampBadge)stampBadge.innerText=marketerProfile.code;const myOrders=Array.isArray(socialDataMap?._marketerOrders?.[marketerProfile.code])?socialDataMap._marketerOrders[marketerProfile.code]:[];let pendingComm=0,confirmedComm=0,confirmedSalesUsd=0;myOrders.forEach(o=>{const comm=Number(o.commissionUsd)||0;if(o.status==='CONFIRMED'){confirmedComm+=comm;confirmedSalesUsd+=(Number(o.totalUsd)||0)}else if(o.status!=='CANCELLED'){pendingComm+=comm}});if(document.getElementById('dashPendingComm'))document.getElementById('dashPendingComm').innerText=`$${pendingComm.toFixed(2)}`;if(document.getElementById('dashConfirmedComm'))document.getElementById('dashConfirmedComm').innerText=`$${confirmedComm.toFixed(2)}`;const rankInfo=getPartnerRankInfo(confirmedSalesUsd);if(document.getElementById('partnerRankBadge'))document.getElementById('partnerRankBadge').innerText=rankInfo.title;if(document.getElementById('partnerRankProgress'))document.getElementById('partnerRankProgress').style.width=`${rankInfo.progress}%`;if(document.getElementById('partnerNextRankHint'))document.getElementById('partnerNextRankHint').innerText=rankInfo.hint;const log=document.getElementById('dashOrdersLog');if(log){log.innerHTML=myOrders.length===0?`<p class="text-gray-400 text-center py-1">لا توجد عمليات مسجلة عبر كودك حتى الآن.</p>`:myOrders.slice().reverse().map(o=>{const statusBadge=o.status==='CONFIRMED'?'<span class="text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded">مؤكدة ✅</span>':(o.status==='CANCELLED'?'<span class="text-red-400 font-bold bg-red-950/60 px-1.5 py-0.5 rounded">ملغية ❌</span>':'<span class="text-yellow-400 font-bold bg-yellow-950/60 px-1.5 py-0.5 rounded">معلقة ⏳</span>');let adminActions='';if(isAdminVerified()&&o.status!=='CONFIRMED'&&o.status!=='CANCELLED'){adminActions=`<div class="flex gap-1 mt-1"><button onclick="adminUpdateOrderStatus('${escapeHtml(marketerProfile.code)}', ${Number(o.id)}, 'CONFIRMED')" class="bg-emerald-700 text-white text-[9px] px-2 py-0.5 rounded font-bold">اعتماد ✅</button><button onclick="adminUpdateOrderStatus('${escapeHtml(marketerProfile.code)}', ${Number(o.id)}, 'CANCELLED')" class="bg-red-700 text-white text-[9px] px-2 py-0.5 rounded font-bold">إلغاء ❌</button></div>`}return`<div class="bg-black/85 p-2 rounded border border-gray-800 space-y-1"><div class="flex justify-between items-center"><span>📅 ${escapeHtml(o.date)} (${Number(o.pieces)||0} ق)</span><div class="flex items-center gap-1.5"><span class="text-sky-300 font-bold">+$${Number(o.commissionUsd).toFixed(2)}</span>${statusBadge}</div></div>${adminActions}</div>`}).join('')}}
+function renderMarketerDashboard(){
+  if(!currentMarketer||!currentMarketer.code)return;
+  const stampBadge=document.getElementById('dashboardStampBadge');if(stampBadge)stampBadge.innerText=currentMarketer.code;
+  const myOrders=Array.isArray(socialDataMap?._marketerOrders?.[currentMarketer.code])?socialDataMap._marketerOrders[currentMarketer.code]:[];
+  let pendingComm=0,confirmedComm=0,confirmedSalesUsd=0;
+  myOrders.forEach(o=>{const comm=Number(o.commissionUsd)||0;if(o.status==='CONFIRMED'){confirmedComm+=comm;confirmedSalesUsd+=(Number(o.totalUsd)||0)}else if(o.status!=='CANCELLED'){pendingComm+=comm}});
+  if(document.getElementById('dashPendingComm'))document.getElementById('dashPendingComm').innerText=`$${pendingComm.toFixed(2)}`;
+  if(document.getElementById('dashConfirmedComm'))document.getElementById('dashConfirmedComm').innerText=`$${confirmedComm.toFixed(2)}`;
+  const rankInfo=getPartnerRankInfo(confirmedSalesUsd);
+  if(document.getElementById('partnerRankBadge'))document.getElementById('partnerRankBadge').innerText=rankInfo.title;
+  if(document.getElementById('partnerRankProgress'))document.getElementById('partnerRankProgress').style.width=`${rankInfo.progress}%`;
+  if(document.getElementById('partnerNextRankHint'))document.getElementById('partnerNextRankHint').innerText=rankInfo.hint;
+  const log=document.getElementById('dashOrdersLog');
+  if(log){
+    log.innerHTML=myOrders.length===0?`<p class="text-gray-400 text-center py-1">لا توجد عمليات مسجلة عبر كودك حتى الآن.</p>`:myOrders.slice().reverse().map(o=>{
+      const statusBadge=o.status==='CONFIRMED'?'<span class="text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded">مؤكدة ✅</span>':(o.status==='CANCELLED'?'<span class="text-red-400 font-bold bg-red-950/60 px-1.5 py-0.5 rounded">ملغية ❌</span>':'<span class="text-yellow-400 font-bold bg-yellow-950/60 px-1.5 py-0.5 rounded">معلقة ⏳</span>');
+      return`<div class="bg-black/85 p-2 rounded border border-gray-800 flex justify-between items-center"><span>📅 ${escapeHtml(o.date)} (${Number(o.pieces)||0} ق)</span><div class="flex items-center gap-1.5"><span class="text-sky-300 font-bold">+$${Number(o.commissionUsd).toFixed(2)}</span>${statusBadge}</div></div>`;
+    }).join('');
+  }
+}
 window.renderMarketerDashboard=renderMarketerDashboard;
 
-async function recordMarketerOrderInCloud(stampCode,totalUsd,commissionUsd,totalPieces){if(!stampCode)return;try{if(!socialDataMap._marketerOrders||typeof socialDataMap._marketerOrders!=='object')socialDataMap._marketerOrders={};if(!Array.isArray(socialDataMap._marketerOrders[stampCode]))socialDataMap._marketerOrders[stampCode]=[];const nowMs=Date.now();if(socialDataMap._marketerOrders[stampCode].some(o=>(nowMs-(o.id||0))<60000&&o.totalUsd===Number(totalUsd)))return;const d=new Date();socialDataMap._marketerOrders[stampCode].push({id:nowMs,date:`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`,totalUsd:Number(totalUsd)||0,commissionUsd:Number(commissionUsd)||0,pieces:Number(totalPieces)||0,status:'PENDING'});localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap));await pushPublicSocialState(null);renderMarketerDashboard()}catch(e){}}
-async function adminUpdateOrderStatus(stampCode,orderId,newStatus){if(!isAdminVerified())return alert("صلاحية الإدارة مطلوبة!");try{if(socialDataMap?._marketerOrders?.[stampCode]){const ord=socialDataMap._marketerOrders[stampCode].find(o=>o.id===orderId);if(ord){ord.status=newStatus;localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap));await pushPublicSocialState(null);renderMarketerDashboard();showToast(newStatus==='CONFIRMED'?"تم اعتماد الطلبية وتثبيت الأرباح بنجاح ✅":"تم إلغاء الطلبية ❌",newStatus==='CONFIRMED'?'success':'error')}}}catch(e){}}
-window.adminUpdateOrderStatus=adminUpdateOrderStatus;
-async function adminClearMarketerOrders(){if(!isAdminVerified())return;if(confirm(`تصفير سجل عمليات الكود (${marketerProfile.code})؟`)){if(socialDataMap?._marketerOrders){socialDataMap._marketerOrders[marketerProfile.code]=[];localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap));await pushPublicSocialState(null);renderMarketerDashboard();showToast("تم تصفير السجل بنجاح ✅")}}}
+function renderAdminMarketersList(){
+  const container=document.getElementById('adminMarketersListContainer');
+  if(!container)return;
+  const accounts=socialDataMap._marketerAccounts||{};
+  const keys=Object.keys(accounts);
+  if(keys.length===0){
+    container.innerHTML=`<p class="text-center text-gray-400 py-6">لا يوجد شركاء مسجلون حتى الآن.</p>`;
+    return;
+  }
+  container.innerHTML=keys.map(code=>{
+    const acc=accounts[code];
+    const myOrders=socialDataMap?._marketerOrders?.[code]||[];
+    let totalSales=0,confComm=0;
+    myOrders.forEach(o=>{if(o.status==='CONFIRMED'){totalSales+=(Number(o.totalUsd)||0);confComm+=(Number(o.commissionUsd)||0)}});
+    return`<div class="glossy-box p-2.5 rounded-xl border border-purple-500/30 flex justify-between items-center gap-2"><div><p class="font-bold text-white text-xs">👤 ${escapeHtml(acc.name)}</p><p class="text-[10px] text-yellow-400 font-mono">🔑 الكود: ${code}</p><p class="text-[9.5px] text-emerald-300">مبيعات مؤكدة: $${totalSales} | أرباح: $${confComm.toFixed(2)}</p></div><button onclick="copyAdminGiveCode('${code}')" class="bg-purple-700 text-white font-bold px-2 py-1 rounded text-[10px]">نسخ الكود 📋</button></div>`;
+  }).join('');
+}
+window.renderAdminMarketersList=renderAdminMarketersList;
+function copyAdminGiveCode(code){try{navigator.clipboard?navigator.clipboard.writeText(code):document.execCommand('copy');showToast(`تم نسخ الكود: ${code} 📋`);}catch(e){alert("الكود هو: "+code);}}
 
-function generateSecureMarketerProfile(){
-  const rawName=document.getElementById('marketerNameInput')?.value.trim()||'PRO';
-  const eng=rawName.replace(/[^a-zA-Z]/g,'').toUpperCase();
-  const prefix=eng.length>=2?eng.slice(0,2):'FW';
-  const randomSuffix=Math.floor(1000+Math.random()*9000);
-  const uniqueCode=`${randomSuffix}-${prefix}`;
-  marketerProfile={name:rawName,phone:randomSuffix.toString(),code:uniqueCode};
-  try{localStorage.setItem(LS_MARKETER_KEY,JSON.stringify(marketerProfile))}catch(e){}
-  updateAffiliateModalUI();playUiSound('success');showToast(`تم توليد كود خاص فريد وآمن: (${uniqueCode}) ✨`);
+async function recordMarketerOrderInCloud(stampCode,totalUsd,commissionUsd,totalPieces){
+  if(!stampCode)return;
+  try{
+    if(!socialDataMap._marketerOrders||typeof socialDataMap._marketerOrders!=='object')socialDataMap._marketerOrders={};
+    if(!Array.isArray(socialDataMap._marketerOrders[stampCode]))socialDataMap._marketerOrders[stampCode]=[];
+    const nowMs=Date.now();
+    if(socialDataMap._marketerOrders[stampCode].some(o=>(nowMs-(o.id||0))<60000&&o.totalUsd===Number(totalUsd)))return;
+    const d=new Date();
+    socialDataMap._marketerOrders[stampCode].push({id:nowMs,date:`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`,totalUsd:Number(totalUsd)||0,commissionUsd:Number(commissionUsd)||0,pieces:Number(totalPieces)||0,status:'PENDING'});
+    localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap));
+    await pushPublicSocialState(null);
+    renderMarketerDashboard();
+  }catch(e){}
 }
 
-function updateAffiliateModalUI(){if(document.getElementById('myAffiliateCode'))document.getElementById('myAffiliateCode').innerText=marketerProfile.code;if(document.getElementById('marketerNameInput')&&marketerProfile.name)document.getElementById('marketerNameInput').value=marketerProfile.name;if(document.getElementById('affiliateLinkInput'))document.getElementById('affiliateLinkInput').value=`${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(marketerProfile.code)}`;renderMarketerDashboard()}
+function updateAffiliateModalUI(){
+  if(!currentMarketer)return;
+  if(document.getElementById('myAffiliateCode'))document.getElementById('myAffiliateCode').innerText=currentMarketer.code;
+  if(document.getElementById('affiliateLinkInput'))document.getElementById('affiliateLinkInput').value=`${window.location.origin}${window.location.pathname}?k=${encodeURIComponent(currentMarketer.code)}`;
+  renderMarketerDashboard();
+}
 function copyAffiliateLink(){const linkEl=document.getElementById('affiliateLinkInput');if(!linkEl)return;linkEl.select();linkEl.setSelectionRange(0,99999);try{navigator.clipboard?navigator.clipboard.writeText(linkEl.value):document.execCommand('copy')}catch(e){}playUiSound('success');showToast("تم نسخ رابطك الخاص! 📋")}
-function calculateDirectProfit(){const directSales=parseFloat(document.getElementById('calcDirectSales')?.value)||0,totalUsd=Math.round(((directSales/150)*5)*100)/100,resEl=document.getElementById('calcProfitResult');if(resEl)resEl.innerText=`$${totalUsd.toLocaleString('en-US')} / شهرياً`}
 
 function requestWithdrawalWhatsApp(){
   playUiSound('success');
-  const receiver=document.getElementById('payoutReceiverName')?.value.trim(),
-    city=document.getElementById('payoutCity')?.value.trim(),
-    accountInfo=document.getElementById('payoutAccountInfo')?.value.trim();
+  const receiver=document.getElementById('payoutReceiverName')?.value.trim(),city=document.getElementById('payoutCity')?.value.trim(),accountInfo=document.getElementById('payoutAccountInfo')?.value.trim();
   if(!receiver||!city||!accountInfo)return alert("يرجى إدخال اسم المستلم، العنوان، وبيانات الحوالة أو الشام كاش أولاً!");
-  const myOrders=socialDataMap?._marketerOrders?.[marketerProfile.code]||[];
-  let confComm=0;
-  myOrders.forEach(o=>{if(o.status==='CONFIRMED')confComm+=Number(o.commissionUsd)||0});
-  const msg=`💳 *طلب صرف مستحقات برنامج شركاء النجاح*\n🏢 *شركة FASHION WORLD - دمشق الحريقة*\n━━━━━━━━━━━━━━━━━━━━\n👤 *اسم الشريك المعتمد:* ${marketerProfile.name||receiver}\n🔑 *كود التوثيق الفرعي:* ${marketerProfile.code}\n💰 *الرصيد المؤكد المطلوب صرفه:* $${confComm.toFixed(2)}\n━━━━━━━━━━━━━━━━━━━━\n📥 *اسم المستلم الثلاثي:* ${receiver}\n📍 *المحافظة ورقم الهاتف:* ${city}\n📱 *بيانات التحويل (شام كاش / حوالة):* ${accountInfo}\n━━━━━━━━━━━━━━━━━━━━\nنرجو التفضل بمراجعة الرصيد وتحويل المستحقات، ولكم جزيل الشكر.`;
+  const myOrders=socialDataMap?._marketerOrders?.[currentMarketer.code]||[];
+  let confComm=0;myOrders.forEach(o=>{if(o.status==='CONFIRMED')confComm+=Number(o.commissionUsd)||0});
+  const msg=`💳 *طلب صرف مستحقات برنامج شركاء النجاح*\n🏢 *شركة FASHION WORLD - دمشق الحريقة*\n━━━━━━━━━━━━━━━━━━━━\n👤 *اسم الشريك:* ${currentMarketer.name}\n🔑 *الكود الفرعي:* ${currentMarketer.code}\n💰 *الرصيد المطلوب صرفه:* $${confComm.toFixed(2)}\n━━━━━━━━━━━━━━━━━━━━\n📥 *المستلم:* ${receiver}\n📍 *العنوان والهاتف:* ${city}\n📱 *بيانات التحويل:* ${accountInfo}`;
   window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`,'_blank');
   showToast("تم تجهيز طلب السحب الرسمي وإرساله للإدارة ✅");
 }
 
 function applySavedTheme(){const isLight=localStorage.getItem(LS_THEME_KEY)==='LIGHT';document.getElementById('mainBody')?.classList.toggle('light-mode',isLight);const btn=document.getElementById('themeToggleBtn');if(btn)btn.innerText=isLight?'☀️':'🌙'}
-function toggleThemeMode(){const body=document.getElementById('mainBody'),isLight=!body.classList.contains('light-mode');body.classList.toggle('light-mode',isLight);localStorage.setItem(LS_THEME_KEY,isLight?'LIGHT':'DARK');const btn=document.getElementById('themeToggleBtn');if(btn)btn.innerText=isLight?'☀️':'🌙';showToast(isLight?"وضع الإضاءة النهارية ☀️":"وضع الإضاءة الليلية 🌙")}
+function toggleThemeMode(){const body=document.getElementById('mainBody'),isLight=!body.classList.contains('light-mode');body.classList.toggle('light-mode',isLight);localStorage.setItem(LS_THEME_KEY,isLight?'LIGHT':'DARK');const btn=document.getElementById('themeToggleBtn');if(btn)btn.innerText=isLight?'☀️':'🌙';showToast(isLight?"وضع النهار ☀️":"وضع الليل 🌙")}
 function toggleAdminMenu(){if(!isAdminVerified())return;document.getElementById('adminDropdownMenu')?.classList.toggle('hidden')}
 function handleSearch(val){searchQuery=val.trim().toLowerCase();document.getElementById('clearSearchBtn')?.classList.toggle('hidden',searchQuery.length===0);renderProducts()}
 function clearSearch(){document.getElementById('searchInput').value='';handleSearch('')}
@@ -606,8 +597,8 @@ function applySocialMapToProducts(){products.forEach(p=>{const smart=getConsiste
 function updateSocialEntryFromProduct(p,deletedCommentId=null){const ex=socialDataMap[p.id]||{},delSet=new Set(ex.deletedCommentIds||[]);if(deletedCommentId)delSet.add(deletedCommentId);socialDataMap[p.id]={views:Number(p.views)||0,likes:Math.max(0,Number(p.likes)||0),ratingSum:Math.max(0,Number(p.ratingSum)||0),ratingCount:Math.max(0,Number(p.ratingCount)||0),comments:(p.comments||[]).filter(c=>c&&!delSet.has(c.id)),deletedCommentIds:Array.from(delSet),updatedAt:Date.now()};try{localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap))}catch(e){}}
 function updateCountersInPlace(){products.forEach(p=>{const smart=getConsistentSmartSocial(p),vEl=document.getElementById(`card-views-${p.id}`),rEl=document.getElementById(`card-rating-${p.id}`),lEl=document.getElementById(`card-like-btn-${p.id}`),isLiked=!!likedProducts[p.id];if(vEl)vEl.innerText=`👁️ ${smart.views}`;if(rEl)rEl.innerText=`⭐ ${getProductRatingLabel(p)} (${(p.comments||[]).length}💬)`;if(lEl){lEl.className=`${isLiked?'bg-red-900/40 border border-red-500 text-red-300':'bg-neutral-800 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition`;lEl.innerHTML=`${isLiked?'❤️':'🤍'} ${p.likes||smart.likes}`}})}
 
-async function fetchPublicSocialState(){try{const res=await fetch(`${PUBLIC_SOCIAL_API}?t=${Date.now()}`,{cache:'no-store'});if(!res.ok)return;const rem=await res.json();if(rem&&typeof rem==='object'){Object.keys(rem).forEach(id=>{if(id==='_marketerOrders'){if(!socialDataMap._marketerOrders)socialDataMap._marketerOrders={};Object.keys(rem._marketerOrders||{}).forEach(code=>{const map=new Map();(socialDataMap._marketerOrders[code]||[]).forEach(i=>i?.id&&map.set(i.id,i));(rem._marketerOrders[code]||[]).forEach(i=>i?.id&&map.set(i.id,i));socialDataMap._marketerOrders[code]=Array.from(map.values())})}else if(id==='_partnerSecret'){socialDataMap._partnerSecret=rem._partnerSecret;partnerSecret=rem._partnerSecret;}else socialDataMap[id]=rem[id]});try{localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap))}catch(e){}applySocialMapToProducts();updateCountersInPlace();renderMarketerDashboard();if(window.currentModalProduct){const up=products.find(i=>i.id===window.currentModalProduct.id);if(up){window.currentModalProduct=up;updateModalHeaderSocial(up);renderModalStars(up);renderComments(up)}}}}catch(e){}}
-async function pushPublicSocialState(p,deletedCommentId=null){if(p)updateSocialEntryFromProduct(p,deletedCommentId);try{const getRes=await fetch(`${PUBLIC_SOCIAL_API}?t=${Date.now()}`,{cache:'no-store'});if(getRes.ok){const rem=await getRes.json();if(rem&&typeof rem==='object'){Object.keys(rem).forEach(id=>{if(id==='_marketerOrders'&&!socialDataMap._marketerOrders)socialDataMap._marketerOrders=rem._marketerOrders;else if(id==='_partnerSecret'&&!socialDataMap._partnerSecret)socialDataMap._partnerSecret=rem._partnerSecret;else if(id!=='_marketerOrders'&&id!=='_partnerSecret'&&!socialDataMap[id])socialDataMap[id]=rem[id]})}}}catch(e){}try{await fetch(PUBLIC_SOCIAL_API,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(socialDataMap)})}catch(e){}}
+async function fetchPublicSocialState(){try{const res=await fetch(`${PUBLIC_SOCIAL_API}?t=${Date.now()}`,{cache:'no-store'});if(!res.ok)return;const rem=await res.json();if(rem&&typeof rem==='object'){Object.keys(rem).forEach(id=>{if(id==='_marketerOrders'){if(!socialDataMap._marketerOrders)socialDataMap._marketerOrders={};Object.keys(rem._marketerOrders||{}).forEach(code=>{const map=new Map();(socialDataMap._marketerOrders[code]||[]).forEach(i=>i?.id&&map.set(i.id,i));(rem._marketerOrders[code]||[]).forEach(i=>i?.id&&map.set(i.id,i));socialDataMap._marketerOrders[code]=Array.from(map.values())})}else if(id==='_marketerAccounts'){if(!socialDataMap._marketerAccounts)socialDataMap._marketerAccounts={};Object.assign(socialDataMap._marketerAccounts,rem._marketerAccounts)}else if(id==='_partnerSecret'){socialDataMap._partnerSecret=rem._partnerSecret;partnerSecret=rem._partnerSecret;}else socialDataMap[id]=rem[id]});try{localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap))}catch(e){}applySocialMapToProducts();updateCountersInPlace();renderMarketerDashboard();renderAdminMarketersList();}}catch(e){}}
+async function pushPublicSocialState(p,deletedCommentId=null){if(p)updateSocialEntryFromProduct(p,deletedCommentId);try{const getRes=await fetch(`${PUBLIC_SOCIAL_API}?t=${Date.now()}`,{cache:'no-store'});if(getRes.ok){const rem=await getRes.json();if(rem&&typeof rem==='object'){Object.keys(rem).forEach(id=>{if(id==='_marketerOrders'&&!socialDataMap._marketerOrders)socialDataMap._marketerOrders=rem._marketerOrders;else if(id==='_marketerAccounts'&&!socialDataMap._marketerAccounts)socialDataMap._marketerAccounts=rem._marketerAccounts;else if(id==='_partnerSecret'&&!socialDataMap._partnerSecret)socialDataMap._partnerSecret=rem._partnerSecret;else if(!['_marketerOrders','_marketerAccounts','_partnerSecret'].includes(id)&&!socialDataMap[id])socialDataMap[id]=rem[id]})}}}catch(e){}try{await fetch(PUBLIC_SOCIAL_API,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(socialDataMap)})}catch(e){}}
 function compressImageFile(file,maxWidth=480,quality=0.52){return new Promise(resolve=>{if(!file)return resolve(null);const reader=new FileReader();reader.onload=ev=>{const img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');let w=img.width,h=img.height;if(w>maxWidth){h=Math.round((h*maxWidth)/w);w=maxWidth}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality))}catch(err){resolve(null)}};img.onerror=()=>resolve(null);img.src=ev.target.result};reader.onerror=()=>resolve(null);reader.readAsDataURL(file)})}
 function parseCleanNumber(val){if(!val)return 0;const str=String(val).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/,/g,'.').replace(/[^0-9.]/g,'');return parseFloat(str)||0}
 
@@ -615,13 +606,7 @@ async function initApp(){
   applySavedTheme();initAffiliateSystem();loadBuyerInfoFromStorage();updateWishlistBadge();
   try{
     const localRaw=localStorage.getItem(LS_STATE_KEY);
-    if(localRaw){
-      const lp=JSON.parse(localRaw);
-      if(Array.isArray(lp.products)&&lp.products.length>0){products=lp.products;localUpdatedAt=Number(lp.updatedAt)||0}
-      if(lp.exchangeRate)exchangeRate=Number(lp.exchangeRate);
-      if(lp.partnerSecret)partnerSecret=String(lp.partnerSecret);
-      if(lp.bannerImg)bannerImg=lp.bannerImg;
-    }
+    if(localRaw){const lp=JSON.parse(localRaw);if(Array.isArray(lp.products)&&lp.products.length>0){products=lp.products;localUpdatedAt=Number(lp.updatedAt)||0}if(lp.exchangeRate)exchangeRate=Number(lp.exchangeRate);if(lp.partnerSecret)partnerSecret=String(lp.partnerSecret);if(lp.bannerImg)bannerImg=lp.bannerImg}
   }catch(e){}
   applySocialMapToProducts();applyBanner();renderProducts();updateCartBadges();checkDeepLinkedModel();
   try{
@@ -629,13 +614,7 @@ async function initApp(){
     if(res.ok){
       const cloud=await res.json();
       if(cloud&&Array.isArray(cloud.products)&&cloud.products.length>0){
-        if((Number(cloud.updatedAt)||0)>=localUpdatedAt){
-          products=cloud.products;
-          if(cloud.exchangeRate)exchangeRate=Number(cloud.exchangeRate);
-          if(cloud.partnerSecret)partnerSecret=String(cloud.partnerSecret);
-          if(cloud.bannerImg)bannerImg=cloud.bannerImg;
-          localUpdatedAt=Number(cloud.updatedAt)||Date.now();
-        }
+        if((Number(cloud.updatedAt)||0)>=localUpdatedAt){products=cloud.products;if(cloud.exchangeRate)exchangeRate=Number(cloud.exchangeRate);if(cloud.partnerSecret)partnerSecret=String(cloud.partnerSecret);if(cloud.bannerImg)bannerImg=cloud.bannerImg;localUpdatedAt=Number(cloud.updatedAt)||Date.now()}
         applySocialMapToProducts();await saveAllState(false);applyBanner();renderProducts();updateCartBadges();checkDeepLinkedModel();
       }
     }
@@ -646,7 +625,7 @@ async function initApp(){
 async function saveAllState(autoCloudSync=true,changedProduct=null,deletedCommentId=null){localUpdatedAt=Date.now();if(changedProduct)await pushPublicSocialState(changedProduct,deletedCommentId);const payload={updatedAt:localUpdatedAt,exchangeRate,partnerSecret,bannerImg,products};try{localStorage.setItem(LS_STATE_KEY,JSON.stringify(payload))}catch(e){}const ghToken=localStorage.getItem(LS_TOKEN_KEY);if(autoCloudSync&&ghToken&&isAdminVerified())syncToGithubSilent(payload,ghToken)}
 async function syncToGithubSilent(payload,ghToken){if(isSyncingGithub)return;isSyncingGithub=true;try{const apiUrl=`https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`;let sha=null;const getRes=await fetch(apiUrl,{headers:{'Authorization':`token ${ghToken}`,'Accept':'application/vnd.github.v3+json'}});if(getRes.ok)sha=(await getRes.json()).sha;const contentBase64=btoa(unescape(encodeURIComponent(JSON.stringify(payload)))),bodyObj={message:"Auto sync store state",content:contentBase64};if(sha)bodyObj.sha=sha;await fetch(apiUrl,{method:'PUT',headers:{'Authorization':`token ${ghToken}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(bodyObj)})}catch(e){}finally{isSyncingGithub=false}}
 async function saveCloudToken(){if(!isAdminVerified())return;const token=document.getElementById('ghTokenInput').value.trim();if(!token)return alert("يرجى لصق المفتاح أولاً!");localStorage.setItem(LS_TOKEN_KEY,token);closeCloudSetupModal();await saveAllState(true);playUiSound('success');showToast("تم تفعيل المزامنة بنجاح! ✨")}
-function clearCloudToken(){localStorage.removeItem(LS_TOKEN_KEY);document.getElementById('ghTokenInput').value='';closeCloudSetupModal();showToast("تم مسح مفتاح التوكن من هذا المتصفح بنجاح 🔒","error")}
+function clearCloudToken(){localStorage.removeItem(LS_TOKEN_KEY);document.getElementById('ghTokenInput').value='';closeCloudSetupModal();showToast("تم مسح مفتاح التوكن 🔒","error")}
 function applyBanner(){const el=document.getElementById('bannerSection');if(el)el.style.backgroundImage=`linear-gradient(to bottom, rgba(6,6,6,0.75), rgba(6,6,6,0.92)), url('${sanitizeImgUrl(bannerImg)}')`}
 function formatPrice(p){const numUsd=Math.round((Number(p.priceUsd)||0)*100)/100,syp=Math.round(numUsd*exchangeRate).toLocaleString('en-US');if(p.hasDiscount&&p.discountPercent>0){const oldUsd=Math.round((numUsd/(1-(Number(p.discountPercent)||15)/100))*100)/100,oldSyp=Math.round(oldUsd*exchangeRate).toLocaleString('en-US');if(currencyMode==='USD')return`<div class="flex items-center gap-1.5"><span class="text-gray-400 line-through text-[10px]">$${oldUsd}</span><span class="text-red-500 font-bold text-xs sm:text-sm">$${numUsd}</span></div>`;if(currencyMode==='SYP')return`<div class="flex items-center gap-1.5"><span class="text-gray-400 line-through text-[10px]">${oldSyp}</span><span class="text-red-500 font-bold text-[11px] sm:text-xs">${syp} ل.س</span></div>`;return`<div class="flex flex-col leading-tight"><div class="flex items-center gap-1.5"><span class="text-gray-400 line-through text-[9px]">$${oldUsd}</span><span class="text-red-500 font-bold text-xs">$${numUsd}</span></div><span class="text-red-500 font-bold text-[9px] sm:text-[10px]">${syp} ل.س</span></div>`}if(currencyMode==='USD')return`<span class="text-yellow-400 font-bold text-xs sm:text-sm">$${numUsd} <span class="text-[9px] text-gray-400">/قطعة</span></span>`;if(currencyMode==='SYP')return`<span class="text-emerald-400 font-bold text-[11px] sm:text-xs">${syp} ل.س</span>`;return`<div class="flex flex-col leading-tight"><span class="text-yellow-400 font-bold text-xs sm:text-sm">$${numUsd} <span class="text-[8px] text-gray-400">/قطعة</span></span><span class="text-emerald-400 font-bold text-[9px] sm:text-[10px]">${syp} ل.س</span></div>`}
 function getProductRatingLabel(p){const c=Number(p.ratingCount)||0,s=Number(p.ratingSum)||0;if(c<=0||s<=0)return'4.8';return Math.min(5,Math.max(1,s/c)).toFixed(1)}
@@ -655,215 +634,104 @@ function toggleDiscountPercentInput(){document.getElementById('discountPercentWr
 
 function renderProducts(){
   const rateFormatted=exchangeRate.toLocaleString('en-US');
-  if(document.getElementById('heroRate'))document.getElementById('heroRate').innerText=rateFormatted;
-  if(document.getElementById('adminRateDisplay'))document.getElementById('adminRateDisplay').innerText=rateFormatted;
   if(document.getElementById('headerRateDesktop'))document.getElementById('headerRateDesktop').innerText=rateFormatted;
-  
+  if(document.getElementById('adminRateDisplay'))document.getElementById('adminRateDisplay').innerText=rateFormatted;
   document.querySelectorAll('.cat-btn').forEach(btn=>{
     const cAttr=btn.getAttribute('data-cat');
-    if(cAttr===currentCategory){
-      btn.className=cAttr==='CLEARANCE'?"cat-btn flex-shrink-0 bg-red-600 text-white font-bold px-3 py-1 rounded-lg text-[11px] shadow":"cat-btn flex-shrink-0 gold-gradient-bg font-bold px-3 py-1 rounded-lg text-[11px] shadow";
-    }else{
-      btn.className=cAttr==='CLEARANCE'?"cat-btn flex-shrink-0 bg-red-950/80 text-red-300 border border-red-500/50 font-bold px-3 py-1 rounded-lg text-[11px] transition":"cat-btn flex-shrink-0 glossy-box text-gray-300 hover:border-yellow-400 font-bold px-3 py-1 rounded-lg text-[11px] transition";
-    }
+    if(cAttr===currentCategory)btn.className=cAttr==='CLEARANCE'?"cat-btn flex-shrink-0 bg-red-600 text-white font-bold px-3 py-1 rounded-lg text-[11px] shadow":"cat-btn flex-shrink-0 gold-gradient-bg font-bold px-3 py-1 rounded-lg text-[11px] shadow";
+    else btn.className=cAttr==='CLEARANCE'?"cat-btn flex-shrink-0 bg-red-950/80 text-red-300 border border-red-500/50 font-bold px-3 py-1 rounded-lg text-[11px] transition":"cat-btn flex-shrink-0 glossy-box text-gray-300 hover:border-yellow-400 font-bold px-3 py-1 rounded-lg text-[11px] transition";
   });
-
-  const grid=document.getElementById('productsGrid');
-  if(!grid)return;
-  
+  const grid=document.getElementById('productsGrid');if(!grid)return;
   let list=products;
-  if(currentCategory==='TREND'){
-    list=[...products].sort((a,b)=>(getConsistentSmartSocial(b).views+getConsistentSmartSocial(b).likes*3)-(getConsistentSmartSocial(a).views+getConsistentSmartSocial(a).likes*3));
-  }else if(currentCategory==='CLEARANCE'){
-    list=products.filter(p=>p.isClearance||p.hasDiscount||(Number(p.fomoLeft)>0&&Number(p.fomoLeft)<=3)||p.stockStatus==='LOW');
-  }else if(currentCategory!=='ALL'){
-    list=products.filter(p=>p.category===currentCategory);
-  }
-
-  if(searchQuery){
-    list=list.filter(p=>(p.name&&p.name.toLowerCase().includes(searchQuery))||(p.category&&p.category.toLowerCase().includes(searchQuery))||(p.pack&&p.pack.toLowerCase().includes(searchQuery))||(p.colors&&p.colors.toLowerCase().includes(searchQuery)));
-  }
-
-  if(list.length===0){
-    grid.innerHTML=`<div class="col-span-full text-center py-10 text-gray-400 text-xs glass-panel rounded-2xl">لا توجد موديلات مطابقة حالياً في هذا القسم.</div>`;
-    return;
-  }
-
+  if(currentCategory==='TREND')list=[...products].sort((a,b)=>(getConsistentSmartSocial(b).views+getConsistentSmartSocial(b).likes*3)-(getConsistentSmartSocial(a).views+getConsistentSmartSocial(a).likes*3));
+  else if(currentCategory==='CLEARANCE')list=products.filter(p=>p.isClearance||p.hasDiscount||(Number(p.fomoLeft)>0&&Number(p.fomoLeft)<=3)||p.stockStatus==='LOW');
+  else if(currentCategory!=='ALL')list=products.filter(p=>p.category===currentCategory);
+  if(searchQuery)list=list.filter(p=>(p.name&&p.name.toLowerCase().includes(searchQuery))||(p.category&&p.category.toLowerCase().includes(searchQuery))||(p.pack&&p.pack.toLowerCase().includes(searchQuery))||(p.colors&&p.colors.toLowerCase().includes(searchQuery)));
+  if(list.length===0){grid.innerHTML=`<div class="col-span-full text-center py-10 text-gray-400 text-xs glass-panel rounded-2xl">لا توجد موديلات مطابقة حالياً.</div>`;return}
   const adminActive=isAdminVerified();
   grid.innerHTML=list.map(p=>{
     const smart=getConsistentSmartSocial(p),isLiked=!!likedProducts[p.id],minQty=p.minQty||10,avgRating=getProductRatingLabel(p),commentsCount=(p.comments||[]).length,discountText=getDiscountBadgeText(p),stockBadge=getStockBadgeInfo(p),colorsPills=renderColorPillsHtml(p.colors,true),pubTime=formatPublishDate(p);
-    return`<div class="card-luxury rounded-2xl overflow-hidden flex flex-col"><div class="relative h-44 sm:h-56 overflow-hidden bg-neutral-950 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})"><img src="${sanitizeImgUrl(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500"/><div class="watermark-logo"><span class="text-[8.5px] font-cinzel font-bold text-yellow-400 drop-shadow-md">FASHION WORLD</span></div><span class="absolute top-2 right-2 gold-gradient-bg font-bold text-[9px] px-2 py-0.5 rounded-full shadow z-20">${escapeHtml(p.category)}</span>${p.hasDiscount?`<span class="absolute top-7 right-2 badge-glass discount-flash text-white font-black">${discountText}</span>`:''}${stockBadge?`<span class="absolute ${p.hasDiscount?'top-12':'top-7'} right-2 badge-glass ${stockBadge.className} discount-flash font-bold text-white">${escapeHtml(stockBadge.text)}</span>`:''}<div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/85 backdrop-blur-sm px-2 py-1 rounded-lg text-[8px] sm:text-[9.5px] border border-yellow-500/20 z-20"><span id="card-views-${p.id}" class="text-sky-300 font-bold">👁️ ${smart.views}</span><span id="card-rating-${p.id}" class="text-yellow-400 font-bold">⭐ ${avgRating} (${commentsCount}💬)</span><span class="text-emerald-400 font-bold">سيرية:${minQty}</span></div></div><div class="p-2.5 sm:p-3 flex-1 flex flex-col justify-between space-y-1.5"><div><div class="flex justify-between items-center gap-1 mb-0.5"><h3 class="font-bold text-white text-[11px] sm:text-xs cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})">${escapeHtml(p.name)}</h3></div><p class="text-[9px] text-gray-400 font-semibold mb-0.5">${escapeHtml(pubTime)}</p><p class="text-[10px] text-gray-300 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>${colorsPills?`<div class="flex items-center gap-1 flex-wrap mt-1">${colorsPills}</div>`:''}</div><div class="flex items-center justify-between border-t border-gray-800/80 pt-1">${formatPrice(p)}<button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${Number(p.id)})" class="${isLiked?'bg-red-900/40 border border-red-500 text-red-300':'bg-neutral-800 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">${isLiked?'❤️':'🤍'} ${p.likes||smart.likes}</button></div><div class="flex items-center gap-1 pt-0.5"><button onclick="playUiSound('tap'); openProductModal(${Number(p.id)})" class="flex-1 gold-gradient-bg font-bold py-1.5 px-2 rounded-lg text-[10px] shadow truncate">${p.stockStatus==='SOLD_OUT'?'👁️ التفاصيل':'🛒 إضافة إلى السلة'}</button>${adminActive?`<button onclick="playUiSound('tap'); toggleQuickClearance(${Number(p.id)})" title="تفعيل/إلغاء التصفية السريعة" class="${p.isClearance?'bg-red-600 text-white':'bg-neutral-800 text-gray-300'} w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">⚡</button><button onclick="playUiSound('tap'); editProduct(${Number(p.id)})" class="bg-blue-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">✏️</button><button onclick="playUiSound('tap'); deleteProduct(${Number(p.id)})" class="bg-red-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">🗑️</button>`:''}</div></div></div>`}).join('')}
+    return`<div class="card-luxury rounded-2xl overflow-hidden flex flex-col"><div class="relative h-44 sm:h-56 overflow-hidden bg-neutral-950 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})"><img src="${sanitizeImgUrl(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500"/><div class="watermark-logo"><span class="text-[8.5px] font-cinzel font-bold text-yellow-400 drop-shadow-md">FASHION WORLD</span></div><span class="absolute top-2 right-2 gold-gradient-bg font-bold text-[9px] px-2 py-0.5 rounded-full shadow z-20">${escapeHtml(p.category)}</span>${p.hasDiscount?`<span class="absolute top-7 right-2 badge-glass discount-flash text-white font-black">${discountText}</span>`:''}${stockBadge?`<span class="absolute ${p.hasDiscount?'top-12':'top-7'} right-2 badge-glass ${stockBadge.className} discount-flash font-bold text-white">${escapeHtml(stockBadge.text)}</span>`:''}<div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/85 backdrop-blur-sm px-2 py-1 rounded-lg text-[8px] sm:text-[9.5px] border border-yellow-500/20 z-20"><span id="card-views-${p.id}" class="text-sky-300 font-bold">👁️ ${smart.views}</span><span id="card-rating-${p.id}" class="text-yellow-400 font-bold">⭐ ${avgRating} (${commentsCount}💬)</span><span class="text-emerald-400 font-bold">سيرية:${minQty}</span></div></div><div class="p-2.5 sm:p-3 flex-1 flex flex-col justify-between space-y-1.5"><div><h3 class="font-bold text-white text-[11px] sm:text-xs cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})">${escapeHtml(p.name)}</h3><p class="text-[9px] text-gray-400 font-semibold mb-0.5">${escapeHtml(pubTime)}</p><p class="text-[10px] text-gray-300 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>${colorsPills?`<div class="flex items-center gap-1 flex-wrap mt-1">${colorsPills}</div>`:''}</div><div class="flex items-center justify-between border-t border-gray-800/80 pt-1">${formatPrice(p)}<button id="card-like-btn-${p.id}" onclick="toggleLikeProduct(event, ${Number(p.id)})" class="${isLiked?'bg-red-900/40 border border-red-500 text-red-300':'bg-neutral-800 text-gray-300 border border-gray-700'} text-[10px] px-2 py-0.5 rounded-lg font-bold transition">${isLiked?'❤️':'🤍'} ${p.likes||smart.likes}</button></div><div class="flex items-center gap-1 pt-0.5"><button onclick="playUiSound('tap'); openProductModal(${Number(p.id)})" class="flex-1 gold-gradient-bg font-bold py-1.5 px-2 rounded-lg text-[10px] shadow truncate">🛒 إضافة للسلة</button>${adminActive?`<button onclick="playUiSound('tap'); editProduct(${Number(p.id)})" class="bg-blue-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">✏️</button><button onclick="playUiSound('tap'); deleteProduct(${Number(p.id)})" class="bg-red-700 text-white w-7 h-7 rounded-lg text-[10px] flex items-center justify-center shadow">🗑️</button>`:''}</div></div></div>`}).join('')}
 window.renderProducts=renderProducts;
 
-async function toggleQuickClearance(id){
-  if(!isAdminVerified())return;
-  const p=products.find(item=>item.id===id);
-  if(!p)return;
-  p.isClearance=!p.isClearance;
-  renderProducts();
-  await saveAllState(true,p);
-  showToast(p.isClearance?"تمت إضافة الموديل لقسم التصفية السريعة ⚡":"تمت إزالة الموديل من التصفية السريعة");
-}
-
-function updateModalHeaderSocial(p){const smart=getConsistentSmartSocial(p);if(document.getElementById('modalViews'))document.getElementById('modalViews').innerText=`👁️ ${smart.views}`;const likeBtn=document.getElementById('modalLikeBtn'),isLiked=!!likedProducts[p.id];if(likeBtn){likeBtn.className=`${isLiked?'bg-red-900/40 border border-red-500 text-red-300':'bg-neutral-800 text-gray-300 border border-gray-700'} px-2 py-0.5 rounded-md text-[10px] font-bold transition`;likeBtn.innerHTML=`${isLiked?'❤️ معجب':'🤍 إعجاب'} (${p.likes||smart.likes})`}}
-
 async function openProductModal(id){
-  const p=products.find(item=>item.id===id);
-  if(!p)return;
-  window.currentModalProduct=p;
-  currentImageIndex=0;
-  if(!viewedProducts[id]){
-    p.views=(Number(p.views)||0)+1;
-    viewedProducts[id]=true;
-    try{localStorage.setItem(LS_VIEWED_KEY,JSON.stringify(viewedProducts))}catch(e){}
-    updateCountersInPlace();
-    saveAllState(false,p);
-  }
+  const p=products.find(item=>item.id===id);if(!p)return;
+  window.currentModalProduct=p;currentImageIndex=0;
+  if(!viewedProducts[id]){p.views=(Number(p.views)||0)+1;viewedProducts[id]=true;try{localStorage.setItem(LS_VIEWED_KEY,JSON.stringify(viewedProducts))}catch(e){}updateCountersInPlace();saveAllState(false,p)}
   document.getElementById('modalTitle').innerText=p.name;
-  const pubEl=document.getElementById('modalPublishTime');
-  if(pubEl)pubEl.innerText=formatPublishDate(p);
+  const pubEl=document.getElementById('modalPublishTime');if(pubEl)pubEl.innerText=formatPublishDate(p);
   updateModalImageDisplay();
   document.getElementById('modalCategory').innerText=`قسم: ${p.category}`;
-  updateModalHeaderSocial(p);
-  updateModalWishlistBtn(p);
+  updateModalHeaderSocial(p);updateModalWishlistBtn(p);
   document.getElementById('modalPack').innerText=`📐 القياسات والتفاصيل: ${p.pack}`;
-
   const colorsContainer=document.getElementById('modalColorsContainer'),colorsWrapper=document.getElementById('modalColorCircles');
-  if(p.colors&&p.colors.trim()){
-    colorsContainer.innerHTML=renderColorPillsHtml(p.colors,false);
-    colorsWrapper.classList.remove('hidden');
-  }else{
-    colorsWrapper.classList.add('hidden');
-  }
-
-  document.getElementById('modalWeightInfo').innerText=`⚖️ وزن القطعة الواحدة: ${getPieceWeightGrams(p)} غرام`;
-  
+  if(p.colors&&p.colors.trim()){colorsContainer.innerHTML=renderColorPillsHtml(p.colors,false);colorsWrapper.classList.remove('hidden')}else colorsWrapper.classList.add('hidden');
+  document.getElementById('modalWeightInfo').innerText=`⚖️ وزن القطعة: ${getPieceWeightGrams(p)} غرام`;
   const fomoEl=document.getElementById('modalFomoBanner'),fomoTxt=getFomoText(p);
-  if(fomoEl){
-    if(fomoTxt){fomoEl.innerText=fomoTxt;fomoEl.classList.remove('hidden')}
-    else fomoEl.classList.add('hidden');
-  }
-
+  if(fomoEl){if(fomoTxt){fomoEl.innerText=fomoTxt;fomoEl.classList.remove('hidden')}else fomoEl.classList.add('hidden')}
   const descEl=document.getElementById('modalAdminDesc');
-  if(descEl){
-    const descLines=[];
-    if(p.adminDesc&&p.adminDesc.trim())descLines.push(`📝 القماش والوصف: ${p.adminDesc.trim()}`);
-    if(fomoTxt)descLines.push(`📦 حالة السيريات والطلبات: ${fomoTxt}`);
-    if(descLines.length>0){
-      descEl.innerText=descLines.join('\n');
-      descEl.classList.remove('hidden');
-    }else{
-      descEl.classList.add('hidden');
-    }
-  }
-
+  if(descEl){const descLines=[];if(p.adminDesc&&p.adminDesc.trim())descLines.push(`📝 القماش والوصف: ${p.adminDesc.trim()}`);if(fomoTxt)descLines.push(`📦 الحالة: ${fomoTxt}`);if(descLines.length>0){descEl.innerText=descLines.join('\n');descEl.classList.remove('hidden')}else descEl.classList.add('hidden')}
   const wholesaleUsd=Math.round((Number(p.priceUsd)||0)*100)/100,retailSuggestionUsd=Math.round((wholesaleUsd*1.4)*100)/100,expectedProfitUsd=Math.round((retailSuggestionUsd-wholesaleUsd)*100)/100;
-  document.getElementById('modalRetailSuggestion').innerText=`💡 سعر الجملة عليك: $${wholesaleUsd} | السعر المقترح للمفرق: $${retailSuggestionUsd} | ربحك المتوقع للقطعة: $${expectedProfitUsd}`;
-  
-  const badge=document.getElementById('modalDiscountBadge');
-  if(p.hasDiscount){badge.innerText=getDiscountBadgeText(p);badge.classList.remove('hidden')}else badge.classList.add('hidden');
-  
+  document.getElementById('modalRetailSuggestion').innerText=`💡 سعر الجملة: $${wholesaleUsd} | المقترح للمفرق: $${retailSuggestionUsd} | ربحك المتوقع: $${expectedProfitUsd}`;
+  const badge=document.getElementById('modalDiscountBadge');if(p.hasDiscount){badge.innerText=getDiscountBadgeText(p);badge.classList.remove('hidden')}else badge.classList.add('hidden');
   const stockBadgeEl=document.getElementById('modalStockBadge'),stockInfo=getStockBadgeInfo(p);
   if(stockInfo){stockBadgeEl.innerText=stockInfo.text;stockBadgeEl.className=`badge-glass ${stockInfo.className} discount-flash font-bold text-white`;stockBadgeEl.classList.remove('hidden')}else stockBadgeEl.classList.add('hidden');
-  
-  document.getElementById('modalAddToCartBtn').innerText=p.stockStatus==='SOLD_OUT'?'🔥 حجز مسبق للدفعة القادمة':'🛒 إضافة إلى السلة';
-  
+  document.getElementById('modalAddToCartBtn').innerText=p.stockStatus==='SOLD_OUT'?'🔥 حجز مسبق':'🛒 إضافة إلى السلة';
   const minQty=p.minQty||10;
-  document.getElementById('modalMinNotice').innerText=`حجم السيرية: ${minQty} قطع (النقر يغير بنصف سيرية)`;
-  document.getElementById('modalQtyInput').value=minQty;
-  document.getElementById('modalQtyInput').min=minQty;
+  document.getElementById('modalMinNotice').innerText=`حجم السيرية: ${minQty} قطع`;
+  document.getElementById('modalQtyInput').value=minQty;document.getElementById('modalQtyInput').min=minQty;
   document.getElementById('modalPriceContainer').innerHTML=formatPrice(p);
-  calculateModalTotal();
-  renderModalStars(p);
-  renderComments(p);
-
+  calculateModalTotal();renderModalStars(p);renderComments(p);
   const allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
-  document.getElementById('modalThumbs').innerHTML=allImgs.map((src, idx)=>`<img src="${src}" onclick="playUiSound('tap'); currentImageIndex=${idx}; updateModalImageDisplay();" class="w-11 h-11 object-cover rounded-lg border border-yellow-500/30 cursor-pointer flex-shrink-0"/>`).join('');
+  document.getElementById('modalThumbs').innerHTML=allImgs.map((src,idx)=>`<img src="${src}" onclick="playUiSound('tap'); currentImageIndex=${idx}; updateModalImageDisplay();" class="w-11 h-11 object-cover rounded-lg border border-yellow-500/30 cursor-pointer flex-shrink-0"/>`).join('');
   toggleModal('productModal',true);
 }
 
 function updateModalImageDisplay(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
+  const p=window.currentModalProduct,allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
   if(allImgs.length===0)return;
   if(currentImageIndex<0)currentImageIndex=allImgs.length-1;
   if(currentImageIndex>=allImgs.length)currentImageIndex=0;
   document.getElementById('modalMainImg').src=allImgs[currentImageIndex];
 }
 
-function nextImage(e){
-  if(e)e.stopPropagation();
-  if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
-  if(allImgs.length<=1)return;
-  currentImageIndex=(currentImageIndex+1)%allImgs.length;
-  updateModalImageDisplay();
-  playUiSound('tap');
-}
-
-function prevImage(e){
-  if(e)e.stopPropagation();
-  if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);
-  if(allImgs.length<=1)return;
-  currentImageIndex=(currentImageIndex-1+allImgs.length)%allImgs.length;
-  updateModalImageDisplay();
-  playUiSound('tap');
-}
+function nextImage(e){if(e)e.stopPropagation();if(!window.currentModalProduct)return;const p=window.currentModalProduct,allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);if(allImgs.length<=1)return;currentImageIndex=(currentImageIndex+1)%allImgs.length;updateModalImageDisplay();playUiSound('tap')}
+function prevImage(e){if(e)e.stopPropagation();if(!window.currentModalProduct)return;const p=window.currentModalProduct,allImgs=[p.img,...(p.extras||[])].map(sanitizeImgUrl).filter(Boolean);if(allImgs.length<=1)return;currentImageIndex=(currentImageIndex-1+allImgs.length)%allImgs.length;updateModalImageDisplay();playUiSound('tap')}
 
 function closeProductModal(){toggleModal('productModal',false);window.currentModalProduct=null}
+function updateModalHeaderSocial(p){const smart=getConsistentSmartSocial(p);if(document.getElementById('modalViews'))document.getElementById('modalViews').innerText=`👁️ ${smart.views}`;const likeBtn=document.getElementById('modalLikeBtn'),isLiked=!!likedProducts[p.id];if(likeBtn){likeBtn.className=`${isLiked?'bg-red-900/40 border border-red-500 text-red-300':'bg-neutral-800 text-gray-300 border border-gray-700'} px-2 py-0.5 rounded-md text-[10px] font-bold transition`;likeBtn.innerHTML=`${isLiked?'❤️ معجب':'🤍 إعجاب'} (${p.likes||smart.likes})`}}
 function renderModalStars(p){const myRating=userRatings[p.id]||0,count=Number(p.ratingCount)||0,sum=Number(p.ratingSum)||0,activeStars=myRating>0?myRating:(count>0?Math.min(5,Math.max(1,Math.round(sum/count))):5);let html='';for(let i=1;i<=5;i++)html+=`<span onclick="rateProduct(${Number(p.id)}, ${i})" class="${i<=activeStars?'text-yellow-400':'text-gray-600'} text-base select-none">★</span>`;html+=`<span class="text-[10px] text-gray-300 mr-1 font-bold">${count>0?`${Math.min(5,Math.max(1,sum/count)).toFixed(1)}/5 (${count})`:'4.8/5'}</span>`;document.getElementById('modalStarsContainer').innerHTML=html}
-async function rateProduct(productId,stars){const p=products.find(item=>item.id===productId);if(!p)return;playUiSound('like');const cleanStars=Math.min(5,Math.max(1,Number(stars)||5));p.ratingCount=Math.max(0,Number(p.ratingCount)||0);p.ratingSum=Math.max(0,Number(p.ratingSum)||0);const prev=Number(userRatings[productId])||0;if(prev>0){p.ratingSum=Math.max(0,(p.ratingSum-prev)+cleanStars);if(p.ratingCount===0)p.ratingCount=1}else{p.ratingSum+=cleanStars;p.ratingCount+=1}userRatings[productId]=cleanStars;try{localStorage.setItem(LS_RATED_KEY,JSON.stringify(userRatings))}catch(e){}renderModalStars(p);updateCountersInPlace();showToast(`شكراً لتقييمك! (${cleanStars} نجوم) ⭐`);await saveAllState(true,p)}
-function renderComments(p){const list=document.getElementById('commentsList'),comments=p.comments||[];if(comments.length===0){list.innerHTML=`<p class="text-gray-400 text-[10px]">لا توجد ملاحظات أو طلبات واقع بعد.</p>`;return}const adminActive=isAdminVerified();list.innerHTML=comments.map(c=>`<div class="flex justify-between items-center bg-black/60 p-1.5 rounded-lg border border-yellow-500/15 text-[10px]"><div><span class="text-yellow-400 font-bold">${escapeHtml(c.author)}:</span><span class="text-gray-200 mr-1">${escapeHtml(c.text)}</span></div>${adminActive?`<button onclick="deleteComment(${Number(p.id)},${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1 py-0.5 bg-red-950/40 rounded">🗑️</button>`:''}</div>`).join('')}
+async function rateProduct(productId,stars){const p=products.find(item=>item.id===productId);if(!p)return;playUiSound('like');const cleanStars=Math.min(5,Math.max(1,Number(stars)||5));p.ratingCount=Math.max(0,Number(p.ratingCount)||0);p.ratingSum=Math.max(0,Number(p.ratingSum)||0);const prev=Number(userRatings[productId])||0;if(prev>0){p.ratingSum=Math.max(0,(p.ratingSum-prev)+cleanStars);if(p.ratingCount===0)p.ratingCount=1}else{p.ratingSum+=cleanStars;p.ratingCount+=1}userRatings[productId]=cleanStars;try{localStorage.setItem(LS_RATED_KEY,JSON.stringify(userRatings))}catch(e){}renderModalStars(p);updateCountersInPlace();showToast(`شكراً لتقييمك! ⭐`);await saveAllState(true,p)}
+function renderComments(p){const list=document.getElementById('commentsList'),comments=p.comments||[];if(comments.length===0){list.innerHTML=`<p class="text-gray-400 text-[10px]">لا توجد ملاحظات.</p>`;return}const adminActive=isAdminVerified();list.innerHTML=comments.map(c=>`<div class="flex justify-between items-center bg-black/60 p-1.5 rounded-lg border border-yellow-500/15 text-[10px]"><div><span class="text-yellow-400 font-bold">${escapeHtml(c.author)}:</span><span class="text-gray-200 mr-1">${escapeHtml(c.text)}</span></div>${adminActive?`<button onclick="deleteComment(${Number(p.id)},${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1 py-0.5 bg-red-950/40 rounded">🗑️</button>`:''}</div>`).join('')}
 window.renderComments=renderComments;
-async function addComment(){if(!window.currentModalProduct)return;const author=escapeHtml(document.getElementById('commentAuthor').value.trim()||"تاجر معتمد"),text=escapeHtml(document.getElementById('commentText').value.trim());if(!text)return alert("يرجى كتابة ملاحظتك أو طلبك حول الواقع أولاً!");playUiSound('cart');if(!Array.isArray(window.currentModalProduct.comments))window.currentModalProduct.comments=[];window.currentModalProduct.comments.push({id:Date.now(),author,text});document.getElementById('commentText').value='';renderComments(window.currentModalProduct);updateCountersInPlace();showToast("تم إرسال الملاحظة بنجاح 💬✨");await saveAllState(true,window.currentModalProduct)}
+async function addComment(){if(!window.currentModalProduct)return;const author=escapeHtml(document.getElementById('commentAuthor').value.trim()||"تاجر معتمد"),text=escapeHtml(document.getElementById('commentText').value.trim());if(!text)return alert("يرجى كتابة الملاحظة!");playUiSound('cart');if(!Array.isArray(window.currentModalProduct.comments))window.currentModalProduct.comments=[];window.currentModalProduct.comments.push({id:Date.now(),author,text});document.getElementById('commentText').value='';renderComments(window.currentModalProduct);updateCountersInPlace();showToast("تم إرسال الملاحظة 💬✨");await saveAllState(true,window.currentModalProduct)}
 async function deleteComment(productId,commentId){if(!isAdminVerified())return;const p=products.find(item=>item.id===productId);if(!p||!p.comments)return;p.comments=p.comments.filter(c=>c.id!==commentId);renderComments(p);updateCountersInPlace();showToast("تم حذف الملاحظة","error");await saveAllState(true,p,commentId)}
 
 function adjustModalQtyByHalf(dir){
-  const input=document.getElementById('modalQtyInput');
-  const minQty=window.currentModalProduct?(window.currentModalProduct.minQty||10):10;
-  const halfStep=Math.max(1, Math.round(minQty / 2));
-  let current=parseInt(input.value)||minQty;
-  current+=(dir*halfStep);
-  if(current<halfStep)current=halfStep;
-  input.value=current;
-  calculateModalTotal();
+  const input=document.getElementById('modalQtyInput'),minQty=window.currentModalProduct?(window.currentModalProduct.minQty||10):10,halfStep=Math.max(1,Math.round(minQty/2));
+  let current=parseInt(input.value)||minQty;current+=(dir*halfStep);if(current<halfStep)current=halfStep;input.value=current;calculateModalTotal();
 }
-
-function adjustModalQty(delta){const input=document.getElementById('modalQtyInput'),minQty=window.currentModalProduct?(window.currentModalProduct.minQty||10):10;input.value=Math.max(minQty,(parseInt(input.value)||minQty)+delta);calculateModalTotal()}
 function calculateModalTotal(){if(!window.currentModalProduct)return;const minQty=window.currentModalProduct.minQty||10,qty=Math.max(minQty,parseInt(document.getElementById('modalQtyInput').value)||minQty),subUsd=Math.round(window.currentModalProduct.priceUsd*qty*100)/100,subSyp=Math.round(subUsd*exchangeRate).toLocaleString('en-US');document.getElementById('modalSubtotal').innerText=`$${subUsd} (${subSyp} ل.س)`;const packs=Math.max(1,(qty/minQty).toFixed(1)),weightKg=((qty*getPieceWeightGrams(window.currentModalProduct))/1000).toFixed(2);document.getElementById('modalPackAndWeight').innerText=`${packs} سيرية | ~${weightKg} كغ`}
-function updateCartBadges(){const m=getCartSmartMetrics(),b=document.getElementById('cartCount');if(b)b.innerText=m.totalPieces;const floatBar=document.getElementById('floatingMiniCart');if(!floatBar)return;if(m.totalPieces<=0){floatBar.classList.add('hidden')}else{floatBar.classList.remove('hidden');if(document.getElementById('floatingCartBadge'))document.getElementById('floatingCartBadge').innerText=m.totalPieces;if(document.getElementById('floatingCartTotal'))document.getElementById('floatingCartTotal').innerText=`$${m.totalUsd}`;if(document.getElementById('floatingCartMeta'))document.getElementById('floatingCartMeta').innerText=`${m.totalPacks} سيرية (~${m.totalWeightKg} كغ)`;const hintEl=document.getElementById('floatingDiscountHint'),tierNote=document.getElementById('tierDiscountNotice');if(hintEl&&tierNote){if(m.rawTotalUsd>=400){hintEl.innerText=`🎉 تم تفعيل حسم 2% تلقائياً (وفرت $${m.discountUsd})!`;tierNote.classList.remove('hidden');}else{const rem=Math.max(0,400-m.rawTotalUsd).toFixed(0);hintEl.innerText=`أضف بقيمة $${rem} إضافية لتحصل على حسم جملة 2% تلقائياً!`;tierNote.classList.add('hidden');}}}}
-function addCustomQtyToCart(){if(!window.currentModalProduct)return;const minQty=window.currentModalProduct.minQty||10,qty=parseInt(document.getElementById('modalQtyInput').value);if(isNaN(qty)||qty<1)return alert(`الكمية غير صحيحة.`);playUiSound('cart');const ex=cart.find(c=>c.id===window.currentModalProduct.id);if(ex)ex.qty+=qty;else cart.push({...window.currentModalProduct,qty});saveCartToStorage();closeProductModal();openCart();showToast(`تمت إضافة ${qty} قطعة إلى السلة 🛒✨`)}
+function updateCartBadges(){const m=getCartSmartMetrics(),b=document.getElementById('cartCount');if(b)b.innerText=m.totalPieces;const floatBar=document.getElementById('floatingMiniCart');if(!floatBar)return;if(m.totalPieces<=0)floatBar.classList.add('hidden');else{floatBar.classList.remove('hidden');if(document.getElementById('floatingCartBadge'))document.getElementById('floatingCartBadge').innerText=m.totalPieces;if(document.getElementById('floatingCartTotal'))document.getElementById('floatingCartTotal').innerText=`$${m.totalUsd}`;if(document.getElementById('floatingCartMeta'))document.getElementById('floatingCartMeta').innerText=`${m.totalPacks} سيرية (~${m.totalWeightKg} كغ)`}}
+function addCustomQtyToCart(){if(!window.currentModalProduct)return;const minQty=window.currentModalProduct.minQty||10,qty=parseInt(document.getElementById('modalQtyInput').value);if(isNaN(qty)||qty<1)return alert(`الكمية غير صحيحة.`);playUiSound('cart');const ex=cart.find(c=>c.id===window.currentModalProduct.id);if(ex)ex.qty+=qty;else cart.push({...window.currentModalProduct,qty});saveCartToStorage();closeProductModal();openCart();showToast(`تمت الإضافة إلى السلة 🛒✨`)}
 function adjustCartItemQty(id,delta){const item=cart.find(c=>c.id===id);if(!item)return;item.qty=Math.max(1,item.qty+delta);saveCartToStorage();openCart()}
 
 function shareProductWhatsApp(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct,
-    shareUrl=getProductShareLink(p.id),
-    msg=`✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n   🧵 *القماش:* ${p.adminDesc||'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n   🎨 *الألوان:* ${p.colors||'متعددة'}\n📦 *السيرية:* ${p.minQty||10} مشكله الوان\n💰 *السعر:* $${p.priceUsd} او مايعادله بليرة السوري\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
+  const p=window.currentModalProduct,shareUrl=getProductShareLink(p.id);
+  const msg=`✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n   🧵 *القماش:* ${p.adminDesc||'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n   🎨 *الألوان:* ${p.colors||'متعددة'}\n📦 *السيرية:* ${p.minQty||10} مشكله الوان\n💰 *السعر:* $${p.priceUsd} او مايعادله بليرة السوري\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
-
 function shareProductFacebook(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct;
-  const shareUrl=getProductShareLink(p.id);
-  const postText=`✨ أحدث موديلات الجملة من شركة FASHION WORLD (دمشق - الحريقة)\n👗 الموديل: ${p.name}\n📐 القياسات: ${p.pack}\n🎨 الألوان: ${p.colors||'تشكيلة متنوعة'}\n💰 سعر الجملة: $${p.priceUsd} للقطعة\n🔗 افتح الموديل مباشرة عبر الرابط:\n${shareUrl}`;
-  try{if(navigator.clipboard)navigator.clipboard.writeText(postText);}catch(e){}
-  playUiSound('success');
-  showToast("تم نسخ تفاصيل الموديل والرابط المباشر! 📘✨");
-  const fbUrl=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-  window.open(fbUrl,'_blank','width=600,height=400');
+  const p=window.currentModalProduct,shareUrl=getProductShareLink(p.id);
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,'_blank','width=600,height=400');
 }
-
 function reserveProductWhatsApp(){
   if(!window.currentModalProduct)return;
-  const p=window.currentModalProduct,
-    shareUrl=getProductShareLink(p.id),
-    msg=`🔒 *طلب تثبيت حجز موديل جملة*\n🏢 *شركة FASHION WORLD - دمشق الحريقة*\n━━━━━━━━━━━━━━━━━━━━\n👗 *اسم الموديل:* ${p.name}\n📐 *القياسات:* ${p.pack}\n🎨 *الألوان:* ${p.colors||'حسب المتوفر'}\n💰 *سعر الجملة:* $${p.priceUsd} للقطعة (حجم السيرية: ${p.minQty||10} قطع)\n🔗 *رابط الموديل:* ${shareUrl}\n━━━━━━━━━━━━━━━━━━━━\nيرجى التفضل بتثبيت حجز هذا الموديل وتأكيد توافر الكمية المطلوبة، ولكم جزيل الشكر.`;
+  const p=window.currentModalProduct,shareUrl=getProductShareLink(p.id);
+  const msg=`🔒 *طلب تثبيت حجز موديل جملة*\n🏢 *FASHION WORLD*\n👗 *الموديل:* ${p.name}\n🔗 *الرابط:* ${shareUrl}`;
   window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
@@ -871,166 +739,55 @@ async function toggleLikeProduct(e,id){if(e)e.stopPropagation();const item=produ
 function filterCategory(cat){currentCategory=cat;renderProducts()}
 function setCurrencyMode(mode){currencyMode=mode;renderProducts()}
 function logoSecretClick(){secretClicks++;if(secretClicks>=3){secretClicks=0;playUiSound('tap');if(isAdminVerified())toggleAdminMenu();else toggleModal('firebaseLoginModal',true)}setTimeout(()=>{secretClicks=0},2200)}
-async function changeExchangeRate(){if(!isAdminVerified())return;const val=prompt("أدخل سعر صرف الدولار مقابل الليرة السورية:",exchangeRate);if(val!==null){const clean=parseCleanNumber(val);if(clean>0){exchangeRate=clean;renderProducts();updateCartBadges();await saveAllState(true);showToast("تم تحديث سعر الصرف ✨")}}}
+async function changeExchangeRate(){if(!isAdminVerified())return;const val=prompt("سعر الصرف الحالي:",exchangeRate);if(val!==null){const clean=parseCleanNumber(val);if(clean>0){exchangeRate=clean;renderProducts();updateCartBadges();await saveAllState(true);showToast("تم تحديث الصرف ✨")}}}
 async function saveNewBanner(){if(!isAdminVerified())return;const fileInput=document.getElementById('bannerFileInput'),btn=document.getElementById('bannerSaveBtn');if(fileInput.files?.[0]){btn.innerText="جاري الحفظ... ⏳";const comp=await compressImageFile(fileInput.files[0],800,0.55);btn.innerText="تحديث وحفظ الغلاف ✨";if(comp){bannerImg=comp;applyBanner();closeBannerModal();await saveAllState(true);showToast("تم تحديث الغلاف ✨")}}else alert("اختر صورة أولاً!")}
 
 function openAddModal(){
   if(!isAdminVerified())return;
-  document.getElementById('editIndex').value="-1";
-  document.getElementById('modalHeaderTitle').innerText="➕ نشر موديل جملة جديد";
-  document.getElementById('pName').value="";
-  document.getElementById('pCat').value="نسواني";
-  document.getElementById('pPriceInput').value="";
-  document.getElementById('pInputCurrency').value="USD";
-  document.getElementById('pMinQty').value="10";
-  document.getElementById('pPack').value="";
-  document.getElementById('pColors').value="";
-  document.getElementById('pPieceWeight').value="350";
-  document.getElementById('pStockStatus').value="AVAILABLE";
-  document.getElementById('pCustomViews').value="";
-  document.getElementById('pCustomLikes').value="";
-  document.getElementById('pFomoLeft').value="";
-  document.getElementById('pFomoBooked').value="";
-  document.getElementById('pAdminDesc').value="";
-  document.getElementById('pImgFile').value="";
-  document.getElementById('pExtraImgFile').value="";
-  document.getElementById('pHasDiscount').checked=false;
-  document.getElementById('pDiscountPercent').value="15";
-  if(document.getElementById('pIsClearance'))document.getElementById('pIsClearance').checked=false;
-  toggleDiscountPercentInput();
+  document.getElementById('editIndex').value="-1";document.getElementById('modalHeaderTitle').innerText="➕ نشر موديل جملة جديد";
+  document.getElementById('pName').value="";document.getElementById('pCat').value="نسواني";document.getElementById('pPriceInput').value="";document.getElementById('pInputCurrency').value="USD";document.getElementById('pMinQty').value="10";document.getElementById('pPack').value="";document.getElementById('pColors').value="";document.getElementById('pPieceWeight').value="350";document.getElementById('pStockStatus').value="AVAILABLE";document.getElementById('pAdminDesc').value="";document.getElementById('pImgFile').value="";
   toggleModal('addModal',true);
 }
 function closeAddModal(){toggleModal('addModal',false)}
 
 function editProduct(id){
-  if(!isAdminVerified())return;
-  const p=products.find(item=>item.id===id);
-  if(!p)return;
-  document.getElementById('editIndex').value=p.id;
-  document.getElementById('modalHeaderTitle').innerText="✏️ تعديل بيانات الموديل";
-  document.getElementById('pName').value=p.name;
-  document.getElementById('pCat').value=p.category;
-  document.getElementById('pPriceInput').value=p.priceUsd;
-  document.getElementById('pInputCurrency').value="USD";
-  document.getElementById('pMinQty').value=p.minQty||10;
-  document.getElementById('pPack').value=p.pack;
-  document.getElementById('pColors').value=p.colors||"";
-  document.getElementById('pPieceWeight').value=getPieceWeightGrams(p);
-  document.getElementById('pStockStatus').value=p.stockStatus||"AVAILABLE";
-  document.getElementById('pCustomViews').value=p.customViews??"";
-  document.getElementById('pCustomLikes').value=p.customLikes??"";
-  document.getElementById('pFomoLeft').value=p.fomoLeft??"";
-  document.getElementById('pFomoBooked').value=p.fomoBooked??"";
-  document.getElementById('pAdminDesc').value=p.adminDesc??"";
-  document.getElementById('pImgFile').value="";
-  document.getElementById('pExtraImgFile').value="";
-  document.getElementById('pHasDiscount').checked=!!p.hasDiscount;
-  document.getElementById('pDiscountPercent').value=p.discountPercent||15;
-  if(document.getElementById('pIsClearance'))document.getElementById('pIsClearance').checked=!!p.isClearance;
-  toggleDiscountPercentInput();
+  if(!isAdminVerified())return;const p=products.find(item=>item.id===id);if(!p)return;
+  document.getElementById('editIndex').value=p.id;document.getElementById('modalHeaderTitle').innerText="✏️ تعديل بيانات الموديل";
+  document.getElementById('pName').value=p.name;document.getElementById('pCat').value=p.category;document.getElementById('pPriceInput').value=p.priceUsd;document.getElementById('pInputCurrency').value="USD";document.getElementById('pMinQty').value=p.minQty||10;document.getElementById('pPack').value=p.pack;document.getElementById('pColors').value=p.colors||"";document.getElementById('pPieceWeight').value=getPieceWeightGrams(p);document.getElementById('pStockStatus').value=p.stockStatus||"AVAILABLE";document.getElementById('pAdminDesc').value=p.adminDesc??"";document.getElementById('pImgFile').value="";
   toggleModal('addModal',true);
 }
 
 async function saveNewProduct(e){
-  e.preventDefault();
-  if(!isAdminVerified())return alert("صلاحية الإدارة مطلوبة!");
-  const saveBtn=document.getElementById('saveProductBtn');
-  saveBtn.innerText="جاري النشر... ⏳";
-  saveBtn.disabled=true;
+  e.preventDefault();if(!isAdminVerified())return alert("صلاحية الإدارة مطلوبة!");
+  const saveBtn=document.getElementById('saveProductBtn');saveBtn.innerText="جاري النشر... ⏳";saveBtn.disabled=true;
   try{
-    const editId=Number(document.getElementById('editIndex').value),
-      name=document.getElementById('pName').value.trim(),
-      category=document.getElementById('pCat').value,
-      rawPrice=parseCleanNumber(document.getElementById('pPriceInput').value),
-      priceUsd=document.getElementById('pInputCurrency').value==='SYP'?Math.round((rawPrice/exchangeRate)*100)/100:rawPrice,
-      minQty=parseInt(document.getElementById('pMinQty').value)||10,
-      pack=document.getElementById('pPack').value.trim(),
-      colors=document.getElementById('pColors').value.trim(),
-      pieceWeight=parseInt(document.getElementById('pPieceWeight').value)||350,
-      stockStatus=document.getElementById('pStockStatus').value||'AVAILABLE',
-      customViews=document.getElementById('pCustomViews').value.trim(),
-      customLikes=document.getElementById('pCustomLikes').value.trim(),
-      fomoLeft=document.getElementById('pFomoLeft').value.trim(),
-      fomoBooked=document.getElementById('pFomoBooked').value.trim(),
-      adminDesc=document.getElementById('pAdminDesc').value.trim(),
-      hasDiscount=document.getElementById('pHasDiscount').checked,
-      discountPercent=hasDiscount?Math.min(90,Math.max(1,parseInt(document.getElementById('pDiscountPercent').value)||15)):0,
-      isClearance=document.getElementById('pIsClearance')?document.getElementById('pIsClearance').checked:false,
-      mainFile=document.getElementById('pImgFile'),
-      extraFiles=document.getElementById('pExtraImgFile'),
-      mainImgData=mainFile.files?.[0]?await compressImageFile(mainFile.files[0],480,0.52):null,
-      extrasData=[];
-    if(extraFiles?.files?.length>0){
-      for(let i=0;i<Math.min(extraFiles.files.length,3);i++){
-        const comp=await compressImageFile(extraFiles.files[i],450,0.5);
-        if(comp)extrasData.push(comp);
-      }
-    }
+    const editId=Number(document.getElementById('editIndex').value),name=document.getElementById('pName').value.trim(),category=document.getElementById('pCat').value,rawPrice=parseCleanNumber(document.getElementById('pPriceInput').value),priceUsd=document.getElementById('pInputCurrency').value==='SYP'?Math.round((rawPrice/exchangeRate)*100)/100:rawPrice,minQty=parseInt(document.getElementById('pMinQty').value)||10,pack=document.getElementById('pPack').value.trim(),colors=document.getElementById('pColors').value.trim(),pieceWeight=parseInt(document.getElementById('pPieceWeight').value)||350,stockStatus=document.getElementById('pStockStatus').value||'AVAILABLE',adminDesc=document.getElementById('pAdminDesc').value.trim(),mainFile=document.getElementById('pImgFile'),mainImgData=mainFile.files?.[0]?await compressImageFile(mainFile.files[0],480,0.52):null;
     let targetProd=null;
     if(editId!==-1){
       const idx=products.findIndex(p=>p.id===editId);
-      if(idx!==-1){
-        Object.assign(products[idx],{name,category,priceUsd,minQty,pack,colors,pieceWeight,stockStatus,customViews,customLikes,fomoLeft,fomoBooked,adminDesc,hasDiscount,discountPercent,isClearance});
-        if(!products[idx].createdAt)products[idx].createdAt=products[idx].id>1700000000000?products[idx].id:Date.now();
-        if(mainImgData)products[idx].img=mainImgData;
-        if(extrasData.length>0)products[idx].extras=extrasData;
-        targetProd=products[idx];
-      }
+      if(idx!==-1){Object.assign(products[idx],{name,category,priceUsd,minQty,pack,colors,pieceWeight,stockStatus,adminDesc});if(mainImgData)products[idx].img=mainImgData;targetProd=products[idx]}
     }else{
-      const nowTs=Date.now();
-      targetProd={id:nowTs,createdAt:nowTs,name,category,priceUsd,minQty,pieceWeight,stockStatus,pack,colors,customViews,customLikes,fomoLeft,fomoBooked,adminDesc,views:0,likes:0,ratingSum:0,ratingCount:0,comments:[],hasDiscount,discountPercent,isClearance,img:mainImgData||"https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",extras:extrasData};
-      products.unshift(targetProd);
+      const nowTs=Date.now();targetProd={id:nowTs,createdAt:nowTs,name,category,priceUsd,minQty,pieceWeight,stockStatus,pack,colors,customViews:"",customLikes:"",fomoLeft:"",fomoBooked:"",adminDesc,views:0,likes:0,ratingSum:0,ratingCount:0,comments:[],hasDiscount:false,discountPercent:0,isClearance:false,img:mainImgData||"https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80",extras:[]};products.unshift(targetProd)
     }
-    currentCategory='ALL';
-    closeAddModal();
-    renderProducts();
-    playUiSound('success');
-    showToast("تم حفظ ونشر الموديل بنجاح! ✅");
-    await saveAllState(true,targetProd);
-  }catch(err){
-    alert("حدث خطأ أثناء الحفظ.");
-  }finally{
-    saveBtn.innerText="حفظ ونشر الموديل ✅";
-    saveBtn.disabled=false;
-  }
+    currentCategory='ALL';closeAddModal();renderProducts();playUiSound('success');showToast("تم نشر الموديل بنجاح! ✅");await saveAllState(true,targetProd);
+  }catch(err){alert("حدث خطأ أثناء الحفظ.")}finally{saveBtn.innerText="حفظ ونشر الموديل ✅";saveBtn.disabled=false}
 }
 
-async function deleteProduct(id){if(!isAdminVerified())return;if(confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")){products=products.filter(p=>p.id!==id);delete socialDataMap[id];try{localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap))}catch(e){}renderProducts();await saveAllState(true);showToast("تم حذف الموديل","error")}}
-function getCartSmartMetrics(){let totalPieces=0,totalPacks=0,totalGrams=0,rawTotalUsd=0;cart.forEach(c=>{const qty=Number(c.qty)||0,minQty=Number(c.minQty)||10;totalPieces+=qty;totalPacks+=Math.max(1,(qty/minQty).toFixed(1));totalGrams+=(qty*getPieceWeightGrams(c));rawTotalUsd+=Math.round((Number(c.priceUsd)||0)*qty*100)/100});rawTotalUsd=Math.round(rawTotalUsd*100)/100;let discountUsd=0,finalTotalUsd=rawTotalUsd;if(rawTotalUsd>=400){discountUsd=Math.round(rawTotalUsd*0.02*100)/100;finalTotalUsd=Math.round((rawTotalUsd-discountUsd)*100)/100}return{totalPieces,totalPacks,totalWeightKg:totalPieces>0?((totalGrams+500)/1000).toFixed(2):"0",rawTotalUsd,discountUsd,totalUsd:finalTotalUsd}}
-function openCart(){loadBuyerInfoFromStorage();const container=document.getElementById('cartItems'),m=getCartSmartMetrics();document.getElementById('cartSummaryPieces').innerText=`${m.totalPieces} قطعة`;document.getElementById('cartSummaryPacks').innerText=`${m.totalPacks} سيرية`;document.getElementById('cartSummaryWeight').innerText=`~${m.totalWeightKg} كغ`;const tierNotice=document.getElementById('tierDiscountNotice');if(m.rawTotalUsd>=400){tierNotice.classList.remove('hidden');}else{tierNotice.classList.add('hidden')}if(cart.length===0){container.innerHTML=`<p class="text-center text-gray-500 py-6">السلة فارغة حالياً</p>`;document.getElementById('cartTotal').innerText="$0"}else{container.innerHTML=cart.map(c=>{const sub=Math.round(c.priceUsd*c.qty*100)/100,packs=(c.qty/(c.minQty||10)).toFixed(1);return`<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2"><div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p><p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} (${packs} سيرية)</p></div><div class="flex items-center gap-1"><button onclick="adjustCartItemQty(${Number(c.id)}, -${Math.max(1, Math.round((c.minQty||10)/2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button><span class="text-white font-bold text-xs px-1">${c.qty}</span><button onclick="adjustCartItemQty(${Number(c.id)}, ${Math.max(1, Math.round((c.minQty||10)/2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button></div><span class="text-emerald-400 font-bold text-xs">$${sub}</span><button onclick="playUiSound('tap'); removeFromCart(${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button></div>`}).join('');const totalSyp=Math.round(m.totalUsd*exchangeRate).toLocaleString('en-US');document.getElementById('cartTotal').innerText=m.rawTotalUsd>=400?`$${m.totalUsd} (مشمول حسم 2% | ${totalSyp} ل.س)`:`$${m.totalUsd} (${totalSyp} ل.س)`}toggleModal('cartModal',true)}
+async function deleteProduct(id){if(!isAdminVerified())return;if(confirm("حذف الموديل؟")){products=products.filter(p=>p.id!==id);delete socialDataMap[id];try{localStorage.setItem(LS_SOCIAL_CACHE,JSON.stringify(socialDataMap))}catch(e){}renderProducts();await saveAllState(true);showToast("تم الحذف","error")}}
+function getCartSmartMetrics(){let totalPieces=0,totalPacks=0,totalGrams=0,rawTotalUsd=0;cart.forEach(c=>{const qty=Number(c.qty)||0,minQty=Number(c.minQty||10);totalPieces+=qty;totalPacks+=Math.max(1,(qty/minQty).toFixed(1));totalGrams+=(qty*getPieceWeightGrams(c));rawTotalUsd+=Math.round((Number(c.priceUsd)||0)*qty*100)/100});rawTotalUsd=Math.round(rawTotalUsd*100)/100;let discountUsd=0,finalTotalUsd=rawTotalUsd;if(rawTotalUsd>=400){discountUsd=Math.round(rawTotalUsd*0.02*100)/100;finalTotalUsd=Math.round((rawTotalUsd-discountUsd)*100)/100}return{totalPieces,totalPacks,totalWeightKg:totalPieces>0?((totalGrams+500)/1000).toFixed(2):"0",rawTotalUsd,discountUsd,totalUsd:finalTotalUsd}}
+function openCart(){loadBuyerInfoFromStorage();const container=document.getElementById('cartItems'),m=getCartSmartMetrics();document.getElementById('cartSummaryPieces').innerText=`${m.totalPieces} قطعة`;document.getElementById('cartSummaryPacks').innerText=`${m.totalPacks} سيرية`;document.getElementById('cartSummaryWeight').innerText=`~${m.totalWeightKg} كغ`;const tierNotice=document.getElementById('tierDiscountNotice');if(m.rawTotalUsd>=400)tierNotice.classList.remove('hidden');else tierNotice.classList.add('hidden');if(cart.length===0){container.innerHTML=`<p class="text-center text-gray-500 py-6">السلة فارغة</p>`;document.getElementById('cartTotal').innerText="$0"}else{container.innerHTML=cart.map(c=>{const sub=Math.round(c.priceUsd*c.qty*100)/100,packs=(c.qty/(c.minQty||10)).toFixed(1);return`<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2"><div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p><p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} (${packs} سيرية)</p></div><div class="flex items-center gap-1"><button onclick="adjustCartItemQty(${Number(c.id)}, -${Math.max(1,Math.round((c.minQty||10)/2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button><span class="text-white font-bold text-xs px-1">${c.qty}</span><button onclick="adjustCartItemQty(${Number(c.id)}, ${Math.max(1,Math.round((c.minQty||10)/2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button></div><span class="text-emerald-400 font-bold text-xs">$${sub}</span><button onclick="playUiSound('tap'); removeFromCart(${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button></div>`}).join('');const totalSyp=Math.round(m.totalUsd*exchangeRate).toLocaleString('en-US');document.getElementById('cartTotal').innerText=`$${m.totalUsd} (${totalSyp} ل.س)`}toggleModal('cartModal',true)}
 function closeCart(){toggleModal('cartModal',false)}function removeFromCart(id){cart=cart.filter(c=>c.id!==id);saveCartToStorage();openCart()}
-function printWholesaleInvoice(){if(cart.length===0)return alert("السلة فارغة! أضف موديلات أولاً لطباعة الفاتورة.");playUiSound('success');const buyerName=document.getElementById('buyerName')?.value.trim(),buyerAddress=document.getElementById('buyerAddress')?.value.trim(),buyerPhone=document.getElementById('buyerPhone')?.value.trim();if(!buyerName||!buyerAddress||!buyerPhone)return alert("يرجى إكمال خانات الاسم، العنوان، ورقم الهاتف لإتمام الطباعة والاعتماد!");const buyerNotes=escapeHtml(document.getElementById('buyerNotes')?.value.trim()||"لا يوجد"),m=getCartSmartMetrics(),totalSyp=Math.round(m.totalUsd*exchangeRate).toLocaleString('en-US'),savedStamp=localStorage.getItem(LS_REFERRED_BY_KEY),commissionUsd=((m.totalUsd/150)*5).toFixed(2),routingStamp=savedStamp?`FW-${savedStamp}-C${commissionUsd}`:`FW-DIR-00`,invoiceNo=`INV-${Math.floor(100000+Math.random()*900000)}`,dateStr=new Date().toLocaleDateString('ar-SY'),rowsHtml=cart.map((c,idx)=>`<tr><td>${idx+1}</td><td style="text-align:right;font-weight:bold;">${escapeHtml(c.name)}</td><td>${escapeHtml(c.category)}</td><td>${c.qty} ق (${(c.qty/(c.minQty||10)).toFixed(1)} سيرية)</td><td>$${c.priceUsd}</td><td style="font-weight:bold;">$${Math.round(c.priceUsd*c.qty*100)/100}</td></tr>`).join('');const win=window.open('','_blank');if(!win)return alert("يرجى السماح بالنوافذ المنبثقة لطباعة الفاتورة.");win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة | واتساب: 0996311804</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div><div>الصرف: ${exchangeRate.toLocaleString('en-US')} ل.س</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 العميل:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان:</b> ${escapeHtml(buyerAddress)} | <b>📝 ملاحظات:</b> ${buyerNotes}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | 🛍️ السيريات: <b>${m.totalPacks}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي (مشمول خصم 2% إذا تجاوز 400$):</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div><p style="text-align:center;font-size:11px;color:#666;margin-top:12px">FASHION WORLD - رمز التوثيق: ${escapeHtml(routingStamp)}</p></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);win.document.close()}
+function printWholesaleInvoice(){if(cart.length===0)return alert("السلة فارغة!");playUiSound('success');const buyerName=document.getElementById('buyerName')?.value.trim(),buyerAddress=document.getElementById('buyerAddress')?.value.trim(),buyerPhone=document.getElementById('buyerPhone')?.value.trim();if(!buyerName||!buyerAddress||!buyerPhone)return alert("يرجى إكمال خانات الاسم، العنوان، والهاتف!");const m=getCartSmartMetrics(),totalSyp=Math.round(m.totalUsd*exchangeRate).toLocaleString('en-US'),savedStamp=localStorage.getItem(LS_REFERRED_BY_KEY),commissionUsd=((m.totalUsd/150)*5).toFixed(2),routingStamp=savedStamp?`FW-${savedStamp}-C${commissionUsd}`:`FW-DIR-00`,invoiceNo=`INV-${Math.floor(100000+Math.random()*900000)}`,dateStr=new Date().toLocaleDateString('ar-SY'),rowsHtml=cart.map((c,idx)=>`<tr><td>${idx+1}</td><td style="text-align:right;font-weight:bold;">${escapeHtml(c.name)}</td><td>${escapeHtml(c.category)}</td><td>${c.qty} ق (${(c.qty/(c.minQty||10)).toFixed(1)} سيرية)</td><td>$${c.priceUsd}</td><td style="font-weight:bold;">$${Math.round(c.priceUsd*c.qty*100)/100}</td></tr>`).join('');const win=window.open('','_blank');if(!win)return alert("السماح بالنوافذ المنبثقة مطلوب.");win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة</small></div><div style="font-size:12px;text-align:left"><div>رقم: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 العميل:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان:</b> ${escapeHtml(buyerAddress)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | ⚖️ الوزن: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي:</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);win.document.close()}
 
 async function sendOrderWhatsApp(){
   if(cart.length===0)return alert("السلة فارغة!");
-  const buyerName=document.getElementById('buyerName')?.value.trim();
-  const buyerAddress=document.getElementById('buyerAddress')?.value.trim();
-  const buyerPhone=document.getElementById('buyerPhone')?.value.trim();
-  const buyerNotes=document.getElementById('buyerNotes')?.value.trim();
-  
-  if(!buyerName || !buyerAddress || !buyerPhone){
-    alert("⚠️ تنبيه هام:\nلا يمكن إرسال الطلبية أو اعتمادها عبر واتساب ما لم تكن خانات (اسم العميل، العنوان ومكتب الشحن، ورقم الهاتف) ممتلئة بالكامل بالمعلومات الإلزامية!");
-    document.getElementById('buyerName')?.focus();
-    return;
-  }
-
-  playUiSound('success');
-  saveBuyerInfoToStorage();
-  const m=getCartSmartMetrics();
-  const lines=cart.map((c,i)=>`🔹 *${i+1}. ${c.name}*\n   • الكمية: ${c.qty} قطعة (${(c.qty/(c.minQty||10)).toFixed(1)} سيرية)\n   • الإجمالي الفرعي: $${Math.round(c.priceUsd*c.qty*100)/100}`).join('\n');
-  const totalSyp=Math.round(m.totalUsd*exchangeRate).toLocaleString('en-US');
-  const savedStamp=localStorage.getItem(LS_REFERRED_BY_KEY);
-  const commissionUsd=((m.totalUsd/150)*5).toFixed(2);
-  const routingStamp=savedStamp?`FW-${savedStamp}-C${commissionUsd}`:`FW-DIR-00`;
-
+  const buyerName=document.getElementById('buyerName')?.value.trim(),buyerAddress=document.getElementById('buyerAddress')?.value.trim(),buyerPhone=document.getElementById('buyerPhone')?.value.trim(),buyerNotes=document.getElementById('buyerNotes')?.value.trim();
+  if(!buyerName||!buyerAddress||!buyerPhone)return alert("يرجى ملء خانات الاسم، العنوان، ورقم الهاتف أولاً!");
+  playUiSound('success');saveBuyerInfoToStorage();
+  const m=getCartSmartMetrics(),lines=cart.map((c,i)=>`🔹 *${i+1}. ${c.name}* (${c.qty} ق)`).join('\n');
+  const totalSyp=Math.round(m.totalUsd*exchangeRate).toLocaleString('en-US'),savedStamp=localStorage.getItem(LS_REFERRED_BY_KEY),commissionUsd=((m.totalUsd/150)*5).toFixed(2),routingStamp=savedStamp?`FW-${savedStamp}-C${commissionUsd}`:`FW-DIR-00`;
   if(savedStamp)recordMarketerOrderInCloud(savedStamp,m.totalUsd,commissionUsd,m.totalPieces);
-
-  let msg=`✨ *فاتورة طلبية جملة رسمية* ✨\n🏢 *شركة FASHION WORLD - دمشق الحريقة*\n━━━━━━━━━━━━━━━━━━━━\n👤 *اسم العميل / المحل:* ${escapeHtml(buyerName)}\n📍 *المحافظة ومكتب الشحن:* ${escapeHtml(buyerAddress)}\n📞 *رقم التواصل:* ${escapeHtml(buyerPhone)}\n`;
-  if(buyerNotes)msg+=`📝 *ملاحظات العميل:* ${escapeHtml(buyerNotes)}\n`;
-  msg+=`━━━━━━━━━━━━━━━━━━━━\n🛍️ *تفاصيل الموديلات المطلوبة:*\n${lines}\n━━━━━━━━━━━━━━━━━━━━\n📦 *إجمالي القطع:* ${m.totalPieces} قطعة (${m.totalPacks} سيرية)\n⚖️ *الوزن التقديري للطرد:* ~${m.totalWeightKg} كغ\n`;
-  if(m.rawTotalUsd>=400)msg+=`🎁 *حسم الجملة (2%):* -$${m.discountUsd}\n`;
-  msg+=`💰 *المبلغ الإجمالي الصافي:* *$${m.totalUsd}* (${totalSyp} ل.س)\n━━━━━━━━━━━━━━━━━━━━\n🔖 *رمز التوثيق:* ${routingStamp}`;
-
+  let msg=`✨ *طلب يافطة جملة رسمية* ✨\n🏢 *FASHION WORLD*\n👤 *العميل:* ${escapeHtml(buyerName)}\n📍 *العنوان:* ${escapeHtml(buyerAddress)}\n📞 *الهاتف:* ${escapeHtml(buyerPhone)}\n${buyerNotes?`📝 *ملاحظات:* ${escapeHtml(buyerNotes)}\n`:''}━━━━━━━━━━━━━━━━━━━━\n${lines}\n━━━━━━━━━━━━━━━━━━━━\n📦 *القطع:* ${m.totalPieces} | ⚖️ *الوزن:* ~${m.totalWeightKg} كغ\n💰 *الإجمالي:* *$${m.totalUsd}* (${totalSyp} ل.س)\n🔖 *التوثيق:* ${routingStamp}`;
   window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
