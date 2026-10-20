@@ -704,7 +704,7 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
 </footer>
 <script id="initialDataScript">
 window.INITIAL_STORE_STATE = {
-  updatedAt: 1710000000000,
+  updatedAt: Date.now(),
   exchangeRate: 15000,
   partnerSecret: "NA.FA7411",
   bannerImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
@@ -782,6 +782,7 @@ try {
     return null;
   };
 
+  // المزامنة الحية الفورية بين الهواتف والمتصفحات المختلفة
   const storeRef = doc(db, "fashion_world", "store_master");
   onSnapshot(storeRef, (snap) => {
     if (snap.exists()) {
@@ -836,12 +837,8 @@ try {
 </script>
 
 <script>
-const GITHUB_REPO = 'najdt656/fashion-world';
-const DATA_FILE_PATH = 'store-data.json';
 const PUBLIC_SOCIAL_API = 'https://kvdb.io/A6p7W8zPqR9xYv2LmN4kJc/fw_public_social_v1';
-
-const LS_STATE_KEY = 'fw_permanent_state_master';
-const LS_TOKEN_KEY = 'fw_gh_token_master';
+const LS_STATE_KEY = 'fw_permanent_state_master_v3';
 const LS_LIKED_KEY = 'fw_user_liked_master';
 const LS_VIEWED_KEY = 'fw_user_viewed_master';
 const LS_RATED_KEY = 'fw_user_rated_master';
@@ -926,7 +923,7 @@ let partnerSecret = window.INITIAL_STORE_STATE.partnerSecret || 'NA.FA7411';
 let bannerImg = window.INITIAL_STORE_STATE.bannerImg;
 let products = JSON.parse(JSON.stringify(window.INITIAL_STORE_STATE.products));
 let currencyMode = 'BOTH', currentCategory = 'ALL', searchQuery = '', cart = [];
-let secretClicks = 0, isSyncingGithub = false, currentImageIndex = 0, deepLinkedOpened = false;
+let secretClicks = 0, currentImageIndex = 0, deepLinkedOpened = false;
 window.currentModalProduct = null;
 
 try {
@@ -948,12 +945,11 @@ if (!socialDataMap._marketerOrders || typeof socialDataMap._marketerOrders !== '
   socialDataMap._marketerOrders = {};
 }
 
-// دالة التطبيق الفوري لتحديثات Firebase والعمولات لدى الشريك
 window.applyIncomingFirestoreSnapshot = (cloud) => {
   if (!cloud || typeof cloud !== 'object') return;
   let hasChanges = false;
 
-  if (Array.isArray(cloud.products) && cloud.products.length > 0 && (Number(cloud.updatedAt) || 0) >= localUpdatedAt) {
+  if (Array.isArray(cloud.products) && cloud.products.length > 0) {
     products = cloud.products;
     localUpdatedAt = Number(cloud.updatedAt) || Date.now();
     hasChanges = true;
@@ -1182,10 +1178,7 @@ function openBannerModal() {
 }
 function closeBannerModal() { toggleModal('bannerModal', false); }
 function openCloudSetupModal() {
-  if (isAdminVerified()) {
-    document.getElementById('ghTokenInput').value = safeStorageGet(LS_TOKEN_KEY, '');
-    toggleModal('cloudSetupModal', true);
-  }
+  if (isAdminVerified()) toggleModal('cloudSetupModal', true);
 }
 function closeCloudSetupModal() { toggleModal('cloudSetupModal', false); }
 function closeFirebaseLoginModal() { toggleModal('firebaseLoginModal', false); }
@@ -1267,7 +1260,7 @@ function openWishlistModal() {
   if (list.length === 0) {
     container.innerHTML = `<p class="text-center text-gray-400 py-6">قائمة المفضلة فارغة حالياً.</p>`;
   } else {
-    container.innerHTML = list.map(p => `<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2"><img src="${sanitizeImgUrl(p.img)}" class="w-10 h-10 object-cover rounded-lg border border-yellow-500/25"/><div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(p.name)}</p><p class="text-[10px] text-yellow-400">$${p.priceUsd} | سيرية: ${p.minQty || 10}</p></div><button type="button" onclick="playUiSound('tap'); openProductModal(${Number(p.id)}); closeWishlistModal();" class="gold-gradient-bg font-bold px-2 py-1 rounded text-[10px]">عرض</button><button type="button" onclick="toggleWishlistModalItem(${Number(p.id)}); openWishlistModal();" class="bg-red-950/60 text-red-400 px-2 py-1 rounded text-[10px] font-bold">حذف</button></div>`).join('');
+    container.innerHTML = list.map(p => `<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2"><img src="${sanitizeImgUrl(p.img)}" class="w-10 h-10 object-cover rounded-lg border border-yellow-500/25"/><div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(p.name)}</p><p class="text-[10px] text-yellow-400">$${p.priceUsd} \vert{} سيرية: ${p.minQty || 10}</p></div><button type="button" onclick="playUiSound('tap'); openProductModal(${Number(p.id)}); closeWishlistModal();" class="gold-gradient-bg font-bold px-2 py-1 rounded text-[10px]">عرض</button><button type="button" onclick="toggleWishlistModalItem(${Number(p.id)}); openWishlistModal();" class="bg-red-950/60 text-red-400 px-2 py-1 rounded text-[10px] font-bold">حذف</button></div>`).join('');
   }
   toggleModal('wishlistModal', true);
 }
@@ -1293,7 +1286,7 @@ function copyTrendWhatsAppText() {
   if (!window.currentModalProduct) return;
   const p = window.currentModalProduct;
   const shareUrl = getProductShareLink(p.id);
-  const text = `✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n🧵 *القماش:* ${p.adminDesc || 'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n🎨 *الألوان:* ${p.colors || 'متعددة'}\n📦 *السيرية:* ${p.minQty || 10} مشكلة ألوان\n💰 *السعر:* $${p.priceUsd} أو ما يعادله بالليرة السورية\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
+  const text = `✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n🧵 *القماش:* ${p.adminDesc || 'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n🎨 *الألوان:* ${p.colors || 'متعددة'}\n📦 *السيرية:* ${p.minQty \vert{}\vert{} 10} مشكلة ألوان\n💰 *السعر:* $${p.priceUsd} أو ما يعادله بالليرة السورية\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
   try {
     navigator.clipboard ? navigator.clipboard.writeText(text) : document.execCommand('copy');
     playUiSound('success');
@@ -1316,7 +1309,7 @@ function sendVipRequestWhatsApp(e) {
 }
 
 // ==========================================
-// إدارة الشركاء ونظام المزامنة الفورية في Firebase
+// إدارة الشركاء عبر Firebase (متزامن فوراً)
 // ==========================================
 async function openAffiliateModal() {
   playUiSound('tap');
@@ -1484,8 +1477,7 @@ function renderMarketerDashboard() {
     } else {
       log.innerHTML = myOrders.slice().reverse().map(o => {
         return `<div class="bg-black/85 p-2 rounded border border-gray-800 flex justify-between items-center">
-          <span>📅 ${escapeHtml(o.date)} | مبيعات: <b class="text-white">$${Number(o.totalUsd).toFixed(2)}</b></span>
-          <span class="text-emerald-400 font-bold bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-500/30">عمولتك: +$${Number(o.commissionUsd).toFixed(2)} ✅</span>
+          <span>📅 ${escapeHtml(o.date)} | مبيعات: <b class="text-white">$${Number(o.totalUsd).toFixed(2)}</b></span> <span class="text-emerald-400 font-bold bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-500/30">عمولتك: +$${Number(o.commissionUsd).toFixed(2)} ✅</span>
         </div>`;
       }).join('');
     }
@@ -1522,7 +1514,7 @@ function renderAdminMarketersList() {
       : myOrders.slice().reverse().map(o => `
         <div class="flex justify-between items-center bg-black/60 px-2 py-1 rounded text-[9.5px] border border-gray-800">
           <span>📅 ${escapeHtml(o.date)} | طلبية: <b>$${Number(o.totalUsd)}</b> ⬅️ عمولة: <b class="text-emerald-400">$${Number(o.commissionUsd).toFixed(2)}</b></span>
-          <button type="button" onclick="adminRemoveMarketerOrder('${code}', ${Number(o.id)})" class="text-red-400 hover:text-red-300 font-bold px-1">حذف ✕</button>
+          <button type="button" onclick="adminRemoveMarketerOrder('${code}',${Number(o.id)})" class="text-red-400 hover:text-red-300 font-bold px-1">حذف ✕</button>
         </div>
       `).join('');
 
@@ -1530,12 +1522,12 @@ function renderAdminMarketersList() {
       <div class="flex justify-between items-start gap-2">
         <div>
           <p class="font-bold text-white text-xs">👤 ${escapeHtml(acc.name)}</p>
-          <p class="text-[10.5px] text-yellow-400 font-mono mt-0.5">🔑 الكود السري الكامل: <b>${code}</b> | الرابط المختصر: <b>${shortCode}</b></p>
-          <p class="text-[10px] text-sky-300 font-bold mt-0.5">${currentRank.title} | المبيعات: $${totalSales.toFixed(2)} | الأرباح: $${confComm.toFixed(2)}</p>
+          <p class="text-[10.5px] text-yellow-400 font-mono mt-0.5">🔑 الكود السري الكامل: <b>${code}</b> \vert{} الرابط المختصر: <b>${shortCode}</b></p>
+          <p class="text-[10px] text-sky-300 font-bold mt-0.5">${currentRank.title} | المبيعات: $${totalSales.toFixed(2)} \vert{} الأرباح: $${confComm.toFixed(2)}</p>
         </div>
         <div class="flex gap-1 flex-shrink-0">
           <button type="button" onclick="copyAdminGiveCode('${code}')" class="bg-purple-700 text-white font-bold px-2.5 py-1 rounded text-[10px]">نسخ 📋</button>
-          <button type="button" onclick="adminDeleteMarketerAccount('${code}')" class="bg-red-800 text-white font-bold px-2 py-1 rounded text-[10px]">حذف 🗑️</button>
+          <button type="button" onclick="adminDeleteMarketerAccount('${code}')" class="bg-red-800 text-white font-bold px-2.5 py-1 rounded text-[10px]">حذف 🗑️</button>
         </div>
       </div>
 
@@ -1591,7 +1583,7 @@ async function adminAddManualOrderForMarketer(code) {
   renderAdminMarketersList();
   if (currentMarketer && currentMarketer.code === code) renderMarketerDashboard();
   playUiSound('success');
-  showToast(`تم تسجيل فاتورة ($${totalUsd}) وإضافة عمولة ${Math.round(rate * 100)}% ($${commissionUsd}) للشريك وتحديثها في Firebase! ✅`);
+  showToast(`تم تسجيل فاتورة ($${totalUsd}) وإضافة عمولة ${Math.round(rate * 100)}\% ($${commissionUsd}) للشريك وتحديثها في Firebase! ✅`);
 }
 window.adminAddManualOrderForMarketer = adminAddManualOrderForMarketer;
 
@@ -1869,7 +1861,7 @@ async function initApp() {
       const fData = await window.pullFromFirestoreCloud();
       if (fData) window.applyIncomingFirestoreSnapshot(fData);
     }
-  }, 300);
+  }, 250);
 
   await fetchPublicSocialState(true);
 }
@@ -1992,8 +1984,7 @@ function renderProducts() {
       <div class="relative h-44 sm:h-56 overflow-hidden bg-neutral-950 cursor-pointer" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})">
         <img src="${sanitizeImgUrl(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         <div class="watermark-logo"><span class="text-[8.5px] font-cinzel font-bold text-yellow-400 drop-shadow-md">FASHION WORLD</span></div>
-        <span class="absolute top-2 right-2 gold-gradient-bg font-bold text-[9px] px-2 py-0.5 rounded-full shadow z-20">${escapeHtml(p.category)}</span>
-        ${extraCount > 0 ? `<span class="absolute top-2 left-2 bg-black/75 text-yellow-300 border border-yellow-500/30 text-[8.5px] font-bold px-1.5 py-0.5 rounded-md z-20">📸 +${extraCount}</span>` : ''}
+        <span class="absolute top-2 right-2 gold-gradient-bg font-bold text-[9px] px-2 py-0.5 rounded-full shadow z-20">${escapeHtml(p.category)}</span>${extraCount > 0 ? `<span class="absolute top-2 left-2 bg-black/75 text-yellow-300 border border-yellow-500/30 text-[8.5px] font-bold px-1.5 py-0.5 rounded-md z-20">📸 +${extraCount}</span>` : ''}
         ${p.hasDiscount ? `<span class="absolute top-7 right-2 badge-glass discount-flash text-white font-black">${discountText}</span>` : ''}
         ${stockBadge ? `<span class="absolute ${p.hasDiscount ? 'top-12' : 'top-7'} right-2 badge-glass ${stockBadge.className} discount-flash font-bold text-white">${escapeHtml(stockBadge.text)}</span>` : ''}
         <div class="absolute bottom-1.5 right-1.5 left-1.5 flex justify-between items-center bg-black/85 backdrop-blur-sm px-2 py-1 rounded-lg text-[8px] sm:text-[9.5px] border border-yellow-500/20 z-20">
@@ -2006,8 +1997,7 @@ function renderProducts() {
         <div>
           <h3 class="font-bold text-white text-[11px] sm:text-xs cursor-pointer hover:text-yellow-400 line-clamp-1" onclick="playUiSound('tap'); openProductModal(${Number(p.id)})">${escapeHtml(p.name)}</h3>
           <p class="text-[9px] text-gray-400 font-semibold mb-0.5">${escapeHtml(pubTime)}</p>
-          <p class="text-[10px] text-gray-300 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>
-          ${colorsPills ? `<div class="flex items-center gap-1 flex-wrap mt-1">${colorsPills}</div>` : ''}
+          <p class="text-[10px] text-gray-300 line-clamp-1">📐 ${escapeHtml(p.pack)}</p>${colorsPills ? `<div class="flex items-center gap-1 flex-wrap mt-1">${colorsPills}</div>` : ''}
         </div>
         <div class="flex items-center justify-between border-t border-gray-800/80 pt-1">
           ${formatPrice(p)}
@@ -2083,7 +2073,7 @@ async function openProductModal(id) {
   const wholesaleUsd = Math.round((Number(p.priceUsd) || 0) * 100) / 100;
   const retailSuggestionUsd = Math.round((wholesaleUsd * 1.4) * 100) / 100;
   const expectedProfitUsd = Math.round((retailSuggestionUsd - wholesaleUsd) * 100) / 100;
-  document.getElementById('modalRetailSuggestion').innerText = `💡 سعر الجملة: $${wholesaleUsd} | المقترح للمفرق: $${retailSuggestionUsd} | ربحك المتوقع: $${expectedProfitUsd}`;
+  document.getElementById('modalRetailSuggestion').innerText = `💡 سعر الجملة: $${wholesaleUsd} | المقترح للمفرق: $${retailSuggestionUsd} \vert{} ربحك المتوقع: $${expectedProfitUsd}`;
 
   const badge = document.getElementById('modalDiscountBadge');
   if (p.hasDiscount) {
@@ -2263,7 +2253,7 @@ function calculateModalTotal() {
   document.getElementById('modalSubtotal').innerText = `$${subUsd} (${subSyp} ل.س)`;
   const packs = Math.max(0.5, (qty / minQty).toFixed(1));
   const weightKg = ((qty * getPieceWeightGrams(window.currentModalProduct)) / 1000).toFixed(2);
-  document.getElementById('modalPackAndWeight').innerText = `${packs} سيرية | ~${weightKg} كغ`;
+  document.getElementById('modalPackAndWeight').innerText = `${packs} سيرية \vert{} ~${weightKg} كغ`;
 }
 
 function updateCartBadges() {
@@ -2308,7 +2298,7 @@ function shareProductWhatsApp() {
   if (!window.currentModalProduct) return;
   const p = window.currentModalProduct;
   const shareUrl = getProductShareLink(p.id);
-  const text = `✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n🧵 *القماش:* ${p.adminDesc || 'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n🎨 *الألوان:* ${p.colors || 'متعددة'}\n📦 *السيرية:* ${p.minQty || 10} مشكلة ألوان\n💰 *السعر:* $${p.priceUsd} أو ما يعادله بالليرة السورية\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
+  const text = `✨ترند الموسم 2026🔮\n\n🌟 *${p.name}*\n🧵 *القماش:* ${p.adminDesc || 'قماش نخب أول'}\n📐 *القياسات:* ${p.pack}\n🎨 *الألوان:* ${p.colors || 'متعددة'}\n📦 *السيرية:* ${p.minQty \vert{}\vert{} 10} مشكلة ألوان\n💰 *السعر:* $${p.priceUsd} أو ما يعادله بالليرة السورية\n\n🔗 *للطلب ومعاينة الواقع عبر الكتالوج الرقمي:*\n${shareUrl}\n\n🏢 *FASHION WORLD - دمشق الحريقة*`;
   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
 }
 
@@ -2584,15 +2574,12 @@ function openCart() {
       const packs = (c.qty / (c.minQty || 10)).toFixed(1);
       return `<div class="flex justify-between items-center glossy-box p-2 rounded-xl gap-2">
         <div class="flex-1 min-w-0">
-          <p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p>
-          <p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} (${packs} سيرية)</p>
+          <p class="font-bold text-white text-xs truncate">${escapeHtml(c.name)}</p> <p class="text-[10px] text-yellow-400">$${c.priceUsd} × ${c.qty} (${packs} سيرية)</p>
         </div>
         <div class="flex items-center gap-1">
           <button type="button" onclick="adjustCartItemQty(${Number(c.id)}, -${Math.max(1, Math.round((c.minQty || 10) / 2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">-</button>
           <span class="text-white font-bold text-xs px-1">${c.qty}</span>
-          <button type="button" onclick="adjustCartItemQty(${Number(c.id)}, ${Math.max(1, Math.round((c.minQty || 10) / 2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button>
-        </div>
-        <span class="text-emerald-400 font-bold text-xs">$${sub}</span>
+          <button type="button" onclick="adjustCartItemQty(${Number(c.id)}, ${Math.max(1, Math.round((c.minQty \vert{}\vert{} 10) / 2))})" class="bg-neutral-800 text-white w-6 h-6 rounded font-bold">+</button> </div> <span class="text-emerald-400 font-bold text-xs">$${sub}</span>
         <button type="button" onclick="playUiSound('tap'); removeFromCart(${Number(c.id)})" class="text-red-400 text-[10px] font-bold px-1.5 py-1 bg-red-950/40 rounded-lg">حذف</button>
       </div>`;
     }).join('');
@@ -2626,7 +2613,7 @@ function printWholesaleInvoice() {
 
   const win = window.open('', '_blank');
   if (!win) return alert("يرجى السماح بالنوافذ المنبثقة لطباعة الفاتورة.");
-  win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة لتجارة الألبسة بالجملة</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 العميل:</b> ${escapeHtml(buyerName)} | <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان والشحن:</b> ${escapeHtml(buyerAddress)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي الصافي:</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
+  win.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"/><title>فاتورة جملة - ${invoiceNo}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Cairo',sans-serif;padding:20px;color:#111}.box{max-width:800px;margin:auto;border:2px solid #D4AF37;border-radius:14px;padding:20px}.hdr{display:flex;justify-content:space-between;border-bottom:2px solid #D4AF37;padding-bottom:10px;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{border:1px solid #ccc;padding:8px;text-align:center}th{background:#111;color:#D4AF37}.tot{background:#111;color:#fff;padding:12px 16px;border-radius:8px;display:flex;justify-content:space-between;font-weight:bold}@media print{.no-print{display:none}}</style></head><body><div class="box"><div class="no-print" style="margin-bottom:10px"><button onclick="window.print()" style="background:#D4AF37;border:none;padding:8px 16px;border-radius:6px;font-weight:bold;cursor:pointer">🖨️ طباعة / حفظ PDF</button></div><div class="hdr"><div><h2 style="margin:0;color:#9A6F1A">FASHION WORLD</h2><small>دمشق - الحريقة لتجارة الألبسة بالجملة</small></div><div style="font-size:12px;text-align:left"><div>رقم الفاتورة: <b>${invoiceNo}</b></div><div>التاريخ: ${dateStr}</div></div></div><div style="font-size:13px;background:#fdfaf0;padding:10px;border-radius:8px"><b>👤 العميل:</b> ${escapeHtml(buyerName)} \vert{} <b>📞 الهاتف:</b> ${escapeHtml(buyerPhone)}<br><b>📍 العنوان والشحن:</b> ${escapeHtml(buyerAddress)}</div><table><thead><tr><th>#</th><th>الموديل</th><th>القسم</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody>${rowsHtml}</tbody></table><div style="font-size:12px;margin-bottom:12px;text-align:center">📦 إجمالي القطع: <b>${m.totalPieces}</b> | ⚖️ الوزن التقريبي: <b>~${m.totalWeightKg} كغ</b></div><div class="tot"><span>المبلغ الإجمالي النهائي الصافي:</span><span style="color:#D4AF37">$${m.totalUsd} (${totalSyp} ل.س)</span></div></div><script>setTimeout(()=>window.print(),400);<\/script></body></html>`);
   win.document.close();
 }
 
@@ -2643,13 +2630,13 @@ async function sendOrderWhatsApp() {
   playUiSound('success');
   saveBuyerInfoToStorage();
   const m = getCartSmartMetrics();
-  const lines = cart.map((c, i) => `🔹 *${i + 1}. ${c.name}* (${c.qty} قطعة - $${Math.round(c.priceUsd * c.qty * 100) / 100})`).join('\n');
+  const lines = cart.map((c, i) => `🔹 *${i + 1}.${c.name}* (${c.qty} قطعة - $${Math.round(c.priceUsd * c.qty * 100) / 100})`).join('\n');
   const totalSyp = Math.round(m.totalUsd * exchangeRate).toLocaleString('en-US');
 
   const savedShortRef = safeStorageGet(LS_REFERRED_BY_KEY, '') || (currentMarketer?.code ? String(currentMarketer.code).substring(0, 4) : '');
   const refLine = savedShortRef ? `\n🔖 *مرجع الشريك (أول 4 أحرف):* ${savedShortRef}` : '';
 
-  const msg = `✨ *طلبية جملة رسمية - FASHION WORLD* ✨\n📍 دمشق - الحريقة\n━━━━━━━━━━━━━━━━━━━━\n👤 *العميل:* ${buyerName}\n📍 *العنوان والشحن:* ${buyerAddress}\n📞 *الهاتف:* ${buyerPhone}\n${buyerNotes ? `📝 *ملاحظات:* ${buyerNotes}\n` : ''}━━━━━━━━━━━━━━━━━━━━\n${lines}\n━━━━━━━━━━━━━━━━━━━━\n📦 *إجمالي القطع:* ${m.totalPieces} قطعة (${m.totalPacks} سيرية)\n⚖️ *الوزن التقريبي:* ~${m.totalWeightKg} كغ\n💰 *المبلغ الصافي:* *$${m.totalUsd}* (${totalSyp} ل.س)${refLine}`;
+  const msg = `✨ *طلبية جملة رسمية - FASHION WORLD* ✨\n📍 دمشق - الحريقة\n━━━━━━━━━━━━━━━━━━━━\n👤 *العميل:* ${buyerName}\n📍 *العنوان والشحن:* ${buyerAddress}\n📞 *الهاتف:* ${buyerPhone}\n${buyerNotes ? `📝 *ملاحظات:* ${buyerNotes}\n` : ''}━━━━━━━━━━━━━━━━━━━━\n${lines}\n━━━━━━━━━━━━━━━━━━━━\n📦 *إجمالي القطع:* `${m.totalPieces} قطعة (${m.totalPacks} سيرية)\n⚖️ *الوزن التقريبي:* ~${m.totalWeightKg} كغ\n💰 *المبلغ الصافي:* *$${m.totalUsd}* (${totalSyp} ل.س)${refLine}`;
   window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
