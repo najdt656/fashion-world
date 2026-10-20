@@ -1,0 +1,54 @@
+services:
+  app:
+    image: serversideup/php:8.2-fpm-nginx
+    container_name: fw-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      DB_HOST: db
+      DB_NAME: fashion_world
+      DB_USER: fw_user
+      DB_PASS: ${DB_PASS}
+      TZ: Asia/Damascus
+    volumes:
+      - ./app:/var/www/html
+      - ./data/uploads:/var/www/html/public/uploads
+      - ./app/src/php.ini:/usr/local/etc/php/conf.d/99-custom.ini:ro
+    networks:
+      - arksrv-network
+      - fw-internal
+    expose:
+      - "8080"
+
+  db:
+    image: mysql:8.0
+    container_name: fw-db
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: fashion_world
+      MYSQL_USER: fw_user
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./app/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    networks:
+      - fw-internal
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASS}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+networks:
+  arksrv-network:
+    external: true
+    name: arksrv-network
+  fw-internal:
+    internal: true
