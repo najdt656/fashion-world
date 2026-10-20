@@ -56,13 +56,14 @@ body.light-mode input,body.light-mode select,body.light-mode textarea{background
   </div>
 </div>
 
-<!-- الشريط العلوي -->
+<!-- الشريط العلوي الاحترافي الهادئ -->
 <div class="bg-black/95 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
   <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-1 text-gray-300">
     <div class="flex items-center gap-1.5">
       <span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span>
-      <span class="text-emerald-400 font-semibold">| شحن لجميع المحافظات</span>
-      <button type="button" onclick="manualSyncRefresh()" class="bg-yellow-500/20 text-yellow-300 hover:bg-yellow-500/40 px-2 py-0.5 rounded text-[9px] font-bold border border-yellow-500/30">🔄 تحديث فوري</button>
+      <span class="text-emerald-400 font-semibold">| شحن آمن لكافة المحافظات</span>
+      <span class="text-neutral-500">|</span>
+      <span id="sysSecureLabel" class="text-[9px] text-gray-400 font-mono">SECURE-NODE: v7.4</span>
     </div>
     <div class="flex items-center gap-2">
       <span class="bg-neutral-900 border border-yellow-500/30 px-2 py-0.5 rounded text-yellow-400 font-bold">💱 الصرف: <b id="headerRateDesktop" class="text-emerald-400">15,000</b> ل.س</span>
@@ -111,19 +112,18 @@ body.light-mode input,body.light-mode select,body.light-mode textarea{background
     </div>
   </div>
 
-  <!-- لوحة الإدارة -->
+  <!-- لوحة الإدارة المخفية السرية -->
   <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/20 bg-neutral-950 px-2.5 py-2">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-1.5 text-xs">
       <div class="flex items-center gap-2">
-        <span class="text-yellow-400 font-bold text-[10px]">👑 الإدارة (الصرف: <b id="adminRateDisplay">15,000</b>)</span>
-        <span class="text-[9px] px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">🔥 متصل آمن</span>
+        <span class="text-yellow-400 font-bold text-[10px]">👑 لوحة الإدارة المركزية (الصرف: <b id="adminRateDisplay">15,000</b>)</span>
       </div>
       <div class="flex flex-wrap items-center gap-1">
         <button type="button" onclick="openAddModal(); toggleAdminMenu();" class="gold-gradient-bg font-bold py-1 px-2.5 rounded-lg text-[10px]">➕ نشر موديل</button>
-        <button type="button" onclick="openAdminMarketersModal(); toggleAdminMenu();" class="bg-purple-600/30 text-purple-300 border border-purple-500/40 py-1 px-2 rounded-lg text-[10px] font-bold">👥 إدارة الشركاء</button>
+        <button type="button" onclick="openAdminMarketersModal(); toggleAdminMenu();" class="bg-purple-600/30 text-purple-300 border border-purple-500/40 py-1 px-2 rounded-lg text-[10px] font-bold">👥 الشركاء والأرباح</button>
         <button type="button" onclick="openBannerModal(); toggleAdminMenu();" class="bg-amber-500/15 text-yellow-300 border border-yellow-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">🖼️ الغلاف</button>
         <button type="button" onclick="changeExchangeRate(); toggleAdminMenu();" class="bg-emerald-500/15 text-emerald-300 border border-emerald-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">💱 الصرف</button>
-        <button type="button" onclick="logoutAdmin(); toggleAdminMenu();" class="bg-red-700 text-white py-1 px-2 rounded-lg text-[10px] font-bold">خروج 🔒</button>
+        <button type="button" onclick="logoutAdmin(); toggleAdminMenu();" class="bg-red-700 text-white py-1 px-2 rounded-lg text-[10px] font-bold">قفل 🔒</button>
         <button type="button" onclick="toggleAdminMenu()" class="bg-neutral-800 text-gray-300 py-1 px-2 rounded-lg text-[10px] font-bold">✕</button>
       </div>
     </div>
@@ -449,6 +449,21 @@ body.light-mode input,body.light-mode select,body.light-mode textarea{background
   </div>
 </div>
 
+<!-- نافذة دخول الأدمن السري -->
+<div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[110] p-3">
+  <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30">
+    <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+      <h3 class="font-bold text-yellow-400 text-sm">🔐 بوابة المصادقة الإدارية</h3>
+      <button type="button" onclick="closeFirebaseLoginModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
+    </div>
+    <form onsubmit="handleAdminFirebaseLogin(event)" class="space-y-2.5">
+      <input id="adminEmailInput" type="email" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Admin Email..."/>
+      <input id="adminPassInput" type="password" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Password..."/>
+      <button id="adminLoginSubmitBtn" type="submit" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">دخول للنظام 👑</button>
+    </form>
+  </div>
+</div>
+
 <!-- نافذة من نحن -->
 <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs text-gray-200 border border-yellow-500/30">
@@ -746,8 +761,6 @@ try {
     try {
       const storeRef = doc(db, "fashion_world", "store_master");
       await setDoc(storeRef, JSON.parse(JSON.stringify(payloadObj)), { merge: true });
-      const ind = document.getElementById('liveFirebaseIndicator');
-      if (ind) ind.innerText = "⚡ Firebase متزامن";
       return true;
     } catch (err) { return false; }
   };
@@ -783,11 +796,11 @@ try {
       );
       window.closeFirebaseLoginModal();
       window.playUiSound('success');
-      window.showToast("تم تفعيل لوحة الإدارة بنجاح 👑");
+      window.showToast("تم تفعيل صلاحية النظام بنجاح 👑");
     } catch (err) {
       alert("⚠️ بيانات الدخول غير صحيحة!");
     } finally {
-      if (btn) { btn.innerText = "تسجيل الدخول 👑"; btn.disabled = false; }
+      if (btn) { btn.innerText = "دخول للنظام 👑"; btn.disabled = false; }
     }
   };
 
@@ -798,14 +811,14 @@ try {
       document.getElementById('adminDropdownMenu')?.classList.add('hidden');
       if (typeof window.renderProducts === 'function') window.renderProducts();
       if (typeof window.renderMarketerDashboard === 'function') window.renderMarketerDashboard();
-      window.showToast("تم تسجيل خروج الإدارة 🔒");
+      window.showToast("تم قفل لوحة التحكم 🔒");
     });
   };
 } catch (err) {}
 </script>
 
 <script>
-const LS_STATE_KEY = 'fw_permanent_state_master_v8';
+const LS_STATE_KEY = 'fw_permanent_state_master_v9';
 const LS_LIKED_KEY = 'fw_user_liked_master';
 const LS_VIEWED_KEY = 'fw_user_viewed_master';
 const LS_RATED_KEY = 'fw_user_rated_master';
@@ -935,20 +948,7 @@ window.applyIncomingFirestoreSnapshot = (cloud) => {
   }
 };
 
-async function manualSyncRefresh() {
-  playUiSound('tap');
-  if (typeof window.pullFromFirestoreCloud === 'function') {
-    const fData = await window.pullFromFirestoreCloud();
-    if (fData) {
-      window.applyIncomingFirestoreSnapshot(fData);
-      showToast("تم تحديث البيانات وجلب أحدث الموديلات بنجاح! ⚡");
-    } else {
-      showToast("المتجر محدث بالفعل", "success");
-    }
-  }
-}
-window.manualSyncRefresh = manualSyncRefresh;
-
+// التحديث التلقائي الصامت في الخلفية كل 15 ثانية للزبائن والشركاء بدون أي أزرار ظاهرة
 async function backgroundAutoSync() {
   if (typeof window.pullFromFirestoreCloud === 'function') {
     try {
@@ -1555,7 +1555,7 @@ async function adminAddManualOrderForMarketer(code) {
   renderAdminMarketersList();
   if (currentMarketer && currentMarketer.code === code) renderMarketerDashboard();
   playUiSound('success');
-  showToast("تم تسجيل الرصيد وتحديثه في Firebase فوراً! ✅");
+  showToast("تم تسجيل الرصيد وتحديثه في النظام! ✅");
 }
 window.adminAddManualOrderForMarketer = adminAddManualOrderForMarketer;
 
@@ -1567,7 +1567,7 @@ async function adminRemoveMarketerOrder(code, orderId) {
   await saveAllState(true);
   renderAdminMarketersList();
   if (currentMarketer && currentMarketer.code === code) renderMarketerDashboard();
-  showToast("تم حذف العملية وتحديث Firebase", "error");
+  showToast("تم حذف العملية وتحديث النظام", "error");
 }
 window.adminRemoveMarketerOrder = adminRemoveMarketerOrder;
 
@@ -1587,7 +1587,7 @@ async function adminDeleteMarketerAccount(code) {
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     await saveAllState(true);
     renderAdminMarketersList();
-    showToast("تم حذف الشريك من Firebase", "error");
+    showToast("تم حذف الشريك من النظام", "error");
   }
 }
 window.adminDeleteMarketerAccount = adminDeleteMarketerAccount;
@@ -2324,7 +2324,7 @@ async function changeExchangeRate() {
       renderProducts();
       updateCartBadges();
       await saveAllState(true);
-      showToast("تم تحديث سعر الصرف في Firebase ✨");
+      showToast("تم تحديث سعر الصرف ✨");
     }
   }
 }
@@ -2342,7 +2342,7 @@ async function saveNewBanner() {
       applyBanner();
       closeBannerModal();
       await saveAllState(true);
-      showToast("تم تحديث الغلاف في Firebase ✨");
+      showToast("تم تحديث الغلاف ✨");
     }
   } else {
     alert("يرجى اختيار صورة أولاً!");
@@ -2406,7 +2406,7 @@ async function saveNewProduct(e) {
   e.preventDefault();
   if (!isAdminVerified()) return alert("صلاحية الإدارة مطلوبة!");
   const saveBtn = document.getElementById('saveProductBtn');
-  saveBtn.innerText = "جاري الرفع إلى Firebase... ⏳";
+  saveBtn.innerText = "جاري الحفظ والرفع... ⏳";
   saveBtn.disabled = true;
 
   try {
@@ -2471,7 +2471,7 @@ async function saveNewProduct(e) {
     renderProducts();
     playUiSound('success');
     await saveAllState(true);
-    showToast("تم نشر الموديل وتحديثه لحظياً في Firebase! ✅");
+    showToast("تم نشر الموديل بنجاح ✅");
   } catch (err) {
     alert("حدث خطأ أثناء حفظ الموديل.");
   } finally {
@@ -2488,7 +2488,7 @@ async function deleteProduct(id) {
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     renderProducts();
     await saveAllState(true);
-    showToast("تم حذف الموديل وتحديث كافة المتصفحات", "error");
+    showToast("تم حذف الموديل وتحديث النظام", "error");
   }
 }
 
