@@ -17,7 +17,6 @@ body.light-mode .card-luxury{background:linear-gradient(180deg,#ffffff 0%,#fefce
 body.light-mode .card-luxury h3{color:#1e293b!important}
 body.light-mode .card-luxury p,body.light-mode .text-gray-300,body.light-mode .text-gray-400{color:#334155!important}
 body.light-mode input,body.light-mode select,body.light-mode textarea{background-color:#fff!important;color:#1e293b!important;border-color:rgba(212,175,55,0.4)!important}
-body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8fafc!important}
 .font-cinzel{font-family:'Cinzel',serif}
 .gold-gradient-text{background:linear-gradient(135deg,#fef08a 0%,#D4AF37 50%,#b45309 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .gold-gradient-bg{background:linear-gradient(135deg,#fde047 0%,#D4AF37 50%,#92400e 100%);box-shadow:0 2px 10px rgba(212,175,55,0.18);transition:.15s;color:#111}
@@ -46,12 +45,12 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
 
 <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[140] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs"></div>
 
-<!-- مكبر الصور الاحترافي -->
+<!-- مكبر الصور -->
 <div id="imageZoomModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[125] p-2 select-none" onclick="closeZoomModal()">
   <button type="button" onclick="closeZoomModal()" class="fixed top-4 right-4 z-[130] bg-neutral-800 text-white w-9 h-9 rounded-full font-bold text-sm border border-yellow-500/30">✕</button>
   <button type="button" onclick="prevZoomImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 z-[130] bg-black/70 hover:bg-black text-yellow-300 px-3 py-2 rounded-full text-sm font-bold border border-yellow-500/30">❮</button>
   <button type="button" onclick="nextZoomImage(event)" class="absolute right-3 top-1/2 -translate-y-1/2 z-[130] bg-black/70 hover:bg-black text-yellow-300 px-3 py-2 rounded-full text-sm font-bold border border-yellow-500/30">❯</button>
-  <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[130] bg-black/80 text-yellow-300 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط على الصورة للتكبير المضاعف</div>
+  <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[130] bg-black/80 text-yellow-300 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-yellow-500/30 pointer-events-none">🔍 اضغط للتكبير</div>
   <div class="w-full h-full flex items-center justify-center overflow-auto" onclick="event.stopPropagation()">
     <img id="zoomModalImg" src="" onclick="toggleDoubleZoom(this)" class="max-w-full max-h-[92vh] object-contain transition-transform duration-300 cursor-zoom-in rounded-lg"/>
   </div>
@@ -63,7 +62,7 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
     <div class="flex items-center gap-1.5">
       <span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span>
       <span class="text-emerald-400 font-semibold">| شحن لجميع المحافظات</span>
-      <span id="liveFirebaseIndicator" class="bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded text-[8.5px] font-bold">⚡ سحابي متصل</span>
+      <span id="liveFirebaseIndicator" class="bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded text-[8.5px] font-bold">⚡ Firebase متصل</span>
     </div>
     <div class="flex items-center gap-2">
       <span class="bg-neutral-900 border border-yellow-500/30 px-2 py-0.5 rounded text-yellow-400 font-bold">💱 الصرف: <b id="headerRateDesktop" class="text-emerald-400">15,000</b> ل.س</span>
@@ -147,7 +146,7 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
   </div>
 </section>
 
-<!-- شريط التصفية السريعة + البحث + الأقسام -->
+<!-- شريط التصفية + البحث -->
 <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full space-y-1.5">
   <div onclick="filterCategory('CLEARANCE')" class="cursor-pointer bg-gradient-to-r from-red-950/90 via-red-900/80 to-amber-950/90 border border-red-500/40 rounded-xl px-3 py-1.5 flex items-center justify-between text-[10px] sm:text-xs shadow">
     <div class="flex items-center gap-1.5 truncate font-bold text-red-200">
@@ -470,19 +469,15 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
 <div id="cloudSetupModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3 text-xs">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-yellow-400 text-sm">🔗 مفتاح المزامنة الاحتياطي (GitHub Token)</h3>
+      <h3 class="font-bold text-yellow-400 text-sm">🔗 مفتاح المزامنة الاحتياطي</h3>
       <button type="button" onclick="closeCloudSetupModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
     </div>
-    <p class="text-[10px] text-gray-300 leading-relaxed">يعمل المتجر الآن عبر سحابة Firebase الحية، ويمكنك أيضاً إبقاء مفتاح GitHub Token كنسخة احتياطية إضافية:</p>
-    <input id="ghTokenInput" type="password" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="ghp_..."/>
-    <div class="flex gap-2">
-      <button type="button" onclick="saveCloudToken()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ وتفعيل المزامنة ✅</button>
-      <button type="button" onclick="clearCloudToken()" class="bg-red-800/80 text-white font-bold px-3 py-2.5 rounded-xl">مسح المفتاح 🗑️</button>
-    </div>
+    <p class="text-[10px] text-gray-300 leading-relaxed">المتجر متصل حالياً بقاعدة بيانات Firebase الحية.</p>
+    <button type="button" onclick="closeCloudSetupModal()" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ وإغلاق</button>
   </div>
 </div>
 
-<!-- نافذة من نحن (مع أيقونات فيسبوك، إنستغرام، تيليجرام، وواتساب كاملة) -->
+<!-- نافذة من نحن مع الأيقونات الرسمية الحقيقية وروابطك الدقيقة -->
 <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs text-gray-200 border border-yellow-500/30">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -491,11 +486,11 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
     </div>
     <p class="font-bold text-white leading-relaxed text-center">المعقل الرئيسي لتجارة وتصنيع الألبسة بالجملة (نسواني، رجالي، ولادي، أطفال) في قلب دمشق - الحريقة. نضمن لتجارنا أعلى جودة وأفضل أسعار الجملة مع شحن آمن لكافة المحافظات.</p>
     <div class="space-y-2 pt-1">
-      <p class="text-yellow-400 font-bold text-center text-[11px]">📱 تابعنا وتواصل معنا عبر منصاتنا الرسمية:</p>
+      <p class="text-yellow-400 font-bold text-center text-[11px]">📱 تواصل معنا عبر منصاتنا الرسمية:</p>
       <div class="grid grid-cols-2 gap-2">
-        <a href="https://wa.me/963996311804" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 font-bold py-2.5 px-3 rounded-xl transition">
+        <a href="https://wa.me/963996311804?text=✨%20*استفسار%20تجاري*" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 font-bold py-2.5 px-3 rounded-xl transition">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
-          <span>واتساب الإدارة</span>
+          <span>واتساب</span>
         </a>
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-blue-900/40 hover:bg-blue-800/60 border border-blue-500/40 text-blue-300 font-bold py-2.5 px-3 rounded-xl transition">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
@@ -504,7 +499,7 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
         <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-pink-900/40 hover:bg-pink-800/60 border border-pink-500/40 text-pink-300 font-bold py-2.5 px-3 rounded-xl transition">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           <span>إنستغرام</span>
-        </a>
+        </span>
         <a href="https://t.me/+963996311804" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-sky-900/40 hover:bg-sky-800/60 border border-sky-500/40 text-sky-300 font-bold py-2.5 px-3 rounded-xl transition">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           <span>تيليجرام</span>
@@ -515,7 +510,7 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
   </div>
 </div>
 
-<!-- نافذة تغيير الغلاف -->
+<!-- نافذة الغلاف -->
 <div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -681,7 +676,7 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
       <div class="space-y-1.5">
         <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم العميل / المحل التجاري (إلزامي)..."/>
         <input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 المحافظة ومكتب الشحن (إلزامي)..."/>
-        <input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 رقم الهاتف / واتساب (إلزامي)..."/>
+        <input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 الهاتف / واتساب (إلزامي)..."/>
         <textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white resize-none" placeholder="📝 ملاحظات إضافية..."></textarea>
       </div>
       <div class="grid grid-cols-2 gap-1.5 pt-0.5">
@@ -692,13 +687,25 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
   </div>
 </div>
 
-<!-- الفوتر مع أيقونات التواصل الاجتماعي الكاملة -->
+<!-- الفوتر مع الأيقونات الرسمية والروابط الخاصة بك -->
 <footer class="bg-black/95 border-t border-yellow-500/20 py-4 px-4 text-center text-[11px] text-gray-400 mt-4 space-y-2.5">
   <div class="flex flex-wrap items-center justify-center gap-2">
-    <a href="https://wa.me/963996311804" target="_blank" rel="noopener noreferrer" class="bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1">💬 واتساب</a>
-    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="bg-blue-950/60 text-blue-300 border border-blue-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1">📘 فيسبوك</a>
-    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="bg-pink-950/60 text-pink-300 border border-pink-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1">📸 إنستغرام</a>
-    <a href="https://t.me/+963996311804" target="_blank" rel="noopener noreferrer" class="bg-sky-950/60 text-sky-300 border border-sky-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1">✈️ تيليجرام</a>
+    <a href="https://wa.me/963996311804?text=✨%20*استفسار%20تجاري*" target="_blank" rel="noopener noreferrer" class="bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+      <span>واتساب</span>
+    </a>
+    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="bg-blue-950/60 text-blue-300 border border-blue-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+      <span>فيسبوك</span>
+    </a>
+    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="bg-pink-950/60 text-pink-300 border border-pink-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <span>إنستغرام</span>
+    </a>
+    <a href="https://t.me/+963996311804" target="_blank" rel="noopener noreferrer" class="bg-sky-950/60 text-sky-300 border border-sky-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      <span>تيليجرام</span>
+    </a>
   </div>
   <p class="font-cinzel font-bold gold-gradient-text m-0">FASHION WORLD - DAMASCUS AL-HARIQA</p>
 </footer>
@@ -768,9 +775,7 @@ try {
       const ind = document.getElementById('liveFirebaseIndicator');
       if (ind) ind.innerText = "⚡ Firebase متزامن";
       return true;
-    } catch (err) {
-      return false;
-    }
+    } catch (err) { return false; }
   };
 
   window.pullFromFirestoreCloud = async () => {
@@ -836,8 +841,7 @@ try {
 </script>
 
 <script>
-const PUBLIC_SOCIAL_API = 'https://kvdb.io/A6p7W8zPqR9xYv2LmN4kJc/fw_public_social_v1';
-const LS_STATE_KEY = 'fw_permanent_state_master_v3';
+const LS_STATE_KEY = 'fw_permanent_state_master_v4';
 const LS_LIKED_KEY = 'fw_user_liked_master';
 const LS_VIEWED_KEY = 'fw_user_viewed_master';
 const LS_RATED_KEY = 'fw_user_rated_master';
@@ -860,19 +864,6 @@ function safeStorageSet(key, valStr) {
 }
 function safeStorageRemove(key) {
   try { localStorage.removeItem(key); } catch (e) {}
-}
-
-async function safeFetchWithTimeout(url, options = {}, timeoutMs = 6000) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    clearTimeout(id);
-    return res;
-  } catch (err) {
-    clearTimeout(id);
-    throw err;
-  }
 }
 
 let audioCtx = null;
@@ -948,7 +939,7 @@ window.applyIncomingFirestoreSnapshot = (cloud) => {
   if (!cloud || typeof cloud !== 'object') return;
   let hasChanges = false;
 
-  if (Array.isArray(cloud.products) && cloud.products.length > 0) {
+  if (Array.isArray(cloud.products)) {
     products = cloud.products;
     localUpdatedAt = Number(cloud.updatedAt) || Date.now();
     hasChanges = true;
@@ -956,17 +947,11 @@ window.applyIncomingFirestoreSnapshot = (cloud) => {
   if (cloud.exchangeRate) { exchangeRate = Number(cloud.exchangeRate); hasChanges = true; }
   if (cloud.bannerImg) { bannerImg = cloud.bannerImg; applyBanner(); }
   if (cloud.marketerAccounts && typeof cloud.marketerAccounts === 'object') {
-    socialDataMap._marketerAccounts = { ...(socialDataMap._marketerAccounts || {}), ...cloud.marketerAccounts };
+    socialDataMap._marketerAccounts = cloud.marketerAccounts;
     hasChanges = true;
   }
   if (cloud.marketerOrders && typeof cloud.marketerOrders === 'object') {
-    if (!socialDataMap._marketerOrders) socialDataMap._marketerOrders = {};
-    Object.keys(cloud.marketerOrders).forEach(code => {
-      const map = new Map();
-      (socialDataMap._marketerOrders[code] || []).forEach(o => o?.id && map.set(o.id, o));
-      (cloud.marketerOrders[code] || []).forEach(o => o?.id && map.set(o.id, o));
-      socialDataMap._marketerOrders[code] = Array.from(map.values());
-    });
+    socialDataMap._marketerOrders = cloud.marketerOrders;
     hasChanges = true;
   }
 
@@ -1308,7 +1293,7 @@ function sendVipRequestWhatsApp(e) {
 }
 
 // ==========================================
-// إدارة الشركاء عبر Firebase
+// إدارة الشركاء والتفاعلات (مشاهدات، إعجابات، تقييمات، تعليقات لحظية)
 // ==========================================
 async function openAffiliateModal() {
   playUiSound('tap');
@@ -1583,7 +1568,7 @@ async function adminAddManualOrderForMarketer(code) {
   renderAdminMarketersList();
   if (currentMarketer && currentMarketer.code === code) renderMarketerDashboard();
   playUiSound('success');
-  showToast(`تم تسجيل فاتورة ($${totalUsd}) وإضافة عمولة ${Math.round(rate * 100)}% ($${commissionUsd}) وتحديثها في Firebase! ✅`);
+  showToast(`تم تسجيل الفاتورة وإضافة العمولة وتحديثها في Firebase! ✅`);
 }
 window.adminAddManualOrderForMarketer = adminAddManualOrderForMarketer;
 
@@ -1749,26 +1734,18 @@ function updateCountersInPlace() {
 
 async function fetchPublicSocialState(forceBypassCache = false) {
   try {
-    const url = `${PUBLIC_SOCIAL_API}?t=${Date.now()}${forceBypassCache ? '&nocache=1' : ''}`;
-    const res = await safeFetchWithTimeout(url, { cache: 'no-store' }, 5000);
+    const url = `https://kvdb.io/A6p7W8zPqR9xYv2LmN4kJc/fw_public_social_v1?t=${Date.now()}${forceBypassCache ? '&nocache=1' : ''}`;
+    const res = await fetch(url, { cache: 'no-store' });
     if (!res.ok) return;
     const rem = await res.json();
     if (rem && typeof rem === 'object') {
       Object.keys(rem).forEach(id => {
         if (id === '_marketerOrders') {
           if (!socialDataMap._marketerOrders) socialDataMap._marketerOrders = {};
-          Object.keys(rem._marketerOrders || {}).forEach(code => {
-            const map = new Map();
-            (socialDataMap._marketerOrders[code] || []).forEach(i => i?.id && map.set(i.id, i));
-            (rem._marketerOrders[code] || []).forEach(i => i?.id && map.set(i.id, i));
-            socialDataMap._marketerOrders[code] = Array.from(map.values());
-          });
+          Object.assign(socialDataMap._marketerOrders, rem._marketerOrders);
         } else if (id === '_marketerAccounts') {
           if (!socialDataMap._marketerAccounts) socialDataMap._marketerAccounts = {};
           Object.assign(socialDataMap._marketerAccounts, rem._marketerAccounts);
-        } else if (id === '_partnerSecret') {
-          socialDataMap._partnerSecret = rem._partnerSecret;
-          partnerSecret = rem._partnerSecret;
         } else {
           socialDataMap[id] = rem[id];
         }
@@ -1787,11 +1764,11 @@ async function pushPublicSocialState(p, deletedCommentId = null) {
   if (p) updateSocialEntryFromProduct(p, deletedCommentId);
   syncQueuePromise = syncQueuePromise.then(async () => {
     try {
-      await safeFetchWithTimeout(PUBLIC_SOCIAL_API, {
+      await fetch('https://kvdb.io/A6p7W8zPqR9xYv2LmN4kJc/fw_public_social_v1', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(socialDataMap)
-      }, 5500);
+      });
     } catch (e) {}
   }).catch(() => {});
   return syncQueuePromise;
@@ -1845,8 +1822,8 @@ async function initApp() {
       if (lp.exchangeRate) exchangeRate = Number(lp.exchangeRate);
       if (lp.partnerSecret) partnerSecret = String(lp.partnerSecret);
       if (lp.bannerImg) bannerImg = lp.bannerImg;
-      if (lp.marketerAccounts) socialDataMap._marketerAccounts = { ...lp.marketerAccounts, ...(socialDataMap._marketerAccounts || {}) };
-      if (lp.marketerOrders) socialDataMap._marketerOrders = { ...lp.marketerOrders, ...(socialDataMap._marketerOrders || {}) };
+      if (lp.marketerAccounts) socialDataMap._marketerAccounts = lp.marketerAccounts;
+      if (lp.marketerOrders) socialDataMap._marketerOrders = lp.marketerOrders;
     }
   } catch (e) {}
 
@@ -1861,7 +1838,7 @@ async function initApp() {
       const fData = await window.pullFromFirestoreCloud();
       if (fData) window.applyIncomingFirestoreSnapshot(fData);
     }
-  }, 250);
+  }, 200);
 
   await fetchPublicSocialState(true);
 }
@@ -2507,7 +2484,7 @@ async function saveNewProduct(e) {
     closeAddModal();
     renderProducts();
     playUiSound('success');
-    await saveAllState(true, targetProd);
+    await saveAllState(true);
     showToast("تم نشر الموديل وتحديثه لحظياً في Firebase! ✅");
   } catch (err) {
     alert("حدث خطأ أثناء حفظ الموديل.");
@@ -2520,12 +2497,12 @@ async function saveNewProduct(e) {
 async function deleteProduct(id) {
   if (!isAdminVerified()) return;
   if (confirm("هل أنت متأكد من حذف هذا الموديل نهائياً؟")) {
-    products = products.filter(p => p.id !== id);
+    products = products.filter(p => Number(p.id) !== Number(id));
     delete socialDataMap[id];
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     renderProducts();
     await saveAllState(true);
-    showToast("تم حذف الموديل من Firebase", "error");
+    showToast("تم حذف الموديل وتحديث كافة المتصفحات", "error");
   }
 }
 
