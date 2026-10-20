@@ -702,7 +702,6 @@ body.light-mode .badge-glass{background:rgba(15,23,42,0.85)!important;color:#f8f
   </div>
   <p class="font-cinzel font-bold gold-gradient-text m-0">FASHION WORLD - DAMASCUS AL-HARIQA</p>
 </footer>
-<!-- البيانات الأولية الاحتياطية -->
 <script id="initialDataScript">
 window.INITIAL_STORE_STATE = {
   updatedAt: 1710000000000,
@@ -741,7 +740,6 @@ window.INITIAL_STORE_STATE = {
 };
 </script>
 
-<!-- محرك Firebase الحقيقي (Auth + Firestore Real-Time Database) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -763,7 +761,6 @@ try {
 
   window.checkAdminAuth = () => !!(auth && auth.currentUser);
 
-  // دالة حفظ البيانات في مستند Firestore الرئيسي
   window.pushToFirestoreCloud = async (payloadObj) => {
     try {
       const storeRef = doc(db, "fashion_world", "store_master");
@@ -772,26 +769,19 @@ try {
       if (ind) ind.innerText = "⚡ Firebase متزامن";
       return true;
     } catch (err) {
-      console.warn("Firestore Push Notice:", err.message);
       return false;
     }
   };
 
-  // دالة جلب مباشر من Firestore عند التحقق من كود الشريك
   window.pullFromFirestoreCloud = async () => {
     try {
       const storeRef = doc(db, "fashion_world", "store_master");
       const snap = await getDoc(storeRef);
-      if (snap.exists()) {
-        return snap.data();
-      }
-    } catch (err) {
-      console.warn("Firestore Pull Notice:", err.message);
-    }
+      if (snap.exists()) return snap.data();
+    } catch (err) {}
     return null;
   };
 
-  // الاستماع اللحظي الحي (Real-Time Listener) لتحديث كل المتصفحات والهواتف بنفس الثانية
   const storeRef = doc(db, "fashion_world", "store_master");
   onSnapshot(storeRef, (snap) => {
     if (snap.exists()) {
@@ -800,9 +790,7 @@ try {
         window.applyIncomingFirestoreSnapshot(data);
       }
     }
-  }, (err) => {
-    console.warn("Firestore Realtime Listener Standby:", err.message);
-  });
+  }, (err) => {});
 
   onAuthStateChanged(auth, (user) => {
     const isAuth = !!user;
@@ -844,12 +832,9 @@ try {
       window.showToast("تم تسجيل خروج الإدارة 🔒");
     });
   };
-} catch (err) {
-  console.warn("Firebase Module Init Error:", err);
-}
+} catch (err) {}
 </script>
 
-<!-- المحرك البرمجي الشامل للمتجر والشركاء -->
 <script>
 const GITHUB_REPO = 'najdt656/fashion-world';
 const DATA_FILE_PATH = 'store-data.json';
@@ -963,7 +948,7 @@ if (!socialDataMap._marketerOrders || typeof socialDataMap._marketerOrders !== '
   socialDataMap._marketerOrders = {};
 }
 
-// استقبال التحديث الحي المباشر من Firebase Firestore وتطبيقه فوراً على المتصفح
+// دالة التطبيق الفوري لتحديثات Firebase والعمولات لدى الشريك
 window.applyIncomingFirestoreSnapshot = (cloud) => {
   if (!cloud || typeof cloud !== 'object') return;
   let hasChanges = false;
@@ -973,14 +958,8 @@ window.applyIncomingFirestoreSnapshot = (cloud) => {
     localUpdatedAt = Number(cloud.updatedAt) || Date.now();
     hasChanges = true;
   }
-  if (cloud.exchangeRate) {
-    exchangeRate = Number(cloud.exchangeRate);
-    hasChanges = true;
-  }
-  if (cloud.bannerImg) {
-    bannerImg = cloud.bannerImg;
-    applyBanner();
-  }
+  if (cloud.exchangeRate) { exchangeRate = Number(cloud.exchangeRate); hasChanges = true; }
+  if (cloud.bannerImg) { bannerImg = cloud.bannerImg; applyBanner(); }
   if (cloud.marketerAccounts && typeof cloud.marketerAccounts === 'object') {
     socialDataMap._marketerAccounts = { ...(socialDataMap._marketerAccounts || {}), ...cloud.marketerAccounts };
     hasChanges = true;
@@ -999,10 +978,7 @@ window.applyIncomingFirestoreSnapshot = (cloud) => {
   if (hasChanges) {
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     safeStorageSet(LS_STATE_KEY, JSON.stringify({
-      updatedAt: localUpdatedAt,
-      exchangeRate,
-      partnerSecret,
-      bannerImg,
+      updatedAt: localUpdatedAt, exchangeRate, partnerSecret, bannerImg,
       marketerAccounts: socialDataMap._marketerAccounts,
       marketerOrders: socialDataMap._marketerOrders,
       products
@@ -1012,7 +988,6 @@ window.applyIncomingFirestoreSnapshot = (cloud) => {
     updateCartBadges();
     renderMarketerDashboard();
     renderAdminMarketersList();
-    checkDeepLinkedModel();
   }
 };
 
@@ -1059,7 +1034,6 @@ function getConsistentSmartSocial(p) {
   };
 }
 
-// توليد رابط المشاركة المختصر (أول 4 أحرف فقط من الكود)
 function getProductShareLink(productId) {
   const baseUrl = `${window.location.origin}${window.location.pathname}?model=${encodeURIComponent(productId)}`;
   if (!currentMarketer || !currentMarketer.code) return baseUrl;
@@ -1075,9 +1049,7 @@ function initAffiliateSystem() {
       const cleanShort = incomingRef.trim().toUpperCase().substring(0, 4);
       if (cleanShort) safeStorageSet(LS_REFERRED_BY_KEY, cleanShort);
     }
-    if (currentMarketer && currentMarketer.code) {
-      updateAffiliateModalUI();
-    }
+    if (currentMarketer && currentMarketer.code) updateAffiliateModalUI();
   } catch (e) {}
 }
 
@@ -1326,9 +1298,7 @@ function copyTrendWhatsAppText() {
     navigator.clipboard ? navigator.clipboard.writeText(text) : document.execCommand('copy');
     playUiSound('success');
     showToast("تم نسخ نص الترند التسويقي مع الرابط! 🔮");
-  } catch (e) {
-    alert("تعذر النسخ تلقائياً.");
-  }
+  } catch (e) {}
 }
 window.copyTrendWhatsAppText = copyTrendWhatsAppText;
 
@@ -1346,7 +1316,7 @@ function sendVipRequestWhatsApp(e) {
 }
 
 // ==========================================
-// إدارة الشركاء عبر Firebase Firestore (برونزي 3% | ذهبي 4% | ماسي 5%)
+// إدارة الشركاء ونظام المزامنة الفورية في Firebase
 // ==========================================
 async function openAffiliateModal() {
   playUiSound('tap');
@@ -1357,7 +1327,6 @@ async function openAffiliateModal() {
       const fData = await window.pullFromFirestoreCloud();
       if (fData) window.applyIncomingFirestoreSnapshot(fData);
     }
-    await fetchPublicSocialState();
     renderMarketerDashboard();
   } else {
     const inp = document.getElementById('partnerPasscodeInput');
@@ -1384,7 +1353,6 @@ async function openAdminMarketersModal() {
     const fData = await window.pullFromFirestoreCloud();
     if (fData) window.applyIncomingFirestoreSnapshot(fData);
   }
-  await fetchPublicSocialState();
   renderAdminMarketersList();
 }
 function closeAdminMarketersModal() { toggleModal('adminMarketersModal', false); }
@@ -1392,28 +1360,16 @@ function closeAdminMarketersModal() { toggleModal('adminMarketersModal', false);
 async function verifyPartnerPasscode(e) {
   e.preventDefault();
   const entered = (document.getElementById('partnerPasscodeInput')?.value || '').trim().toUpperCase();
-  if (!entered || entered.length !== 8) {
-    return alert("⚠️ يرجى إدخال كود الشريك الصحيح المكون من 8 خانات!");
-  }
+  if (!entered || entered.length !== 8) return alert("⚠️ يرجى إدخال كود الشريك الصحيح المكون من 8 خانات!");
 
   const submitBtn = document.getElementById('partnerAuthSubmitBtn');
-  if (submitBtn) { submitBtn.innerText = "جاري التحقق من السحاب... ⏳"; submitBtn.disabled = true; }
+  if (submitBtn) { submitBtn.innerText = "جاري التحقق من Firebase... ⏳"; submitBtn.disabled = true; }
 
   try {
-    // 1. الجلب المباشر من Firebase Firestore أولاً
     if (typeof window.pullFromFirestoreCloud === 'function') {
       const fData = await window.pullFromFirestoreCloud();
       if (fData) window.applyIncomingFirestoreSnapshot(fData);
     }
-    // 2. الجلب الاحتياطي من KVDB و GitHub
-    await fetchPublicSocialState(true);
-    try {
-      const ghRes = await safeFetchWithTimeout(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' }, 4500);
-      if (ghRes.ok) {
-        const ghData = await ghRes.json();
-        if (ghData) window.applyIncomingFirestoreSnapshot(ghData);
-      }
-    } catch (err) {}
 
     const accounts = socialDataMap._marketerAccounts || {};
     const account = accounts[entered];
@@ -1465,7 +1421,6 @@ async function adminGenerateNewMarketerCode() {
 
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     await saveAllState(true);
-    await pushPublicSocialState(null);
 
     if (nameInp) nameInp.value = '';
     renderAdminMarketersList();
@@ -1477,7 +1432,6 @@ async function adminGenerateNewMarketerCode() {
 }
 window.adminGenerateNewMarketerCode = adminGenerateNewMarketerCode;
 
-// نظام المستويات التصاعدي (برونزي 3% | ذهبي 4% | ماسي 5%)
 function getPartnerRankInfo(confirmedSalesUsd) {
   const sales = Number(confirmedSalesUsd) || 0;
   if (sales >= 5000) {
@@ -1581,7 +1535,7 @@ function renderAdminMarketersList() {
         </div>
         <div class="flex gap-1 flex-shrink-0">
           <button type="button" onclick="copyAdminGiveCode('${code}')" class="bg-purple-700 text-white font-bold px-2.5 py-1 rounded text-[10px]">نسخ 📋</button>
-          <button type="button" onclick="adminDeleteMarketerAccount('${code}')" class="bg-red-800 text-white font-bold px-2.5 py-1 rounded text-[10px]">حذف 🗑️</button>
+          <button type="button" onclick="adminDeleteMarketerAccount('${code}')" class="bg-red-800 text-white font-bold px-2 py-1 rounded text-[10px]">حذف 🗑️</button>
         </div>
       </div>
 
@@ -1633,12 +1587,11 @@ async function adminAddManualOrderForMarketer(code) {
 
   safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
   await saveAllState(true);
-  await pushPublicSocialState(null);
 
   renderAdminMarketersList();
   if (currentMarketer && currentMarketer.code === code) renderMarketerDashboard();
   playUiSound('success');
-  showToast(`تم تسجيل فاتورة ($${totalUsd}) وإضافة عمولة ${Math.round(rate * 100)}% ($${commissionUsd}) للشريك! ✅`);
+  showToast(`تم تسجيل فاتورة ($${totalUsd}) وإضافة عمولة ${Math.round(rate * 100)}% ($${commissionUsd}) للشريك وتحديثها في Firebase! ✅`);
 }
 window.adminAddManualOrderForMarketer = adminAddManualOrderForMarketer;
 
@@ -1648,10 +1601,9 @@ async function adminRemoveMarketerOrder(code, orderId) {
   socialDataMap._marketerOrders[code] = socialDataMap._marketerOrders[code].filter(o => Number(o.id) !== Number(orderId));
   safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
   await saveAllState(true);
-  await pushPublicSocialState(null);
   renderAdminMarketersList();
   if (currentMarketer && currentMarketer.code === code) renderMarketerDashboard();
-  showToast("تم حذف العملية من سجل الشريك", "error");
+  showToast("تم حذف العملية وتحديث Firebase", "error");
 }
 window.adminRemoveMarketerOrder = adminRemoveMarketerOrder;
 
@@ -1670,9 +1622,8 @@ async function adminDeleteMarketerAccount(code) {
     if (socialDataMap._marketerOrders) delete socialDataMap._marketerOrders[code];
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     await saveAllState(true);
-    await pushPublicSocialState(null);
     renderAdminMarketersList();
-    showToast("تم حذف حساب الشريك بنجاح", "error");
+    showToast("تم حذف حساب الشريك من Firebase", "error");
   }
 }
 window.adminDeleteMarketerAccount = adminDeleteMarketerAccount;
@@ -1913,27 +1864,16 @@ async function initApp() {
   updateCartBadges();
   checkDeepLinkedModel();
 
-  // جلب من Firebase أولاً إن توفر
   setTimeout(async () => {
     if (typeof window.pullFromFirestoreCloud === 'function') {
       const fData = await window.pullFromFirestoreCloud();
       if (fData) window.applyIncomingFirestoreSnapshot(fData);
     }
-  }, 400);
-
-  // الجلب المساند من GitHub
-  try {
-    const res = await safeFetchWithTimeout(`./${DATA_FILE_PATH}?t=${Date.now()}`, { cache: 'no-store' }, 5500);
-    if (res.ok) {
-      const cloud = await res.json();
-      if (cloud) window.applyIncomingFirestoreSnapshot(cloud);
-    }
-  } catch (e) {}
+  }, 300);
 
   await fetchPublicSocialState(true);
 }
 
-// دالة الحفظ الثلاثية (تحفظ في Firebase Firestore لحظياً + KVDB + GitHub)
 async function saveAllState(autoCloudSync = true, changedProduct = null, deletedCommentId = null) {
   localUpdatedAt = Date.now();
   if (changedProduct) await pushPublicSocialState(changedProduct, deletedCommentId);
@@ -1950,64 +1890,9 @@ async function saveAllState(autoCloudSync = true, changedProduct = null, deleted
 
   safeStorageSet(LS_STATE_KEY, JSON.stringify(payload));
 
-  if (autoCloudSync) {
-    // 1. الرفع اللحظي المباشر إلى Firebase Firestore (يفتح في Brave و Opera و Chrome بنفس الثانية)
-    if (typeof window.pushToFirestoreCloud === 'function') {
-      await window.pushToFirestoreCloud(payload);
-    }
-    // 2. الرفع المساند إلى GitHub إن وجد التوكن
-    const ghToken = safeStorageGet(LS_TOKEN_KEY);
-    if (ghToken && isAdminVerified()) {
-      syncToGithubSilent(payload, ghToken);
-    }
+  if (autoCloudSync && typeof window.pushToFirestoreCloud === 'function') {
+    await window.pushToFirestoreCloud(payload);
   }
-}
-
-async function syncToGithubSilent(payload, ghToken) {
-  if (isSyncingGithub) return;
-  isSyncingGithub = true;
-  try {
-    const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE_PATH}`;
-    let sha = null;
-    const getRes = await safeFetchWithTimeout(apiUrl, {
-      headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github.v3+json' }
-    }, 7000);
-    if (getRes.ok) sha = (await getRes.json()).sha;
-
-    const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-    const bodyObj = { message: "Sync Fashion World Store State", content: contentBase64 };
-    if (sha) bodyObj.sha = sha;
-
-    await safeFetchWithTimeout(apiUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${ghToken}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyObj)
-    }, 9000);
-  } catch (e) {} finally {
-    isSyncingGithub = false;
-  }
-}
-
-async function saveCloudToken() {
-  if (!isAdminVerified()) return;
-  const token = document.getElementById('ghTokenInput').value.trim();
-  if (!token) return alert("يرجى لصق المفتاح أولاً!");
-  safeStorageSet(LS_TOKEN_KEY, token);
-  closeCloudSetupModal();
-  await saveAllState(true);
-  playUiSound('success');
-  showToast("تم حفظ التوكن وتفعيل المزامنة الشاملة! ✨");
-}
-
-function clearCloudToken() {
-  safeStorageRemove(LS_TOKEN_KEY);
-  document.getElementById('ghTokenInput').value = '';
-  closeCloudSetupModal();
-  showToast("تم مسح مفتاح التوكن 🔒", "error");
 }
 
 function applyBanner() {
@@ -2502,7 +2387,7 @@ async function saveNewBanner() {
       applyBanner();
       closeBannerModal();
       await saveAllState(true);
-      showToast("تم تحديث الغلاف سحابياً ✨");
+      showToast("تم تحديث الغلاف في Firebase ✨");
     }
   } else {
     alert("يرجى اختيار صورة أولاً!");
@@ -2631,7 +2516,7 @@ async function saveNewProduct(e) {
     renderProducts();
     playUiSound('success');
     await saveAllState(true, targetProd);
-    showToast("تم نشر الموديل في Firebase وجميع المتصفحات! ✅");
+    showToast("تم نشر الموديل وتحديثه لحظياً في Firebase! ✅");
   } catch (err) {
     alert("حدث خطأ أثناء حفظ الموديل.");
   } finally {
@@ -2648,7 +2533,7 @@ async function deleteProduct(id) {
     safeStorageSet(LS_SOCIAL_CACHE, JSON.stringify(socialDataMap));
     renderProducts();
     await saveAllState(true);
-    showToast("تم حذف الموديل سحابياً", "error");
+    showToast("تم حذف الموديل من Firebase", "error");
   }
 }
 
@@ -2768,7 +2653,6 @@ async function sendOrderWhatsApp() {
   window.open(`https://wa.me/963996311804?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// بدء تشغيل النظام بالكامل
 initApp();
 </script>
 </body>
