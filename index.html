@@ -62,7 +62,7 @@ body.light-mode input,body.light-mode select,body.light-mode textarea{background
     <div class="flex items-center gap-1.5">
       <span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span>
       <span class="text-emerald-400 font-semibold">| شحن لجميع المحافظات</span>
-      <button type="button" onclick="manualSyncRefresh()" class="bg-yellow-500/20 text-yellow-300 hover:bg-yellow-500/40 px-2 py-0.5 rounded text-[9px] font-bold border border-yellow-500/30">🔄 تحديث فوري</button>
+      <span id="liveFirebaseIndicator" class="bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded text-[8.5px] font-bold">⚡ Firebase متصل</span>
     </div>
     <div class="flex items-center gap-2">
       <span class="bg-neutral-900 border border-yellow-500/30 px-2 py-0.5 rounded text-yellow-400 font-bold">💱 الصرف: <b id="headerRateDesktop" class="text-emerald-400">15,000</b> ل.س</span>
@@ -449,239 +449,7 @@ body.light-mode input,body.light-mode select,body.light-mode textarea{background
   </div>
 </div>
 
-<!-- نافذة من نحن مع روابطك وتواصلك الفعلي -->
-<div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
-  <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs text-gray-200 border border-yellow-500/30">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-yellow-400 text-sm">✨ من نحن - Fashion World</h3>
-      <button type="button" onclick="closeAboutModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
-    </div>
-    <p class="font-bold text-white leading-relaxed text-center">المعقل الرئيسي لتجارة وتصنيع الألبسة بالجملة (نسواني، رجالي، ولادي، أطفال) في قلب دمشق - الحريقة. نضمن لتجارنا أعلى جودة وأفضل أسعار الجملة مع شحن آمن لكافة المحافظات.</p>
-    <div class="space-y-2 pt-1">
-      <p class="text-yellow-400 font-bold text-center text-[11px]">📱 تواصل معنا عبر منصاتنا الرسمية:</p>
-      <div class="grid grid-cols-2 gap-2">
-        <a href="https://wa.me/963996311804?text=✨%20*استفسار%20تجاري*" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 font-bold py-2.5 px-3 rounded-xl transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
-          <span>واتساب</span>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-blue-900/40 hover:bg-blue-800/60 border border-blue-500/40 text-blue-300 font-bold py-2.5 px-3 rounded-xl transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-          <span>فيسبوك</span>
-        </a>
-        <a href="https://www.instagram.com/fashion.world_na?dlrf=cDB4aDlyZ3h4eWQ2" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-pink-900/40 hover:bg-pink-800/60 border border-pink-500/40 text-pink-300 font-bold py-2.5 px-3 rounded-xl transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          <span>إنستغرام</span>
-        </a>
-        <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-sky-900/40 hover:bg-sky-800/60 border border-sky-500/40 text-sky-300 font-bold py-2.5 px-3 rounded-xl transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          <span>تيليجرام</span>
-        </a>
-      </div>
-    </div>
-    <button type="button" onclick="closeAboutModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl mt-2">إغلاق النافذة</button>
-  </div>
-</div>
-
-<!-- نافذة الغلاف -->
-<div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
-  <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-yellow-400 text-sm">🖼️ تغيير صورة الغلاف الرئيسي</h3>
-      <button type="button" onclick="closeBannerModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
-    </div>
-    <input id="bannerFileInput" type="file" accept="image/*" class="w-full bg-black border border-gray-700 rounded-xl p-2 text-gray-300"/>
-    <div class="flex gap-2">
-      <button type="button" id="bannerSaveBtn" onclick="saveNewBanner()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">تحديث وحفظ الغلاف ✨</button>
-      <button type="button" onclick="closeBannerModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إغلاق</button>
-    </div>
-  </div>
-</div>
-
-<!-- نافذة إضافة وتعديل الموديلات -->
-<div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-  <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[93vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5">
-      <h3 id="modalHeaderTitle" class="font-bold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3>
-      <button type="button" onclick="closeAddModal()" class="bg-red-900/60 hover:bg-red-700 text-white px-2.5 py-1 rounded-lg font-bold text-xs">إغلاق ✕</button>
-    </div>
-    <form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2 pl-1">
-      <input type="hidden" id="editIndex" value="-1"/>
-      <input id="pName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="اسم الموديل..."/>
-      <div class="grid grid-cols-2 gap-2">
-        <select id="pCat" onchange="autoSuggestWeight(this.value)" class="bg-black border border-gray-700 rounded-xl px-2 py-2 text-white">
-          <option value="نسواني">نسواني</option>
-          <option value="رجالي">رجالي</option>
-          <option value="ولادي">ولادي</option>
-          <option value="ب.ب">ب.ب</option>
-        </select>
-        <div class="flex gap-1">
-          <input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2 py-2 text-white" placeholder="السعر"/>
-          <select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold">
-            <option value="USD">$</option>
-            <option value="SYP">ل.س</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-gray-400 mb-0.5 text-[10px]">📦 حجم السيرية:</label>
-          <input id="pMinQty" type="number" min="1" value="10" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white"/>
-        </div>
-        <div>
-          <label class="block text-gray-400 mb-0.5 text-[10px]">📐 القياسات:</label>
-          <input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="مثال: M / L / XL"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🎨 الألوان (افصل بفاصلة):</label>
-        <input id="pColors" type="text" class="w-full bg-black border border-yellow-500/30 rounded-xl px-3 py-1.5 text-white" placeholder="مثال: أسود، أبيض، كحلي"/>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن القطعة (غرام):</label>
-          <input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/30 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold"/>
-        </div>
-        <div>
-          <label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 حالة المستودع:</label>
-          <select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold">
-            <option value="AVAILABLE">متوفر بالمستودع ✅</option>
-            <option value="LOW">كمية محدودة ⚠️</option>
-            <option value="PREORDER">تثبيت حجز 🔥</option>
-            <option value="SOLD_OUT">نفدت الكمية ❌</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-orange-300 mb-0.5 font-bold text-[10px]">⚠️ السيريات المتبقية:</label>
-          <input id="pFomoLeft" type="number" min="0" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white" placeholder="مثال: 3"/>
-        </div>
-        <div>
-          <label class="block text-orange-300 mb-0.5 font-bold text-[10px]">🔥 عبارة التشويق:</label>
-          <input id="pFomoBooked" type="text" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white" placeholder="مثال: تم بيع 5 سيريات"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🧵 نوع القماش والوصف:</label>
-        <textarea id="pAdminDesc" rows="2" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white text-xs resize-none" placeholder="نوع القماش والتفاصيل..."></textarea>
-      </div>
-      <div class="glossy-box p-2.5 rounded-xl space-y-2 border border-yellow-500/30">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5">
-            <input type="checkbox" id="pHasDiscount" onchange="toggleDiscountPercentInput()" class="w-4 h-4 accent-yellow-400 cursor-pointer"/>
-            <label for="pHasDiscount" class="text-yellow-400 font-bold cursor-pointer">تفعيل شارة وحسم مئوي 🔥</label>
-          </div>
-          <div id="discountPercentWrapper" class="hidden flex items-center gap-1">
-            <input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-14 bg-black border border-yellow-400 text-center text-yellow-300 font-bold rounded py-0.5"/>
-            <span class="text-red-400 font-bold">%</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-1.5 border-t border-gray-800 pt-1.5">
-          <input type="checkbox" id="pIsClearance" class="w-4 h-4 accent-red-500 cursor-pointer"/>
-          <label for="pIsClearance" class="text-red-400 font-bold cursor-pointer">⚡ إظهار في قسم "تصفية سريعة وعروض"</label>
-        </div>
-      </div>
-      <div class="bg-black/40 p-2 rounded-xl border border-gray-800">
-        <label class="block text-yellow-300 font-bold mb-1">📷 الصورة الرئيسية:</label>
-        <input id="pImgFile" type="file" accept="image/*" class="w-full text-gray-300 text-[10px]"/>
-      </div>
-      <div class="bg-black/40 p-2 rounded-xl border border-gray-800">
-        <label class="block text-yellow-300 font-bold mb-1">📸 صور إضافية:</label>
-        <input id="pExtraImgFile" type="file" accept="image/*" multiple class="w-full text-gray-300 text-[10px]"/>
-      </div>
-      <div class="flex gap-2 pt-1">
-        <button id="saveProductBtn" type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ ونشر الموديل سحابياً ✅</button>
-        <button type="button" onclick="closeAddModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إلغاء</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- السلة العائمة -->
-<div id="floatingMiniCart" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-3xl hidden">
-  <div class="glass-panel rounded-2xl p-2.5 sm:px-4 border border-yellow-500/40 shadow-2xl flex items-center justify-between gap-2 bg-neutral-950/95">
-    <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" onclick="playUiSound('tap'); openCart()">
-      <div class="relative gold-gradient-bg w-10 h-10 rounded-xl flex items-center justify-center text-base font-black flex-shrink-0">
-        🛒<span id="floatingCartBadge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border border-black">0</span>
-      </div>
-      <div class="min-w-0">
-        <div class="flex items-center gap-1.5 text-xs font-bold text-white truncate">
-          <span id="floatingCartTotal" class="text-yellow-400 font-black">$0</span>
-          <span class="text-gray-500">|</span>
-          <span id="floatingCartMeta" class="text-[10px] text-sky-300 truncate">0 سيرية (~0 كغ)</span>
-        </div>
-        <p class="text-[9.5px] text-emerald-400 font-semibold truncate">أضف موديلات بقيمة $400 للحصول على حسم جملة 2% فوراً</p>
-      </div>
-    </div>
-    <button type="button" onclick="playUiSound('tap'); openCart()" class="gold-gradient-bg font-black px-3 py-2 rounded-xl text-[10px] sm:text-xs shadow flex-shrink-0">عرض السلة ⬅️</button>
-  </div>
-</div>
-
-<!-- درج السلة -->
-<div id="cartModal" class="fixed inset-0 bg-black/80 hidden justify-end z-50" onclick="closeCart()">
-  <div class="glass-panel w-full max-w-md h-full p-4 flex flex-col justify-between overflow-hidden text-xs border-r border-yellow-500/30 drawer-anim" onclick="event.stopPropagation()">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
-      <div class="flex items-center gap-2">
-        <h3 class="font-bold text-yellow-400 text-sm">🛒 درج طلبية الجملة الذكي</h3>
-        <button type="button" onclick="clearEntireCart()" class="text-[10px] text-red-400 bg-red-950/40 px-2 py-0.5 rounded border border-red-500/30 font-bold">تفريغ</button>
-      </div>
-      <button type="button" onclick="closeCart()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
-    </div>
-    <div id="cartItems" class="overflow-y-auto flex-1 space-y-2 my-2.5 pr-1"></div>
-    <div class="border-t border-gray-800 pt-2.5 space-y-2">
-      <div class="glossy-box p-2 rounded-xl border border-sky-500/30 space-y-1">
-        <p class="text-[10px] text-sky-300 font-bold">📦 حاسبة الطرد والشحن:</p>
-        <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
-          <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">إجمالي القطع</span><strong id="cartSummaryPieces" class="text-white font-bold">0 قطعة</strong></div>
-          <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">عدد السيريات</span><strong id="cartSummaryPacks" class="text-yellow-400 font-bold">0 سيرية</strong></div>
-          <div class="bg-black/70 py-1 rounded border border-gray-800"><span class="text-gray-400 block">الوزن التقريبي</span><strong id="cartSummaryWeight" class="text-emerald-400 font-bold">0 كغ</strong></div>
-        </div>
-      </div>
-      <div class="bg-emerald-950/40 p-2 rounded-xl border border-emerald-500/40 text-[10px] text-emerald-300 font-bold flex flex-col gap-0.5">
-        <span>🎉 عند بلوغ فاتورتك 400$ فأكثر، يتم حسم 2% تلقائياً!</span>
-        <span id="tierDiscountNotice" class="hidden text-yellow-300">✨ تم تطبيق حسم الجملة (2%)!</span>
-      </div>
-      <div class="flex justify-between font-bold bg-black/60 p-2 rounded-xl border border-yellow-500/25">
-        <span>الإجمالي النهائي الصافي:</span>
-        <span id="cartTotal" class="text-yellow-400">$0</span>
-      </div>
-      <div class="space-y-1.5">
-        <input id="buyerName" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="👤 اسم العميل / المحل التجاري (إلزامي)..."/>
-        <input id="buyerAddress" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="📍 المحافظة ومكتب الشحن (إلزامي)..."/>
-        <input id="buyerPhone" type="tel" dir="ltr" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-right text-white" placeholder="📞 الهاتف / واتساب (إلزامي)..."/>
-        <textarea id="buyerNotes" rows="1" oninput="saveBuyerInfoToStorage()" class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white resize-none" placeholder="📝 ملاحظات إضافية..."></textarea>
-      </div>
-      <div class="grid grid-cols-2 gap-1.5 pt-0.5">
-        <button type="button" onclick="sendOrderWhatsApp()" class="bg-emerald-600 text-white font-bold py-2.5 rounded-xl">📲 إرسال عبر واتساب</button>
-        <button type="button" onclick="printWholesaleInvoice()" class="gold-gradient-bg font-bold py-2.5 rounded-xl">🖨️ طباعة فاتورة PDF</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- الفوتر -->
-<footer class="bg-black/95 border-t border-yellow-500/20 py-4 px-4 text-center text-[11px] text-gray-400 mt-4 space-y-2.5">
-  <div class="flex flex-wrap items-center justify-center gap-2">
-    <a href="https://wa.me/963996311804?text=✨%20*استفسار%20تجاري*" target="_blank" rel="noopener noreferrer" class="bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
-      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
-      <span>واتساب</span>
-    </a>
-    <a href="https://www.facebook.com/profile.php?id=100094030465332" target="_blank" rel="noopener noreferrer" class="bg-blue-950/60 text-blue-300 border border-blue-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
-      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-      <span>فيسبوك</span>
-    </a>
-    <a href="https://www.instagram.com/fashion.world_na?dlrf=cDB4aDlyZ3h4eWQ2" target="_blank" rel="noopener noreferrer" class="bg-pink-950/60 text-pink-300 border border-pink-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
-      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      <span>إنستغرام</span>
-    </a>
-    <a href="https://t.me/mi2cS3jE8qA1Y2Zk" target="_blank" rel="noopener noreferrer" class="bg-sky-950/60 text-sky-300 border border-sky-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">
-      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-      <span>تيليجرام</span>
-    </a>
-  </div>
-  <p class="font-cinzel font-bold gold-gradient-text m-0">FASHION WORLD - DAMASCUS AL-HARIQA</p>
-</footer>
-
+<!-- الكود البرمجي الكامل والمتزامن -->
 <script id="initialDataScript">
 window.INITIAL_STORE_STATE = {
   updatedAt: Date.now(),
@@ -804,7 +572,7 @@ try {
 </script>
 
 <script>
-const LS_STATE_KEY = 'fw_permanent_state_master_v6';
+const LS_STATE_KEY = 'fw_permanent_state_master_v7';
 const LS_LIKED_KEY = 'fw_user_liked_master';
 const LS_VIEWED_KEY = 'fw_user_viewed_master';
 const LS_RATED_KEY = 'fw_user_rated_master';
@@ -947,6 +715,19 @@ async function manualSyncRefresh() {
   }
 }
 window.manualSyncRefresh = manualSyncRefresh;
+
+// نظام المزامنة الصامتة التلقائية في الخلفية كل 15 ثانية للزبائن
+async function backgroundAutoSync() {
+  if (typeof window.pullFromFirestoreCloud === 'function') {
+    try {
+      const fData = await window.pullFromFirestoreCloud();
+      if (fData && fData.updatedAt && fData.updatedAt > localUpdatedAt) {
+        window.applyIncomingFirestoreSnapshot(fData);
+      }
+    } catch (e) {}
+  }
+}
+setInterval(backgroundAutoSync, 15000);
 
 function showToast(message, type = 'success') {
   const container = document.getElementById('toastContainer');
