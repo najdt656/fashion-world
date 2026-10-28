@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
-<title>FASHION WORLD STORE| عالم الأزياء لتجارة الألبسة بالجملة - دمشق الحريقة</title>
+<title>FASHION WORLD STORE| عالم الأزياء لتجارة الألبسة بالجملة</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
@@ -12,7 +12,7 @@
 <body class="min-h-screen flex flex-col pb-24" id="mainBody">
 <div id="toastContainer" class="fixed top-16 left-1/2 -translate-x-1/2 z-[140] flex flex-col items-center gap-2 pointer-events-none px-3 w-full max-w-xs"></div>
 
-<!-- مكبر الصور -->
+<!-- Image zoom-->
 <div id="imageZoomModal" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[125] p-2 select-none" onclick="closeZoomModal()">
   <button type="button" onclick="closeZoomModal()" class="fixed top-4 right-4 z-[130] bg-neutral-800 text-white w-9 h-9 rounded-full font-bold text-sm border border-yellow-500/30">✕</button>
   <button type="button" onclick="prevZoomImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 z-[130] bg-black/70 hover:bg-black text-yellow-300 px-3 py-2 rounded-full text-sm font-bold border border-yellow-500/30">❮</button>
@@ -23,8 +23,8 @@
   </div>
 </div>
 
-<!-- الشريط العلوي الاحترافي الهادئ -->
-<div class="bg-black/95 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
+<!--  -->
+<!-- <div class="bg-black/95 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
   <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-1 text-gray-300">
     <div class="flex items-center gap-1.5">
       <span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span>
@@ -36,9 +36,9 @@
       <span class="bg-neutral-900 border border-yellow-500/30 px-2 py-0.5 rounded text-yellow-400 font-bold">💱 الصرف: <b id="headerRateDesktop" class="text-emerald-400">15,000</b> ل.س</span>
     </div>
   </div>
-</div>
+</div> -->
 
-<!-- الهيدر الرئيسي -->
+<!-- Header -->
 <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/20 w-full">
   <div class="max-w-7xl mx-auto px-2.5 sm:px-6 py-2 flex items-center justify-between gap-2">
     <div class="flex items-center gap-2 cursor-pointer select-none flex-shrink-0" onclick="logoSecretClick()">
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <!-- درج الأدوات -->
+  <!-- tools drawer -->
   <div id="userToolsDrawer" class="hidden border-t border-yellow-500/20 bg-neutral-950/95 px-3 py-2">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
       <div class="flex items-center gap-2 flex-wrap">
@@ -80,7 +80,7 @@
   </div>
 
   <!-- لوحة الإدارة المخفية السرية -->
-  <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/20 bg-neutral-950 px-2.5 py-2">
+  <!-- <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/20 bg-neutral-950 px-2.5 py-2">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-1.5 text-xs">
       <div class="flex items-center gap-2">
         <span class="text-yellow-400 font-bold text-[10px]">👑 لوحة الإدارة المركزية (الصرف: <b id="adminRateDisplay">15,000</b>)</span>
@@ -95,15 +95,15 @@
       </div>
     </div>
   </div>
-</header>
+</header> -->
 
-<!-- البانر الرئيسي -->
+<!-- banner -->
 <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full">
   <div id="bannerSection" class="relative overflow-hidden rounded-2xl border border-yellow-500/25 bg-cover bg-center py-6 sm:py-10 px-3 sm:px-6 shadow-lg">
     <div class="max-w-2xl mx-auto text-center relative z-10 space-y-2.5">
       <span class="inline-block px-2.5 py-0.5 rounded-full bg-black/75 border border-yellow-400/30 text-yellow-300 text-[9px] sm:text-xs font-bold">✨ المنصة الاحترافية لتجار الجملة والشركاء المعتمدين ✨</span>
-      <h2 class="text-lg sm:text-3xl font-black text-white">تشكيلة الموسم الحصرية بأسعار <span class="gold-gradient-text">جملة الجملة 🔥</span></h2>
-      <p class="text-gray-300 text-[10px] sm:text-xs max-w-lg mx-auto">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، احسب وزن وطرد السيريات بدقة، واستخرج فاتورة الجملة الرسمية لحظياً.</p>
+      <h2 class="text-lg sm:text-3xl font-black text-white">تشكيلة الموسم الحصرية بأسعار <span class="gold-gradient-text">الجملة</span></h2>
+      <p class="text-gray-300 text-[10px] sm:text-xs max-w-lg mx-auto">تصفح الكتالوج الرسمي لشركة <strong class="text-yellow-400">Fashion World</strong>، </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[10px] sm:text-xs max-w-md mx-auto">
         <button type="button" onclick="openAffiliateModal()" class="bg-emerald-700 text-white font-bold py-2 px-3 rounded-xl border border-emerald-500/30 flex items-center justify-center gap-1 shadow">🤝 بوابة شركاء النجاح (3% - 5%)</button>
         <button type="button" onclick="openVipModal()" class="bg-purple-800 text-yellow-200 font-bold py-2 px-3 rounded-xl border border-purple-400/30 flex items-center justify-center gap-1 shadow">👑 تصنيع الكميات الخاصة (VIP)</button>
@@ -112,11 +112,11 @@
   </div>
 </section>
 
-<!-- شريط التصفية والبحث -->
+<!-- filter and search bar -->
 <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full space-y-1.5">
   <div onclick="filterCategory('CLEARANCE')" class="cursor-pointer bg-gradient-to-r from-red-950/90 via-red-900/80 to-amber-950/90 border border-red-500/40 rounded-xl px-3 py-1.5 flex items-center justify-between text-[10px] sm:text-xs shadow">
     <div class="flex items-center gap-1.5 truncate font-bold text-red-200">
-      <span class="bg-red-600 text-white px-2 py-0.5 rounded-md text-[9px] font-black discount-flash">⚡ تصفية سريعة</span>
+      <span class="bg-red-600 text-white px-2 py-0.5 rounded-md text-[9px] font-black discount-flash">تصفية سريعة</span>
       <span class="truncate">قسم العروض الخاصة والحسومات الكبرى على الموديلات!</span>
     </div>
     <span class="text-yellow-300 font-bold whitespace-nowrap mr-1">عرض الكل ⬅️</span>
@@ -141,12 +141,12 @@
   </div>
 </section>
 
-<!-- شبكة عرض المنتجات -->
+<!-- Products Grid -->
 <main class="max-w-7xl mx-auto px-2.5 sm:px-6 py-3 flex-1 w-full">
   <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4"></div>
 </main>
 
-<!-- نافذة تفاصيل الموديل -->
+<!-- Product Modal -->
 <div id="productModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
   <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-3xl max-h-[93vh] p-3.5 sm:p-5 flex flex-col shadow-2xl overflow-hidden">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2">
@@ -201,7 +201,7 @@
           <div id="modalAdminDesc" class="hidden text-[10px] text-gray-300 bg-neutral-900/80 p-2 rounded-xl border border-yellow-500/20 leading-relaxed whitespace-pre-line"></div>
           <div id="modalRetailSuggestion" class="text-[10px] text-emerald-300 font-bold bg-emerald-950/30 p-2 rounded-xl border border-emerald-500/30 leading-relaxed"></div>
           <div class="flex items-center justify-between pt-1 border-t border-gray-800">
-            <span class="text-yellow-300 font-bold text-[11px]">تقييم التجار:</span>
+            <span class="text-yellow-300 font-bold text-[11px]">تقييم المنتج:</span>
             <div id="modalStarsContainer" class="flex items-center gap-0.5 text-base cursor-pointer"></div>
           </div>
           <div id="modalPriceContainer" class="pt-1 border-t border-gray-800 flex items-center justify-between"></div>
@@ -227,7 +227,7 @@
         </div>
 
         <div class="glossy-box p-2.5 rounded-2xl space-y-1.5 text-xs">
-          <p class="font-bold text-yellow-400 text-[10px]">💬 ملاحظات التجار:</p>
+          <p class="font-bold text-yellow-400 text-[10px]">💬 ملاحظات:</p>
           <div id="commentsList" class="space-y-1 max-h-24 overflow-y-auto pr-1"></div>
           <div class="flex gap-1 pt-1">
             <input id="commentAuthor" class="w-1/3 bg-black border border-yellow-500/25 rounded-lg px-2 py-1 text-white text-[10px]" placeholder="اسم التاجر..."/>
@@ -244,7 +244,7 @@
   </div>
 </div>
 
-<!-- نافذة المفضلة -->
+<!-- favorit window -->
 <div id="wishlistModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-lg p-4 space-y-3 text-xs border border-pink-500/30">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -256,11 +256,11 @@
   </div>
 </div>
 
-<!-- نافذة طلبات VIP -->
+<!-- VIP -->
 <div id="vipModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
   <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg p-4 sm:p-5 flex flex-col space-y-3 text-xs border border-purple-500/40">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-yellow-400 text-sm">👑 تصنيع الكميات الخاصة (VIP)</h3>
+      <h3 class="font-bold text-yellow-400 text-sm"> تصنيع الكميات الخاصة (VIP)</h3>
       <button type="button" onclick="closeVipModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full">✕</button>
     </div>
     <form onsubmit="sendVipRequestWhatsApp(event)" class="space-y-2.5">
@@ -282,7 +282,7 @@
   </div>
 </div>
 
-<!-- نافذة دخول الشريك المعتمد -->
+<!-- Partner Authentication Modal -->
 <div id="partnerAuthModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs border border-emerald-500/40 shadow-2xl">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -303,7 +303,7 @@
   </div>
 </div>
 
-<!-- نافذة لوحة الشريك -->
+<!-- Affiliate Modal -->
 <div id="affiliateModal" class="fixed inset-0 bg-black/90 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
   <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] p-4 sm:p-5 flex flex-col overflow-hidden border border-yellow-500/40 text-xs">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2.5 mb-2.5">
@@ -397,8 +397,8 @@
   </div>
 </div>
 
-<!-- نافذة إدارة الشركاء للأدمن -->
-<div id="adminMarketersModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
+<!-- Admin Marketers Modal -->
+<!-- <div id="adminMarketersModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-2xl max-h-[92vh] p-4 flex flex-col space-y-3 text-xs border border-purple-500/40">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
       <h3 class="font-bold text-purple-400 text-sm">👥 إدارة الشركاء وإضافة العمولات</h3>
@@ -414,10 +414,10 @@
     <div id="adminMarketersListContainer" class="overflow-y-auto flex-1 space-y-2.5 max-h-80 pr-1"></div>
     <button type="button" onclick="closeAdminMarketersModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl">إغلاق النافذة</button>
   </div>
-</div>
+</div> -->
 
 <!-- نافذة دخول الأدمن السري -->
-<div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[110] p-3">
+<!-- <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[110] p-3">
   <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
       <h3 class="font-bold text-yellow-400 text-sm">🔐 بوابة المصادقة الإدارية</h3>
@@ -429,9 +429,9 @@
       <button id="adminLoginSubmitBtn" type="submit" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">دخول للنظام 👑</button>
     </form>
   </div>
-</div>
+</div> -->
 
-<!-- نافذة من نحن -->
+<!-- about -->
 <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs text-gray-200 border border-yellow-500/30">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -464,8 +464,8 @@
   </div>
 </div>
 
-<!-- نافذة الغلاف -->
-<div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
+<!-- Banner Modal -->
+<!-- <div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2">
       <h3 class="font-bold text-yellow-400 text-sm">🖼️ تغيير صورة الغلاف الرئيسي</h3>
@@ -477,10 +477,10 @@
       <button type="button" onclick="closeBannerModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إغلاق</button>
     </div>
   </div>
-</div>
+</div> -->
 
-<!-- نافذة إضافة وتعديل الموديلات -->
-<div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+<!--  add   -->
+<!-- <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
   <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[93vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5">
       <h3 id="modalHeaderTitle" class="font-bold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3>
@@ -577,9 +577,9 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
 
-<!-- السلة العائمة -->
+<!--  -->
 <div id="floatingMiniCart" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-3xl hidden">
   <div class="glass-panel rounded-2xl p-2.5 sm:px-4 border border-yellow-500/40 shadow-2xl flex items-center justify-between gap-2 bg-neutral-950/95">
     <div class="flex items-center gap-2.5 min-w-0 cursor-pointer" onclick="playUiSound('tap'); openCart()">
@@ -599,7 +599,7 @@
   </div>
 </div>
 
-<!-- درج السلة -->
+<!--   -->
 <div id="cartModal" class="fixed inset-0 bg-black/80 hidden justify-end z-50" onclick="closeCart()">
   <div class="glass-panel w-full max-w-md h-full p-4 flex flex-col justify-between overflow-hidden text-xs border-r border-yellow-500/30 drawer-anim" onclick="event.stopPropagation()">
     <div class="flex justify-between items-center border-b border-gray-800 pb-2.5">
@@ -641,7 +641,6 @@
   </div>
 </div>
 
-<!-- الفوتر -->
 <footer class="bg-black/95 border-t border-yellow-500/20 py-4 px-4 text-center text-[11px] text-gray-400 mt-4 space-y-2.5">
   <div class="flex flex-wrap items-center justify-center gap-2">
     <a href="https://wa.me/963996311804?text=✨%20*استفسار%20تجاري*" target="_blank" rel="noopener noreferrer" class="bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-lg font-bold flex items-center gap-1.5">

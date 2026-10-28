@@ -6,7 +6,7 @@ require_admin();
 $method = strtoupper($_SERVER['REQUEST_METHOD']);
 $id     = (int)($_GET['id'] ?? 0);
 
-// ===== GET (لا يحتاج CSRF) =====
+// ===== GET =====
 if ($method === 'GET') {
     if ($id === 0) {
         $rows = $pdo->query("SELECT * FROM products ORDER BY created_at DESC")->fetchAll();
@@ -61,7 +61,7 @@ $fields = function(array $b, ?array $existing = null): array {
     if ($f['name'] === '')       json_error('name is required');
     if ($f['price_usd'] <= 0)    json_error('price_usd must be > 0');
     if (!in_array($f['category'], ['نسواني','رجالي','ولادي','ب.ب'], true))   json_error('Invalid category');
-    if (!in_array($f['stock_status'], ['AVAILABLE','LOW','PREORDER','SOLD_OUT'], true)) json_error('Invalid stock_status');
+    if (!in_array($f['stock_status'], ['متوفر','كمية محدودة ','طلب مسبق','مباع'], true)) json_error('Invalid stock_status');
     if ($f['discount_percent'] < 0 || $f['discount_percent'] > 90) json_error('Invalid discount_percent');
     return $f;
 };
@@ -174,6 +174,4 @@ if ($method === 'DELETE') {
     json_response(['ok' => true]);
 }
 
-// ===== أي method غير مدعوم =====
-// ملاحظة: نضيف اسم الطريقة في الرسالة حتى تعرف السبب بالضبط
 json_error('Method not allowed: ' . $method, 405);

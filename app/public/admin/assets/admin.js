@@ -3,7 +3,7 @@
 const CSRF = window.FW_CSRF;
 const state = { products: [], currentEdit: null };
 
-// ===== أدوات مساعدة =====
+// ===== tools  =====
 function qs(id){ return document.getElementById(id); }
 function esc(s){
   return s==null ? '' : String(s)
@@ -11,9 +11,7 @@ function esc(s){
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ===== دالة الاتصال بالـ API =====
-// ✅ الإصلاح الجوهري: headers تُوضع بعد ...opts فلا يمكن استبدالها
-// يدعم JSON و FormData (FormData لا يحتاج Content-Type — المتصفح يضيفه)
+// =====  =====
 async function api(path, opts = {}) {
   const headers = { 'X-CSRF-Token': CSRF, ...(opts.headers || {}) };
   const r = await fetch(path, {
@@ -27,7 +25,7 @@ async function api(path, opts = {}) {
 }
 
 // =====================================================
-// المصادقة
+// Authentication
 // =====================================================
 qs('loginForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -48,7 +46,7 @@ qs('loginForm')?.addEventListener('submit', async (e) => {
     err.innerText = ex.message;
     err.classList.remove('hidden');
   } finally {
-    btn.disabled = false; btn.innerText = 'دخول 👑';
+    btn.disabled = false; btn.innerText = 'دخول 🔑';
   }
 });
 
@@ -59,7 +57,7 @@ async function logout(){
 window.logout = logout;
 
 // =====================================================
-// التبويبات
+// Tabs
 // =====================================================
 document.querySelectorAll('.tab-btn').forEach((b) => {
   b.addEventListener('click', () => {
@@ -79,7 +77,7 @@ document.querySelectorAll('.tab-btn').forEach((b) => {
 });
 
 // =====================================================
-// المنتجات
+// products
 // =====================================================
 async function loadProducts() {
   try {
@@ -196,7 +194,7 @@ window.showProductForm = showProductForm;
 async function saveProduct(e) {
   e.preventDefault();
 
-  // بناء FormData
+  //  FormData
   const fd = new FormData();
   fd.append('name',           qs('fName').value.trim());
   fd.append('category',       qs('fCat').value);
@@ -226,11 +224,8 @@ async function saveProduct(e) {
   const id = state.currentEdit ? state.currentEdit.id : null;
   const url = id ? '/api/admin/products.php?id=' + id : '/api/admin/products.php';
 
-  // ⚠️ مهم: PUT + FormData لا يعمل في PHP افتراضيًا
-  // الحل: نرسل POST دائمًا، ونضيف _method=PUT للتعديل
   if (id) fd.append('_method', 'PUT');
 
-  // ✅ لا نمرر headers هنا — دالة api تضبط CSRF تلقائيًا
   try {
     const r = await api(url, { method: 'POST', body: fd });
     qs('productForm').classList.add('hidden');
@@ -254,7 +249,7 @@ async function deleteProduct(id) {
 window.deleteProduct = deleteProduct;
 
 // =====================================================
-// الطلبات
+// Orders
 // =====================================================
 async function loadOrders() {
   try {
@@ -299,7 +294,7 @@ async function updateOrderStatus(id, status) {
 window.updateOrderStatus = updateOrderStatus;
 
 // =====================================================
-// التعليقات
+// Comments
 // =====================================================
 async function loadComments() {
   try {
@@ -334,7 +329,7 @@ async function deleteComment(id) {
 window.deleteComment = deleteComment;
 
 // =====================================================
-// الشركاء
+// Marketers
 // =====================================================
 async function loadMarketers() {
   try {
@@ -409,7 +404,7 @@ async function addOrder(id) {
 window.addOrder = addOrder;
 
 // =====================================================
-// الإعدادات
+// Settings
 // =====================================================
 async function loadSettings() {
   try {
@@ -420,7 +415,7 @@ async function loadSettings() {
       img.src = s.banner_img;
       img.classList.remove('hidden');
     }
-  } catch (e) { /* صامت */ }
+  } catch (e) { /*  */ }
 }
 
 async function saveSettings() {
@@ -446,9 +441,7 @@ async function saveSettings() {
 }
 window.saveSettings = saveSettings;
 
-// =====================================================
-// بدء التشغيل
-// =====================================================
+
 if (!qs('adminView')?.classList.contains('hidden')) {
   loadProducts();
 }

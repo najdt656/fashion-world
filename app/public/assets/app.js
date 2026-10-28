@@ -20,6 +20,12 @@ const state = {
   productsLoaded: false,
 };
 
+Object.defineProperty(window, 'currentModalProduct', {
+  get() { return state.currentModalProduct; },
+  set(v) { state.currentModalProduct = v; },
+  configurable: true
+});
+
 const LS_THEME_KEY = 'fw_theme_mode';
 const LS_MARKETER_KEY = 'fw_marketer_profile';
 const LS_REF_KEY = 'fw_referred_by';
@@ -277,8 +283,13 @@ function updateCountersInPlace(){
 
 // ===== مودال المنتج =====
 async function openProductModal(id){
+  // const p=state.products.find(x=>x.id===id); if(!p) return;
+  // state.currentModalProduct=p; state.currentImageIndex=0;
+  
   const p=state.products.find(x=>x.id===id); if(!p) return;
-  state.currentModalProduct=p; state.currentImageIndex=0;
+  state.currentModalProduct=p;
+  window.currentModalProduct=p;
+  state.currentImageIndex=0;
 
   if(!p.isViewed){
     p.isViewed=true; p.views++;
@@ -354,7 +365,7 @@ function nextImage(e){ if(e) e.stopPropagation(); const p=state.currentModalProd
 function prevImage(e){ if(e) e.stopPropagation(); const p=state.currentModalProduct; if(!p) return; const n=[p.img,...p.extras].length; if(n<=1) return; state.currentImageIndex=(state.currentImageIndex-1+n)%n; updateModalImageDisplay(); playUiSound('tap'); }
 window.nextImage=nextImage; window.prevImage=prevImage;
 
-function closeProductModal(){ toggleModal('productModal',false); state.currentModalProduct=null; }
+function closeProductModal(){ toggleModal('productModal',false); state.currentModalProduct=null; window.currentModalProduct=null;}
 window.closeProductModal=closeProductModal;
 
 function updateModalHeaderSocial(p){
@@ -570,29 +581,65 @@ window.downloadModalProductImage=downloadModalProductImage;
 window.copyTrendWhatsAppText=copyTrendWhatsAppText;
 
 // ===== Like / Wishlist =====
+// async function toggleLike(e,pid){
+//   if(e) e.stopPropagation();
+//   try{
+//     playUiSound('like');
+//     const r=await apiPost('/api/public/interactions.php?action=like',{product_id:pid});
+//     const p=state.products.find(x=>x.id===pid);
+//     if(p){ p.likes=r.likes; if(r.liked) state.likedIds.add(pid); else state.likedIds.delete(pid); }
+//     updateCountersInPlace();
+//     if(state.currentModalProduct?.id===pid) updateModalHeaderSocial(p);
+//   }catch(e){ showToast(e.message,'error'); }
+// }
+
 async function toggleLike(e,pid){
   if(e) e.stopPropagation();
+  if (!pid || pid <= 0) return;
   try{
     playUiSound('like');
-    const r=await apiPost('/api/public/interactions.php?action=like',{product_id:pid});
+    const r = await apiPost('/api/public/interactions.php?action=like',{product_id:pid});
     const p=state.products.find(x=>x.id===pid);
     if(p){ p.likes=r.likes; if(r.liked) state.likedIds.add(pid); else state.likedIds.delete(pid); }
     updateCountersInPlace();
     if(state.currentModalProduct?.id===pid) updateModalHeaderSocial(p);
   }catch(e){ showToast(e.message,'error'); }
 }
-window.toggleLike=toggleLike;
+
+window.toggleLikeProduct=toggleLike;
+
+// async function toggleWishlistModalItem(pid){
+//   try{
+//     playUiSound('like');
+//     const r=await apiPost('/api/public/interactions.php?action=wishlist',{product_id:pid});
+//     if(r.wished) state.wishlistIds.add(pid); else state.wishlistIds.delete(pid);
+//     updateWishlistBadge();
+//     if(state.currentModalProduct?.id===pid) updateModalWishlistBtn(state.currentModalProduct);
+//   }catch(e){ showToast(e.message,'error'); }
+// }
 
 async function toggleWishlistModalItem(pid){
+  if (!pid || pid <= 0) {
+    console.warn('[app] toggleWishlist called with invalid pid:', pid);
+    return;
+  }
   try{
     playUiSound('like');
-    const r=await apiPost('/api/public/interactions.php?action=wishlist',{product_id:pid});
+    const r = await apiPost('/api/public/interactions.php?action=wishlist',{product_id:pid});
     if(r.wished) state.wishlistIds.add(pid); else state.wishlistIds.delete(pid);
     updateWishlistBadge();
     if(state.currentModalProduct?.id===pid) updateModalWishlistBtn(state.currentModalProduct);
   }catch(e){ showToast(e.message,'error'); }
 }
+
 window.toggleWishlistModalItem=toggleWishlistModalItem;
+
+async function removeFromWishlistAndRefresh(pid) {
+  if (!pid || pid <= 0) return;
+  await toggleWishlistModalItem(pid);   // ★ انتظر انتهاء الحذف
+  openWishlistModal();                  // ★ ثم أعد رسم القائمة
+}
+window.removeFromWishlistAndRefresh = removeFromWishlistAndRefresh;
 
 function updateWishlistBadge(){ if(qs('wishlistCount')) qs('wishlistCount').innerText=state.wishlistIds.size; }
 function updateModalWishlistBtn(p){
@@ -612,8 +659,8 @@ function openWishlistModal(){
         <div class="flex-1 min-w-0"><p class="font-bold text-white text-xs truncate">${escapeHtml(p.name)}</p>
         <p class="text-[10px] text-yellow-400">$${p.price_usd} | سيرية: ${p.min_qty}</p></div>
         <button onclick="openProductModal(${p.id}); closeWishlistModal();" class="gold-gradient-bg font-bold px-2 py-1 rounded text-[10px]">عرض</button>
-        <button onclick="toggleWishlistModalItem(${p.id}); openWishlistModal();" class="bg-red-950/60 text-red-400 px-2 py-1 rounded text-[10px]">حذف</button>
-      </div>`).join('');
+        <button onclick="removeFromWishlistAndRefresh(${p.id})" class="bg-red-950/60 text-red-400 px-2 py-1 rounded text-[10px]">حذف</button>
+        </div>`).join('');
   toggleModal('wishlistModal',true);
 }
 window.openWishlistModal=openWishlistModal;
@@ -650,10 +697,31 @@ function closeAboutModal(){ toggleModal('aboutModal',false); }
 window.openAboutModal=openAboutModal; window.closeAboutModal=closeAboutModal;
 
 // ===== الشريك =====
-function openAffiliateModal(){
-  if(state.currentMarketer){ renderMarketerDashboard(); toggleModal('affiliateModal',true); }
-  else { toggleModal('partnerAuthModal',true); }
+//function openAffiliateModal(){
+//  if(state.currentMarketer){ renderMarketerDashboard(); toggleModal('affiliateModal',true); }
+//  else { toggleModal('partnerAuthModal',true); }
+//}
+
+async function openAffiliateModal(){
+  if (state.currentMarketer) {
+    // اعرض المودال فورًا مع بيانات localStorage (تجربة أسرع)
+    if (qs('partnerWelcomeName')) qs('partnerWelcomeName').innerText =
+      `👤 الشريك: ${state.currentMarketer.name || ''}`;
+    if (qs('myAffiliateCode')) qs('myAffiliateCode').innerText =
+      state.currentMarketer.code || '';
+    if (qs('myShortRefCode')) qs('myShortRefCode').innerText =
+      state.currentMarketer.short_code || '';
+    if (qs('affiliateLinkInput')) qs('affiliateLinkInput').value =
+      `${location.origin}${location.pathname}?ref=${state.currentMarketer.short_code || ''}`;
+    toggleModal('affiliateModal', true);
+
+    // ثم اجلب البيانات الحقيقية من السيرفر (مبيعات، أرباح، سجل)
+    await refreshDashboard();
+  } else {
+    toggleModal('partnerAuthModal', true);
+  }
 }
+
 function closeAffiliateModal(){ toggleModal('affiliateModal',false); }
 function closePartnerAuthModal(){ toggleModal('partnerAuthModal',false); }
 async function verifyPartnerPasscode(e){
@@ -671,12 +739,31 @@ async function verifyPartnerPasscode(e){
   }catch(err){ alert('كود غير صحيح'); }
   finally{ btn.innerText='دخول إلى حسابي 🔓'; btn.disabled=false; }
 }
+//async function refreshDashboard(){
+//  try{
+//    const d=await api('/api/public/partner.php?action=dashboard');
+//    renderMarketerDashboard(d);
+//  }catch(e){}
+//}
+
 async function refreshDashboard(){
-  try{
-    const d=await api('/api/public/partner.php?action=dashboard');
+  try {
+    const d = await api('/api/public/partner.php?action=dashboard');
     renderMarketerDashboard(d);
-  }catch(e){}
+    return true;
+  } catch (e) {
+    // جلسة منتهية → امسح الحالة واطلب دخولاً جديداً
+    if (String(e.message).includes('Unauthorized') || String(e.message).includes('401')) {
+      state.currentMarketer = null;
+      localStorage.removeItem(LS_MARKETER_KEY);
+      toggleModal('affiliateModal', false);
+      toggleModal('partnerAuthModal', true);
+      showToast('انتهت الجلسة، يرجى الدخول مجددًا', 'error');
+    }
+    return false;
+  }
 }
+
 function logoutPartnerAccount(){
   fetch('/api/public/partner.php?action=logout',{method:'POST'}).finally(()=>{
     state.currentMarketer=null; localStorage.removeItem(LS_MARKETER_KEY);
@@ -803,6 +890,10 @@ async function boot(){
   await loadSettings();
   await loadProducts();
   await loadCart();
+  // إذا كان هناك شريك محفوظ، تحقق أن جلسته ما زالت صالحة
+  if (state.currentMarketer) {
+    refreshDashboard();
+  }
   setInterval(pollStore, 30000);
 }
 
