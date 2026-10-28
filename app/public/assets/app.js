@@ -1,6 +1,5 @@
 'use strict';
 
-// ===== الحالة العامة =====
 const state = {
   products: [],
   exchangeRate: 15000,
@@ -31,7 +30,7 @@ const LS_MARKETER_KEY = 'fw_marketer_profile';
 const LS_REF_KEY = 'fw_referred_by';
 const LS_BUYER_KEY = 'fw_buyer_info';
 
-// ===== أدوات =====
+// ===== tools =====
 function qs(id){ return document.getElementById(id); }
 function fmt(n){ return (Math.round(n*100)/100).toLocaleString('en-US'); }
 function escapeHtml(s){ if(s==null) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
@@ -76,7 +75,6 @@ async function apiPost(path, body){ return api(path,{method:'POST', body:JSON.st
 async function apiPatch(path, body){ return api(path,{method:'PATCH', body:JSON.stringify(body||{})}); }
 async function apiDelete(path){ return api(path,{method:'DELETE'}); }
 
-// ===== التحميل الأولي =====
 async function loadSettings(){
   try{
     const s = await api('/api/public/settings.php');
@@ -112,7 +110,7 @@ async function loadCart(){
   }catch(e){ console.warn('cart load failed', e); }
 }
 
-// ===== Polling خفيف =====
+// ===== Polling =====
 async function pollStore(){
   try{
     const s = await api('/api/public/settings.php');
@@ -139,7 +137,7 @@ function updateRateLabels(){
   if(qs('headerRateDesktop')) qs('headerRateDesktop').innerText = r;
 }
 
-// ===== التصنيفات =====
+// ===== catogare =====
 function filterCategory(cat){ state.currentCategory=cat; renderProducts(); }
 function setCurrencyMode(m){ state.currencyMode=m; renderProducts(); }
 function handleSearch(v){ state.searchQuery=v.trim().toLowerCase(); qs('clearSearchBtn').classList.toggle('hidden',!state.searchQuery); renderProducts(); }
@@ -149,7 +147,7 @@ window.setCurrencyMode=setCurrencyMode;
 window.handleSearch=handleSearch;
 window.clearSearch=clearSearch;
 
-// ===== عرض المنتجات =====
+// =====  prodicts =====
 function getPieceWeightGrams(p){ return p.piece_weight || (p.category==='ولادي'?220:p.category==='ب.ب'?150:350); }
 
 function getStockBadgeInfo(p){
@@ -281,11 +279,7 @@ function updateCountersInPlace(){
   });
 }
 
-// ===== مودال المنتج =====
 async function openProductModal(id){
-  // const p=state.products.find(x=>x.id===id); if(!p) return;
-  // state.currentModalProduct=p; state.currentImageIndex=0;
-  
   const p=state.products.find(x=>x.id===id); if(!p) return;
   state.currentModalProduct=p;
   window.currentModalProduct=p;
@@ -436,7 +430,7 @@ function calculateModalTotal(){
 }
 window.calculateModalTotal=calculateModalTotal;
 
-// ===== سلة =====
+// ===== cart =====
 async function addCustomQtyToCart(){
   const p=state.currentModalProduct; if(!p) return;
   const qty=Math.max(p.min_qty,parseInt(qs('modalQtyInput').value)||p.min_qty);
@@ -542,7 +536,7 @@ function openCart(){
 window.openCart=openCart;
 function closeCart(){ toggleModal('cartModal',false); } window.closeCart=closeCart;
 
-// ===== مشاركة =====
+// ===== share =====
 function shareLink(pid){
   const base=`${location.origin}${location.pathname}?model=${pid}`;
   if(!state.currentMarketer) return base;
@@ -580,19 +574,6 @@ window.reserveProductWhatsApp=reserveProductWhatsApp;
 window.downloadModalProductImage=downloadModalProductImage;
 window.copyTrendWhatsAppText=copyTrendWhatsAppText;
 
-// ===== Like / Wishlist =====
-// async function toggleLike(e,pid){
-//   if(e) e.stopPropagation();
-//   try{
-//     playUiSound('like');
-//     const r=await apiPost('/api/public/interactions.php?action=like',{product_id:pid});
-//     const p=state.products.find(x=>x.id===pid);
-//     if(p){ p.likes=r.likes; if(r.liked) state.likedIds.add(pid); else state.likedIds.delete(pid); }
-//     updateCountersInPlace();
-//     if(state.currentModalProduct?.id===pid) updateModalHeaderSocial(p);
-//   }catch(e){ showToast(e.message,'error'); }
-// }
-
 async function toggleLike(e,pid){
   if(e) e.stopPropagation();
   if (!pid || pid <= 0) return;
@@ -607,16 +588,6 @@ async function toggleLike(e,pid){
 }
 
 window.toggleLikeProduct=toggleLike;
-
-// async function toggleWishlistModalItem(pid){
-//   try{
-//     playUiSound('like');
-//     const r=await apiPost('/api/public/interactions.php?action=wishlist',{product_id:pid});
-//     if(r.wished) state.wishlistIds.add(pid); else state.wishlistIds.delete(pid);
-//     updateWishlistBadge();
-//     if(state.currentModalProduct?.id===pid) updateModalWishlistBtn(state.currentModalProduct);
-//   }catch(e){ showToast(e.message,'error'); }
-// }
 
 async function toggleWishlistModalItem(pid){
   if (!pid || pid <= 0) {
@@ -636,8 +607,8 @@ window.toggleWishlistModalItem=toggleWishlistModalItem;
 
 async function removeFromWishlistAndRefresh(pid) {
   if (!pid || pid <= 0) return;
-  await toggleWishlistModalItem(pid);   // ★ انتظر انتهاء الحذف
-  openWishlistModal();                  // ★ ثم أعد رسم القائمة
+  await toggleWishlistModalItem(pid);
+  openWishlistModal();
 }
 window.removeFromWishlistAndRefresh = removeFromWishlistAndRefresh;
 
@@ -696,15 +667,8 @@ function openAboutModal(){ toggleModal('aboutModal',true); }
 function closeAboutModal(){ toggleModal('aboutModal',false); }
 window.openAboutModal=openAboutModal; window.closeAboutModal=closeAboutModal;
 
-// ===== الشريك =====
-//function openAffiliateModal(){
-//  if(state.currentMarketer){ renderMarketerDashboard(); toggleModal('affiliateModal',true); }
-//  else { toggleModal('partnerAuthModal',true); }
-//}
-
 async function openAffiliateModal(){
   if (state.currentMarketer) {
-    // اعرض المودال فورًا مع بيانات localStorage (تجربة أسرع)
     if (qs('partnerWelcomeName')) qs('partnerWelcomeName').innerText =
       `👤 الشريك: ${state.currentMarketer.name || ''}`;
     if (qs('myAffiliateCode')) qs('myAffiliateCode').innerText =
@@ -715,7 +679,6 @@ async function openAffiliateModal(){
       `${location.origin}${location.pathname}?ref=${state.currentMarketer.short_code || ''}`;
     toggleModal('affiliateModal', true);
 
-    // ثم اجلب البيانات الحقيقية من السيرفر (مبيعات، أرباح، سجل)
     await refreshDashboard();
   } else {
     toggleModal('partnerAuthModal', true);
@@ -739,12 +702,6 @@ async function verifyPartnerPasscode(e){
   }catch(err){ alert('كود غير صحيح'); }
   finally{ btn.innerText='دخول إلى حسابي 🔓'; btn.disabled=false; }
 }
-//async function refreshDashboard(){
-//  try{
-//    const d=await api('/api/public/partner.php?action=dashboard');
-//    renderMarketerDashboard(d);
-//  }catch(e){}
-//}
 
 async function refreshDashboard(){
   try {
@@ -752,7 +709,6 @@ async function refreshDashboard(){
     renderMarketerDashboard(d);
     return true;
   } catch (e) {
-    // جلسة منتهية → امسح الحالة واطلب دخولاً جديداً
     if (String(e.message).includes('Unauthorized') || String(e.message).includes('401')) {
       state.currentMarketer = null;
       localStorage.removeItem(LS_MARKETER_KEY);
@@ -840,7 +796,7 @@ function initFromStorage(){
   }catch(e){}
 }
 
-// ===== فاتورة / طلب =====
+// ===== order =====
 function buildOrderPayload(){
   const name=qs('buyerName').value.trim(), addr=qs('buyerAddress').value.trim(), phone=qs('buyerPhone').value.trim(), notes=qs('buyerNotes').value.trim();
   if(!name||!addr||!phone) throw new Error('أكمل الاسم والعنوان والهاتف');
@@ -883,14 +839,14 @@ async function sendOrderWhatsApp(){
 }
 window.sendOrderWhatsApp=sendOrderWhatsApp;
 
-// ===== إقلاع =====
+// ===== boot =====
 async function boot(){
   applySavedTheme();
   initFromStorage();
   await loadSettings();
   await loadProducts();
   await loadCart();
-  // إذا كان هناك شريك محفوظ، تحقق أن جلسته ما زالت صالحة
+
   if (state.currentMarketer) {
     refreshDashboard();
   }

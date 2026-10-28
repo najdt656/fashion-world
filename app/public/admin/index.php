@@ -53,7 +53,6 @@ $isAuth = !empty($_SESSION['admin_id']);
       <button onclick="showProductForm()" class="gold-gradient-bg font-bold px-3 py-1.5 rounded-xl text-xs">➕ منتج جديد</button>
     </div>
     <div id="productsList" class="grid gap-2"></div>
-    <div id="productForm" class="hidden glass-panel rounded-2xl p-4 mt-4 space-y-2"></div>
   </section>
 
   <section id="tab-orders" class="tab-content hidden">
@@ -90,6 +89,16 @@ $isAuth = !empty($_SESSION['admin_id']);
       <button onclick="saveSettings()" class="w-full gold-gradient-bg font-bold py-2 rounded-xl text-sm">حفظ ✅</button>
     </div>
   </section>
+</div>
+
+<div id="productFormModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-[100] p-0 sm:p-4">
+  <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[93vh] flex flex-col overflow-hidden text-sm border border-yellow-500/30">
+    <div class="flex justify-between items-center border-b border-gray-800 px-4 sm:px-5 py-3 sticky top-0 bg-neutral-950/95 backdrop-blur z-10">
+      <h3 id="productFormTitle" class="font-bold text-yellow-400 text-sm sm:text-base">➕ منتج جديد</h3>
+      <button type="button" onclick="closeProductFormModal()" class="bg-red-900/60 hover:bg-red-700 text-white px-3 py-1 rounded-lg font-bold text-xs">إغلاق ✕</button>
+    </div>
+    <div id="productForm" class="overflow-y-auto flex-1 px-4 sm:px-5 py-3"></div>
+  </div>
 </div>
 
 <script>window.FW_CSRF = <?= json_encode($csrf) ?>;</script>

@@ -14,7 +14,6 @@ $items = $b['items'] ?? [];
 if ($name===''||$phone===''||$addr==='') json_error('Missing buyer data');
 if (!is_array($items)||count($items)===0) json_error('Cart empty');
 
-// إعادة حساب الأسعار من DB (لا تثق بالعميل)
 $ids = array_map(fn($i)=>(int)$i['product_id'], $items);
 $in  = implode(',', array_fill(0, count($ids), '?'));
 $stmt = $pdo->prepare("SELECT id,name,price_usd,min_qty,piece_weight FROM products WHERE id IN ($in)");
@@ -36,7 +35,6 @@ foreach ($items as $it) {
 }
 if (empty($orderItems)) json_error('No valid items');
 
-// حسم 2% عند 400$
 if ($totalUsd >= 400) $totalUsd = round($totalUsd * 0.98, 2);
 $totalWeight = round(($totalGrams + 500) / 1000, 2);
 $refClean = $ref ? substr(preg_replace('/[^A-Z0-9]/','',strtoupper($ref)), 0, 4) : null;

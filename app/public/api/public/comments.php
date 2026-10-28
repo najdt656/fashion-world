@@ -11,7 +11,6 @@ if ($pid<=0 || $text==='') json_error('Missing fields');
 if (mb_strlen($text) > 1000) json_error('Comment too long');
 if ($author==='') $author='تاجر معتمد';
 
-// حد بسيط: 5 تعليقات/دقيقة/زائر
 $stmt=$pdo->prepare("SELECT COUNT(*) FROM product_comments c JOIN visitors v ON v.id=? WHERE c.product_id=? AND c.created_at > NOW()-INTERVAL 1 MINUTE");
 $stmt->execute([$vid,$pid]);
 if ((int)$stmt->fetchColumn() >= 5) json_error('Too many comments, slow down', 429);

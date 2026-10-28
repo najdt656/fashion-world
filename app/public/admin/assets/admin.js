@@ -1,14 +1,35 @@
 'use strict';
 
 const CSRF = window.FW_CSRF;
-const state = { products: [], currentEdit: null };
+// const state = { products: [], currentEdit: null };
+const state = { products: [], currentEdit: null, deletedExtras: new Set() };
 
 // ===== tools  =====
 function qs(id){ return document.getElementById(id); }
+
+function toggleModal(id, show) {
+  const el = qs(id);
+  if (!el) return;
+  el.classList.toggle('hidden', !show);
+  el.classList.toggle('flex', show);
+}
+
 function esc(s){
   return s==null ? '' : String(s)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+const STOCK_LABELS = {
+  AVAILABLE: { ar: 'متوفر',        emoji: '✅', cls: 'text-emerald-400' },
+  LOW:       { ar: 'كمية محدودة',  emoji: '⚠️', cls: 'text-amber-400'  },
+  PREORDER:  { ar: 'تثبيت حجز',    emoji: '🔥', cls: 'text-purple-400' },
+  SOLD_OUT:  { ar: 'نفدت الكمية',  emoji: '❌', cls: 'text-gray-400'   },
+};
+
+function stockLabel(value, withEmoji = true) {
+  const info = STOCK_LABELS[value] || { ar: value || '—', emoji: '' };
+  return withEmoji ? `${info.emoji} ${info.ar}`.trim() : info.ar;
 }
 
 // =====  =====
@@ -99,6 +120,9 @@ async function loadProducts() {
             <p class="text-[10px] text-yellow-400">
               ${esc(p.category)} • $${p.price_usd} • سيرية ${p.min_qty}
             </p>
+            <p class="text-[10px] ${STOCK_LABELS[p.stock_status]?.cls || 'text-gray-400'}">
+              ${stockLabel(p.stock_status)}
+            </p>
           </div>
         </div>
         <div class="flex gap-1">
@@ -125,9 +149,15 @@ async function showProductForm(id = null) {
     }
   }
   state.currentEdit = p;
-  const form = qs('productForm');
-  form.classList.remove('hidden');
-  form.innerHTML = `
+  state.deletedExtras = new Set();
+
+  const titleEl = qs('productFormTitle');
+  if (titleEl) titleEl.innerText = id ? '✏️ تعديل المنتج' : '➕ نشر منتج جديد';
+
+  const mainImg = p && p.main_image ? p.main_image : '';
+  const extras = p && Array.isArray(p.extras) ? p.extras : [];
+
+  qs('productForm').innerHTML = `
     <form onsubmit="saveProduct(event)" class="space-y-2 text-sm">
       <input id="fName" required class="w-full bg-black border border-gray-700 rounded px-3 py-2 text-white"
              placeholder="اسم الموديل" value="${p ? esc(p.name) : ''}"/>
@@ -144,15 +174,20 @@ async function showProductForm(id = null) {
                class="bg-black border border-gray-700 rounded px-3 py-2 text-white"
                placeholder="حجم السيرية" value="${p ? p.min_qty : 10}"/>
         <input id="fPack" required class="bg-black border border-gray-700 rounded px-3 py-2 text-white"
-               placeholder="القياسات (مثال: M/L/XL)" value="${p ? esc(p.pack || '') : ''}"/>
+               placeholder="القياسات (M/L/XL)" value="${p ? esc(p.pack || '') : ''}"/>
         <input id="fColors" class="bg-black border border-gray-700 rounded px-3 py-2 text-white"
                placeholder="الألوان (افصل بفاصلة)" value="${p ? esc(p.colors || '') : ''}"/>
         <input id="fWeight" type="number" min="50" max="3000"
                class="bg-black border border-gray-700 rounded px-3 py-2 text-white"
                placeholder="الوزن/غرام" value="${p ? p.piece_weight : 350}"/>
         <select id="fStock" class="bg-black border border-gray-700 rounded px-2 py-2 text-white">
-          ${['AVAILABLE','LOW','PREORDER','SOLD_OUT'].map((s) =>
-            `<option value="${s}" ${p && p.stock_status === s ? 'selected' : ''}>${s}</option>`
+          ${[
+            ['AVAILABLE', '✅ متوفر بالمستودع'],
+            ['LOW',       '⚠️ كمية محدودة'],
+            ['PREORDER',  '🔥 تثبيت حجز مسبق'],
+            ['SOLD_OUT',  '❌ نفدت الكمية']
+          ].map(([value, label]) =>
+            `<option value="${value}" ${p && p.stock_status === value ? 'selected' : ''}>${label}</option>`
           ).join('')}
         </select>
         <input id="fFomoLeft" type="number" min="0"
@@ -171,53 +206,135 @@ async function showProductForm(id = null) {
                class="w-16 bg-black border border-gray-700 rounded px-2 py-1 text-white"/>
         <label><input type="checkbox" id="fClear" ${p && p.is_clearance ? 'checked' : ''}/> تصفية</label>
       </div>
-      <div>
-        <label class="text-xs text-yellow-300">الصورة الرئيسية${p ? ' (اتركها فارغة للإبقاء على الحالية)' : ''}:</label>
-        <input id="fImg" type="file" accept="image/*" class="w-full text-gray-300 text-xs"/>
+
+      <!-- -->
+      <div class="border-t border-gray-800 pt-3 mt-2">
+        <p class="text-yellow-400 font-bold text-xs mb-2">📷 إدارة الصور</p>
+
+        <!-- Mine Image  -->
+        <div class="mb-3">
+          <label class="block text-xs text-yellow-300 mb-1">الصورة الرئيسية:</label>
+          <div class="flex items-start gap-2">
+            <div id="mainImgPreview" class="w-20 h-20 rounded-lg bg-neutral-800 border border-gray-700 overflow-hidden flex items-center justify-center flex-shrink-0">
+              ${mainImg
+                ? `<img src="${esc(mainImg)}" class="w-full h-full object-cover"/>`
+                : `<span class="text-2xl">📷</span>`}
+            </div>
+            <div class="flex-1 min-w-0">
+              <input id="fImg" type="file" accept="image/*" class="w-full text-gray-300 text-xs"/>
+              <p class="text-[10px] text-gray-500 mt-1">
+                ${mainImg ? 'اختر صورة جديدة للاستبدال (اترك فارغًا للإبقاء على الحالية)' : 'مطلوبة عند الإنشاء'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- More Images -->
+        <div>
+          <label class="block text-xs text-yellow-300 mb-1">
+            الصور الإضافية
+            <span class="text-gray-500 font-normal">(<span id="extrasCount">${extras.length}</span>/4)</span>
+          </label>
+          <div id="extrasGrid" class="grid grid-cols-4 gap-2 mb-2">
+            ${extras.map((ex) => `
+              <div class="relative group" data-path="${esc(ex)}">
+                <img src="${esc(ex)}" class="w-full aspect-square object-cover rounded-lg border border-gray-700"/>
+                <button type="button" onclick="removeExtraImage(this)"
+                        class="absolute -top-1 -right-1 bg-red-600 hover:bg-red-500 text-white w-5 h-5 rounded-full text-xs font-bold shadow flex items-center justify-center"
+                        title="حذف هذه الصورة">✕</button>
+              </div>
+            `).join('')}
+          </div>
+          <input id="fExtras" type="file" accept="image/*" multiple class="w-full text-gray-300 text-xs"/>
+          <p class="text-[10px] text-gray-500 mt-1">
+            يمكنك إضافة حتى 4 صور. المتبقي: <span id="extrasRemaining">${Math.max(0, 4 - extras.length)}</span>
+          </p>
+        </div>
       </div>
-      ${!p ? `
-      <div>
-        <label class="text-xs text-yellow-300">صور إضافية (حتى 4):</label>
-        <input id="fExtras" type="file" accept="image/*" multiple class="w-full text-gray-300 text-xs"/>
-      </div>` : ''}
-      <div class="flex gap-2">
-        <button type="submit" class="flex-1 gold-gradient-bg font-bold py-2 rounded">
-          ${p ? 'تحديث ✅' : 'حفظ ✅'}
+
+      <div class="flex gap-2 pt-2 sticky bottom-0 bg-neutral-950/95 backdrop-blur py-2 -mx-4 px-4 sm:-mx-5 sm:px-5">
+        <button type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl text-sm">
+          ${p ? 'تحديث ✅' : 'حفظ ونشر ✅'}
         </button>
-        <button type="button" onclick="qs('productForm').classList.add('hidden')"
-                class="bg-neutral-800 text-white px-4 rounded">إلغاء</button>
+        <button type="button" onclick="closeProductFormModal()"
+                class="bg-neutral-800 text-white px-4 rounded-xl text-sm font-bold">إلغاء</button>
       </div>
     </form>`;
+
+  const mainFile = qs('fImg');
+  if (mainFile) {
+    mainFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const prev = qs('mainImgPreview');
+        if (prev) prev.innerHTML = `<img src="${ev.target.result}" class="w-full h-full object-cover"/>`;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  toggleModal('productFormModal', true);
+  document.body.style.overflow = 'hidden';
 }
 window.showProductForm = showProductForm;
+
+
+function removeExtraImage(btn) {
+  const wrap = btn.closest('[data-path]');
+  if (!wrap) return;
+  const path = wrap.getAttribute('data-path');
+  if (path) {
+    state.deletedExtras.add(path);
+    console.log('[admin] marked for deletion:', path);
+  }
+  wrap.remove();
+  // تحديث العدادات
+  const grid = qs('extrasGrid');
+  const count = grid ? grid.children.length : 0;
+  if (qs('extrasCount')) qs('extrasCount').innerText = count;
+  if (qs('extrasRemaining')) qs('extrasRemaining').innerText = Math.max(0, 4 - count);
+}
+window.removeExtraImage = removeExtraImage;
+
+function closeProductFormModal() {
+  toggleModal('productFormModal', false);
+  document.body.style.overflow = '';
+  state.deletedExtras = new Set();
+}
+window.closeProductFormModal = closeProductFormModal;
+
 
 async function saveProduct(e) {
   e.preventDefault();
 
-  //  FormData
   const fd = new FormData();
-  fd.append('name',           qs('fName').value.trim());
-  fd.append('category',       qs('fCat').value);
-  fd.append('price_usd',      qs('fPrice').value);
-  fd.append('min_qty',        qs('fMinQty').value);
-  fd.append('pack',           qs('fPack').value.trim());
-  fd.append('colors',         qs('fColors').value.trim());
-  fd.append('piece_weight',   qs('fWeight').value || 350);
-  fd.append('stock_status',   qs('fStock').value);
-  fd.append('fomo_left',      qs('fFomoLeft').value || 0);
-  fd.append('fomo_booked',    qs('fFomoBooked').value.trim());
-  fd.append('admin_desc',     qs('fDesc').value.trim());
-  fd.append('has_discount',   qs('fDisc').checked ? '1' : '0');
-  fd.append('discount_percent', qs('fDiscPct').value || 0);
-  fd.append('is_clearance',   qs('fClear').checked ? '1' : '0');
+  fd.append('name',              qs('fName').value.trim());
+  fd.append('category',          qs('fCat').value);
+  fd.append('price_usd',         qs('fPrice').value);
+  fd.append('min_qty',           qs('fMinQty').value);
+  fd.append('pack',              qs('fPack').value.trim());
+  fd.append('colors',            qs('fColors').value.trim());
+  fd.append('piece_weight',      qs('fWeight').value || 350);
+  fd.append('stock_status',      qs('fStock').value);
+  fd.append('fomo_left',         qs('fFomoLeft').value || 0);
+  fd.append('fomo_booked',       qs('fFomoBooked').value.trim());
+  fd.append('admin_desc',        qs('fDesc').value.trim());
+  fd.append('has_discount',      qs('fDisc').checked ? '1' : '0');
+  fd.append('discount_percent',  qs('fDiscPct').value || 0);
+  fd.append('is_clearance',      qs('fClear').checked ? '1' : '0');
 
   if (qs('fImg').files[0]) fd.append('main_image', qs('fImg').files[0]);
 
+  if (state.deletedExtras && state.deletedExtras.size > 0) {
+    state.deletedExtras.forEach((path) => fd.append('delete_extras[]', path));
+  }
+
   const extrasEl = qs('fExtras');
   if (extrasEl && extrasEl.files.length) {
-    const files = extrasEl.files;
-    for (let i = 0; i < Math.min(files.length, 4); i++) {
-      fd.append('extras[]', files[i]);
+    for (let i = 0; i < Math.min(extrasEl.files.length, 4); i++) {
+      fd.append('extras[]', extrasEl.files[i]);
     }
   }
 
@@ -228,7 +345,7 @@ async function saveProduct(e) {
 
   try {
     const r = await api(url, { method: 'POST', body: fd });
-    qs('productForm').classList.add('hidden');
+    closeProductFormModal();
     await loadProducts();
     alert(id ? '✅ تم التحديث بنجاح' : `✅ تم حفظ المنتج (رقم ${r.id})`);
   } catch (err) {
@@ -441,6 +558,15 @@ async function saveSettings() {
 }
 window.saveSettings = saveSettings;
 
+// إغلاق النافذة بـ ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = qs('productFormModal');
+    if (modal && !modal.classList.contains('hidden')) {
+      closeProductFormModal();
+    }
+  }
+});
 
 if (!qs('adminView')?.classList.contains('hidden')) {
   loadProducts();

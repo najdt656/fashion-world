@@ -30,7 +30,7 @@ $rawBody  = file_get_contents('php://input');
 $jsonBody = ($rawBody !== '' && $rawBody !== false) ? (json_decode($rawBody, true) ?: []) : [];
 $b = !empty($_POST) ? $_POST : $jsonBody;
 
-// ===== Method override (POST + _method=PUT من FormData) =====
+// ===== Method override (POST + _method=PUT  FormData) =====
 if ($method === 'POST' && isset($b['_method'])) {
     $override = strtoupper((string)$b['_method']);
     if (!in_array($override, ['PUT', 'PATCH', 'DELETE'], true)) {
@@ -61,7 +61,7 @@ $fields = function(array $b, ?array $existing = null): array {
     if ($f['name'] === '')       json_error('name is required');
     if ($f['price_usd'] <= 0)    json_error('price_usd must be > 0');
     if (!in_array($f['category'], ['نسواني','رجالي','ولادي','ب.ب'], true))   json_error('Invalid category');
-    if (!in_array($f['stock_status'], ['متوفر','كمية محدودة ','طلب مسبق','مباع'], true)) json_error('Invalid stock_status');
+    if (!in_array($f['stock_status'], ['AVAILABLE','LOW','PREORDER','SOLD_OUT'], true)) json_error('Invalid stock_status');
     if ($f['discount_percent'] < 0 || $f['discount_percent'] > 90) json_error('Invalid discount_percent');
     return $f;
 };
@@ -132,21 +132,40 @@ if ($method === 'PUT') {
     if (!$ex) json_error('Product not found', 404);
 
     $f = $fields($b, $ex);
+
     if (isset($_FILES['main_image']) && $_FILES['main_image']['error'] === UPLOAD_ERR_OK) {
+        if (!empty($ex['main_image']) && strpos($ex['main_image'], '/uploads/') === 0) {
+            $oldFile = $config['app']['uploads_path'] . str_replace('/uploads', '', $ex['main_image']);
+            if (is_file($oldFile)) @unlink($oldFile);
+        }
         $f['main_image'] = $saveImage($_FILES['main_image']);
     }
 
     $set = implode(',', array_map(fn($c) => "$c=?", array_keys($f)));
-    try {
-        $pdo->prepare("UPDATE products SET $set WHERE id=?")->execute(array_merge(array_values($f), [$id]));
-    } catch (PDOException $e) {
-        error_log('Product update failed: ' . $e->getMessage());
-        json_error('Update failed: ' . $e->getMessage(), 500);
+    $pdo->prepare("UPDATE products SET $set WHERE id=?")->execute(array_merge(array_values($f), [$id]));
+
+    if (!empty($_POST['delete_extras']) && is_array($_POST['delete_extras'])) {
+        foreach ($_POST['delete_extras'] as $path) {
+            $path = trim((string)$path);
+            if ($path === '') continue;
+
+            $pdo->prepare('DELETE FROM product_images WHERE product_id=? AND image_path=?')
+                ->execute([$id, $path]);
+
+            if (strpos($path, '/uploads/') === 0) {
+                $file = $config['app']['uploads_path'] . str_replace('/uploads', '', $path);
+                if (is_file($file)) @unlink($file);
+            }
+        }
     }
 
     if (!empty($_FILES['extras']['name'][0])) {
-        $pdo->prepare('DELETE FROM product_images WHERE product_id=?')->execute([$id]);
-        $cnt = min(count($_FILES['extras']['name']), 4);
+        $cntStmt = $pdo->prepare('SELECT COUNT(*) FROM product_images WHERE product_id=?');
+        $cntStmt->execute([$id]);
+        $existing = (int)$cntStmt->fetchColumn();
+        $maxNew = max(0, 4 - $existing);
+
+        $cnt = min(count($_FILES['extras']['name']), $maxNew);
         for ($i = 0; $i < $cnt; $i++) {
             $file = [
                 'name'     => $_FILES['extras']['name'][$i],
@@ -156,8 +175,11 @@ if ($method === 'PUT') {
             ];
             $p = $saveImage($file);
             if ($p) {
+                $sortStmt = $pdo->prepare('SELECT COALESCE(MAX(sort_order), 0) FROM product_images WHERE product_id=?');
+                $sortStmt->execute([$id]);
+                $nextSort = (int)$sortStmt->fetchColumn() + 1;
                 $pdo->prepare('INSERT INTO product_images (product_id, image_path, sort_order) VALUES (?, ?, ?)')
-                    ->execute([$id, $p, $i]);
+                    ->execute([$id, $p, $nextSort]);
             }
         }
     }

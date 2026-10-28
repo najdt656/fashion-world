@@ -1,12 +1,10 @@
 <?php
 require __DIR__ . '/../../../src/bootstrap.php';
 
-// التحقق من طريقة الطلب
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     json_error('Method not allowed', 405);
 }
 
-// قراءة جسم الطلب بأمان
 $rawBody = file_get_contents('php://input');
 $body = [];
 if (!empty($rawBody)) {
@@ -16,7 +14,6 @@ if (!empty($rawBody)) {
     }
 }
 
-// استخراج المعاملات
 $action = $_GET['action'] ?? '';
 $pid = isset($body['product_id']) ? (int)$body['product_id'] : 0;
 
@@ -24,7 +21,6 @@ if ($pid <= 0) {
     json_error('Invalid or missing product_id');
 }
 
-// التحقق من وجود المنتج
 $check = $pdo->prepare('SELECT id FROM products WHERE id = ?');
 $check->execute([$pid]);
 if (!$check->fetch()) {
@@ -33,13 +29,11 @@ if (!$check->fetch()) {
 
 $vid = get_visitor_id($pdo, $config);
 
-// تنفيذ الإجراء المطلوب
 switch ($action) {
     case 'view':
         $stmt = $pdo->prepare('INSERT IGNORE INTO visitor_views (visitor_id, product_id) VALUES (?, ?)');
         $stmt->execute([$vid, $pid]);
         
-        // زيادة العداد فقط إذا كانت المشاهدة جديدة
         if ($stmt->rowCount() > 0) {
             $pdo->prepare('UPDATE products SET views = views + 1 WHERE id = ?')->execute([$pid]);
         }
@@ -47,7 +41,6 @@ switch ($action) {
         break;
 
     case 'like':
-        // ... (باقي كود الإعجاب، التقييم، المفضلة يبقى كما هو، مع إضافة التحقق من المدخلات)
         $stmt = $pdo->prepare('DELETE FROM visitor_likes WHERE visitor_id = ? AND product_id = ?');
         $stmt->execute([$vid, $pid]);
         

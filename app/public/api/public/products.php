@@ -15,19 +15,16 @@ if ($products) {
     $ids = array_column($products, 'id');
     $in  = implode(',', array_fill(0, count($ids), '?'));
 
-    // صور إضافية
     $imgs = [];
     $stmt = $pdo->prepare("SELECT product_id,image_path FROM product_images WHERE product_id IN ($in) ORDER BY sort_order,id");
     $stmt->execute($ids);
     foreach ($stmt as $r) $imgs[$r['product_id']][] = $r['image_path'];
 
-    // تعليقات
     $cmts = [];
     $stmt = $pdo->prepare("SELECT id,product_id,author,body,created_at FROM product_comments WHERE product_id IN ($in) ORDER BY id ASC");
     $stmt->execute($ids);
     foreach ($stmt as $r) $cmts[$r['product_id']][] = $r;
 
-    // حالة الزائر: like / wishlist / rating / views
     $liked = $wished = $rated = $viewed = [];
     $stmt = $pdo->prepare("SELECT product_id FROM visitor_likes WHERE visitor_id=? AND product_id IN ($in)");
     $stmt->execute(array_merge([$vid], $ids)); foreach ($stmt as $r) $liked[] = (int)$r['product_id'];

@@ -23,21 +23,6 @@
   </div>
 </div>
 
-<!--  -->
-<!-- <div class="bg-black/95 border-b border-yellow-500/20 text-[10px] py-1.5 px-2.5 sm:px-4 w-full">
-  <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-1 text-gray-300">
-    <div class="flex items-center gap-1.5">
-      <span class="text-yellow-400 font-bold">📍 دمشق - الحريقة</span>
-      <span class="text-emerald-400 font-semibold">| شحن آمن لكافة المحافظات</span>
-      <span class="text-neutral-500">|</span>
-      <span id="sysSecureLabel" class="text-[9px] text-gray-400 font-mono">SECURE-NODE: v7.4</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="bg-neutral-900 border border-yellow-500/30 px-2 py-0.5 rounded text-yellow-400 font-bold">💱 الصرف: <b id="headerRateDesktop" class="text-emerald-400">15,000</b> ل.س</span>
-    </div>
-  </div>
-</div> -->
-
 <!-- Header -->
 <header class="glass-panel sticky top-0 z-50 border-b border-yellow-500/20 w-full">
   <div class="max-w-7xl mx-auto px-2.5 sm:px-6 py-2 flex items-center justify-between gap-2">
@@ -78,24 +63,6 @@
       <button type="button" onclick="toggleToolsDrawer()" class="bg-neutral-800 text-gray-300 px-2.5 py-1 rounded-lg text-[10px] font-bold">إغلاق ✕</button>
     </div>
   </div>
-
-  <!-- لوحة الإدارة المخفية السرية -->
-  <!-- <div id="adminDropdownMenu" class="hidden border-t border-yellow-500/20 bg-neutral-950 px-2.5 py-2">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-1.5 text-xs">
-      <div class="flex items-center gap-2">
-        <span class="text-yellow-400 font-bold text-[10px]">👑 لوحة الإدارة المركزية (الصرف: <b id="adminRateDisplay">15,000</b>)</span>
-      </div>
-      <div class="flex flex-wrap items-center gap-1">
-        <button type="button" onclick="openAddModal(); toggleAdminMenu();" class="gold-gradient-bg font-bold py-1 px-2.5 rounded-lg text-[10px]">➕ نشر موديل</button>
-        <button type="button" onclick="openAdminMarketersModal(); toggleAdminMenu();" class="bg-purple-600/30 text-purple-300 border border-purple-500/40 py-1 px-2 rounded-lg text-[10px] font-bold">👥 الشركاء والأرباح</button>
-        <button type="button" onclick="openBannerModal(); toggleAdminMenu();" class="bg-amber-500/15 text-yellow-300 border border-yellow-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">🖼️ الغلاف</button>
-        <button type="button" onclick="changeExchangeRate(); toggleAdminMenu();" class="bg-emerald-500/15 text-emerald-300 border border-emerald-500/25 py-1 px-2 rounded-lg text-[10px] font-bold">💱 الصرف</button>
-        <button type="button" onclick="logoutAdmin(); toggleAdminMenu();" class="bg-red-700 text-white py-1 px-2 rounded-lg text-[10px] font-bold">قفل 🔒</button>
-        <button type="button" onclick="toggleAdminMenu()" class="bg-neutral-800 text-gray-300 py-1 px-2 rounded-lg text-[10px] font-bold">✕</button>
-      </div>
-    </div>
-  </div>
-</header> -->
 
 <!-- banner -->
 <section class="max-w-7xl mx-auto px-2.5 sm:px-6 pt-2.5 w-full">
@@ -397,40 +364,6 @@
   </div>
 </div>
 
-<!-- Admin Marketers Modal -->
-<!-- <div id="adminMarketersModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-3">
-  <div class="glass-panel rounded-3xl w-full max-w-2xl max-h-[92vh] p-4 flex flex-col space-y-3 text-xs border border-purple-500/40">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-purple-400 text-sm">👥 إدارة الشركاء وإضافة العمولات</h3>
-      <button type="button" onclick="closeAdminMarketersModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
-    </div>
-    <div class="bg-purple-950/30 p-3 rounded-xl border border-purple-500/30 space-y-2">
-      <p class="font-bold text-yellow-300">➕ توليد كود شريك جديد:</p>
-      <div class="flex gap-2">
-        <input id="newMarketerNameInput" class="flex-1 bg-black border border-purple-500/40 rounded-lg px-3 py-1.5 text-white" placeholder="اسم الشريك أو اسم المحل التجاري..."/>
-        <button type="button" id="genMarketerBtn" onclick="adminGenerateNewMarketerCode()" class="bg-purple-700 hover:bg-purple-600 text-white font-bold px-4 py-1.5 rounded-lg whitespace-nowrap">توليد كود 8 خانات ✨</button>
-      </div>
-    </div>
-    <div id="adminMarketersListContainer" class="overflow-y-auto flex-1 space-y-2.5 max-h-80 pr-1"></div>
-    <button type="button" onclick="closeAdminMarketersModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl">إغلاق النافذة</button>
-  </div>
-</div> -->
-
-<!-- نافذة دخول الأدمن السري -->
-<!-- <div id="firebaseLoginModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[110] p-3">
-  <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs border border-yellow-500/30">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-yellow-400 text-sm">🔐 بوابة المصادقة الإدارية</h3>
-      <button type="button" onclick="closeFirebaseLoginModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
-    </div>
-    <form onsubmit="handleAdminFirebaseLogin(event)" class="space-y-2.5">
-      <input id="adminEmailInput" type="email" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Admin Email..."/>
-      <input id="adminPassInput" type="password" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" dir="ltr" placeholder="Password..."/>
-      <button id="adminLoginSubmitBtn" type="submit" class="w-full gold-gradient-bg font-bold py-2.5 rounded-xl">دخول للنظام 👑</button>
-    </form>
-  </div>
-</div> -->
-
 <!-- about -->
 <div id="aboutModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
   <div class="glass-panel rounded-3xl w-full max-w-md p-5 space-y-3.5 text-xs text-gray-200 border border-yellow-500/30">
@@ -463,121 +396,6 @@
     <button type="button" onclick="closeAboutModal()" class="w-full bg-neutral-800 text-white font-bold py-2 rounded-xl mt-2">إغلاق النافذة</button>
   </div>
 </div>
-
-<!-- Banner Modal -->
-<!-- <div id="bannerModal" class="fixed inset-0 bg-black/85 hidden items-center justify-center z-50 p-3">
-  <div class="glass-panel rounded-3xl w-full max-w-sm p-5 space-y-3 text-xs">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-      <h3 class="font-bold text-yellow-400 text-sm">🖼️ تغيير صورة الغلاف الرئيسي</h3>
-      <button type="button" onclick="closeBannerModal()" class="bg-neutral-800 text-gray-300 w-7 h-7 rounded-full font-bold">✕</button>
-    </div>
-    <input id="bannerFileInput" type="file" accept="image/\*" class="w-full bg-black border border-gray-700 rounded-xl p-2 text-gray-300"/>
-    <div class="flex gap-2">
-      <button type="button" id="bannerSaveBtn" onclick="saveNewBanner()" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">تحديث وحفظ الغلاف ✨</button>
-      <button type="button" onclick="closeBannerModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إغلاق</button>
-    </div>
-  </div>
-</div> -->
-
-<!--  add   -->
-<!-- <div id="addModal" class="fixed inset-0 bg-black/85 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-  <div class="glass-panel rounded-t-3xl sm:rounded-3xl w-full max-w-md max-h-[93vh] p-4 sm:p-5 flex flex-col overflow-hidden text-xs">
-    <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-2.5">
-      <h3 id="modalHeaderTitle" class="font-bold text-yellow-400 text-sm">➕ نشر موديل جملة جديد</h3>
-      <button type="button" onclick="closeAddModal()" class="bg-red-900/60 hover:bg-red-700 text-white px-2.5 py-1 rounded-lg font-bold text-xs">إغلاق ✕</button>
-    </div>
-    <form onsubmit="saveNewProduct(event)" class="overflow-y-auto flex-1 space-y-2 pl-1">
-      <input type="hidden" id="editIndex" value="-1"/>
-      <input id="pName" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-2 text-white" placeholder="اسم الموديل..."/>
-      <div class="grid grid-cols-2 gap-2">
-        <select id="pCat" onchange="autoSuggestWeight(this.value)" class="bg-black border border-gray-700 rounded-xl px-2 py-2 text-white">
-          <option value="نسواني">نسواني</option>
-          <option value="رجالي">رجالي</option>
-          <option value="ولادي">ولادي</option>
-          <option value="ب.ب">ب.ب</option>
-        </select>
-        <div class="flex gap-1">
-          <input id="pPriceInput" type="text" inputmode="decimal" required class="w-full bg-black border border-gray-700 rounded-xl px-2 py-2 text-white" placeholder="السعر"/>
-          <select id="pInputCurrency" class="bg-neutral-800 text-yellow-400 border border-gray-700 rounded-xl px-2 font-bold">
-            <option value="USD">$</option>
-            <option value="SYP">ل.س</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-gray-400 mb-0.5 text-[10px]">📦 حجم السيرية:</label>
-          <input id="pMinQty" type="number" min="1" value="10" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white"/>
-        </div>
-        <div>
-          <label class="block text-gray-400 mb-0.5 text-[10px]">📐 القياسات:</label>
-          <input id="pPack" required class="w-full bg-black border border-gray-700 rounded-xl px-3 py-1.5 text-white" placeholder="مثال: M / L / XL"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🎨 الألوان (افصل بفاصلة):</label>
-        <input id="pColors" type="text" class="w-full bg-black border border-yellow-500/30 rounded-xl px-3 py-1.5 text-white" placeholder="مثال: أسود، أبيض، كحلي"/>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-amber-300 mb-0.5 font-bold text-[10px]">⚖️ وزن القطعة (غرام):</label>
-          <input id="pPieceWeight" type="number" min="50" max="3000" value="350" required class="w-full bg-black border border-amber-500/30 rounded-xl px-2.5 py-1.5 text-yellow-300 font-bold"/>
-        </div>
-        <div>
-          <label class="block text-emerald-300 mb-0.5 font-bold text-[10px]">📦 حالة المستودع:</label>
-          <select id="pStockStatus" class="w-full bg-black border border-emerald-500/30 rounded-xl px-2 py-1.5 text-white font-bold">
-            <option value="AVAILABLE">متوفر بالمستودع ✅</option>
-            <option value="LOW">كمية محدودة ⚠️</option>
-            <option value="PREORDER">تثبيت حجز 🔥</option>
-            <option value="SOLD_OUT">نفدت الكمية ❌</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-orange-300 mb-0.5 font-bold text-[10px]">⚠️ السيريات المتبقية:</label>
-          <input id="pFomoLeft" type="number" min="0" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white" placeholder="مثال: 3"/>
-        </div>
-        <div>
-          <label class="block text-orange-300 mb-0.5 font-bold text-[10px]">🔥 عبارة التشويق:</label>
-          <input id="pFomoBooked" type="text" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white" placeholder="مثال: تم بيع 5 سيريات"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-yellow-300 mb-0.5 font-bold text-[10px]">🧵 نوع القماش والوصف:</label>
-        <textarea id="pAdminDesc" rows="2" class="w-full bg-black border border-gray-700 rounded-xl px-2.5 py-1.5 text-white text-xs resize-none" placeholder="نوع القماش والتفاصيل..."></textarea>
-      </div>
-      <div class="glossy-box p-2.5 rounded-xl space-y-2 border border-yellow-500/30">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5">
-            <input type="checkbox" id="pHasDiscount" onchange="toggleDiscountPercentInput()" class="w-4 h-4 accent-yellow-400 cursor-pointer"/>
-            <label for="pHasDiscount" class="text-yellow-400 font-bold cursor-pointer">تفعيل شارة وحسم مئوي 🔥</label>
-          </div>
-          <div id="discountPercentWrapper" class="hidden flex items-center gap-1">
-            <input id="pDiscountPercent" type="number" min="1" max="90" value="15" class="w-14 bg-black border border-yellow-400 text-center text-yellow-300 font-bold rounded py-0.5"/>
-            <span class="text-red-400 font-bold">%</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-1.5 border-t border-gray-800 pt-1.5">
-          <input type="checkbox" id="pIsClearance" class="w-4 h-4 accent-red-500 cursor-pointer"/>
-          <label for="pIsClearance" class="text-red-400 font-bold cursor-pointer">⚡ إظهار في قسم "تصفية سريعة وعروض"</label>
-        </div>
-      </div>
-      <div class="bg-black/40 p-2 rounded-xl border border-gray-800">
-        <label class="block text-yellow-300 font-bold mb-1">📷 الصورة الرئيسية:</label>
-        <input id="pImgFile" type="file" accept="image/\*" class="w-full text-gray-300 text-[10px]"/>
-      </div>
-      <div class="bg-black/40 p-2 rounded-xl border border-gray-800">
-        <label class="block text-yellow-300 font-bold mb-1">📸 صور إضافية:</label>
-        <input id="pExtraImgFile" type="file" accept="image/\*" multiple class="w-full text-gray-300 text-[10px]"/>
-      </div>
-      <div class="flex gap-2 pt-1">
-        <button id="saveProductBtn" type="submit" class="flex-1 gold-gradient-bg font-bold py-2.5 rounded-xl">حفظ ونشر الموديل سحابياً ✅</button>
-        <button type="button" onclick="closeAddModal()" class="bg-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold">إلغاء</button>
-      </div>
-    </form>
-  </div>
-</div> -->
 
 <!--  -->
 <div id="floatingMiniCart" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-3xl hidden">
